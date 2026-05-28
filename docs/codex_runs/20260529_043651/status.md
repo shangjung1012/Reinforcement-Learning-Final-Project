@@ -6,7 +6,7 @@
 
 ## Current commit
 
-`93bf3af`
+`304b84b` before final report/status commit
 
 ## Milestones completed
 
@@ -18,7 +18,7 @@
 - [x] P1 reader/EM-F1 extension
 - [x] P3 RL framing clarification
 - [x] P2/P5 validation and cost docs
-- [ ] Final report for human
+- [x] Final report for human
 
 ## Tests run
 
@@ -47,6 +47,7 @@
 | 2026-05-29 05:25 | `uv run pytest tests/test_off_policy_evaluation.py tests/test_bandit_baselines.py -q` | pass | `11 passed` after RL framing test additions |
 | 2026-05-29 05:27 | `uv run pytest -q` | pass | `151 passed, 1 warning` after P3 |
 | 2026-05-29 05:38 | `uv run pytest -q` | pass | `151 passed, 1 warning` after validation/cost docs |
+| 2026-05-29 05:47 | `uv run pytest -q` | pass | `151 passed, 1 warning` before final report/status commit |
 
 ## Commits pushed
 
@@ -56,6 +57,7 @@
 | `6ef6908` | `scripts: add raw-data-free final smoke runner` | Yes |
 | `bec4f96` | `eval: add lightweight reader EM F1 smoke` | Yes |
 | `93bf3af` | `docs: clarify offline bandit framing` | Yes |
+| `304b84b` | `docs: add validation and cost model guides` | Yes |
 
 ## Current blockers
 
@@ -66,9 +68,9 @@
 
 ## Next planned work
 
-1. Validate and commit P2/P5 validation and cost docs.
-2. Write final human report.
-3. Run final test/status checks and push final docs.
+1. Commit and push final report/status docs.
+2. Run final git status check.
+3. Hand off final summary to the user.
 
 ## Milestone self-review
 
@@ -149,3 +151,16 @@
 8. Any output too large for git? No.
 9. Any dependency added? No.
 10. Human inspection? Check that the guardrail wording matches the intended defense stance.
+
+### Final report/status handoff
+
+1. What changed? Completed the final human report and latest run status.
+2. Why useful? Gives the next reviewer a compact record of commits, tests, generated artifacts, and remaining limitations.
+3. Evidence? The report lists pushed commits and exact validation commands/results from this run.
+4. Tests ran? Full `uv run pytest -q` passed with `151 passed, 1 warning` before commit.
+5. Tests not run and why? Full-data experiments remain blocked by absent raw datasets.
+6. Are any claims changed? No benchmark claims changed.
+7. Are changed claims supported? Yes, all report claims are tied to commands already recorded in this run.
+8. Any output too large for git? No generated smoke outputs are staged.
+9. Any dependency added? No.
+10. Human inspection? Review final report and README quickstart.
