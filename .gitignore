@@ -1,6 +1,14 @@
+.venv/
+.pytest_cache/
+__pycache__/
+
 .secrets/
 .env
 vertex_adc.json
+data/raw/*
+!data/raw/download.sh
+outputs/cache/
+outputs/codex_smoke/
 outputs/learning_curve_runs/
 outputs/feature_ablation_runs/
 outputs/policy_model_sweep_runs/

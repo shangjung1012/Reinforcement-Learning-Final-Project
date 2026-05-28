@@ -16,4 +16,7 @@ uv run pytest -q
 uv run pytest tests/test_artifact_index.py::test_export_artifact_index_records_existing_and_missing_files -q
 uv run pytest tests/test_core.py::test_hotpot_loader_reads_examples -q
 uv run pytest -q
+uv run pytest tests/test_final_smoke.py -q
+uv run python scripts/run_final_smoke.py --output-dir outputs/codex_smoke --pytest-mode skip
+uv run python scripts/run_final_smoke.py --output-dir outputs/codex_smoke
 ```

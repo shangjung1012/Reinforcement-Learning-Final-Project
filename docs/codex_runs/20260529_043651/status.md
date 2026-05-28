@@ -14,7 +14,7 @@
 - [x] Autonomous branch created
 - [x] Initial run-log files created
 - [x] Baseline validation
-- [ ] P0 smoke reproduction
+- [x] P0 smoke reproduction
 - [ ] P1 reader/EM-F1 extension
 - [ ] Final report for human
 
@@ -31,6 +31,11 @@
 | 2026-05-29 04:47 | `uv run pytest tests/test_artifact_index.py::test_export_artifact_index_records_existing_and_missing_files -q` | pass | Platform-stable bytes fixture |
 | 2026-05-29 04:47 | `uv run pytest tests/test_core.py::test_hotpot_loader_reads_examples -q` | pass | Synthetic Hotpot fixture |
 | 2026-05-29 04:48 | `uv run pytest -q` | pass | `142 passed, 1 warning` |
+| 2026-05-29 04:54 | `uv run pytest tests/test_final_smoke.py -q` | fail | RED: `scripts/run_final_smoke.py` missing |
+| 2026-05-29 04:58 | `uv run pytest tests/test_final_smoke.py -q` | pass | Smoke runner writes fixture, retrieval outputs, OPE CSV, and manifest |
+| 2026-05-29 04:59 | `uv run python scripts/run_final_smoke.py --output-dir outputs/codex_smoke --pytest-mode skip` | pass | Script-only smoke generated local outputs |
+| 2026-05-29 05:02 | `uv run python scripts/run_final_smoke.py --output-dir outputs/codex_smoke` | pass | Targeted nested pytest `17 passed`; smoke manifest status `pass` |
+| 2026-05-29 05:04 | `uv run pytest -q` | pass | `143 passed, 1 warning` after P0 |
 
 ## Commits pushed
 
@@ -47,9 +52,8 @@
 ## Next planned work
 
 1. Commit initial audit and baseline test hygiene fixes.
-2. Start P0 smoke reproduction runner with tests-first changes.
-3. Add final reproduction docs and README pointer.
-4. Validate smoke command and full pytest.
+2. Commit and push P0.
+3. Start P1 reader/EM-F1 extension.
 
 ## Milestone self-review
 
@@ -78,3 +82,16 @@
 8. Any output too large for git? No.
 9. Any dependency added? No.
 10. Human inspection? Review that the synthetic Hotpot fixture still exercises `load_hotpotqa` parsing of context and supporting facts.
+
+### P0 smoke reproduction
+
+1. What changed? Added `scripts/run_final_smoke.py`, `docs/FINAL_REPRODUCTION.md`, README quickstart text, ignore rules for local caches/raw data/smoke outputs, and a smoke-runner test.
+2. Why useful? A reviewer can now run one raw-data-free command that verifies targeted tests, retrieval-policy evaluation, OPE diagnostics, and manifest generation.
+3. Evidence? `uv run python scripts/run_final_smoke.py --output-dir outputs/codex_smoke` passed and wrote a manifest with `uses_raw_data=false`, `uses_external_api=false`, and `uses_model_download=false`.
+4. Tests ran? `tests/test_final_smoke.py`, direct smoke with `--pytest-mode skip`, and direct smoke with default targeted pytest.
+5. Tests not run and why? Full-data experiments were not run because raw datasets are absent.
+6. Are any claims changed? No final benchmark claims changed.
+7. Are changed claims supported? The new smoke docs only claim integration coverage, supported by the smoke manifest and command output.
+8. Any output too large for git? Generated `outputs/codex_smoke/` is ignored and should not be committed.
+9. Any dependency added? No.
+10. Human inspection? Review whether the synthetic fixture is representative enough for a smoke test and whether README placement is visible enough.

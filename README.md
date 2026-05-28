@@ -85,6 +85,20 @@ Raw datasets are expected under `data/raw/` and are intentionally ignored by git
 uv sync
 ```
 
+## Final Reproduction Quickstart
+
+For a raw-data-free reviewer check, run:
+
+```bash
+uv run python scripts/run_final_smoke.py --output-dir outputs/codex_smoke
+```
+
+This smoke path uses a synthetic HotpotQA-style fixture, a fake dense embedder,
+targeted pytest, retrieval-policy evaluation, and OPE diagnostics. It does not
+use raw datasets, Vertex/Gemini, paid APIs, or model downloads. See
+`docs/FINAL_REPRODUCTION.md` for smoke, full-data, and external-API
+reproduction details.
+
 ## Expected Data Layout
 
 ```text
