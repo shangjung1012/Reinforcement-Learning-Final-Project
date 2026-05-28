@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import numpy as np
@@ -12,8 +13,25 @@ from selective_rag_rl.retriever import BM25Retriever, RetrievalResult
 from selective_rag_rl.rewrites import ACTIONS, rewrite, rewrite_cost
 
 
-def test_hotpot_loader_reads_examples() -> None:
-    path = Path("data/raw/HotpotQA/hotpot_dev_distractor_v1.json")
+def test_hotpot_loader_reads_examples(tmp_path: Path) -> None:
+    path = tmp_path / "hotpot.json"
+    raw = [
+        {
+            "_id": f"q{i}",
+            "question": f"Which evidence title supports example {i}?",
+            "answer": f"answer {i}",
+            "level": "easy",
+            "type": "bridge",
+            "context": [
+                [f"Gold {i}", [f"Gold passage sentence {i}."]],
+                [f"Distractor {i}", [f"Distractor sentence {i}."]],
+            ],
+            "supporting_facts": [[f"Gold {i}", 0]],
+        }
+        for i in range(5)
+    ]
+    path.write_text(json.dumps(raw), encoding="utf-8")
+
     examples = load_hotpotqa(path, num_examples=3, seed=42)
     assert len(examples) == 3
     assert examples[0].question

@@ -1,0 +1,19 @@
+# Commands
+
+Commands are recorded as the run proceeds. Results are summarized in
+`status.md`.
+
+```powershell
+pwd
+git status --short
+git branch --show-current
+git log --oneline -5
+Get-ChildItem -File -Recurse -Depth 2 | Sort-Object FullName | ForEach-Object { $_.FullName.Substring((Get-Location).Path.Length + 1) } | Select-Object -First 200
+git switch -c codex/autonomous-improvements-20260529-0436
+git remote -v
+uv sync
+uv run pytest -q
+uv run pytest tests/test_artifact_index.py::test_export_artifact_index_records_existing_and_missing_files -q
+uv run pytest tests/test_core.py::test_hotpot_loader_reads_examples -q
+uv run pytest -q
+```

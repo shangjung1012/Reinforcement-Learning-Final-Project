@@ -14,7 +14,8 @@ from selective_rag_rl.artifact_index import (
 def test_export_artifact_index_records_existing_and_missing_files(tmp_path: Path) -> None:
     existing = tmp_path / "outputs" / "results" / "summary.csv"
     existing.parent.mkdir(parents=True)
-    existing.write_text("method,reward\npolicy,1.0\n", encoding="utf-8")
+    payload = b"method,reward\npolicy,1.0\n"
+    existing.write_bytes(payload)
     missing = tmp_path / "outputs" / "results" / "missing.csv"
     output_csv = tmp_path / "outputs" / "results" / "artifact_index.csv"
 
@@ -45,7 +46,7 @@ def test_export_artifact_index_records_existing_and_missing_files(tmp_path: Path
 
     assert existing_row["path"] == "outputs/results/summary.csv"
     assert bool(existing_row["exists"]) is True
-    assert existing_row["size_bytes"] == len("method,reward\npolicy,1.0\n")
+    assert existing_row["size_bytes"] == len(payload)
     assert existing_row["sha256_12"] == "c39a45d5625c"
     assert existing_row["role"] == "Primary held-out result table."
     assert existing_row["producer_command"] == "uv run python scripts/run_example.py"
