@@ -20,7 +20,9 @@ was absent locally, and no Vertex/Gemini or model-download paths were executed.
 - `bec4f96` - `eval: add lightweight reader EM F1 smoke`
 - `93bf3af` - `docs: clarify offline bandit framing`
 - `304b84b` - `docs: add validation and cost model guides`
-- Final report/status commit follows this file update.
+- `f79a5ba` - `docs: finalize autonomous run report`
+- Final status-completion cleanup follows this file update; use
+  `git log --oneline -1` for the final branch tip.
 
 ## Pushes Attempted
 

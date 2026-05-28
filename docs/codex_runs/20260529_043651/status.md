@@ -6,7 +6,9 @@
 
 ## Current commit
 
-`304b84b` before final report/status commit
+Final branch tip is the latest commit on
+`codex/autonomous-improvements-20260529-0436`; run `git log --oneline -1` for
+the exact hash.
 
 ## Milestones completed
 
@@ -58,6 +60,7 @@
 | `bec4f96` | `eval: add lightweight reader EM F1 smoke` | Yes |
 | `93bf3af` | `docs: clarify offline bandit framing` | Yes |
 | `304b84b` | `docs: add validation and cost model guides` | Yes |
+| `f79a5ba` | `docs: finalize autonomous run report` | Yes |
 
 ## Current blockers
 
@@ -68,9 +71,8 @@
 
 ## Next planned work
 
-1. Commit and push final report/status docs.
-2. Run final git status check.
-3. Hand off final summary to the user.
+1. Run final git status check.
+2. Hand off final summary to the user.
 
 ## Milestone self-review
 

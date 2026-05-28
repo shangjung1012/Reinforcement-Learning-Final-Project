@@ -27,4 +27,5 @@ uv run pytest tests/test_off_policy_evaluation.py tests/test_bandit_baselines.py
 uv run pytest -q
 git status --short
 git log --oneline -6
+git log --oneline -1
 ```
