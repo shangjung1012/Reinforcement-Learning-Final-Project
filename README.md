@@ -110,6 +110,8 @@ It is an evaluation-plumbing check, not final answer-generation evidence. See
 `docs/READER_EXTENSION.md`.
 
 For the precise RL interpretation and claim boundary, see `docs/RL_FRAMING.md`.
+For model-selection guardrails and reward/cost interpretation, see
+`docs/VALIDATION_PROTOCOL.md` and `docs/COST_MODEL.md`.
 
 ## Expected Data Layout
 

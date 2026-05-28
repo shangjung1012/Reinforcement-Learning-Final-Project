@@ -6,7 +6,7 @@
 
 ## Current commit
 
-`26924a9`
+`93bf3af`
 
 ## Milestones completed
 
@@ -16,6 +16,8 @@
 - [x] Baseline validation
 - [x] P0 smoke reproduction
 - [x] P1 reader/EM-F1 extension
+- [x] P3 RL framing clarification
+- [x] P2/P5 validation and cost docs
 - [ ] Final report for human
 
 ## Tests run
@@ -44,11 +46,16 @@
 | 2026-05-29 05:23 | `uv run pytest tests/test_bandit_baselines.py::test_linucb_history_records_chosen_action_reward_not_oracle_reward tests/test_off_policy_evaluation.py::test_estimate_off_policy_value_reports_no_coverage_when_actions_never_match -q` | pass | `2 passed`; focused RL sanity tests |
 | 2026-05-29 05:25 | `uv run pytest tests/test_off_policy_evaluation.py tests/test_bandit_baselines.py -q` | pass | `11 passed` after RL framing test additions |
 | 2026-05-29 05:27 | `uv run pytest -q` | pass | `151 passed, 1 warning` after P3 |
+| 2026-05-29 05:38 | `uv run pytest -q` | pass | `151 passed, 1 warning` after validation/cost docs |
 
 ## Commits pushed
 
 | Commit | Message | Pushed? |
 | --- | --- | --- |
+| `afa49f4` | `tests: make baseline suite data independent` | Yes |
+| `6ef6908` | `scripts: add raw-data-free final smoke runner` | Yes |
+| `bec4f96` | `eval: add lightweight reader EM F1 smoke` | Yes |
+| `93bf3af` | `docs: clarify offline bandit framing` | Yes |
 
 ## Current blockers
 
@@ -59,9 +66,9 @@
 
 ## Next planned work
 
-1. Commit initial audit and baseline test hygiene fixes.
-2. Commit and push P3.
-3. Start validation protocol/cost docs if time remains.
+1. Validate and commit P2/P5 validation and cost docs.
+2. Write final human report.
+3. Run final test/status checks and push final docs.
 
 ## Milestone self-review
 
@@ -129,3 +136,16 @@
 8. Any output too large for git? No.
 9. Any dependency added? No.
 10. Human inspection? Review doc wording for defense fit.
+
+### P2/P5 validation and cost docs
+
+1. What changed? Added validation protocol and cost-model interpretation docs, plus README links.
+2. Why useful? Reviewers now have explicit guidance for model selection, semantic-feature caution, OPE interpretation, and proxy cost claims.
+3. Evidence? Docs are traceable to existing script outputs and do not introduce new benchmark claims.
+4. Tests ran? Full `uv run pytest -q` passed with `151 passed, 1 warning`.
+5. Tests not run and why? Full-data experiments are still blocked by absent raw datasets.
+6. Are any claims changed? No final benchmark claims changed.
+7. Are changed claims supported? The docs explain existing claim boundaries and smoke/full-data separation.
+8. Any output too large for git? No.
+9. Any dependency added? No.
+10. Human inspection? Check that the guardrail wording matches the intended defense stance.

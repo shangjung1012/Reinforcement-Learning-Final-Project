@@ -9,8 +9,9 @@
 - [x] Implement P0 smoke reproduction runner and docs.
 - [x] Validate P0 with full pytest and commit.
 - [x] Implement P1 answer metrics and lightweight reader smoke.
-- [ ] Validate P1 with full pytest and commit.
+- [x] Validate P1 with full pytest and commit.
 - [x] Add P3 RL framing docs and focused bandit/OPE sanity tests.
+- [x] Add P2/P5 validation and cost interpretation docs.
 
 ## Backlog
 
@@ -24,8 +25,8 @@
 - [x] P1: Add tests for answer metrics and reader behavior.
 - [x] P3: Add `docs/RL_FRAMING.md`.
 - [x] P3: Strengthen OPE or selected-action bandit sanity tests if gaps remain.
-- [ ] P2: Add `docs/VALIDATION_PROTOCOL.md` and guardrail tests if not already covered.
-- [ ] P5: Add `docs/COST_MODEL.md`.
+- [x] P2: Add `docs/VALIDATION_PROTOCOL.md` with selection guardrails and reporting rules.
+- [x] P5: Add `docs/COST_MODEL.md`.
 - [ ] P6: Write final human report and update latest status.
 
 ## Notes
@@ -36,3 +37,4 @@
 - Full pytest baseline now passes locally: `142 passed, 1 warning`.
 - Smoke runner direct validation passes with targeted pytest: `17 passed`.
 - Reader toy smoke writes EM/F1 outputs; it is documented as evaluation plumbing, not final QA evidence.
+- RL framing tests and full pytest pass after P3: `151 passed, 1 warning`.
