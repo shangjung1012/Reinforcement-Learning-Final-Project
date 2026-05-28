@@ -109,6 +109,8 @@ This uses a deterministic lexical-overlap reader and reports SQuAD-style EM/F1.
 It is an evaluation-plumbing check, not final answer-generation evidence. See
 `docs/READER_EXTENSION.md`.
 
+For the precise RL interpretation and claim boundary, see `docs/RL_FRAMING.md`.
+
 ## Expected Data Layout
 
 ```text

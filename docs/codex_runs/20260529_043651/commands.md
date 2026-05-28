@@ -22,4 +22,6 @@ uv run python scripts/run_final_smoke.py --output-dir outputs/codex_smoke
 uv run pytest tests/test_answer_metrics.py tests/test_reader.py tests/test_reader_eval.py -q
 uv run python scripts/run_reader_eval.py --help
 uv run python scripts/run_reader_eval.py --dataset toy --num-examples 4 --output-dir outputs/codex_reader_smoke
+uv run pytest tests/test_bandit_baselines.py::test_linucb_history_records_chosen_action_reward_not_oracle_reward tests/test_off_policy_evaluation.py::test_estimate_off_policy_value_reports_no_coverage_when_actions_never_match -q
+uv run pytest tests/test_off_policy_evaluation.py tests/test_bandit_baselines.py -q
 ```

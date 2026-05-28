@@ -41,6 +41,9 @@
 | 2026-05-29 05:14 | `uv run python scripts/run_reader_eval.py --help` | pass | CLI help works |
 | 2026-05-29 05:14 | `uv run python scripts/run_reader_eval.py --dataset toy --num-examples 4 --output-dir outputs/codex_reader_smoke` | pass | Toy reader summary: EM `0.0`, F1 `0.490079`, retrieval metrics `1.0` |
 | 2026-05-29 05:17 | `uv run pytest -q` | pass | `149 passed, 1 warning` after P1 |
+| 2026-05-29 05:23 | `uv run pytest tests/test_bandit_baselines.py::test_linucb_history_records_chosen_action_reward_not_oracle_reward tests/test_off_policy_evaluation.py::test_estimate_off_policy_value_reports_no_coverage_when_actions_never_match -q` | pass | `2 passed`; focused RL sanity tests |
+| 2026-05-29 05:25 | `uv run pytest tests/test_off_policy_evaluation.py tests/test_bandit_baselines.py -q` | pass | `11 passed` after RL framing test additions |
+| 2026-05-29 05:27 | `uv run pytest -q` | pass | `151 passed, 1 warning` after P3 |
 
 ## Commits pushed
 
@@ -57,8 +60,8 @@
 ## Next planned work
 
 1. Commit initial audit and baseline test hygiene fixes.
-2. Commit and push P1.
-3. Start P3 RL framing/OPE docs and tests.
+2. Commit and push P3.
+3. Start validation protocol/cost docs if time remains.
 
 ## Milestone self-review
 
@@ -113,3 +116,16 @@
 8. Any output too large for git? Generated `outputs/codex_reader_smoke/` is ignored.
 9. Any dependency added? No.
 10. Human inspection? Review whether `LexicalOverlapReader` behavior is acceptable as a deterministic smoke reader.
+
+### P3 RL framing
+
+1. What changed? Added `docs/RL_FRAMING.md` and focused tests for selected-action reward logging and no-coverage OPE behavior.
+2. Why useful? The repository now has a concise technical explanation of why the work is offline contextual bandit learning and where the claim boundary is.
+3. Evidence? Bandit/OPE targeted tests pass.
+4. Tests ran? Focused two-test command and full bandit/OPE test files.
+5. Tests not run and why? Full-data experiments were not run because raw datasets are absent.
+6. Are any claims changed? No benchmark claims changed; documentation clarifies existing claims.
+7. Are changed claims supported? Yes, by existing implementation and tests.
+8. Any output too large for git? No.
+9. Any dependency added? No.
+10. Human inspection? Review doc wording for defense fit.

@@ -10,6 +10,7 @@
 - [x] Validate P0 with full pytest and commit.
 - [x] Implement P1 answer metrics and lightweight reader smoke.
 - [ ] Validate P1 with full pytest and commit.
+- [x] Add P3 RL framing docs and focused bandit/OPE sanity tests.
 
 ## Backlog
 
@@ -21,8 +22,8 @@
 - [x] P1: Add `answer_metrics.py` with normalized EM/F1.
 - [x] P1: Add deterministic lightweight reader and reader eval script.
 - [x] P1: Add tests for answer metrics and reader behavior.
-- [ ] P3: Add `docs/RL_FRAMING.md`.
-- [ ] P3: Strengthen OPE or selected-action bandit sanity tests if gaps remain.
+- [x] P3: Add `docs/RL_FRAMING.md`.
+- [x] P3: Strengthen OPE or selected-action bandit sanity tests if gaps remain.
 - [ ] P2: Add `docs/VALIDATION_PROTOCOL.md` and guardrail tests if not already covered.
 - [ ] P5: Add `docs/COST_MODEL.md`.
 - [ ] P6: Write final human report and update latest status.
