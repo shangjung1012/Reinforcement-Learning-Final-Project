@@ -19,4 +19,7 @@ uv run pytest -q
 uv run pytest tests/test_final_smoke.py -q
 uv run python scripts/run_final_smoke.py --output-dir outputs/codex_smoke --pytest-mode skip
 uv run python scripts/run_final_smoke.py --output-dir outputs/codex_smoke
+uv run pytest tests/test_answer_metrics.py tests/test_reader.py tests/test_reader_eval.py -q
+uv run python scripts/run_reader_eval.py --help
+uv run python scripts/run_reader_eval.py --dataset toy --num-examples 4 --output-dir outputs/codex_reader_smoke
 ```

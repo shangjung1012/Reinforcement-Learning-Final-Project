@@ -99,6 +99,16 @@ use raw datasets, Vertex/Gemini, paid APIs, or model downloads. See
 `docs/FINAL_REPRODUCTION.md` for smoke, full-data, and external-API
 reproduction details.
 
+For a lightweight downstream QA metric smoke, run:
+
+```bash
+uv run python scripts/run_reader_eval.py --dataset toy --output-dir outputs/codex_reader_smoke
+```
+
+This uses a deterministic lexical-overlap reader and reports SQuAD-style EM/F1.
+It is an evaluation-plumbing check, not final answer-generation evidence. See
+`docs/READER_EXTENSION.md`.
+
 ## Expected Data Layout
 
 ```text
@@ -252,9 +262,11 @@ outputs/cache/
 
 ## Current Scope
 
-This version does not include a neural reader or generated-answer EM/F1. The
-final scope is retrieval-stage selective query rewriting, using Recall@5, MRR,
-nDCG@5, retrieval calls, and rewrite cost as the main evaluation signals.
+This version does not include a neural reader or final generated-answer EM/F1
+benchmark. A deterministic lexical-overlap reader smoke path is available for
+testing downstream QA metrics, but the final scope remains retrieval-stage
+selective query rewriting, using Recall@5, MRR, nDCG@5, retrieval calls, and
+rewrite cost as the main evaluation signals.
 Vertex semantic features are implemented as an optional extension and cached
 under `outputs/cache/`. They include query-to-top-passage similarity summaries
 and top-k rank-aware similarity profiles, score-shape features over the head

@@ -15,7 +15,7 @@
 - [x] Initial run-log files created
 - [x] Baseline validation
 - [x] P0 smoke reproduction
-- [ ] P1 reader/EM-F1 extension
+- [x] P1 reader/EM-F1 extension
 - [ ] Final report for human
 
 ## Tests run
@@ -36,6 +36,11 @@
 | 2026-05-29 04:59 | `uv run python scripts/run_final_smoke.py --output-dir outputs/codex_smoke --pytest-mode skip` | pass | Script-only smoke generated local outputs |
 | 2026-05-29 05:02 | `uv run python scripts/run_final_smoke.py --output-dir outputs/codex_smoke` | pass | Targeted nested pytest `17 passed`; smoke manifest status `pass` |
 | 2026-05-29 05:04 | `uv run pytest -q` | pass | `143 passed, 1 warning` after P0 |
+| 2026-05-29 05:10 | `uv run pytest tests/test_answer_metrics.py tests/test_reader.py tests/test_reader_eval.py -q` | fail | RED: missing answer metrics and reader modules |
+| 2026-05-29 05:13 | `uv run pytest tests/test_answer_metrics.py tests/test_reader.py tests/test_reader_eval.py -q` | pass | `6 passed` after P1 implementation |
+| 2026-05-29 05:14 | `uv run python scripts/run_reader_eval.py --help` | pass | CLI help works |
+| 2026-05-29 05:14 | `uv run python scripts/run_reader_eval.py --dataset toy --num-examples 4 --output-dir outputs/codex_reader_smoke` | pass | Toy reader summary: EM `0.0`, F1 `0.490079`, retrieval metrics `1.0` |
+| 2026-05-29 05:17 | `uv run pytest -q` | pass | `149 passed, 1 warning` after P1 |
 
 ## Commits pushed
 
@@ -52,8 +57,8 @@
 ## Next planned work
 
 1. Commit initial audit and baseline test hygiene fixes.
-2. Commit and push P0.
-3. Start P1 reader/EM-F1 extension.
+2. Commit and push P1.
+3. Start P3 RL framing/OPE docs and tests.
 
 ## Milestone self-review
 
@@ -95,3 +100,16 @@
 8. Any output too large for git? Generated `outputs/codex_smoke/` is ignored and should not be committed.
 9. Any dependency added? No.
 10. Human inspection? Review whether the synthetic fixture is representative enough for a smoke test and whether README placement is visible enough.
+
+### P1 reader/EM-F1 extension
+
+1. What changed? Added SQuAD-style answer metrics, deterministic lexical-overlap reader, toy/raw-data-capable reader eval script, tests, and reader-extension docs.
+2. Why useful? The repo now has an honest downstream QA metric path that satisfies the original proposal direction without implying a neural reader or final answer-generation benchmark.
+3. Evidence? Toy reader eval produced detailed/summary EM/F1 outputs under ignored `outputs/codex_reader_smoke/`.
+4. Tests ran? P1 targeted tests and reader eval CLI/help smoke.
+5. Tests not run and why? Full pytest is next before commit; full-data reader eval was skipped because raw datasets are absent.
+6. Are any claims changed? README scope was corrected to say no neural/final answer benchmark exists, while noting the lightweight reader smoke.
+7. Are changed claims supported? Yes, by the new script, tests, and toy smoke output.
+8. Any output too large for git? Generated `outputs/codex_reader_smoke/` is ignored.
+9. Any dependency added? No.
+10. Human inspection? Review whether `LexicalOverlapReader` behavior is acceptable as a deterministic smoke reader.
