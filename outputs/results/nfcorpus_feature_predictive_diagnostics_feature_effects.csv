@@ -1,0 +1,7 @@
+dataset,feature_set,baseline_feature_set,policy_model,n_pairs,validation_reward_delta_mean,validation_reward_delta_std,validation_reward_win_rate,selective_reward_delta_mean,selective_reward_delta_std,selective_reward_win_rate,selective_recall_at_5_delta_mean,selective_recall_at_5_delta_std,selective_retrieval_calls_delta_mean,selective_retrieval_calls_delta_std
+nfcorpus_feature_predictive_diagnostics_smoke,contrast_only,no_contrast,auto,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+nfcorpus_feature_predictive_diagnostics_smoke,contrast_only,no_contrast,ridge,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+nfcorpus_feature_predictive_diagnostics_smoke,full,no_contrast,auto,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+nfcorpus_feature_predictive_diagnostics_smoke,full,no_contrast,ridge,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+nfcorpus_feature_predictive_diagnostics_smoke,contrast_only,no_contrast,__all__,2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+nfcorpus_feature_predictive_diagnostics_smoke,full,no_contrast,__all__,2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0

@@ -1,0 +1,15 @@
+dataset,feature_set,baseline_feature_set,policy_model,n_pairs,validation_reward_delta_mean,validation_reward_delta_std,validation_reward_win_rate,selective_reward_delta_mean,selective_reward_delta_std,selective_reward_win_rate,selective_recall_at_5_delta_mean,selective_recall_at_5_delta_std,selective_retrieval_calls_delta_mean,selective_retrieval_calls_delta_std
+nfcorpus_score_shape_ablation,full,no_semantic,ridge_l2=1.0,1,-0.018398503564,0.0,0.0,-0.042797131148,0.0,0.0,-0.003630464481,0.0,0.1,0.0
+nfcorpus_score_shape_ablation,no_profile,no_semantic,ridge_l2=1.0,1,-0.017798503564,0.0,0.0,-0.035530464481,0.0,0.0,-0.003630464481,0.0,0.08,0.0
+nfcorpus_score_shape_ablation,no_rank_agreement,no_semantic,ridge_l2=1.0,1,-0.003,0.0,0.0,-0.007266666667,0.0,0.0,0.0,0.0,0.02,0.0
+nfcorpus_score_shape_ablation,no_score_shape,no_semantic,ridge_l2=1.0,1,-0.018398503564,0.0,0.0,-0.042797131148,0.0,0.0,-0.003630464481,0.0,0.1,0.0
+nfcorpus_score_shape_ablation,profile_only,no_semantic,ridge_l2=1.0,1,-0.018705973426,0.0,0.0,-0.022058823529,0.0,0.0,-0.003725490196,0.0,0.0,0.0
+nfcorpus_score_shape_ablation,rank_agreement_only,no_semantic,ridge_l2=1.0,1,-0.04429140886,0.0,0.0,-0.074430954677,0.0,0.0,-0.022730954677,0.0,0.14,0.0
+nfcorpus_score_shape_ablation,score_shape_only,no_semantic,ridge_l2=1.0,1,-0.022466657187,0.0,0.0,-0.022058823529,0.0,0.0,-0.003725490196,0.0,0.0,0.0
+nfcorpus_score_shape_ablation,full,no_semantic,__all__,1,-0.018398503564,0.0,0.0,-0.042797131148,0.0,0.0,-0.003630464481,0.0,0.1,0.0
+nfcorpus_score_shape_ablation,no_profile,no_semantic,__all__,1,-0.017798503564,0.0,0.0,-0.035530464481,0.0,0.0,-0.003630464481,0.0,0.08,0.0
+nfcorpus_score_shape_ablation,no_rank_agreement,no_semantic,__all__,1,-0.003,0.0,0.0,-0.007266666667,0.0,0.0,0.0,0.0,0.02,0.0
+nfcorpus_score_shape_ablation,no_score_shape,no_semantic,__all__,1,-0.018398503564,0.0,0.0,-0.042797131148,0.0,0.0,-0.003630464481,0.0,0.1,0.0
+nfcorpus_score_shape_ablation,profile_only,no_semantic,__all__,1,-0.018705973426,0.0,0.0,-0.022058823529,0.0,0.0,-0.003725490196,0.0,0.0,0.0
+nfcorpus_score_shape_ablation,rank_agreement_only,no_semantic,__all__,1,-0.04429140886,0.0,0.0,-0.074430954677,0.0,0.0,-0.022730954677,0.0,0.14,0.0
+nfcorpus_score_shape_ablation,score_shape_only,no_semantic,__all__,1,-0.022466657187,0.0,0.0,-0.022058823529,0.0,0.0,-0.003725490196,0.0,0.0,0.0

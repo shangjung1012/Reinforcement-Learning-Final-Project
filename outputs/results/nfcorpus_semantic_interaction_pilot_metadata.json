@@ -1,0 +1,49 @@
+{
+  "dataset_key": "nfcorpus",
+  "train_examples": 50,
+  "test_examples": 50,
+  "seed": 42,
+  "full_corpus": true,
+  "corpus_size": 3633,
+  "policy_model": "ridge",
+  "selected_policy_model": "ridge_l2=1.0",
+  "feature_set": "full",
+  "feature_width": 29,
+  "semantic_features": "vertex",
+  "semantic_cache_path": "outputs/cache/nfcorpus_pilot_vertex_embeddings.jsonl",
+  "best_fixed_action": "bm25_keyword",
+  "policy_action_distribution": {
+    "test": {
+      "total": 50,
+      "actions": {
+        "bm25_keep": 15,
+        "bm25_keyword": 25,
+        "dense_keep": 4,
+        "dense_keyword": 6
+      },
+      "proportions": {
+        "bm25_keep": 0.3,
+        "bm25_keyword": 0.5,
+        "dense_keep": 0.08,
+        "dense_keyword": 0.12
+      }
+    },
+    "train": {
+      "total": 50,
+      "actions": {
+        "bm25_keep": 15,
+        "bm25_keyword": 25,
+        "dense_keep": 6,
+        "dense_keyword": 3,
+        "hybrid_keep": 1
+      },
+      "proportions": {
+        "bm25_keep": 0.3,
+        "bm25_keyword": 0.5,
+        "dense_keep": 0.12,
+        "dense_keyword": 0.06,
+        "hybrid_keep": 0.02
+      }
+    }
+  }
+}

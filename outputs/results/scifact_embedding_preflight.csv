@@ -1,0 +1,4 @@
+dataset,split,examples,k,model,cache_path,query_unique,query_cached,query_missing,document_unique,document_cached,document_missing,total_unique,total_cached,total_missing
+scifact,train,300,5,gemini-embedding-001,outputs/cache/vertex_embeddings.jsonl,300,0,300,1147,0,1147,1447,0,1447
+scifact,test,150,5,gemini-embedding-001,outputs/cache/vertex_embeddings.jsonl,150,0,150,650,0,650,800,0,800
+scifact,combined,450,5,gemini-embedding-001,outputs/cache/vertex_embeddings.jsonl,450,0,450,1557,0,1557,2007,0,2007

@@ -1,0 +1,80 @@
+{
+    "num_examples": 50,
+    "train_examples": 50,
+    "test_examples": 50,
+    "seed": 42,
+    "k": 5,
+    "best_fixed_action": "bm25_keyword",
+    "policy_model": "ridge",
+    "feature_set": "full",
+    "feature_width": 56,
+    "selected_policy_model": "ridge_l2=1.0",
+    "selected_knn_k": null,
+    "validation_policy_scores": {
+        "ridge_l2=1.0": 0.3761953449058324
+    },
+    "tuning_folds": 5,
+    "embedder": "sentence-transformers/all-MiniLM-L6-v2",
+    "semantic_features": "vertex",
+    "semantic_cache_path": "outputs/cache/nfcorpus_pilot_vertex_embeddings.jsonl",
+    "dense_weight": 0.5,
+    "retrieval_call_cost": 0.03,
+    "llm_cache_path": null,
+    "llm_base_cost": null,
+    "llm_token_cost": null,
+    "policy_action_distribution": {
+        "test": {
+            "total": 50,
+            "actions": {
+                "bm25_keep": 17,
+                "bm25_keyword": 20,
+                "dense_keep": 6,
+                "dense_keyword": 2,
+                "hybrid_keep": 4,
+                "hybrid_keyword": 1
+            },
+            "proportions": {
+                "bm25_keep": 0.34,
+                "bm25_keyword": 0.4,
+                "dense_keep": 0.12,
+                "dense_keyword": 0.04,
+                "hybrid_keep": 0.08,
+                "hybrid_keyword": 0.02
+            }
+        },
+        "train": {
+            "total": 50,
+            "actions": {
+                "bm25_keep": 18,
+                "bm25_keyword": 17,
+                "dense_keep": 9,
+                "dense_keyword": 3,
+                "hybrid_keep": 2,
+                "hybrid_keyword": 1
+            },
+            "proportions": {
+                "bm25_keep": 0.36,
+                "bm25_keyword": 0.34,
+                "dense_keep": 0.18,
+                "dense_keyword": 0.06,
+                "hybrid_keep": 0.04,
+                "hybrid_keyword": 0.02
+            }
+        }
+    },
+    "dataset_key": "nfcorpus",
+    "pool_size": 100,
+    "full_corpus": true,
+    "corpus_size": 3633,
+    "train_split": "train",
+    "test_split": "test",
+    "outputs": {
+        "detailed_csv": "outputs/semantic_nfcorpus_projection_pilot/results/nfcorpus_retrieval_policy_detailed.csv",
+        "summary_csv": "outputs/semantic_nfcorpus_projection_pilot/results/nfcorpus_retrieval_policy_summary.csv",
+        "summary_json": "outputs/semantic_nfcorpus_projection_pilot/results/nfcorpus_retrieval_policy_summary.json",
+        "table_tex": "outputs/semantic_nfcorpus_projection_pilot/results/nfcorpus_retrieval_policy_table.tex",
+        "checkpoint": "outputs/semantic_nfcorpus_projection_pilot/checkpoints/nfcorpus_retrieval_policy.pkl",
+        "metadata_json": "outputs/semantic_nfcorpus_projection_pilot/results/nfcorpus_retrieval_policy_metadata.json",
+        "action_distribution_csv": "outputs/semantic_nfcorpus_projection_pilot/results/nfcorpus_retrieval_policy_action_distribution.csv"
+    }
+}

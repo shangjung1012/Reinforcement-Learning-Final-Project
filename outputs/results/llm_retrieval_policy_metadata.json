@@ -1,0 +1,36 @@
+{
+  "num_examples": 20,
+  "train_examples": 12,
+  "test_examples": 8,
+  "seed": 42,
+  "k": 5,
+  "best_fixed_action": "dense_keyword",
+  "policy_model": "auto",
+  "selected_policy_model": "ridge_l2=1.0",
+  "selected_knn_k": null,
+  "validation_policy_scores": {
+    "knn_k=1": 1.375,
+    "knn_k=3": 1.4166666666666667,
+    "knn_k=5": 1.4324999999999999,
+    "ridge_l2=1.0": 1.4716666666666667,
+    "extra_trees": 1.425,
+    "random_forest": 1.4275000000000002
+  },
+  "tuning_folds": 3,
+  "embedder": "sentence-transformers/all-MiniLM-L6-v2",
+  "semantic_features": "none",
+  "semantic_cache_path": null,
+  "dense_weight": 0.5,
+  "retrieval_call_cost": 0.03,
+  "llm_cache_path": "outputs/cache/gemini_rewrites.jsonl",
+  "llm_base_cost": 1.0,
+  "llm_token_cost": 0.01,
+  "outputs": {
+    "detailed_csv": "outputs/results/llm_retrieval_policy_detailed.csv",
+    "summary_csv": "outputs/results/llm_retrieval_policy_summary.csv",
+    "summary_json": "outputs/results/llm_retrieval_policy_summary.json",
+    "table_tex": "outputs/results/llm_retrieval_policy_table.tex",
+    "checkpoint": "outputs/checkpoints/hotpot_llm_retrieval_policy.pkl",
+    "metadata_json": "outputs/results/llm_retrieval_policy_metadata.json"
+  }
+}

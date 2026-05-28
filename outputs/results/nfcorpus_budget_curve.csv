@@ -1,0 +1,5 @@
+dataset,call_budget,selected_method,selected_reward,selected_recall_at_5,selected_retrieval_calls,n_feasible_methods
+nfcorpus_main,1.0,Confidence-gated retrieval policy,0.4070945958761671,0.1356779292095004,1.0,8
+nfcorpus_main,1.25,Confidence-gated retrieval policy,0.4070945958761671,0.1356779292095004,1.0,8
+nfcorpus_main,1.5,Confidence-gated retrieval policy,0.4070945958761671,0.1356779292095004,1.0,8
+nfcorpus_main,2.0,Confidence-gated retrieval policy,0.4070945958761671,0.1356779292095004,1.0,10

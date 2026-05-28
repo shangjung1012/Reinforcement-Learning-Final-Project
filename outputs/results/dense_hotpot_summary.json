@@ -1,0 +1,38 @@
+[
+  {
+    "method": "Dense original",
+    "recall_at_5": 0.8333333333333334,
+    "mrr": 0.8394444444444444,
+    "ndcg_at_5": 0.7580712628009916,
+    "reward": 1.2530555555555556,
+    "rewrite_cost": 0.0,
+    "retrieval_calls": 1.0
+  },
+  {
+    "method": "Dense keyword",
+    "recall_at_5": 0.8125,
+    "mrr": 0.8491666666666667,
+    "ndcg_at_5": 0.7467986045511665,
+    "reward": 1.2370833333333333,
+    "rewrite_cost": 0.0,
+    "retrieval_calls": 1.0
+  },
+  {
+    "method": "Hybrid original",
+    "recall_at_5": 0.8625,
+    "mrr": 0.87,
+    "ndcg_at_5": 0.7900299449683749,
+    "reward": 1.2974999999999999,
+    "rewrite_cost": 0.0,
+    "retrieval_calls": 2.0
+  },
+  {
+    "method": "Hybrid keyword",
+    "recall_at_5": 0.8875,
+    "mrr": 0.8870833333333332,
+    "ndcg_at_5": 0.8134680380391506,
+    "reward": 1.331041666666667,
+    "rewrite_cost": 0.0,
+    "retrieval_calls": 2.0
+  }
+]

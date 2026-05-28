@@ -1,0 +1,51 @@
+dataset,qid,question,selected_action,train_best_action,oracle_action,policy_reward,train_best_reward,oracle_reward,policy_reward_delta_vs_train_best,policy_regret,oracle_margin_vs_train_best,oracle_margin_vs_second_best,candidate_action_reward_spread,oracle_tie_count,beats_train_best,matches_train_best_action,matches_oracle_action
+nfcorpus_semantic_projection_pilot,PLAIN-1983,rapamycin,bm25_keyword,bm25_keyword,bm25_keep,0.65625,0.65625,0.65625,0.0,0.0,0.0,0.0,0.03,4,False,True,False
+nfcorpus_semantic_projection_pilot,PLAIN-2408,Zoloft,dense_keyword,bm25_keyword,bm25_keep,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.03,4,False,False,False
+nfcorpus_semantic_projection_pilot,PLAIN-123,How Citrus Might Help Keep Your Hands Warm,hybrid_keyword,bm25_keyword,dense_keep,0.1562745098039215,0.0,0.5196078431372549,0.156274509804,0.363333333333,0.519607843137,0.03,0.519607843137,1,True,False,False
+nfcorpus_semantic_projection_pilot,PLAIN-1161,fava beans,bm25_keyword,bm25_keyword,bm25_keep,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.03,4,False,True,False
+nfcorpus_semantic_projection_pilot,PLAIN-817,canker sores,dense_keyword,bm25_keyword,bm25_keep,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.03,4,False,False,False
+nfcorpus_semantic_projection_pilot,PLAIN-2520,Caloric Restriction vs. Plant-Based Diets,bm25_keep,bm25_keyword,dense_keep,0.1523972602739726,0.1523972602739726,0.1803652968036529,0.0,0.02796803653,0.02796803653,0.0,0.03,2,False,False,False
+nfcorpus_semantic_projection_pilot,PLAIN-1962,pumpkin,bm25_keep,bm25_keyword,bm25_keep,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.03,4,False,False,True
+nfcorpus_semantic_projection_pilot,PLAIN-1909,pork,bm25_keyword,bm25_keyword,bm25_keep,0.5107991360691144,0.5107991360691144,0.5107991360691144,0.0,0.0,0.0,0.0,0.034319654428,2,False,True,False
+nfcorpus_semantic_projection_pilot,PLAIN-2690,Chronic Headaches and Pork Tapeworms,bm25_keyword,bm25_keyword,dense_keep,0.2732558139534883,0.2732558139534883,0.5697674418604651,0.0,0.296511627907,0.296511627907,0.0,0.296511627907,2,False,True,False
+nfcorpus_semantic_projection_pilot,PLAIN-2610,Treating Asthma With Plants vs. Supplements?,bm25_keyword,bm25_keyword,bm25_keep,0.5327868852459017,0.5327868852459017,0.5327868852459017,0.0,0.0,0.0,0.0,0.263606557377,2,False,True,False
+nfcorpus_semantic_projection_pilot,PLAIN-850,cauliflower,bm25_keyword,bm25_keyword,bm25_keep,0.5877192982456141,0.5877192982456141,0.5877192982456141,0.0,0.0,0.0,0.0,0.052631578947,2,False,True,False
+nfcorpus_semantic_projection_pilot,PLAIN-2750,Preventing the Common Cold with Probiotics?,bm25_keep,bm25_keyword,dense_keep,0.5508474576271186,0.5508474576271186,0.5677966101694916,0.0,0.016949152542,0.016949152542,0.0,0.046949152542,2,False,False,False
+nfcorpus_semantic_projection_pilot,PLAIN-207,Avoiding Cooked Meat Carcinogens,bm25_keyword,bm25_keyword,dense_keep,0.2681818181818182,0.2681818181818182,0.5545454545454546,0.0,0.286363636364,0.286363636364,0.0,0.286363636364,2,False,True,False
+nfcorpus_semantic_projection_pilot,PLAIN-1183,Finland,bm25_keyword,bm25_keyword,bm25_keep,0.54,0.54,0.54,0.0,0.0,0.0,0.0,0.25,2,False,True,False
+nfcorpus_semantic_projection_pilot,PLAIN-418,Fresh fruit versus frozen--which is better?,dense_keep,bm25_keyword,bm25_keep,1.1666666666666663,1.1666666666666663,1.1666666666666663,0.0,0.0,0.0,0.0,0.03,4,False,False,False
+nfcorpus_semantic_projection_pilot,PLAIN-541,American Dental Association,bm25_keyword,bm25_keyword,bm25_keep,0.2916666666666666,0.2916666666666666,0.2916666666666666,0.0,0.0,0.0,0.0,0.321666666667,2,False,True,False
+nfcorpus_semantic_projection_pilot,PLAIN-2720,Keeping Your Hands Warm With Citrus,bm25_keyword,bm25_keyword,bm25_keyword,0.5555555555555556,0.5555555555555556,0.5555555555555556,0.0,0.0,0.0,0.057777777778,0.457777777778,1,False,True,True
+nfcorpus_semantic_projection_pilot,PLAIN-3131,Are Avocados Good for You?,dense_keep,bm25_keyword,dense_keep,0.6666666666666666,0.0,0.6666666666666666,0.666666666667,0.0,0.666666666667,0.0,0.666666666667,2,True,False,True
+nfcorpus_semantic_projection_pilot,PLAIN-1066,Dr. Walter Willett,bm25_keyword,bm25_keyword,bm25_keep,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.03,4,False,True,False
+nfcorpus_semantic_projection_pilot,PLAIN-2650,Turmeric Curcumin and Osteoarthritis,bm25_keep,bm25_keyword,bm25_keep,0.5689655172413793,0.5689655172413793,0.5689655172413793,0.0,0.0,0.0,0.0,0.03,4,False,False,True
+nfcorpus_semantic_projection_pilot,PLAIN-3053,Dragon's Blood,bm25_keep,bm25_keyword,bm25_keep,1.1666666666666663,1.1666666666666663,1.1666666666666663,0.0,0.0,0.0,0.0,0.333333333333,2,False,False,True
+nfcorpus_semantic_projection_pilot,PLAIN-1762,oral intraepithelial neoplasia,bm25_keyword,bm25_keyword,hybrid_keep,0.5,0.5,0.97,0.0,0.47,0.47,0.0,0.47,2,False,True,False
+nfcorpus_semantic_projection_pilot,PLAIN-2830,Neurobiology of Artificial Sweeteners,bm25_keep,bm25_keyword,bm25_keyword,0.5,0.5833333333333333,0.5833333333333333,-0.083333333333,0.083333333333,0.0,0.083333333333,0.583333333333,1,False,False,False
+nfcorpus_semantic_projection_pilot,PLAIN-1496,leeks,dense_keyword,bm25_keyword,bm25_keep,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.03,4,False,False,False
+nfcorpus_semantic_projection_pilot,PLAIN-1794,Panama,bm25_keep,bm25_keyword,bm25_keep,1.5,1.5,1.5,0.0,0.0,0.0,0.0,0.5,2,False,False,True
+nfcorpus_semantic_projection_pilot,PLAIN-371,Any update on the scary in vitro avocado data?,bm25_keyword,bm25_keyword,bm25_keyword,0.6666666666666666,0.6666666666666666,0.6666666666666666,0.0,0.0,0.0,0.041666666667,0.666666666667,1,False,True,True
+nfcorpus_semantic_projection_pilot,PLAIN-12,Exploiting Autophagy to Live Longer,bm25_keyword,bm25_keyword,dense_keep,0.0,0.0,0.1999999999999999,0.0,0.2,0.2,0.066666666667,0.23,1,False,True,False
+nfcorpus_semantic_projection_pilot,PLAIN-1827,Peoria,dense_keyword,bm25_keyword,bm25_keep,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.03,4,False,False,False
+nfcorpus_semantic_projection_pilot,PLAIN-1151,factory farming practices,bm25_keyword,bm25_keyword,dense_keep,0.1315359477124183,0.1315359477124183,0.1797385620915032,0.0,0.048202614379,0.048202614379,0.0,0.103202614379,2,False,True,False
+nfcorpus_semantic_projection_pilot,PLAIN-593,apnea,bm25_keep,bm25_keyword,bm25_keep,0.8333333333333333,0.8333333333333333,0.8333333333333333,0.0,0.0,0.0,0.0,0.03,4,False,False,True
+nfcorpus_semantic_projection_pilot,PLAIN-987,cumin,bm25_keyword,bm25_keyword,bm25_keep,0.5,0.5,0.5,0.0,0.0,0.0,0.0,0.53,2,False,True,False
+nfcorpus_semantic_projection_pilot,PLAIN-3392,Healthiest Airplane Beverage,bm25_keyword,bm25_keyword,bm25_keep,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.03,4,False,True,False
+nfcorpus_semantic_projection_pilot,PLAIN-3201,Acne & Cancer Connection,bm25_keyword,bm25_keyword,bm25_keep,0.13125,0.13125,0.13125,0.0,0.0,0.0,0.0,0.16125,2,False,True,False
+nfcorpus_semantic_projection_pilot,PLAIN-196,Should We Avoid Titanium Dioxide?,bm25_keep,bm25_keyword,bm25_keep,0.5434782608695652,0.5434782608695652,0.5434782608695652,0.0,0.0,0.0,0.0,0.044492753623,2,False,False,True
+nfcorpus_semantic_projection_pilot,PLAIN-2810,Apple Juice May Be Worse Than Sugar Water,bm25_keep,bm25_keyword,bm25_keep,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.03,4,False,False,True
+nfcorpus_semantic_projection_pilot,PLAIN-1867,pineapples,dense_keyword,bm25_keyword,bm25_keep,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.03,4,False,False,False
+nfcorpus_semantic_projection_pilot,PLAIN-430,Are krill oil supplements better than fish oil capsules?,bm25_keyword,bm25_keyword,bm25_keep,0.875,0.875,0.875,0.0,0.0,0.0,0.0,0.125,2,False,True,False
+nfcorpus_semantic_projection_pilot,PLAIN-3097,Amyloid and Apple Juice,bm25_keep,bm25_keyword,bm25_keep,0.75,0.75,0.75,0.0,0.0,0.0,0.0,0.03,4,False,False,True
+nfcorpus_semantic_projection_pilot,PLAIN-3151,Too Much Iodine Can Be as Bad as Too Little,bm25_keyword,bm25_keyword,dense_keep,0.0,0.0,0.3333333333333333,0.0,0.333333333333,0.333333333333,0.0,0.363333333333,2,False,True,False
+nfcorpus_semantic_projection_pilot,PLAIN-520,Alli,dense_keyword,bm25_keyword,bm25_keep,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.03,4,False,False,False
+nfcorpus_semantic_projection_pilot,PLAIN-2600,Eggs and Arterial Function,bm25_keyword,bm25_keyword,dense_keep,0.225,0.225,0.8,0.0,0.575,0.575,0.0,0.6,2,False,True,False
+nfcorpus_semantic_projection_pilot,PLAIN-270,Is Caffeinated Tea Really Dehydrating?,dense_keep,bm25_keyword,bm25_keep,0.5192307692307693,0.5192307692307693,0.5192307692307693,0.0,0.0,0.0,0.0,0.03,4,False,False,False
+nfcorpus_semantic_projection_pilot,PLAIN-1039,domoic acid,bm25_keyword,bm25_keyword,bm25_keep,1.5,1.5,1.5,0.0,0.0,0.0,0.0,0.03,4,False,True,False
+nfcorpus_semantic_projection_pilot,PLAIN-2450,Are Organic Foods Safer?,bm25_keep,bm25_keyword,bm25_keep,0.5526315789473684,0.5526315789473684,0.5526315789473684,0.0,0.0,0.0,0.0,0.359649122807,2,False,False,True
+nfcorpus_semantic_projection_pilot,PLAIN-792,cadaverine,bm25_keep,bm25_keyword,bm25_keep,1.0,1.0,1.0,0.0,0.0,0.0,0.0,0.708333333333,2,False,False,True
+nfcorpus_semantic_projection_pilot,PLAIN-280,Mercury Testing Recommended Before Pregnancy,bm25_keyword,bm25_keyword,bm25_keep,0.6,0.6,0.6,0.0,0.0,0.0,0.0,0.28,2,False,True,False
+nfcorpus_semantic_projection_pilot,PLAIN-112,Food Dyes and ADHD,bm25_keep,bm25_keyword,dense_keep,0.5357142857142857,0.5357142857142857,0.5892857142857143,0.0,0.053571428571,0.053571428571,0.0,0.065714285714,2,False,False,False
+nfcorpus_semantic_projection_pilot,PLAIN-2321,veggie chicken,bm25_keyword,bm25_keyword,bm25_keep,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.03,4,False,True,False
+nfcorpus_semantic_projection_pilot,PLAIN-56,Foods for Glaucoma,bm25_keyword,bm25_keyword,dense_keep,0.58,0.58,0.6,0.0,0.02,0.02,0.0,0.05,2,False,True,False
+nfcorpus_semantic_projection_pilot,PLAIN-3241,Apthous Ulcer Mystery Solved,bm25_keyword,bm25_keyword,dense_keep,0.0,0.0,0.5344827586206896,0.0,0.534482758621,0.534482758621,0.0,0.534482758621,2,False,True,False

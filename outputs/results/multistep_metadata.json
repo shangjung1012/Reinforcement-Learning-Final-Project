@@ -1,0 +1,22 @@
+{
+  "num_examples": 600,
+  "train_examples": 360,
+  "test_examples": 240,
+  "seed": 42,
+  "k": 5,
+  "horizon": 2,
+  "target_mode": "bootstrapped",
+  "model": "knn",
+  "knn_k": 5,
+  "best_fixed_trace": "keyword_compress -> stop",
+  "retrieval_cost": 0.02,
+  "token_cost": 0.005,
+  "outputs": {
+    "detailed_csv": "outputs/results/multistep_detailed.csv",
+    "summary_csv": "outputs/results/multistep_summary.csv",
+    "summary_json": "outputs/results/multistep_summary.json",
+    "table_tex": "outputs/results/multistep_table.tex",
+    "q0_checkpoint": "outputs/checkpoints/hotpot_fqi_q0.pkl",
+    "q1_checkpoint": "outputs/checkpoints/hotpot_fqi_q1.pkl"
+  }
+}

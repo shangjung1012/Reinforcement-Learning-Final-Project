@@ -1,0 +1,30 @@
+{
+  "num_examples": 300,
+  "train_examples": 180,
+  "test_examples": 120,
+  "seed": 42,
+  "k": 5,
+  "best_fixed_action": "hybrid_keyword",
+  "selected_knn_k": 5,
+  "validation_policy_scores": {
+    "knn_k=1": 1.2853148148148148,
+    "knn_k=3": 1.3124999999999998,
+    "knn_k=5": 1.3193518518518519,
+    "knn_k=7": 1.3154722222222224,
+    "knn_k=9": 1.3071018518518518,
+    "knn_k=11": 1.3125462962962962,
+    "knn_k=15": 1.2946296296296296,
+    "knn_k=21": 1.3042129629629629
+  },
+  "tuning_folds": 5,
+  "embedder": "sentence-transformers/all-MiniLM-L6-v2",
+  "dense_weight": 0.5,
+  "retrieval_call_cost": 0.03,
+  "outputs": {
+    "detailed_csv": "outputs/results/retrieval_policy_detailed.csv",
+    "summary_csv": "outputs/results/retrieval_policy_summary.csv",
+    "summary_json": "outputs/results/retrieval_policy_summary.json",
+    "table_tex": "outputs/results/retrieval_policy_table.tex",
+    "checkpoint": "outputs/checkpoints/hotpot_retrieval_policy.pkl"
+  }
+}

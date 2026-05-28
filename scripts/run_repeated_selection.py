@@ -1,0 +1,79 @@
+from __future__ import annotations
+
+import argparse
+from pathlib import Path
+
+import pandas as pd
+
+from selective_rag_rl.policy_model_sweep import POLICY_MODEL_CHOICES
+from selective_rag_rl.retrieval_policy_experiment import AUTO_POLICY_MODEL_CHOICES, FEATURE_SET_CHOICES, SEMANTIC_DEPTH_DEFAULT
+from selective_rag_rl.selection_repeats import run_repeated_policy_model_selection
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--dataset", choices=["scifact", "nfcorpus"], default="nfcorpus")
+    parser.add_argument("--data-path", type=Path, default=None)
+    parser.add_argument("--output-dir", type=Path, default=Path("outputs") / "repeated_selection_runs")
+    parser.add_argument("--seeds", default="41,42,43")
+    parser.add_argument("--policy-models", default="ridge,auto")
+    parser.add_argument("--feature-set", choices=FEATURE_SET_CHOICES, default="full")
+    parser.add_argument("--feature-sets", default=None)
+    parser.add_argument("--num-train-examples", type=int, default=50)
+    parser.add_argument("--num-test-examples", type=int, default=50)
+    parser.add_argument("--k", type=int, default=5)
+    parser.add_argument("--pool-size", type=int, default=100)
+    parser.add_argument("--full-corpus", action="store_true")
+    parser.add_argument("--embedder", default="sentence-transformers/all-MiniLM-L6-v2")
+    parser.add_argument("--dense-weight", type=float, default=0.5)
+    parser.add_argument("--retrieval-call-cost", type=float, default=0.03)
+    parser.add_argument("--semantic-features", choices=["none", "vertex"], default="none")
+    parser.add_argument("--semantic-cache-path", type=Path, default=None)
+    parser.add_argument("--semantic-depth", type=int, default=SEMANTIC_DEPTH_DEFAULT)
+    parser.add_argument("--knn-k-candidates", default="1,3,5,7,9,11,15,21")
+    parser.add_argument("--tuning-folds", type=int, default=5)
+    parser.add_argument("--auto-candidate-models", default=",".join(AUTO_POLICY_MODEL_CHOICES))
+    parser.add_argument("--retrieval-contrast-features", action="store_true")
+    args = parser.parse_args()
+
+    default_paths = {
+        "scifact": Path("data/raw/scifact"),
+        "nfcorpus": Path("data/raw/nfcorpus"),
+    }
+    seeds = [int(value) for value in args.seeds.split(",") if value.strip()]
+    policy_models = [value.strip() for value in args.policy_models.split(",") if value.strip()]
+    unknown = sorted(set(policy_models) - set(POLICY_MODEL_CHOICES))
+    if unknown:
+        raise ValueError(f"Unknown policy model(s): {', '.join(unknown)}")
+    feature_sets = [value.strip() for value in args.feature_sets.split(",") if value.strip()] if args.feature_sets else None
+    knn_k_candidates = [int(value) for value in args.knn_k_candidates.split(",") if value.strip()]
+    auto_candidate_models = [value.strip() for value in args.auto_candidate_models.split(",") if value.strip()]
+    metadata = run_repeated_policy_model_selection(
+        dataset=args.dataset,
+        data_path=args.data_path or default_paths[args.dataset],
+        output_dir=args.output_dir,
+        seeds=seeds,
+        policy_models=policy_models,
+        feature_set=args.feature_set,
+        feature_sets=feature_sets,
+        num_train_examples=args.num_train_examples,
+        num_test_examples=args.num_test_examples,
+        k=args.k,
+        pool_size=args.pool_size,
+        full_corpus=args.full_corpus,
+        embedder_name=args.embedder,
+        dense_weight=args.dense_weight,
+        retrieval_call_cost=args.retrieval_call_cost,
+        semantic_features=args.semantic_features,
+        semantic_cache_path=args.semantic_cache_path,
+        semantic_depth=args.semantic_depth,
+        knn_k_candidates=knn_k_candidates,
+        tuning_folds=args.tuning_folds,
+        auto_candidate_models=auto_candidate_models,
+        retrieval_contrast_features=args.retrieval_contrast_features,
+    )
+    print(pd.read_csv(metadata["stability_csv"]).to_string(index=False))
+
+
+if __name__ == "__main__":
+    main()

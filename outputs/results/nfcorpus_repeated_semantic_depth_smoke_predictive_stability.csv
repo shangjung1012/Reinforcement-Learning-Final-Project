@@ -1,0 +1,17 @@
+dataset,group,target,semantic_depth,baseline_semantic_depth,n_runs,active_columns_delta_mean,width_delta_mean,train_r2_delta_across_seed_mean,train_r2_delta_across_seed_std,test_r2_delta_across_seed_mean,test_r2_delta_across_seed_std,test_r2_delta_positive_rate,test_corr_delta_across_seed_mean,test_corr_delta_across_seed_std,test_corr_delta_positive_rate
+nfcorpus_repeated_semantic_depth,bias,dense_advantage_vs_bm25,8,5,2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+nfcorpus_repeated_semantic_depth,bias,hybrid_advantage_vs_bm25,8,5,2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+nfcorpus_repeated_semantic_depth,bias,oracle_margin,8,5,2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+nfcorpus_repeated_semantic_depth,bias,oracle_reward,8,5,2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+nfcorpus_repeated_semantic_depth,query_form,dense_advantage_vs_bm25,8,5,2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+nfcorpus_repeated_semantic_depth,query_form,hybrid_advantage_vs_bm25,8,5,2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+nfcorpus_repeated_semantic_depth,query_form,oracle_margin,8,5,2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+nfcorpus_repeated_semantic_depth,query_form,oracle_reward,8,5,2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+nfcorpus_repeated_semantic_depth,retrieval_confidence,dense_advantage_vs_bm25,8,5,2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+nfcorpus_repeated_semantic_depth,retrieval_confidence,hybrid_advantage_vs_bm25,8,5,2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+nfcorpus_repeated_semantic_depth,retrieval_confidence,oracle_margin,8,5,2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+nfcorpus_repeated_semantic_depth,retrieval_confidence,oracle_reward,8,5,2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+nfcorpus_repeated_semantic_depth,wh_word,dense_advantage_vs_bm25,8,5,2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+nfcorpus_repeated_semantic_depth,wh_word,hybrid_advantage_vs_bm25,8,5,2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+nfcorpus_repeated_semantic_depth,wh_word,oracle_margin,8,5,2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+nfcorpus_repeated_semantic_depth,wh_word,oracle_reward,8,5,2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0

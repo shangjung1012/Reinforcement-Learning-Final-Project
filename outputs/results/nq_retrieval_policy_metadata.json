@@ -1,0 +1,39 @@
+{
+  "num_examples": 500,
+  "train_examples": 300,
+  "test_examples": 200,
+  "seed": 42,
+  "k": 5,
+  "best_fixed_action": "dense_keep",
+  "policy_model": "auto",
+  "selected_policy_model": "ridge_l2=1.0",
+  "selected_knn_k": null,
+  "validation_policy_scores": {
+    "knn_k=1": 1.461361111111111,
+    "knn_k=3": 1.472611111111111,
+    "knn_k=5": 1.4734444444444446,
+    "knn_k=7": 1.4839444444444445,
+    "knn_k=9": 1.4839444444444445,
+    "knn_k=11": 1.4847777777777778,
+    "knn_k=15": 1.4867222222222223,
+    "knn_k=21": 1.4888888888888887,
+    "ridge_l2=1.0": 1.4944444444444445,
+    "extra_trees": 1.493611111111111,
+    "random_forest": 1.4944444444444445
+  },
+  "tuning_folds": 5,
+  "embedder": "sentence-transformers/all-MiniLM-L6-v2",
+  "semantic_features": "none",
+  "semantic_cache_path": null,
+  "dense_weight": 0.5,
+  "retrieval_call_cost": 0.03,
+  "outputs": {
+    "detailed_csv": "outputs/results/nq_retrieval_policy_detailed.csv",
+    "summary_csv": "outputs/results/nq_retrieval_policy_summary.csv",
+    "summary_json": "outputs/results/nq_retrieval_policy_summary.json",
+    "table_tex": "outputs/results/nq_retrieval_policy_table.tex",
+    "checkpoint": "outputs/checkpoints/nq_retrieval_policy.pkl",
+    "metadata_json": "outputs/results/nq_retrieval_policy_metadata.json"
+  },
+  "pool_size": 50
+}

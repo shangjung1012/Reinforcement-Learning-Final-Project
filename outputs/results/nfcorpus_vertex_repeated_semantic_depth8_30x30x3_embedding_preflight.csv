@@ -1,0 +1,11 @@
+dataset,split,examples,k,model,cache_path,query_unique,query_cached,query_missing,document_unique,document_cached,document_missing,total_unique,total_cached,total_missing
+nfcorpus,seed_41_train,30,8,gemini-embedding-001,outputs/cache/nfcorpus_pilot_vertex_embeddings.jsonl,30,20,10,237,181,56,267,201,66
+nfcorpus,seed_41_test,30,8,gemini-embedding-001,outputs/cache/nfcorpus_pilot_vertex_embeddings.jsonl,30,22,8,228,171,57,258,193,65
+nfcorpus,seed_41_combined,60,8,gemini-embedding-001,outputs/cache/nfcorpus_pilot_vertex_embeddings.jsonl,60,42,18,449,337,112,509,379,130
+nfcorpus,seed_42_train,30,8,gemini-embedding-001,outputs/cache/nfcorpus_pilot_vertex_embeddings.jsonl,30,30,0,232,192,40,262,222,40
+nfcorpus,seed_42_test,30,8,gemini-embedding-001,outputs/cache/nfcorpus_pilot_vertex_embeddings.jsonl,30,30,0,230,177,53,260,207,53
+nfcorpus,seed_42_combined,60,8,gemini-embedding-001,outputs/cache/nfcorpus_pilot_vertex_embeddings.jsonl,60,60,0,449,356,93,509,416,93
+nfcorpus,seed_43_train,30,8,gemini-embedding-001,outputs/cache/nfcorpus_pilot_vertex_embeddings.jsonl,30,1,29,231,67,164,261,68,193
+nfcorpus,seed_43_test,30,8,gemini-embedding-001,outputs/cache/nfcorpus_pilot_vertex_embeddings.jsonl,30,6,24,228,86,142,258,92,166
+nfcorpus,seed_43_combined,60,8,gemini-embedding-001,outputs/cache/nfcorpus_pilot_vertex_embeddings.jsonl,60,7,53,444,146,298,504,153,351
+nfcorpus,repeated_combined,180,8,gemini-embedding-001,outputs/cache/nfcorpus_pilot_vertex_embeddings.jsonl,175,104,71,1135,673,462,1310,777,533

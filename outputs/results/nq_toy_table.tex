@@ -1,0 +1,12 @@
+\begin{tabular}{lrrrrrr}
+\toprule
+Method & Recall@5 & MRR & nDCG@5 & Reward & Cost & Calls \\
+\midrule
+Vanilla BM25 & 0.955 & 0.903 & 0.916 & 1.407 & 0.000 & 1.000 \\
+Rewrite-all keyword & 0.970 & 0.936 & 0.945 & 1.438 & 0.000 & 1.000 \\
+Rewrite-all entity expansion & 0.970 & 0.936 & 0.945 & 1.438 & 0.000 & 1.000 \\
+Train-best fixed rewrite & 0.970 & 0.936 & 0.945 & 1.438 & 0.000 & 1.000 \\
+Selective bandit & 0.970 & 0.933 & 0.942 & 1.437 & 0.000 & 1.000 \\
+Oracle best action & 0.970 & 0.940 & 0.948 & 1.440 & 0.000 & 1.000 \\
+\bottomrule
+\end{tabular}

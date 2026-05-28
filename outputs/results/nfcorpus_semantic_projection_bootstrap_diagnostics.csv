@@ -1,0 +1,5 @@
+dataset,comparison,metric,n_queries,mean_policy,mean_baseline,mean_delta,ci_lower,ci_upper,prob_delta_gt_0,n_bootstrap,seed
+nfcorpus_semantic_projection_pilot,Selective retrieval policy - Train-best retrieval action,reward,50,0.42177081522677917,0.406978658364034,0.014792156862745097,-0.0033333333333333305,0.04458431372549019,0.8266,5000,42
+nfcorpus_semantic_projection_pilot,Selective retrieval policy - Train-best retrieval action,recall_at_5,50,0.1520374818934458,0.1483119916973674,0.0037254901960784305,0.0,0.010784313725490192,0.8658,5000,42
+nfcorpus_semantic_projection_pilot,Selective retrieval policy - Train-best retrieval action,mrr,50,0.5406666666666666,0.5173333333333333,0.02333333333333333,-0.006666666666666667,0.07,0.8266,5000,42
+nfcorpus_semantic_projection_pilot,Selective retrieval policy - Train-best retrieval action,ndcg_at_5,50,0.35424261951247793,0.34359757829838744,0.010645041214090519,-0.0012288509590897407,0.027603051477771326,0.9374,5000,42

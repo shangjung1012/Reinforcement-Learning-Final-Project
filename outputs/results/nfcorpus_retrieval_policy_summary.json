@@ -1,0 +1,101 @@
+[
+  {
+    "method": "Vanilla BM25",
+    "recall_at_5": 0.11834725939262707,
+    "mrr": 0.5094444444444444,
+    "ndcg_at_5": 0.34421697577324956,
+    "reward": 0.3730694816148493,
+    "rewrite_cost": 0.0,
+    "retrieval_calls": 1.0
+  },
+  {
+    "method": "BM25 keyword",
+    "recall_at_5": 0.12403186299309063,
+    "mrr": 0.522888888888889,
+    "ndcg_at_5": 0.3538112618707896,
+    "reward": 0.3854763074375351,
+    "rewrite_cost": 0.0,
+    "retrieval_calls": 1.0
+  },
+  {
+    "method": "Dense original",
+    "recall_at_5": 0.12220833726570283,
+    "mrr": 0.509888888888889,
+    "ndcg_at_5": 0.3579017941230752,
+    "reward": 0.37715278171014727,
+    "rewrite_cost": 0.0,
+    "retrieval_calls": 1.0
+  },
+  {
+    "method": "Dense keyword",
+    "recall_at_5": 0.11888256392477968,
+    "mrr": 0.49716666666666676,
+    "ndcg_at_5": 0.3499771588017766,
+    "reward": 0.367465897258113,
+    "rewrite_cost": 0.0,
+    "retrieval_calls": 1.0
+  },
+  {
+    "method": "Hybrid original",
+    "recall_at_5": 0.13054903097439563,
+    "mrr": 0.5304444444444444,
+    "ndcg_at_5": 0.3636016502800924,
+    "reward": 0.36577125319661785,
+    "rewrite_cost": 0.03,
+    "retrieval_calls": 2.0
+  },
+  {
+    "method": "Hybrid keyword",
+    "recall_at_5": 0.13306211542345148,
+    "mrr": 0.5361666666666667,
+    "ndcg_at_5": 0.36822167343301243,
+    "reward": 0.3711454487567848,
+    "rewrite_cost": 0.03,
+    "retrieval_calls": 2.0
+  },
+  {
+    "method": "Train-best retrieval action",
+    "recall_at_5": 0.12220833726570283,
+    "mrr": 0.509888888888889,
+    "ndcg_at_5": 0.3579017941230752,
+    "reward": 0.37715278171014727,
+    "rewrite_cost": 0.0,
+    "retrieval_calls": 1.0
+  },
+  {
+    "method": "Heuristic retrieval router",
+    "recall_at_5": 0.12914746325821336,
+    "mrr": 0.5209444444444445,
+    "ndcg_at_5": 0.35231372476151857,
+    "reward": 0.3896196854804356,
+    "rewrite_cost": 0.0,
+    "retrieval_calls": 1.0
+  },
+  {
+    "method": "Selective retrieval policy",
+    "recall_at_5": 0.1356779292095004,
+    "mrr": 0.5428333333333333,
+    "ndcg_at_5": 0.3722254638103688,
+    "reward": 0.4070945958761671,
+    "rewrite_cost": 0.0,
+    "retrieval_calls": 1.0
+  },
+  {
+    "method": "Confidence-gated retrieval policy",
+    "recall_at_5": 0.1356779292095004,
+    "mrr": 0.5428333333333333,
+    "ndcg_at_5": 0.3722254638103688,
+    "reward": 0.4070945958761671,
+    "rewrite_cost": 0.0,
+    "retrieval_calls": 1.0
+  },
+  {
+    "method": "Oracle retrieval action",
+    "recall_at_5": 0.15665732853009304,
+    "mrr": 0.6161666666666668,
+    "ndcg_at_5": 0.4386963459059314,
+    "reward": 0.4641406618634263,
+    "rewrite_cost": 0.0006,
+    "retrieval_calls": 1.02
+  }
+]

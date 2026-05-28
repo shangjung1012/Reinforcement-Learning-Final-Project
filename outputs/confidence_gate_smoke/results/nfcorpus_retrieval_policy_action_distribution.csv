@@ -1,0 +1,4 @@
+split,action,count,proportion
+test,dense_keep,8,1.0
+train,bm25_keyword,5,0.4166666666666667
+train,dense_keep,7,0.5833333333333334

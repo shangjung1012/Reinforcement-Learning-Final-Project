@@ -1,0 +1,5 @@
+dataset,feature_set,policy_model,auto_candidate_models,retrieval_contrast_features,semantic_depth,selected_policy_model,train_size,test_size,feature_width,validation_reward,selective_reward,best_fixed_reward,oracle_reward,selective_recall_at_5,best_fixed_recall_at_5,best_fixed_retrieval_calls,selective_retrieval_calls
+nfcorpus,full,ridge,,False,5,ridge_l2=1.0,20,20,56,0.6456190223981443,0.5935583579853014,0.6277250246519682,0.6374472468741905,0.2007250246519683,0.21939169131863495,1.0,1.1
+nfcorpus,full,auto,"knn,ridge,extra_trees,random_forest,mlp",False,5,mlp,20,20,56,0.6599556338394589,0.5580674155494905,0.6277250246519682,0.6374472468741905,0.18440074888282387,0.21939169131863495,1.0,1.35
+nfcorpus,no_semantic,ridge,,False,5,ridge_l2=1.0,20,20,56,0.644336971116093,0.6193916913186348,0.6277250246519682,0.6374472468741905,0.21105835798530165,0.21939169131863495,1.0,1.0
+nfcorpus,no_semantic,auto,"knn,ridge,extra_trees,random_forest,mlp",False,5,knn_k=15,20,20,56,0.6591190223981443,0.6277250246519682,0.6277250246519682,0.6374472468741905,0.21939169131863495,0.21939169131863495,1.0,1.0

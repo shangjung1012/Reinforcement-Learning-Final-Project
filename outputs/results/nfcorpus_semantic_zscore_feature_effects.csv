@@ -1,0 +1,7 @@
+dataset,feature_set,baseline_feature_set,policy_model,n_pairs,validation_reward_delta_mean,validation_reward_delta_std,validation_reward_win_rate,selective_reward_delta_mean,selective_reward_delta_std,selective_reward_win_rate,selective_recall_at_5_delta_mean,selective_recall_at_5_delta_std,selective_retrieval_calls_delta_mean,selective_retrieval_calls_delta_std
+nfcorpus_semantic_zscore_smoke,full,no_semantic,auto,1,-0.0015,0.0,0.0,-0.0015,0.0,0.0,0.0,0.0,0.05,0.0
+nfcorpus_semantic_zscore_smoke,full,no_semantic,ridge,1,0.001282051282,0.0,1.0,-0.025833333333,0.0,0.0,-0.010333333333,0.0,0.1,0.0
+nfcorpus_semantic_zscore_smoke,semantic_zscore,no_semantic,auto,1,-0.0015,0.0,0.0,-0.0015,0.0,0.0,0.0,0.0,0.05,0.0
+nfcorpus_semantic_zscore_smoke,semantic_zscore,no_semantic,ridge,1,-0.093371794872,0.0,0.0,-0.017819672131,0.0,0.0,-0.000819672131,0.0,0.15,0.0
+nfcorpus_semantic_zscore_smoke,full,no_semantic,__all__,2,-0.00010897435900000005,0.001391025641,0.5,-0.0136666666665,0.0121666666665,0.0,-0.0051666666665,0.0051666666665,0.07500000000000001,0.025
+nfcorpus_semantic_zscore_smoke,semantic_zscore,no_semantic,__all__,2,-0.047435897436,0.045935897435999996,0.0,-0.009659836065500001,0.008159836065500001,0.0,-0.0004098360655,0.0004098360655,0.1,0.049999999999999996

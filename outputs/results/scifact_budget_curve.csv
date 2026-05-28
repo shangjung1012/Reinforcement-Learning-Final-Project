@@ -1,0 +1,5 @@
+dataset,call_budget,selected_method,selected_reward,selected_recall_at_5,selected_retrieval_calls,n_feasible_methods
+scifact_main,1.0,Dense original,1.0420277777777778,0.7412777777777777,1.0,4
+scifact_main,1.25,Heuristic retrieval router,1.0480666666666665,0.7334444444444445,1.0533333333333332,5
+scifact_main,1.5,Confidence-gated retrieval policy,1.090488888888889,0.7736666666666666,1.413333333333333,7
+scifact_main,2.0,Confidence-gated retrieval policy,1.090488888888889,0.7736666666666666,1.413333333333333,10

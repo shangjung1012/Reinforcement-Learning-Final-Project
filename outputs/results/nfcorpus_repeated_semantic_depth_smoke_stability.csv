@@ -1,0 +1,3 @@
+dataset,feature_set,policy_model,semantic_depth,baseline_semantic_depth,n_runs,validation_reward_delta_across_seed_mean,validation_reward_delta_across_seed_std,validation_reward_delta_win_rate,selective_reward_delta_across_seed_mean,selective_reward_delta_across_seed_std,selective_reward_delta_win_rate,selective_recall_at_5_delta_across_seed_mean,selective_recall_at_5_delta_across_seed_std,selective_retrieval_calls_delta_across_seed_mean,selective_retrieval_calls_delta_across_seed_std
+nfcorpus_repeated_semantic_depth,full,ridge,8,5,2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+nfcorpus_repeated_semantic_depth,no_semantic,ridge,8,5,2,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0

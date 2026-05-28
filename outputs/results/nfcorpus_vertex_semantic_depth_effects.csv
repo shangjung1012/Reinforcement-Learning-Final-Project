@@ -1,0 +1,5 @@
+dataset,feature_set,policy_model,semantic_depth,baseline_semantic_depth,n_pairs,validation_reward_delta_mean,validation_reward_delta_std,validation_reward_win_rate,selective_reward_delta_mean,selective_reward_delta_std,selective_reward_win_rate,selective_recall_at_5_delta_mean,selective_recall_at_5_delta_std,selective_retrieval_calls_delta_mean,selective_retrieval_calls_delta_std
+nfcorpus,full,auto,8,5,1,0.0,0.0,0.0,-0.008333333333,0.0,0.0,-0.008333333333,0.0,0.0,0.0
+nfcorpus,full,ridge,8,5,1,0.000627659574,0.0,1.0,0.002,0.0,1.0,0.002,0.0,0.0,0.0
+nfcorpus,no_semantic,auto,8,5,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+nfcorpus,no_semantic,ridge,8,5,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0

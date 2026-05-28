@@ -1,0 +1,88 @@
+{
+  "num_examples": 600,
+  "train_examples": 600,
+  "test_examples": 300,
+  "seed": 42,
+  "k": 5,
+  "best_fixed_action": "dense_keep",
+  "policy_model": "auto",
+  "feature_set": "full",
+  "feature_width": 14,
+  "selected_policy_model": "ridge_l2=1.0",
+  "selected_knn_k": null,
+  "validation_policy_scores": {
+    "knn_k=1": 0.35316226003132345,
+    "knn_k=3": 0.34871576457635683,
+    "knn_k=5": 0.3516791051433893,
+    "knn_k=7": 0.35315412734275886,
+    "knn_k=9": 0.35486216137655857,
+    "knn_k=11": 0.3507949954529873,
+    "knn_k=15": 0.35618835287038036,
+    "knn_k=21": 0.3632611853259465,
+    "ridge_l2=1.0": 0.36639582718973934,
+    "extra_trees": 0.3554432164766656,
+    "random_forest": 0.3549175938117517,
+    "mlp": 0.3472533184453437
+  },
+  "tuning_folds": 5,
+  "embedder": "sentence-transformers/all-MiniLM-L6-v2",
+  "semantic_features": "none",
+  "semantic_depth": 5,
+  "semantic_cache_path": null,
+  "dense_weight": 0.5,
+  "retrieval_call_cost": 0.03,
+  "llm_cache_path": null,
+  "llm_base_cost": null,
+  "llm_token_cost": null,
+  "retrieval_contrast_features": false,
+  "confidence_gate_margin": 0.0,
+  "policy_action_distribution": {
+    "test": {
+      "total": 300,
+      "actions": {
+        "bm25_keep": 98,
+        "bm25_keyword": 36,
+        "dense_keep": 108,
+        "dense_keyword": 58
+      },
+      "proportions": {
+        "bm25_keep": 0.32666666666666666,
+        "bm25_keyword": 0.12,
+        "dense_keep": 0.36,
+        "dense_keyword": 0.19333333333333333
+      }
+    },
+    "train": {
+      "total": 600,
+      "actions": {
+        "bm25_keep": 172,
+        "bm25_keyword": 87,
+        "dense_keep": 239,
+        "dense_keyword": 101,
+        "hybrid_keyword": 1
+      },
+      "proportions": {
+        "bm25_keep": 0.2866666666666667,
+        "bm25_keyword": 0.145,
+        "dense_keep": 0.3983333333333333,
+        "dense_keyword": 0.16833333333333333,
+        "hybrid_keyword": 0.0016666666666666668
+      }
+    }
+  },
+  "dataset_key": "nfcorpus",
+  "pool_size": 100,
+  "full_corpus": true,
+  "corpus_size": 3633,
+  "train_split": "train",
+  "test_split": "test",
+  "outputs": {
+    "detailed_csv": "outputs/results/nfcorpus_retrieval_policy_detailed.csv",
+    "summary_csv": "outputs/results/nfcorpus_retrieval_policy_summary.csv",
+    "summary_json": "outputs/results/nfcorpus_retrieval_policy_summary.json",
+    "table_tex": "outputs/results/nfcorpus_retrieval_policy_table.tex",
+    "checkpoint": "outputs/checkpoints/nfcorpus_retrieval_policy.pkl",
+    "metadata_json": "outputs/results/nfcorpus_retrieval_policy_metadata.json",
+    "action_distribution_csv": "outputs/results/nfcorpus_retrieval_policy_action_distribution.csv"
+  }
+}

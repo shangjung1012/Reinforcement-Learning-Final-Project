@@ -1,0 +1,3 @@
+seed,grid_csv
+41,outputs/repeated_selection_runs/nfcorpus_smoke/seed_41/results/nfcorpus_policy_model_sweep.csv
+42,outputs/repeated_selection_runs/nfcorpus_smoke/seed_42/results/nfcorpus_policy_model_sweep.csv

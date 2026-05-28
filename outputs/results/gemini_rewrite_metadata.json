@@ -1,0 +1,14 @@
+{
+  "dataset": "HotpotQA Gemini rewrite baselines",
+  "num_examples": 20,
+  "test_examples": 8,
+  "seed": 42,
+  "k": 5,
+  "cache": "outputs/cache/gemini_rewrites.jsonl",
+  "outputs": {
+    "detailed_csv": "outputs/results/gemini_rewrite_detailed.csv",
+    "summary_csv": "outputs/results/gemini_rewrite_summary.csv",
+    "summary_json": "outputs/results/gemini_rewrite_summary.json",
+    "table_tex": "outputs/results/gemini_rewrite_table.tex"
+  }
+}

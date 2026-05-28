@@ -1,0 +1,17 @@
+{
+  "dataset": "Natural Questions single-hop title retrieval",
+  "num_examples": 500,
+  "train_examples": 300,
+  "test_examples": 200,
+  "seed": 42,
+  "pool_size": 50,
+  "k": 5,
+  "best_fixed_action": "keyword_compress",
+  "outputs": {
+    "detailed_csv": "outputs/results/nq_toy_detailed.csv",
+    "summary_csv": "outputs/results/nq_toy_summary.csv",
+    "summary_json": "outputs/results/nq_toy_summary.json",
+    "table_tex": "outputs/results/nq_toy_table.tex",
+    "checkpoint": "outputs/checkpoints/nq_bandit_policy.pkl"
+  }
+}

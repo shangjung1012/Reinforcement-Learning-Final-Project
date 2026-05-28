@@ -1,0 +1,15 @@
+{
+  "num_examples": 1000,
+  "train_examples": 600,
+  "test_examples": 400,
+  "seed": 42,
+  "k": 5,
+  "best_fixed_action": "keyword_compress",
+  "outputs": {
+    "detailed_csv": "outputs/results/hotpot_toy_detailed.csv",
+    "summary_csv": "outputs/results/hotpot_toy_summary.csv",
+    "summary_json": "outputs/results/hotpot_toy_summary.json",
+    "table_tex": "outputs/results/hotpot_toy_table.tex",
+    "checkpoint": "outputs/checkpoints/hotpot_bandit_policy.pkl"
+  }
+}

@@ -1,0 +1,20 @@
+[
+  {
+    "method": "Gemini rewrite-all",
+    "recall_at_5": 0.75,
+    "mrr": 0.90625,
+    "ndcg_at_5": 0.7428689098956677,
+    "reward": 0.14312499999999995,
+    "rewrite_cost": 1.06,
+    "retrieval_calls": 1.0
+  },
+  {
+    "method": "Gemini decompose",
+    "recall_at_5": 0.875,
+    "mrr": 0.90625,
+    "ndcg_at_5": 0.8395821117043031,
+    "reward": 0.23937499999999992,
+    "rewrite_cost": 1.08875,
+    "retrieval_calls": 2.0
+  }
+]

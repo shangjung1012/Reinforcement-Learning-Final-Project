@@ -1,0 +1,3 @@
+dataset,feature_set,policy_model,baseline_semantic_depth,n_runs,n_unique_validation_best_depths,validation_best_depth_modal,validation_best_depth_modal_count,validation_best_depth_modal_share,n_unique_heldout_best_depths,heldout_best_depth_modal,heldout_best_depth_modal_count,heldout_best_depth_modal_share,validation_matches_heldout_depth_rate,validation_selected_heldout_delta_mean,heldout_best_delta_mean,depth_selection_reward_gap_mean,depth_selection_reward_gap_std
+nfcorpus_repeated_semantic_depth,full,ridge,5,2,1,5,2,1.0,1,5,2,1.0,1.0,0.0,0.0,0.0,0.0
+nfcorpus_repeated_semantic_depth,no_semantic,ridge,5,2,1,5,2,1.0,1,5,2,1.0,1.0,0.0,0.0,0.0,0.0

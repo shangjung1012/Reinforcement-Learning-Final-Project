@@ -1,0 +1,3 @@
+method,recall_at_5,mrr,ndcg_at_5,reward,rewrite_cost,retrieval_calls
+Gemini rewrite-all,0.75,0.90625,0.7428689098956677,0.14312499999999995,1.06,1.0
+Gemini decompose,0.875,0.90625,0.8395821117043031,0.23937499999999992,1.08875,2.0

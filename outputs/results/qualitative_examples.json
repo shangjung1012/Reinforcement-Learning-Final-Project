@@ -1,0 +1,42 @@
+[
+  {
+    "qid": "5a747a9a55429929fddd8444",
+    "question": "Which composer lived longer, Maurice Ravel or Paul Hindemith?",
+    "selected_action": "entity_expand",
+    "vanilla_top_docs": "Illustrissimi | Rapsodie espagnole | Louise Ochs\u00e9 | Sh\u00e9h\u00e9razade (Ravel) | Paul Hindemith",
+    "selected_top_docs": "Konzertmusik for Brass and String Orchestra | Paul Hindemith | Illustrissimi | Maurice Ravel | Hindemith Prize",
+    "gold_docs": "Maurice Ravel | Paul Hindemith"
+  },
+  {
+    "qid": "5a760ab65542994ccc918697",
+    "question": "Alfred Balk served as the secretary of the Committee on the Employment of Minority Groups in the News Media under which United States Vice President?",
+    "selected_action": "keyword_compress",
+    "vanilla_top_docs": "Alfred Balk | Gordon Johndroe | Gerald Ford | Cynthia Hogan | Jim Lentz",
+    "selected_top_docs": "Alfred Balk | Gordon Johndroe | Gerald Ford | Cynthia Hogan | Nelson Rockefeller",
+    "gold_docs": "Alfred Balk | Nelson Rockefeller"
+  },
+  {
+    "qid": "5a773ec45542994aec3b7245",
+    "question": " Who was born earlier, Simone Bolelli or Caroline Wozniacki?",
+    "selected_action": "keyword_compress",
+    "vanilla_top_docs": "Fabio Fognini | Caroline Wozniacki | 2011 Brussels Open \u2013 Singles | Caroline Wozniacki career statistics | Patrik Wozniacki",
+    "selected_top_docs": "Patrik Wozniacki | Simone Bolelli | Caroline Wozniacki | Fabio Fognini | Caroline Wozniacki career statistics",
+    "gold_docs": "Caroline Wozniacki | Simone Bolelli"
+  },
+  {
+    "qid": "5a7747e15542994aec3b7266",
+    "question": "Which was formed first, the duo Big & Rich or Lonestar?",
+    "selected_action": "keyword_compress",
+    "vanilla_top_docs": "Rich Rocks | Underneath the Same Moon | For the Kids (EP) | John Rich | Live a Little (Big Kenny album)",
+    "selected_top_docs": "Underneath the Same Moon | Live a Little (Big Kenny album) | Lonestar | Rich Rocks | John Rich",
+    "gold_docs": "John Rich | Lonestar"
+  },
+  {
+    "qid": "5a7a01b15542996c55b2dcd1",
+    "question": "Who lived longer, Alejandro Jodorowsky or Philip Saville?",
+    "selected_action": "keyword_compress",
+    "vanilla_top_docs": "Philip Saville | Santa Sangre | The Holy Mountain (1973 film) | Axel Jodorowsky | The Dance of Reality",
+    "selected_top_docs": "Philip Saville | Axel Jodorowsky | The Dance of Reality | Jodorowsky's Dune | Alejandro Jodorowsky",
+    "gold_docs": "Alejandro Jodorowsky | Philip Saville"
+  }
+]

@@ -1,0 +1,15 @@
+\begin{tabular}{lrrrrrr}
+\toprule
+Method & Recall@5 & MRR & nDCG@5 & Reward & Cost & Calls \\
+\midrule
+Vanilla BM25 & 0.955 & 0.901 & 0.914 & 1.405 & 0.000 & 1.000 \\
+BM25 keyword & 0.970 & 0.934 & 0.943 & 1.437 & 0.000 & 1.000 \\
+Dense original & 0.990 & 0.974 & 0.978 & 1.477 & 0.000 & 1.000 \\
+Dense keyword & 0.990 & 0.974 & 0.978 & 1.477 & 0.000 & 1.000 \\
+Hybrid original & 0.990 & 0.961 & 0.968 & 1.440 & 0.030 & 2.000 \\
+Hybrid keyword & 0.995 & 0.967 & 0.974 & 1.449 & 0.030 & 2.000 \\
+Train-best retrieval action & 0.990 & 0.974 & 0.978 & 1.477 & 0.000 & 1.000 \\
+Selective retrieval policy & 0.990 & 0.976 & 0.980 & 1.478 & 0.000 & 1.000 \\
+Oracle retrieval action & 0.995 & 0.980 & 0.984 & 1.485 & 0.000 & 1.000 \\
+\bottomrule
+\end{tabular}

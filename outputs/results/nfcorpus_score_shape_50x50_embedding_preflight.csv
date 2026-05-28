@@ -1,0 +1,4 @@
+dataset,split,examples,k,model,cache_path,query_unique,query_cached,query_missing,document_unique,document_cached,document_missing,total_unique,total_cached,total_missing
+nfcorpus,train,50,5,gemini-embedding-001,outputs/cache/nfcorpus_pilot_vertex_embeddings.jsonl,50,50,0,228,228,0,278,278,0
+nfcorpus,test,50,5,gemini-embedding-001,outputs/cache/nfcorpus_pilot_vertex_embeddings.jsonl,50,50,0,194,194,0,244,244,0
+nfcorpus,combined,100,5,gemini-embedding-001,outputs/cache/nfcorpus_pilot_vertex_embeddings.jsonl,100,100,0,401,401,0,501,501,0

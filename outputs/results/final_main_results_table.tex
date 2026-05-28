@@ -1,0 +1,18 @@
+\begin{tabular}{lllrrllr}
+\toprule
+dataset & method & objective & objective_value & delta_vs_train_best & ci_low & ci_high & retrieval_calls \\
+\midrule
+scifact & Train-best retrieval action & reward & 1.056778 & 0.000000 &  &  & 2.000000 \\
+scifact & Heuristic retrieval router & reward & 1.048067 & -0.008711 &  &  & 1.053333 \\
+scifact & Best selected-action bandit baseline & reward & 1.062139 & 0.005361 &  &  & 1.033333 \\
+scifact & Selective retrieval policy & reward & 1.090489 & 0.033711 & 0.008852 & 0.058341 & 1.413333 \\
+scifact & Constrained policy lambda=0.03 & utility_lambda_0.03 & 1.089378 & 0.047350 & 0.014315 & 0.082247 & 1.273333 \\
+scifact & Oracle retrieval action & reward & 1.206244 & 0.149467 &  &  & 1.006667 \\
+nfcorpus & Train-best retrieval action & reward & 0.377153 & 0.000000 &  &  & 1.000000 \\
+nfcorpus & Heuristic retrieval router & reward & 0.389620 & 0.012467 &  &  & 1.000000 \\
+nfcorpus & Best selected-action bandit baseline & reward & 0.404025 & 0.026873 &  &  & 1.136667 \\
+nfcorpus & Selective retrieval policy & reward & 0.407095 & 0.029942 & 0.005428 & 0.054799 & 1.000000 \\
+nfcorpus & Constrained policy lambda=0.03 & utility_lambda_0.03 & 0.409809 & 0.032656 & 0.010587 & 0.058431 & 1.000000 \\
+nfcorpus & Oracle retrieval action & reward & 0.464141 & 0.086988 &  &  & 1.020000 \\
+\bottomrule
+\end{tabular}

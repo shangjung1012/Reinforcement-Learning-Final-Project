@@ -1,0 +1,56 @@
+[
+  {
+    "method": "Vanilla BM25",
+    "recall_at_5": 0.955,
+    "mrr": 0.9032499999999999,
+    "ndcg_at_5": 0.9162205153541619,
+    "reward": 1.4066250000000002,
+    "rewrite_cost": 0.0,
+    "retrieval_calls": 1.0
+  },
+  {
+    "method": "Rewrite-all keyword",
+    "recall_at_5": 0.97,
+    "mrr": 0.9364166666666667,
+    "ndcg_at_5": 0.9448608906658262,
+    "reward": 1.4382083333333333,
+    "rewrite_cost": 0.0,
+    "retrieval_calls": 1.0
+  },
+  {
+    "method": "Rewrite-all entity expansion",
+    "recall_at_5": 0.97,
+    "mrr": 0.9364166666666667,
+    "ndcg_at_5": 0.9448608906658262,
+    "reward": 1.4382083333333333,
+    "rewrite_cost": 0.0,
+    "retrieval_calls": 1.0
+  },
+  {
+    "method": "Train-best fixed rewrite",
+    "recall_at_5": 0.97,
+    "mrr": 0.9364166666666667,
+    "ndcg_at_5": 0.9448608906658262,
+    "reward": 1.4382083333333333,
+    "rewrite_cost": 0.0,
+    "retrieval_calls": 1.0
+  },
+  {
+    "method": "Selective bandit",
+    "recall_at_5": 0.97,
+    "mrr": 0.9330833333333334,
+    "ndcg_at_5": 0.9423608906658261,
+    "reward": 1.4365416666666666,
+    "rewrite_cost": 0.0,
+    "retrieval_calls": 1.0
+  },
+  {
+    "method": "Oracle best action",
+    "recall_at_5": 0.97,
+    "mrr": 0.9404166666666666,
+    "ndcg_at_5": 0.9479266266296534,
+    "reward": 1.4402083333333335,
+    "rewrite_cost": 0.0,
+    "retrieval_calls": 1.0
+  }
+]

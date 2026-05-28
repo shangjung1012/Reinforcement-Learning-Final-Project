@@ -1,0 +1,56 @@
+[
+  {
+    "method": "Vanilla BM25",
+    "recall_at_5": 0.7854166666666667,
+    "mrr": 0.8782638888888888,
+    "ndcg_at_5": 0.7438413499305736,
+    "reward": 1.224548611111111,
+    "cost": 0.0,
+    "retrieval_calls": 1.0
+  },
+  {
+    "method": "Rewrite-all keyword",
+    "recall_at_5": 0.8229166666666666,
+    "mrr": 0.9230555555555556,
+    "ndcg_at_5": 0.790148104902911,
+    "reward": 1.2644444444444447,
+    "cost": 0.02,
+    "retrieval_calls": 2.0
+  },
+  {
+    "method": "Rewrite-all entity",
+    "recall_at_5": 0.8166666666666667,
+    "mrr": 0.9296527777777778,
+    "ndcg_at_5": 0.7899347334490658,
+    "reward": 1.2500972222222224,
+    "cost": 0.03139583333333334,
+    "retrieval_calls": 2.0
+  },
+  {
+    "method": "Train-best fixed trace",
+    "recall_at_5": 0.8229166666666666,
+    "mrr": 0.9230555555555556,
+    "ndcg_at_5": 0.790148104902911,
+    "reward": 1.2644444444444447,
+    "cost": 0.02,
+    "retrieval_calls": 2.0
+  },
+  {
+    "method": "Multi-step FQI",
+    "recall_at_5": 0.8145833333333333,
+    "mrr": 0.888125,
+    "ndcg_at_5": 0.7692134953660843,
+    "reward": 1.2225208333333335,
+    "cost": 0.036125000000000004,
+    "retrieval_calls": 2.4375
+  },
+  {
+    "method": "Oracle two-step",
+    "recall_at_5": 0.9125,
+    "mrr": 0.9588194444444444,
+    "ndcg_at_5": 0.8538873067747684,
+    "reward": 1.376263888888889,
+    "cost": 0.015645833333333335,
+    "retrieval_calls": 1.5708333333333333
+  }
+]

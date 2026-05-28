@@ -1,0 +1,65 @@
+{
+  "num_examples": 12,
+  "train_examples": 12,
+  "test_examples": 8,
+  "seed": 42,
+  "k": 5,
+  "best_fixed_action": "dense_keep",
+  "policy_model": "ridge",
+  "feature_set": "full",
+  "feature_width": 14,
+  "selected_policy_model": "ridge_l2=1.0",
+  "selected_knn_k": null,
+  "validation_policy_scores": {
+    "ridge_l2=1.0": 0.5614229794745021
+  },
+  "tuning_folds": 2,
+  "embedder": "fake",
+  "semantic_features": "none",
+  "semantic_depth": 5,
+  "semantic_cache_path": null,
+  "dense_weight": 0.5,
+  "retrieval_call_cost": 0.03,
+  "llm_cache_path": null,
+  "llm_base_cost": null,
+  "llm_token_cost": null,
+  "retrieval_contrast_features": false,
+  "confidence_gate_margin": 999.0,
+  "policy_action_distribution": {
+    "test": {
+      "total": 8,
+      "actions": {
+        "dense_keep": 8
+      },
+      "proportions": {
+        "dense_keep": 1.0
+      }
+    },
+    "train": {
+      "total": 12,
+      "actions": {
+        "bm25_keyword": 5,
+        "dense_keep": 7
+      },
+      "proportions": {
+        "bm25_keyword": 0.4166666666666667,
+        "dense_keep": 0.5833333333333334
+      }
+    }
+  },
+  "dataset_key": "nfcorpus",
+  "pool_size": 20,
+  "full_corpus": false,
+  "corpus_size": null,
+  "train_split": "train",
+  "test_split": "test",
+  "outputs": {
+    "detailed_csv": "outputs/confidence_gate_smoke/results/nfcorpus_retrieval_policy_detailed.csv",
+    "summary_csv": "outputs/confidence_gate_smoke/results/nfcorpus_retrieval_policy_summary.csv",
+    "summary_json": "outputs/confidence_gate_smoke/results/nfcorpus_retrieval_policy_summary.json",
+    "table_tex": "outputs/confidence_gate_smoke/results/nfcorpus_retrieval_policy_table.tex",
+    "checkpoint": "outputs/confidence_gate_smoke/checkpoints/nfcorpus_retrieval_policy.pkl",
+    "metadata_json": "outputs/confidence_gate_smoke/results/nfcorpus_retrieval_policy_metadata.json",
+    "action_distribution_csv": "outputs/confidence_gate_smoke/results/nfcorpus_retrieval_policy_action_distribution.csv"
+  }
+}

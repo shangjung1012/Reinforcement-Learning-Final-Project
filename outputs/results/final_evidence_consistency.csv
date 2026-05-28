@@ -1,0 +1,7 @@
+claim_id,source_artifact,expected_value,observed_value,status,evidence_path
+deployment_confidence,outputs/results/nfcorpus_vertex_deployment_decision.csv,pilot_low_n,pilot_low_n,pass,deployment_decision.decision_confidence
+runtime_policy,outputs/results/nfcorpus_vertex_deployment_decision.csv,train_best_fixed_retrieval_action,train_best_fixed_retrieval_action,pass,deployment_decision.recommended_runtime_policy
+full_auto_depth_effect_ci,outputs/results/nfcorpus_vertex_selection_protocol_summary.csv,"[-0.019894, 0.008454]","[-0.019894, 0.008454]",pass,protocol[full/auto].depth_effect_ci
+full_ridge_depth_effect_ci,outputs/results/nfcorpus_vertex_selection_protocol_summary.csv,"[-0.008071, 0.010826]","[-0.008071, 0.010826]",pass,protocol[full/ridge].depth_effect_ci
+protocol_artifact_indexed,outputs/results/final_artifact_index.csv,indexed,indexed,pass,artifact_index[nfcorpus_vertex_protocol_summary]
+deployment_artifact_indexed,outputs/results/final_artifact_index.csv,indexed,indexed,pass,artifact_index[nfcorpus_vertex_deployment_decision]

@@ -1,0 +1,11 @@
+.secrets/
+.env
+vertex_adc.json
+outputs/learning_curve_runs/
+outputs/feature_ablation_runs/
+outputs/policy_model_sweep_runs/
+outputs/repeated_selection_runs/
+outputs/repeated_semantic_depth_runs/
+outputs/semantic_nfcorpus_pilot/
+outputs/semantic_nfcorpus_interaction_pilot/
+outputs/semantic_nfcorpus_projection_pilot/

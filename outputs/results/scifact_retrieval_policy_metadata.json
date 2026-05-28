@@ -1,0 +1,94 @@
+{
+  "num_examples": 600,
+  "train_examples": 600,
+  "test_examples": 300,
+  "seed": 42,
+  "k": 5,
+  "best_fixed_action": "hybrid_keyword",
+  "policy_model": "auto",
+  "feature_set": "full",
+  "feature_width": 14,
+  "selected_policy_model": "extra_trees",
+  "selected_knn_k": null,
+  "validation_policy_scores": {
+    "knn_k=1": 1.051886111111111,
+    "knn_k=3": 1.0778027777777777,
+    "knn_k=5": 1.080161111111111,
+    "knn_k=7": 1.0733222222222223,
+    "knn_k=9": 1.0648333333333333,
+    "knn_k=11": 1.0635583333333334,
+    "knn_k=15": 1.0624972222222222,
+    "knn_k=21": 1.0689472222222223,
+    "ridge_l2=1.0": 1.0767694444444444,
+    "extra_trees": 1.0829805555555554,
+    "random_forest": 1.0775694444444446,
+    "mlp": 1.0631472222222222
+  },
+  "tuning_folds": 5,
+  "embedder": "sentence-transformers/all-MiniLM-L6-v2",
+  "semantic_features": "none",
+  "semantic_depth": 5,
+  "semantic_cache_path": null,
+  "dense_weight": 0.5,
+  "retrieval_call_cost": 0.03,
+  "llm_cache_path": null,
+  "llm_base_cost": null,
+  "llm_token_cost": null,
+  "retrieval_contrast_features": false,
+  "confidence_gate_margin": 0.0,
+  "policy_action_distribution": {
+    "test": {
+      "total": 300,
+      "actions": {
+        "bm25_keep": 53,
+        "bm25_keyword": 54,
+        "dense_keep": 60,
+        "dense_keyword": 9,
+        "hybrid_keep": 40,
+        "hybrid_keyword": 84
+      },
+      "proportions": {
+        "bm25_keep": 0.17666666666666667,
+        "bm25_keyword": 0.18,
+        "dense_keep": 0.2,
+        "dense_keyword": 0.03,
+        "hybrid_keep": 0.13333333333333333,
+        "hybrid_keyword": 0.28
+      }
+    },
+    "train": {
+      "total": 600,
+      "actions": {
+        "bm25_keep": 82,
+        "bm25_keyword": 138,
+        "dense_keep": 139,
+        "dense_keyword": 19,
+        "hybrid_keep": 62,
+        "hybrid_keyword": 160
+      },
+      "proportions": {
+        "bm25_keep": 0.13666666666666666,
+        "bm25_keyword": 0.23,
+        "dense_keep": 0.23166666666666666,
+        "dense_keyword": 0.03166666666666667,
+        "hybrid_keep": 0.10333333333333333,
+        "hybrid_keyword": 0.26666666666666666
+      }
+    }
+  },
+  "dataset_key": "scifact",
+  "pool_size": 100,
+  "full_corpus": true,
+  "corpus_size": 5183,
+  "train_split": "train",
+  "test_split": "test",
+  "outputs": {
+    "detailed_csv": "outputs/results/scifact_retrieval_policy_detailed.csv",
+    "summary_csv": "outputs/results/scifact_retrieval_policy_summary.csv",
+    "summary_json": "outputs/results/scifact_retrieval_policy_summary.json",
+    "table_tex": "outputs/results/scifact_retrieval_policy_table.tex",
+    "checkpoint": "outputs/checkpoints/scifact_retrieval_policy.pkl",
+    "metadata_json": "outputs/results/scifact_retrieval_policy_metadata.json",
+    "action_distribution_csv": "outputs/results/scifact_retrieval_policy_action_distribution.csv"
+  }
+}

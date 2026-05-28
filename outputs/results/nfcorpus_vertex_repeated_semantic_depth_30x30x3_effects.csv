@@ -1,0 +1,13 @@
+dataset,feature_set,policy_model,semantic_depth,baseline_semantic_depth,n_pairs,validation_reward_delta_mean,validation_reward_delta_std,validation_reward_win_rate,selective_reward_delta_mean,selective_reward_delta_std,selective_reward_win_rate,selective_recall_at_5_delta_mean,selective_recall_at_5_delta_std,selective_retrieval_calls_delta_mean,selective_retrieval_calls_delta_std,seed
+nfcorpus,full,auto,8,5,1,-0.009578754579,0.0,0.0,0.012802802803,0.0,1.0,0.004469469469,0.0,0.0,0.0,41
+nfcorpus,full,ridge,8,5,1,-0.009578754579,0.0,0.0,0.012802802803,0.0,1.0,0.004469469469,0.0,0.0,0.0,41
+nfcorpus,no_semantic,auto,8,5,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,41
+nfcorpus,no_semantic,ridge,8,5,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,41
+nfcorpus,full,auto,8,5,1,7.6923077e-05,0.0,1.0,-0.023385819797,0.0,0.0,-0.017052486464,0.0,-0.066666666667,0.0,42
+nfcorpus,full,ridge,8,5,1,0.007666666667,0.0,1.0,-0.011321156773,0.0,0.0,-0.009321156773,0.0,0.066666666667,0.0,42
+nfcorpus,no_semantic,auto,8,5,1,0.001666666667,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,42
+nfcorpus,no_semantic,ridge,8,5,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,42
+nfcorpus,full,auto,8,5,1,0.004532790592,0.0,1.0,-0.007267806268,0.0,0.0,-0.006267806268,0.0,-0.133333333333,0.0,43
+nfcorpus,full,ridge,8,5,1,-0.002497512438,0.0,0.0,0.003680311891,0.0,1.0,0.002680311891,0.0,0.133333333333,0.0,43
+nfcorpus,no_semantic,auto,8,5,1,0.001841269841,0.0,1.0,-0.000900900901,0.0,0.0,-0.000900900901,0.0,0.0,0.0,43
+nfcorpus,no_semantic,ridge,8,5,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,43

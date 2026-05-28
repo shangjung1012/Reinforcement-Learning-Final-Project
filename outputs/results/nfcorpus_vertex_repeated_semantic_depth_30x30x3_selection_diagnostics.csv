@@ -1,0 +1,13 @@
+dataset,seed,feature_set,policy_model,baseline_semantic_depth,validation_best_depth,heldout_best_depth,validation_selected_heldout_delta,heldout_best_delta,depth_selection_reward_gap
+nfcorpus_repeated_semantic_depth,41,full,auto,5,5,8,0.0,0.012802802803,0.012802802803
+nfcorpus_repeated_semantic_depth,41,full,ridge,5,5,8,0.0,0.012802802803,0.012802802803
+nfcorpus_repeated_semantic_depth,41,no_semantic,auto,5,5,5,0.0,0.0,0.0
+nfcorpus_repeated_semantic_depth,41,no_semantic,ridge,5,5,5,0.0,0.0,0.0
+nfcorpus_repeated_semantic_depth,42,full,auto,5,8,5,-0.023385819797,0.0,0.023385819797
+nfcorpus_repeated_semantic_depth,42,full,ridge,5,8,5,-0.011321156773,0.0,0.011321156773
+nfcorpus_repeated_semantic_depth,42,no_semantic,auto,5,8,5,0.0,0.0,0.0
+nfcorpus_repeated_semantic_depth,42,no_semantic,ridge,5,5,5,0.0,0.0,0.0
+nfcorpus_repeated_semantic_depth,43,full,auto,5,8,5,-0.007267806268,0.0,0.007267806268
+nfcorpus_repeated_semantic_depth,43,full,ridge,5,5,8,0.0,0.003680311891,0.003680311891
+nfcorpus_repeated_semantic_depth,43,no_semantic,auto,5,8,5,-0.000900900901,0.0,0.000900900901
+nfcorpus_repeated_semantic_depth,43,no_semantic,ridge,5,5,5,0.0,0.0,0.0

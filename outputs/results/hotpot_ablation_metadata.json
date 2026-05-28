@@ -1,0 +1,14 @@
+{
+  "dataset": "HotpotQA ablation",
+  "num_examples": 1000,
+  "train_examples": 600,
+  "test_examples": 400,
+  "seed": 42,
+  "k": 5,
+  "outputs": {
+    "detailed_csv": "outputs/results/hotpot_ablation_detailed.csv",
+    "summary_csv": "outputs/results/hotpot_ablation_summary.csv",
+    "summary_json": "outputs/results/hotpot_ablation_summary.json",
+    "table_tex": "outputs/results/hotpot_ablation_table.tex"
+  }
+}

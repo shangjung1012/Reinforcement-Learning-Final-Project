@@ -1,0 +1,17 @@
+dataset,group,target,semantic_depth,baseline_semantic_depth,n_pairs,train_r2_delta,test_r2_delta,test_corr_delta,active_columns_delta,width_delta
+nfcorpus,bias,dense_advantage_vs_bm25,8,5,1,0.0,0.0,0.0,0.0,0.0
+nfcorpus,bias,hybrid_advantage_vs_bm25,8,5,1,0.0,0.0,0.0,0.0,0.0
+nfcorpus,bias,oracle_margin,8,5,1,0.0,0.0,0.0,0.0,0.0
+nfcorpus,bias,oracle_reward,8,5,1,0.0,0.0,0.0,0.0,0.0
+nfcorpus,query_form,dense_advantage_vs_bm25,8,5,1,0.0,0.0,0.0,0.0,0.0
+nfcorpus,query_form,hybrid_advantage_vs_bm25,8,5,1,0.0,0.0,0.0,0.0,0.0
+nfcorpus,query_form,oracle_margin,8,5,1,0.0,0.0,0.0,0.0,0.0
+nfcorpus,query_form,oracle_reward,8,5,1,0.0,0.0,0.0,0.0,0.0
+nfcorpus,retrieval_confidence,dense_advantage_vs_bm25,8,5,1,0.0,0.0,0.0,0.0,0.0
+nfcorpus,retrieval_confidence,hybrid_advantage_vs_bm25,8,5,1,0.0,0.0,0.0,0.0,0.0
+nfcorpus,retrieval_confidence,oracle_margin,8,5,1,0.0,0.0,0.0,0.0,0.0
+nfcorpus,retrieval_confidence,oracle_reward,8,5,1,0.0,0.0,0.0,0.0,0.0
+nfcorpus,wh_word,dense_advantage_vs_bm25,8,5,1,0.0,0.0,0.0,0.0,0.0
+nfcorpus,wh_word,hybrid_advantage_vs_bm25,8,5,1,0.0,0.0,0.0,0.0,0.0
+nfcorpus,wh_word,oracle_margin,8,5,1,0.0,0.0,0.0,0.0,0.0
+nfcorpus,wh_word,oracle_reward,8,5,1,0.0,0.0,0.0,0.0,0.0

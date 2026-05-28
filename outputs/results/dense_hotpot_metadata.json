@@ -1,0 +1,15 @@
+{
+  "dataset": "HotpotQA dense retrieval baselines",
+  "num_examples": 300,
+  "test_examples": 120,
+  "seed": 42,
+  "k": 5,
+  "embedder": "sentence-transformers/all-MiniLM-L6-v2",
+  "dense_weight": 0.5,
+  "outputs": {
+    "detailed_csv": "outputs/results/dense_hotpot_detailed.csv",
+    "summary_csv": "outputs/results/dense_hotpot_summary.csv",
+    "summary_json": "outputs/results/dense_hotpot_summary.json",
+    "table_tex": "outputs/results/dense_hotpot_table.tex"
+  }
+}
