@@ -29,7 +29,8 @@ Commits made:
 - `5f2b2ca` - `api: add gemini budget gate`
 - `c869b3b` - `docs: add experiment evidence dashboard`
 - `8f7922a` - `docs: finalize api validation run report`
-- Final status cleanup commit follows this update.
+- `5adb955` - `docs: mark api validation run complete`
+- Run `git log --oneline -1` for the exact final branch tip.
 
 ## Push Status
 

@@ -6,8 +6,8 @@
 
 ## Current commit
 
-Latest pushed branch tip after final report is `8f7922a`; a final status cleanup
-commit follows this line update.
+Run `git log --oneline -1` for the final pushed branch tip. The latest
+explicitly recorded cleanup commit in this status file is `5adb955`.
 
 ## Milestones completed
 
