@@ -28,7 +28,8 @@ Commits made:
 - `3b8ea2b` - `eval: add cost frontier summary utility`
 - `5f2b2ca` - `api: add gemini budget gate`
 - `c869b3b` - `docs: add experiment evidence dashboard`
-- Final report/status commit follows this update.
+- `8f7922a` - `docs: finalize api validation run report`
+- Final status cleanup commit follows this update.
 
 ## Push Status
 

@@ -46,4 +46,5 @@ uv run pytest -q
 uv run python scripts/run_final_smoke.py --output-dir outputs/codex_smoke_second --pytest-mode targeted
 uv run pytest -q
 uv run pytest -q
+uv run pytest -q
 ```

@@ -6,7 +6,8 @@
 
 ## Current commit
 
-`809e372 docs: mark autonomous run complete`
+Latest pushed branch tip after final report is `8f7922a`; a final status cleanup
+commit follows this line update.
 
 ## Milestones completed
 
@@ -68,6 +69,7 @@
 | 2026-05-29 23:49 | `uv run python scripts/run_final_smoke.py --output-dir outputs/codex_smoke_second --pytest-mode targeted` | pass | Nested targeted pytest `18 passed` |
 | 2026-05-29 23:50 | `uv run pytest -q` | pass | `171 passed, 1 warning` before final report |
 | 2026-05-29 23:56 | `uv run pytest -q` | pass | `171 passed, 1 warning` before final report commit |
+| 2026-05-29 23:59 | `uv run pytest -q` | pass | `171 passed, 1 warning` before final status cleanup commit |
 
 ## Tests run
 
@@ -92,11 +94,20 @@
 | 2026-05-29 23:49 | `uv run python scripts/run_final_smoke.py --output-dir outputs/codex_smoke_second --pytest-mode targeted` | pass | Nested targeted pytest `18 passed` |
 | 2026-05-29 23:50 | `uv run pytest -q` | pass | `171 passed, 1 warning` final verification |
 | 2026-05-29 23:56 | `uv run pytest -q` | pass | `171 passed, 1 warning` final pre-commit verification |
+| 2026-05-29 23:59 | `uv run pytest -q` | pass | `171 passed, 1 warning` after status cleanup edits |
 
 ## Commits pushed
 
 | Commit | Message | Pushed? |
 | --- | --- | --- |
+| `d0d8f16` | `docs: start api validation run audit` | Yes |
+| `c8593c8` | `scripts: add safe api preflight` | Yes |
+| `c6216fe` | `scripts: add raw data preflight` | Yes |
+| `1e8ac9b` | `eval: add validation guardrail utility` | Yes |
+| `3b8ea2b` | `eval: add cost frontier summary utility` | Yes |
+| `5f2b2ca` | `api: add gemini budget gate` | Yes |
+| `c869b3b` | `docs: add experiment evidence dashboard` | Yes |
+| `8f7922a` | `docs: finalize api validation run report` | Yes |
 
 ## API usage
 
@@ -111,7 +122,7 @@
 
 ## Next planned work
 
-1. Commit and push final report/status update.
+1. Commit and push final status cleanup.
 2. Run final git status check.
 3. Hand off summary to the user.
 
