@@ -59,3 +59,15 @@ Passing API preflight means credentials, model access, and the SDK path work for
 tiny calls. It does not support benchmark claims. Full generated-action or
 semantic-feature claims require cached/budgeted runs on real data, repeated-seed
 validation, and guardrail checks.
+
+## Gemini Baseline Budget Gate
+
+`scripts/run_gemini_baseline.py` now supports a dry-run and explicit call budget:
+
+```bash
+uv run python scripts/run_gemini_baseline.py --data-path path/to/hotpot.json --num-examples 10 --cache-path outputs/cache/codex_gemini_rewrites.jsonl --dry-run
+CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_gemini_baseline.py --data-path path/to/hotpot.json --num-examples 10 --cache-path outputs/cache/codex_gemini_rewrites.jsonl --allow-api --max-new-calls 8
+```
+
+When the cache misses exceed `--max-new-calls`, or when live calls are not
+explicitly allowed, the script stops before constructing the live Vertex client.

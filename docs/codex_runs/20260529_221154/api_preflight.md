@@ -7,6 +7,9 @@
 | 2026-05-29 22:27 | Vertex embedding | dry-run preflight | no | 0 | 1 | 0 | `dry_run_no_api_call` |
 | 2026-05-29 22:28 | Gemini | live preflight | yes | 1 | 1 | 1 | `api_call_succeeded` |
 | 2026-05-29 22:28 | Vertex embedding | live preflight | yes | 1 | 1 | 1 | `api_call_succeeded` |
+| 2026-05-29 23:24 | Gemini baseline | synthetic dry-run | no | 0 | 4 | 0 | budget estimate only |
+| 2026-05-29 23:25 | Gemini baseline | synthetic live pilot | yes | 4 | 4 | 4 | succeeded |
+| 2026-05-29 23:27 | Gemini baseline | synthetic cache check | no | 0 | 0 | 0 | cache-resumable |
 
 ## Environment Name Check
 

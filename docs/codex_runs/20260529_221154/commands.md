@@ -35,4 +35,9 @@ uv run pytest tests/test_cost_frontier.py -q
 uv run python scripts/run_cost_frontier_summary.py --dataset scifact --summary-csv outputs/results/scifact_retrieval_policy_summary.csv --output-csv outputs/results/scifact_cost_frontier_summary.csv --budgets 1.0,1.25,1.5,2.0
 uv run python scripts/run_cost_frontier_summary.py --dataset nfcorpus --summary-csv outputs/results/nfcorpus_retrieval_policy_summary.csv --output-csv outputs/results/nfcorpus_cost_frontier_summary.csv --budgets 1.0,1.25,1.5,2.0
 uv run pytest -q
+uv run pytest tests/test_gemini_baseline.py -q
+uv run python scripts/run_gemini_baseline.py --data-path outputs/codex_smoke_second/fixtures/synthetic_hotpot.json --num-examples 4 --seed 42 --cache-path outputs/cache/codex_gemini_rewrites_synthetic.jsonl --output-dir outputs/codex_gemini_pilot/synthetic_4 --dry-run
+$env:CODEX_ALLOW_API_CALLS='1'; uv run python scripts/run_gemini_baseline.py --data-path outputs/codex_smoke_second/fixtures/synthetic_hotpot.json --num-examples 4 --seed 42 --cache-path outputs/cache/codex_gemini_rewrites_synthetic.jsonl --output-dir outputs/codex_gemini_pilot/synthetic_4 --allow-api --max-new-calls 4
+uv run python scripts/run_gemini_baseline.py --data-path outputs/codex_smoke_second/fixtures/synthetic_hotpot.json --num-examples 4 --seed 42 --cache-path outputs/cache/codex_gemini_rewrites_synthetic.jsonl --output-dir outputs/codex_gemini_pilot/synthetic_4_cache_check --dry-run
+uv run pytest -q
 ```

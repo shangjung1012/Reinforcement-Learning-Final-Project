@@ -15,7 +15,9 @@
 - [x] Implement P1 validation guardrail utility.
 - [x] Validate and commit P1 validation guardrail utility.
 - [x] Implement P2 cost frontier utility.
-- [ ] Validate and commit P2 cost frontier utility.
+- [x] Validate and commit P2 cost frontier utility.
+- [x] Implement Gemini baseline budget gate.
+- [ ] Validate and commit Gemini budget gate and pilot report.
 
 ## Backlog
 
@@ -26,7 +28,8 @@
 - [x] P3: Run data preflight and document missing raw datasets.
 - [x] P1: Add executable validation guardrail utility and tests.
 - [x] P2: Add cost frontier summary utility and tests.
-- [ ] P4/P5: Add stronger API budget enforcement before any non-preflight pilot.
+- [x] P4: Add stronger Gemini API budget enforcement before non-preflight pilot.
+- [ ] P5: Add stronger Vertex embedding budget enforcement if time remains.
 - [ ] P7/P8: Add dashboard/final second-run report if time remains.
 
 ## Notes
@@ -39,3 +42,4 @@
 - Data preflight found all required raw-data paths missing, so real-data smoke is blocked.
 - Guardrail outputs for SciFact/NFCorpus are analysis-only because the detailed CSVs do not include validation splits.
 - Cost frontier outputs were generated for SciFact/NFCorpus from existing summary CSVs.
+- Synthetic Gemini pilot used 4 bounded calls and is cache-resumable; it is API pilot evidence only.

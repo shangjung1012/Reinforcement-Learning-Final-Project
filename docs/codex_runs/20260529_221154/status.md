@@ -54,6 +54,12 @@
 | 2026-05-29 23:08 | `uv run python scripts/run_cost_frontier_summary.py --dataset scifact ...` | pass | Budget 1.0 selected Dense original; budget 1.5 selected Selective retrieval policy |
 | 2026-05-29 23:08 | `uv run python scripts/run_cost_frontier_summary.py --dataset nfcorpus ...` | pass | Selective retrieval policy selected for budgets 1.0, 1.25, 1.5, and 2.0 |
 | 2026-05-29 23:12 | `uv run pytest -q` | pass | `167 passed, 1 warning` before P2 commit |
+| 2026-05-29 23:20 | `uv run pytest tests/test_gemini_baseline.py -q` | fail | RED: `GeminiBudgetError` was missing |
+| 2026-05-29 23:22 | `uv run pytest tests/test_gemini_baseline.py -q` | pass | `5 passed` after Gemini budget gate |
+| 2026-05-29 23:24 | `uv run python scripts/run_gemini_baseline.py ... --dry-run` | pass | Synthetic pilot estimate: 4 cache misses, 0 calls |
+| 2026-05-29 23:25 | `CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_gemini_baseline.py ... --allow-api --max-new-calls 4` | pass | Synthetic pilot used 4 new Gemini calls |
+| 2026-05-29 23:27 | `uv run python scripts/run_gemini_baseline.py ... --dry-run` | pass | Cache check: 4 hits, 0 misses |
+| 2026-05-29 23:32 | `uv run pytest -q` | pass | `169 passed, 1 warning` before P4 commit |
 
 ## Tests run
 
@@ -71,6 +77,8 @@
 | 2026-05-29 22:59 | `uv run pytest -q` | pass | `162 passed, 1 warning` after P1 |
 | 2026-05-29 23:07 | `uv run pytest tests/test_cost_frontier.py -q` | pass | `5 passed` |
 | 2026-05-29 23:12 | `uv run pytest -q` | pass | `167 passed, 1 warning` after P2 |
+| 2026-05-29 23:22 | `uv run pytest tests/test_gemini_baseline.py -q` | pass | `5 passed` |
+| 2026-05-29 23:32 | `uv run pytest -q` | pass | `169 passed, 1 warning` after P4 |
 
 ## Commits pushed
 
@@ -79,9 +87,9 @@
 
 ## API usage
 
-- Gemini new calls so far: 1
+- Gemini new calls so far: 5
 - Vertex embedding new texts so far: 1
-- Cache hits/misses for preflight: no cache path used; estimated misses were 1 per provider
+- Cache hits/misses: API preflight had no cache path; synthetic Gemini pilot had 4 misses before live run and 4 hits after cache check
 
 ## Current blockers
 
@@ -90,9 +98,9 @@
 
 ## Next planned work
 
-1. Run full pytest for P2.
-2. Commit and push cost frontier utility and generated frontier summaries.
-3. Decide whether to do a bounded Gemini safety/budget milestone without raw data.
+1. Run full pytest for P4.
+2. Commit and push Gemini budget gate and synthetic pilot report.
+3. Consider final report/dashboard or bounded embedding budget enforcement next.
 
 ## Milestone self-review
 
@@ -160,3 +168,16 @@
 8. Any secrets/data/cache accidentally staged? To be checked before commit.
 9. Any API usage? None.
 10. What should a human inspect? Whether budget values 1.0, 1.25, 1.5, and 2.0 match the intended defense table.
+
+### P4 Gemini budget gate and synthetic pilot
+
+1. What changed? Added dry-run/budget gate controls to the Gemini baseline script and recorded a tiny synthetic Gemini pilot.
+2. Why does it improve the project? It prevents accidental Gemini calls and proves the API path is cache-resumable before real-data runs.
+3. What evidence verifies it? Tests passed, dry-run estimated 4 misses, bounded live run used 4 calls, and follow-up dry-run reported 4 cache hits and 0 misses.
+4. What tests ran? `uv run pytest tests/test_gemini_baseline.py -q` and full `uv run pytest -q`.
+5. What did not run and why? No real-data Gemini pilot ran because HotpotQA raw data is absent.
+6. Did any claim change? No final claim changed.
+7. Is every changed claim supported? The report labels the synthetic run as API pilot only.
+8. Any secrets/data/cache accidentally staged? To be checked before commit; cache and pilot output directories are ignored.
+9. Any API usage? Yes: 4 new Gemini calls in this milestone, bringing second-run Gemini total to 5.
+10. What should a human inspect? The budget default of zero and the pilot report's claim boundary.
