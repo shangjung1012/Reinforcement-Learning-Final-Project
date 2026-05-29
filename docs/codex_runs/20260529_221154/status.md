@@ -18,7 +18,7 @@
 - [x] P1 validation guardrail utility
 - [x] P2 cost frontier utility
 - [x] P7 experiment dashboard
-- [ ] Final second-run report
+- [x] Final second-run report
 
 ## Timeline
 
@@ -65,6 +65,9 @@
 | 2026-05-29 23:39 | `uv run pytest tests/test_experiment_dashboard.py -q` | pass | `2 passed` after dashboard implementation |
 | 2026-05-29 23:40 | `uv run python scripts/run_experiment_dashboard.py --output-csv outputs/results/experiment_dashboard.csv --output-md docs/EXPERIMENT_DASHBOARD.md` | pass | Dashboard counts include `181` full_benchmark, `6` final_claim, `5` api_pilot |
 | 2026-05-29 23:43 | `uv run pytest -q` | pass | `171 passed, 1 warning` before P7 commit |
+| 2026-05-29 23:49 | `uv run python scripts/run_final_smoke.py --output-dir outputs/codex_smoke_second --pytest-mode targeted` | pass | Nested targeted pytest `18 passed` |
+| 2026-05-29 23:50 | `uv run pytest -q` | pass | `171 passed, 1 warning` before final report |
+| 2026-05-29 23:56 | `uv run pytest -q` | pass | `171 passed, 1 warning` before final report commit |
 
 ## Tests run
 
@@ -86,6 +89,9 @@
 | 2026-05-29 23:32 | `uv run pytest -q` | pass | `169 passed, 1 warning` after P4 |
 | 2026-05-29 23:39 | `uv run pytest tests/test_experiment_dashboard.py -q` | pass | `2 passed` |
 | 2026-05-29 23:43 | `uv run pytest -q` | pass | `171 passed, 1 warning` after P7 |
+| 2026-05-29 23:49 | `uv run python scripts/run_final_smoke.py --output-dir outputs/codex_smoke_second --pytest-mode targeted` | pass | Nested targeted pytest `18 passed` |
+| 2026-05-29 23:50 | `uv run pytest -q` | pass | `171 passed, 1 warning` final verification |
+| 2026-05-29 23:56 | `uv run pytest -q` | pass | `171 passed, 1 warning` final pre-commit verification |
 
 ## Commits pushed
 
@@ -105,9 +111,9 @@
 
 ## Next planned work
 
-1. Run full pytest for P7.
-2. Commit and push dashboard artifacts.
-3. Write final second-run report.
+1. Commit and push final report/status update.
+2. Run final git status check.
+3. Hand off summary to the user.
 
 ## Milestone self-review
 
@@ -201,3 +207,16 @@
 8. Any secrets/data/cache accidentally staged? To be checked before commit.
 9. Any API usage? None.
 10. What should a human inspect? Evidence-level classification heuristics for older output filenames.
+
+### Final report handoff
+
+1. What changed? Completed the second-run final report and final status update.
+2. Why does it improve the project? It gives the next reviewer exact commits, tests, API counts, data blockers, and claim boundaries.
+3. What evidence verifies it? Final smoke and full pytest passed.
+4. What tests ran? `run_final_smoke.py` targeted smoke and two final `uv run pytest -q` checks.
+5. What did not run and why? Full-data experiments remain blocked by missing raw data.
+6. Did any claim change? No final benchmark claim changed.
+7. Is every changed claim supported? Yes; the report ties each claim to recorded commands and generated artifacts.
+8. Any secrets/data/cache accidentally staged? To be checked before final commit.
+9. Any API usage? None during final handoff.
+10. What should a human inspect? Final report and dashboard classifications.

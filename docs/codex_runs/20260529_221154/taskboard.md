@@ -19,7 +19,8 @@
 - [x] Implement Gemini baseline budget gate.
 - [x] Validate and commit Gemini budget gate and pilot report.
 - [x] Implement experiment dashboard.
-- [ ] Validate and commit experiment dashboard.
+- [x] Validate and commit experiment dashboard.
+- [x] Write final second-run report.
 
 ## Backlog
 
@@ -33,7 +34,7 @@
 - [x] P4: Add stronger Gemini API budget enforcement before non-preflight pilot.
 - [ ] P5: Add stronger Vertex embedding budget enforcement if time remains.
 - [x] P7: Add dashboard if time remains.
-- [ ] P8: Add final second-run report.
+- [x] P8: Add final second-run report.
 
 ## Notes
 
@@ -47,3 +48,4 @@
 - Cost frontier outputs were generated for SciFact/NFCorpus from existing summary CSVs.
 - Synthetic Gemini pilot used 4 bounded calls and is cache-resumable; it is API pilot evidence only.
 - Experiment dashboard classifies current artifacts by evidence level.
+- Final smoke and full pytest passed before final report.
