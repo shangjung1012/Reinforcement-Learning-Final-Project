@@ -40,4 +40,7 @@ uv run python scripts/run_gemini_baseline.py --data-path outputs/codex_smoke_sec
 $env:CODEX_ALLOW_API_CALLS='1'; uv run python scripts/run_gemini_baseline.py --data-path outputs/codex_smoke_second/fixtures/synthetic_hotpot.json --num-examples 4 --seed 42 --cache-path outputs/cache/codex_gemini_rewrites_synthetic.jsonl --output-dir outputs/codex_gemini_pilot/synthetic_4 --allow-api --max-new-calls 4
 uv run python scripts/run_gemini_baseline.py --data-path outputs/codex_smoke_second/fixtures/synthetic_hotpot.json --num-examples 4 --seed 42 --cache-path outputs/cache/codex_gemini_rewrites_synthetic.jsonl --output-dir outputs/codex_gemini_pilot/synthetic_4_cache_check --dry-run
 uv run pytest -q
+uv run pytest tests/test_experiment_dashboard.py -q
+uv run python scripts/run_experiment_dashboard.py --output-csv outputs/results/experiment_dashboard.csv --output-md docs/EXPERIMENT_DASHBOARD.md
+uv run pytest -q
 ```

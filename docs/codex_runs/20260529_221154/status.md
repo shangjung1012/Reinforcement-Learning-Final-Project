@@ -17,6 +17,7 @@
 - [x] P3 data preflight utility
 - [x] P1 validation guardrail utility
 - [x] P2 cost frontier utility
+- [x] P7 experiment dashboard
 - [ ] Final second-run report
 
 ## Timeline
@@ -60,6 +61,10 @@
 | 2026-05-29 23:25 | `CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_gemini_baseline.py ... --allow-api --max-new-calls 4` | pass | Synthetic pilot used 4 new Gemini calls |
 | 2026-05-29 23:27 | `uv run python scripts/run_gemini_baseline.py ... --dry-run` | pass | Cache check: 4 hits, 0 misses |
 | 2026-05-29 23:32 | `uv run pytest -q` | pass | `169 passed, 1 warning` before P4 commit |
+| 2026-05-29 23:37 | `uv run pytest tests/test_experiment_dashboard.py -q` | fail | RED: `selective_rag_rl.experiment_dashboard` did not exist |
+| 2026-05-29 23:39 | `uv run pytest tests/test_experiment_dashboard.py -q` | pass | `2 passed` after dashboard implementation |
+| 2026-05-29 23:40 | `uv run python scripts/run_experiment_dashboard.py --output-csv outputs/results/experiment_dashboard.csv --output-md docs/EXPERIMENT_DASHBOARD.md` | pass | Dashboard counts include `181` full_benchmark, `6` final_claim, `5` api_pilot |
+| 2026-05-29 23:43 | `uv run pytest -q` | pass | `171 passed, 1 warning` before P7 commit |
 
 ## Tests run
 
@@ -79,6 +84,8 @@
 | 2026-05-29 23:12 | `uv run pytest -q` | pass | `167 passed, 1 warning` after P2 |
 | 2026-05-29 23:22 | `uv run pytest tests/test_gemini_baseline.py -q` | pass | `5 passed` |
 | 2026-05-29 23:32 | `uv run pytest -q` | pass | `169 passed, 1 warning` after P4 |
+| 2026-05-29 23:39 | `uv run pytest tests/test_experiment_dashboard.py -q` | pass | `2 passed` |
+| 2026-05-29 23:43 | `uv run pytest -q` | pass | `171 passed, 1 warning` after P7 |
 
 ## Commits pushed
 
@@ -98,9 +105,9 @@
 
 ## Next planned work
 
-1. Run full pytest for P4.
-2. Commit and push Gemini budget gate and synthetic pilot report.
-3. Consider final report/dashboard or bounded embedding budget enforcement next.
+1. Run full pytest for P7.
+2. Commit and push dashboard artifacts.
+3. Write final second-run report.
 
 ## Milestone self-review
 
@@ -181,3 +188,16 @@
 8. Any secrets/data/cache accidentally staged? To be checked before commit; cache and pilot output directories are ignored.
 9. Any API usage? Yes: 4 new Gemini calls in this milestone, bringing second-run Gemini total to 5.
 10. What should a human inspect? The budget default of zero and the pilot report's claim boundary.
+
+### P7 experiment dashboard
+
+1. What changed? Added artifact dashboard logic, CLI, tests, CSV output, and Markdown summary.
+2. Why does it improve the project? It makes evidence levels explicit so smoke/API pilot outputs are not overclaimed.
+3. What evidence verifies it? Targeted tests passed and the dashboard grouped current artifacts by evidence level.
+4. What tests ran? `uv run pytest tests/test_experiment_dashboard.py -q` and full `uv run pytest -q`.
+5. What did not run and why? No new experiments ran; this catalogs existing outputs.
+6. Did any claim change? No.
+7. Is every changed claim supported? The dashboard only labels artifact classes and claim boundaries.
+8. Any secrets/data/cache accidentally staged? To be checked before commit.
+9. Any API usage? None.
+10. What should a human inspect? Evidence-level classification heuristics for older output filenames.

@@ -17,7 +17,9 @@
 - [x] Implement P2 cost frontier utility.
 - [x] Validate and commit P2 cost frontier utility.
 - [x] Implement Gemini baseline budget gate.
-- [ ] Validate and commit Gemini budget gate and pilot report.
+- [x] Validate and commit Gemini budget gate and pilot report.
+- [x] Implement experiment dashboard.
+- [ ] Validate and commit experiment dashboard.
 
 ## Backlog
 
@@ -30,7 +32,8 @@
 - [x] P2: Add cost frontier summary utility and tests.
 - [x] P4: Add stronger Gemini API budget enforcement before non-preflight pilot.
 - [ ] P5: Add stronger Vertex embedding budget enforcement if time remains.
-- [ ] P7/P8: Add dashboard/final second-run report if time remains.
+- [x] P7: Add dashboard if time remains.
+- [ ] P8: Add final second-run report.
 
 ## Notes
 
@@ -43,3 +46,4 @@
 - Guardrail outputs for SciFact/NFCorpus are analysis-only because the detailed CSVs do not include validation splits.
 - Cost frontier outputs were generated for SciFact/NFCorpus from existing summary CSVs.
 - Synthetic Gemini pilot used 4 bounded calls and is cache-resumable; it is API pilot evidence only.
+- Experiment dashboard classifies current artifacts by evidence level.
