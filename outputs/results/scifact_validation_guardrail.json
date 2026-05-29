@@ -1,0 +1,29 @@
+{
+  "rows": [
+    {
+      "dataset": "scifact",
+      "seed": null,
+      "selected_config": "Selective retrieval policy",
+      "heldout_best_config": "Confidence-gated retrieval policy",
+      "validation_reward": null,
+      "heldout_reward": 1.0904888888888888,
+      "reward_gap": 0.03371111111111125,
+      "call_gap": -0.5866666666666667,
+      "dominated_by_train_best": false,
+      "recommendation": "analysis_only_no_validation",
+      "reason": "no_validation_split_available"
+    }
+  ],
+  "aggregate": {
+    "dataset": "scifact",
+    "n_runs": 1,
+    "support_rate": 0.0,
+    "fallback_rate": 0.0,
+    "mean_reward_gap": 0.03371111111111125,
+    "mean_call_gap": -0.5866666666666667
+  },
+  "outputs": {
+    "summary_csv": "outputs\\results\\scifact_validation_guardrail.csv",
+    "summary_json": "outputs\\results\\scifact_validation_guardrail.json"
+  }
+}

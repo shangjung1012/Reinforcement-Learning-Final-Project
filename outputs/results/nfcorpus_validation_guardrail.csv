@@ -1,0 +1,2 @@
+dataset,seed,selected_config,heldout_best_config,validation_reward,heldout_reward,reward_gap,call_gap,dominated_by_train_best,recommendation,reason
+nfcorpus,,Selective retrieval policy,Confidence-gated retrieval policy,,0.4070945958761671,0.02994181416601982,0.0,False,analysis_only_no_validation,no_validation_split_available

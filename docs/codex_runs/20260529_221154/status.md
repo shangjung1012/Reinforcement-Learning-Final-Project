@@ -15,7 +15,7 @@
 - [x] Raw-data-free smoke validation
 - [x] P0 API preflight utility
 - [x] P3 data preflight utility
-- [ ] P1 validation guardrail utility
+- [x] P1 validation guardrail utility
 - [ ] P2 cost frontier utility
 - [ ] Final second-run report
 
@@ -44,6 +44,11 @@
 | 2026-05-29 22:41 | `uv run pytest tests/test_data_preflight.py -q` | pass | `2 passed` after data preflight implementation |
 | 2026-05-29 22:42 | `uv run python scripts/run_data_preflight.py --output-dir outputs/codex_data_preflight` | pass | Raw data unavailable; 11 required paths missing |
 | 2026-05-29 22:46 | `uv run pytest -q` | pass | `156 passed, 1 warning` before P3 commit |
+| 2026-05-29 22:51 | `uv run pytest tests/test_validation_guardrail.py -q` | fail | RED: `selective_rag_rl.validation_guardrail` did not exist |
+| 2026-05-29 22:54 | `uv run pytest tests/test_validation_guardrail.py -q` | pass | `6 passed` after guardrail implementation |
+| 2026-05-29 22:55 | `uv run python scripts/run_validation_guardrail.py --dataset scifact --detailed-csv outputs/results/scifact_retrieval_policy_detailed.csv --output-csv outputs/results/scifact_validation_guardrail.csv` | pass | `analysis_only_no_validation`; reward gap `0.033711`, call gap `-0.586667` |
+| 2026-05-29 22:55 | `uv run python scripts/run_validation_guardrail.py --dataset nfcorpus --detailed-csv outputs/results/nfcorpus_retrieval_policy_detailed.csv --output-csv outputs/results/nfcorpus_validation_guardrail.csv` | pass | `analysis_only_no_validation`; reward gap `0.029942`, call gap `0.0` |
+| 2026-05-29 22:59 | `uv run pytest -q` | pass | `162 passed, 1 warning` before P1 commit |
 
 ## Tests run
 
@@ -57,6 +62,8 @@
 | 2026-05-29 22:33 | `uv run pytest -q` | pass | `154 passed, 1 warning` after P0 |
 | 2026-05-29 22:41 | `uv run pytest tests/test_data_preflight.py -q` | pass | `2 passed` |
 | 2026-05-29 22:46 | `uv run pytest -q` | pass | `156 passed, 1 warning` after P3 |
+| 2026-05-29 22:54 | `uv run pytest tests/test_validation_guardrail.py -q` | pass | `6 passed` |
+| 2026-05-29 22:59 | `uv run pytest -q` | pass | `162 passed, 1 warning` after P1 |
 
 ## Commits pushed
 
@@ -76,9 +83,9 @@
 
 ## Next planned work
 
-1. Run full pytest for P3.
-2. Commit and push data preflight utility.
-3. Add validation guardrail utility next.
+1. Run full pytest for P1.
+2. Commit and push validation guardrail utility and generated guardrail summaries.
+3. Add cost frontier utility next.
 
 ## Milestone self-review
 
@@ -120,3 +127,16 @@
 8. Any secrets/data/cache accidentally staged? To be checked before commit; `outputs/codex_data_preflight/` is ignored.
 9. Any API usage? None in this milestone.
 10. What should a human inspect? Confirm expected raw-data paths match the README layout.
+
+### P1 validation guardrail utility
+
+1. What changed? Added executable guardrail logic, CLI, tests, docs, and SciFact/NFCorpus guardrail outputs.
+2. Why does it improve the project? It turns the documented selection guardrail into an auditable machine-readable artifact.
+3. What evidence verifies it? Targeted tests passed and existing detailed CSVs produced guardrail CSV/JSON outputs.
+4. What tests ran? `uv run pytest tests/test_validation_guardrail.py -q` and full `uv run pytest -q`.
+5. What did not run and why? No new full experiments ran; guardrail was applied only to existing artifacts.
+6. Did any claim change? No. The generated outputs explicitly say `analysis_only_no_validation` because the detailed CSVs do not include a validation split.
+7. Is every changed claim supported? Yes, by the generated guardrail rows.
+8. Any secrets/data/cache accidentally staged? To be checked before commit; only sanitized outputs under `outputs/results/` should be staged.
+9. Any API usage? None.
+10. What should a human inspect? The recommendation vocabulary and whether confidence-gated policy should be the heldout-best comparator in final discussion.

@@ -55,6 +55,17 @@ validation_reward, heldout_reward, reward_gap, call_gap,
 dominated_by_train_best, recommendation, reason
 ```
 
+Executable guardrail checks are available through:
+
+```bash
+uv run python scripts/run_validation_guardrail.py --dataset scifact --detailed-csv outputs/results/scifact_retrieval_policy_detailed.csv --output-csv outputs/results/scifact_validation_guardrail.csv
+uv run python scripts/run_validation_guardrail.py --dataset nfcorpus --detailed-csv outputs/results/nfcorpus_retrieval_policy_detailed.csv --output-csv outputs/results/nfcorpus_validation_guardrail.csv
+```
+
+When a detailed CSV has only train/test rows and no validation split, the tool
+emits `analysis_only_no_validation`. That output is useful for auditing reward
+and call gaps, but it should not be used as a model-selection rule.
+
 ## Semantic Feature Policy
 
 Semantic state features can be useful diagnostics, but they add cache,

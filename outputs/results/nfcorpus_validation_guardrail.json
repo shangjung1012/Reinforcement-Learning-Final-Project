@@ -1,0 +1,29 @@
+{
+  "rows": [
+    {
+      "dataset": "nfcorpus",
+      "seed": null,
+      "selected_config": "Selective retrieval policy",
+      "heldout_best_config": "Confidence-gated retrieval policy",
+      "validation_reward": null,
+      "heldout_reward": 0.4070945958761671,
+      "reward_gap": 0.02994181416601982,
+      "call_gap": 0.0,
+      "dominated_by_train_best": false,
+      "recommendation": "analysis_only_no_validation",
+      "reason": "no_validation_split_available"
+    }
+  ],
+  "aggregate": {
+    "dataset": "nfcorpus",
+    "n_runs": 1,
+    "support_rate": 0.0,
+    "fallback_rate": 0.0,
+    "mean_reward_gap": 0.02994181416601982,
+    "mean_call_gap": 0.0
+  },
+  "outputs": {
+    "summary_csv": "outputs\\results\\nfcorpus_validation_guardrail.csv",
+    "summary_json": "outputs\\results\\nfcorpus_validation_guardrail.json"
+  }
+}

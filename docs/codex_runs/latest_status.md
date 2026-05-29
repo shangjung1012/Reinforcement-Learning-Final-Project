@@ -4,7 +4,7 @@
 - Branch: `codex/api-validation-improvements-20260529-2211`
 - Base branch: `codex/autonomous-improvements-20260529-0436`
 - Base commit: `809e372`
-- Current phase: P3 data preflight ready to commit
-- Latest validation: `uv run pytest -q` passed with `156 passed, 1 warning`
+- Current phase: P1 validation guardrail ready to commit
+- Latest validation: `uv run pytest -q` passed with `162 passed, 1 warning`
 
 See `docs/codex_runs/20260529_221154/status.md` for live status.

@@ -1,0 +1,2 @@
+dataset,seed,selected_config,heldout_best_config,validation_reward,heldout_reward,reward_gap,call_gap,dominated_by_train_best,recommendation,reason
+scifact,,Selective retrieval policy,Confidence-gated retrieval policy,,1.0904888888888888,0.03371111111111125,-0.5866666666666667,False,analysis_only_no_validation,no_validation_split_available
