@@ -93,6 +93,21 @@ Vertex/Gemini rewrite and embedding experiments are optional. Do not run them
 for smoke reproduction. They require credentials and may use quota. Cached
 artifacts under `outputs/cache/` are local generated data and are ignored by git.
 
+Before any API-backed experiment, run the no-cost preflight:
+
+```bash
+uv run python scripts/run_api_preflight.py --provider all --output-dir outputs/codex_api_preflight
+```
+
+To intentionally make one tiny Gemini call and one Vertex embedding request,
+use both an allow flag and explicit budgets:
+
+```bash
+CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_api_preflight.py --provider all --output-dir outputs/codex_api_preflight --allow-api --max-new-gemini-calls 1 --max-new-embedding-texts 1
+```
+
+See `docs/API_EXPERIMENTS.md` for the full API safety workflow.
+
 ## Claim Boundary
 
 The main supported claim remains retrieval-stage and cost-aware:

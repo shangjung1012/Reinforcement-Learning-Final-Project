@@ -1,10 +1,12 @@
 # API Preflight Log
 
-No controlled API calls have been made in this second run yet.
-
 | Time | Provider | Mode | Allow API? | New calls/texts allowed | Estimated misses | Actual calls/texts | Result |
 | --- | --- | --- | --- | ---: | ---: | ---: | --- |
 | 2026-05-29 22:15 | Google GenAI | documentation check | no | 0 | 0 | 0 | Context7 docs checked; no project API call |
+| 2026-05-29 22:27 | Gemini | dry-run preflight | no | 0 | 1 | 0 | `dry_run_no_api_call` |
+| 2026-05-29 22:27 | Vertex embedding | dry-run preflight | no | 0 | 1 | 0 | `dry_run_no_api_call` |
+| 2026-05-29 22:28 | Gemini | live preflight | yes | 1 | 1 | 1 | `api_call_succeeded` |
+| 2026-05-29 22:28 | Vertex embedding | live preflight | yes | 1 | 1 | 1 | `api_call_succeeded` |
 
 ## Environment Name Check
 
@@ -18,3 +20,8 @@ The local `.env` file exists. The following variable names were present:
 
 Credential file existence was confirmed by basename only:
 `application_default_credentials.json`.
+
+## Local Output
+
+The latest local preflight summary was written under
+`outputs/codex_api_preflight/`, which is ignored by git.

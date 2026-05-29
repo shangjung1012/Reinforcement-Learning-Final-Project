@@ -112,6 +112,8 @@ It is an evaluation-plumbing check, not final answer-generation evidence. See
 For the precise RL interpretation and claim boundary, see `docs/RL_FRAMING.md`.
 For model-selection guardrails and reward/cost interpretation, see
 `docs/VALIDATION_PROTOCOL.md` and `docs/COST_MODEL.md`.
+For optional Vertex/Gemini setup and bounded preflight commands, see
+`docs/API_EXPERIMENTS.md`.
 
 ## Expected Data Layout
 
