@@ -114,6 +114,8 @@ For model-selection guardrails and reward/cost interpretation, see
 `docs/VALIDATION_PROTOCOL.md` and `docs/COST_MODEL.md`.
 For optional Vertex/Gemini setup and bounded preflight commands, see
 `docs/API_EXPERIMENTS.md`.
+Before running full-data experiments, check local raw-data availability with
+`uv run python scripts/run_data_preflight.py --output-dir outputs/codex_data_preflight`.
 
 ## Expected Data Layout
 

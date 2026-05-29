@@ -24,4 +24,7 @@ uv run pytest tests/test_api_preflight.py -q
 uv run python scripts/run_api_preflight.py --provider all --output-dir outputs/codex_api_preflight
 $env:CODEX_ALLOW_API_CALLS='1'; uv run python scripts/run_api_preflight.py --provider all --output-dir outputs/codex_api_preflight --allow-api --max-new-gemini-calls 1 --max-new-embedding-texts 1
 uv run pytest -q
+uv run pytest tests/test_data_preflight.py -q
+uv run python scripts/run_data_preflight.py --output-dir outputs/codex_data_preflight
+uv run pytest -q
 ```

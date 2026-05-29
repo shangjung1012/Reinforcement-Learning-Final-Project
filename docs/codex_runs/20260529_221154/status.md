@@ -14,7 +14,7 @@
 - [x] Baseline tests
 - [x] Raw-data-free smoke validation
 - [x] P0 API preflight utility
-- [ ] P3 data preflight utility
+- [x] P3 data preflight utility
 - [ ] P1 validation guardrail utility
 - [ ] P2 cost frontier utility
 - [ ] Final second-run report
@@ -40,6 +40,10 @@
 | 2026-05-29 22:27 | `uv run python scripts/run_api_preflight.py --provider all --output-dir outputs/codex_api_preflight` | pass | Dry-run only; 0 API calls |
 | 2026-05-29 22:28 | `CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_api_preflight.py --provider all --output-dir outputs/codex_api_preflight --allow-api --max-new-gemini-calls 1 --max-new-embedding-texts 1` | pass | Gemini 1 call; Vertex embedding 1 text |
 | 2026-05-29 22:33 | `uv run pytest -q` | pass | `154 passed, 1 warning` before P0 commit |
+| 2026-05-29 22:39 | `uv run pytest tests/test_data_preflight.py -q` | fail | RED: `selective_rag_rl.data_preflight` did not exist |
+| 2026-05-29 22:41 | `uv run pytest tests/test_data_preflight.py -q` | pass | `2 passed` after data preflight implementation |
+| 2026-05-29 22:42 | `uv run python scripts/run_data_preflight.py --output-dir outputs/codex_data_preflight` | pass | Raw data unavailable; 11 required paths missing |
+| 2026-05-29 22:46 | `uv run pytest -q` | pass | `156 passed, 1 warning` before P3 commit |
 
 ## Tests run
 
@@ -51,6 +55,8 @@
 | 2026-05-29 22:20 | `uv run pytest -q` | pass | `151 passed, 1 warning` after docs/ignore updates |
 | 2026-05-29 22:26 | `uv run pytest tests/test_api_preflight.py -q` | pass | `3 passed` |
 | 2026-05-29 22:33 | `uv run pytest -q` | pass | `154 passed, 1 warning` after P0 |
+| 2026-05-29 22:41 | `uv run pytest tests/test_data_preflight.py -q` | pass | `2 passed` |
+| 2026-05-29 22:46 | `uv run pytest -q` | pass | `156 passed, 1 warning` after P3 |
 
 ## Commits pushed
 
@@ -70,9 +76,9 @@
 
 ## Next planned work
 
-1. Run full pytest for P0.
-2. Commit and push API preflight utility.
-3. Add data preflight utility next.
+1. Run full pytest for P3.
+2. Commit and push data preflight utility.
+3. Add validation guardrail utility next.
 
 ## Milestone self-review
 
@@ -101,3 +107,16 @@
 8. Any secrets/data/cache accidentally staged? To be checked before commit; `.env` and `outputs/codex_api_preflight/` are ignored.
 9. Any API usage? Yes: 1 Gemini call and 1 Vertex embedding text in explicit live preflight.
 10. What should a human inspect? Confirm the preflight summary fields are sufficiently sanitized and the API budget defaults are conservative.
+
+### P3 data preflight utility
+
+1. What changed? Added raw-data availability preflight, CLI, tests, and a real-data smoke blocked report.
+2. Why does it improve the project? It gives a reproducible no-data check before launching full-data or API-backed experiments.
+3. What evidence verifies it? Targeted tests passed and local preflight reported 11 missing required raw-data paths.
+4. What tests ran? `uv run pytest tests/test_data_preflight.py -q` and full `uv run pytest -q`.
+5. What did not run and why? Real-data SciFact/NFCorpus/Hotpot/NQ experiments did not run because all required raw paths are missing.
+6. Did any claim change? No.
+7. Is every changed claim supported? Yes; docs only claim local data availability status.
+8. Any secrets/data/cache accidentally staged? To be checked before commit; `outputs/codex_data_preflight/` is ignored.
+9. Any API usage? None in this milestone.
+10. What should a human inspect? Confirm expected raw-data paths match the README layout.

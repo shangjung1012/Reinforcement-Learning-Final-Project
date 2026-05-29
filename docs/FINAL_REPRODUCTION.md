@@ -82,6 +82,12 @@ cd data/raw
 bash download.sh
 ```
 
+Before launching real-data experiments, check local data availability:
+
+```bash
+uv run python scripts/run_data_preflight.py --output-dir outputs/codex_data_preflight
+```
+
 After data is available, use the commands in `README.md` to rerun the full
 SciFact, NFCorpus, HotpotQA, Natural Questions, diagnostics, and final artifact
 generation flows. The main full-data result artifacts are already checked in
