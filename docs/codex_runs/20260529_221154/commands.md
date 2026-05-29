@@ -31,4 +31,8 @@ uv run pytest tests/test_validation_guardrail.py -q
 uv run python scripts/run_validation_guardrail.py --dataset scifact --detailed-csv outputs/results/scifact_retrieval_policy_detailed.csv --output-csv outputs/results/scifact_validation_guardrail.csv
 uv run python scripts/run_validation_guardrail.py --dataset nfcorpus --detailed-csv outputs/results/nfcorpus_retrieval_policy_detailed.csv --output-csv outputs/results/nfcorpus_validation_guardrail.csv
 uv run pytest -q
+uv run pytest tests/test_cost_frontier.py -q
+uv run python scripts/run_cost_frontier_summary.py --dataset scifact --summary-csv outputs/results/scifact_retrieval_policy_summary.csv --output-csv outputs/results/scifact_cost_frontier_summary.csv --budgets 1.0,1.25,1.5,2.0
+uv run python scripts/run_cost_frontier_summary.py --dataset nfcorpus --summary-csv outputs/results/nfcorpus_retrieval_policy_summary.csv --output-csv outputs/results/nfcorpus_cost_frontier_summary.csv --budgets 1.0,1.25,1.5,2.0
+uv run pytest -q
 ```

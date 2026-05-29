@@ -1,0 +1,176 @@
+{
+  "dataset": "nfcorpus",
+  "budgets": [
+    1.0,
+    1.25,
+    1.5,
+    2.0
+  ],
+  "budget_rows": [
+    {
+      "dataset": "nfcorpus",
+      "budget": 1.0,
+      "selected_method": "Selective retrieval policy",
+      "reward": 0.4070945958761671,
+      "recall_at_5": 0.1356779292095004,
+      "mrr": 0.5428333333333333,
+      "retrieval_calls": 1.0,
+      "rewrite_cost": 0.0,
+      "feasible_methods": 8,
+      "dominated_methods_count": 8
+    },
+    {
+      "dataset": "nfcorpus",
+      "budget": 1.25,
+      "selected_method": "Selective retrieval policy",
+      "reward": 0.4070945958761671,
+      "recall_at_5": 0.1356779292095004,
+      "mrr": 0.5428333333333333,
+      "retrieval_calls": 1.0,
+      "rewrite_cost": 0.0,
+      "feasible_methods": 8,
+      "dominated_methods_count": 8
+    },
+    {
+      "dataset": "nfcorpus",
+      "budget": 1.5,
+      "selected_method": "Selective retrieval policy",
+      "reward": 0.4070945958761671,
+      "recall_at_5": 0.1356779292095004,
+      "mrr": 0.5428333333333333,
+      "retrieval_calls": 1.0,
+      "rewrite_cost": 0.0,
+      "feasible_methods": 8,
+      "dominated_methods_count": 8
+    },
+    {
+      "dataset": "nfcorpus",
+      "budget": 2.0,
+      "selected_method": "Selective retrieval policy",
+      "reward": 0.4070945958761671,
+      "recall_at_5": 0.1356779292095004,
+      "mrr": 0.5428333333333333,
+      "retrieval_calls": 1.0,
+      "rewrite_cost": 0.0,
+      "feasible_methods": 10,
+      "dominated_methods_count": 8
+    }
+  ],
+  "frontier_rows": [
+    {
+      "dataset": "nfcorpus",
+      "method": "Selective retrieval policy",
+      "reward": 0.4070945958761671,
+      "recall_at_5": 0.1356779292095004,
+      "mrr": 0.5428333333333333,
+      "retrieval_calls": 1.0,
+      "rewrite_cost": 0.0,
+      "dominated": false,
+      "reason": "pareto_frontier"
+    },
+    {
+      "dataset": "nfcorpus",
+      "method": "Confidence-gated retrieval policy",
+      "reward": 0.4070945958761671,
+      "recall_at_5": 0.1356779292095004,
+      "mrr": 0.5428333333333333,
+      "retrieval_calls": 1.0,
+      "rewrite_cost": 0.0,
+      "dominated": false,
+      "reason": "pareto_frontier"
+    },
+    {
+      "dataset": "nfcorpus",
+      "method": "Heuristic retrieval router",
+      "reward": 0.3896196854804356,
+      "recall_at_5": 0.1291474632582133,
+      "mrr": 0.5209444444444445,
+      "retrieval_calls": 1.0,
+      "rewrite_cost": 0.0,
+      "dominated": true,
+      "reason": "lower_or_equal_reward_and_higher_or_equal_calls"
+    },
+    {
+      "dataset": "nfcorpus",
+      "method": "BM25 keyword",
+      "reward": 0.3854763074375351,
+      "recall_at_5": 0.1240318629930906,
+      "mrr": 0.522888888888889,
+      "retrieval_calls": 1.0,
+      "rewrite_cost": 0.0,
+      "dominated": true,
+      "reason": "lower_or_equal_reward_and_higher_or_equal_calls"
+    },
+    {
+      "dataset": "nfcorpus",
+      "method": "Dense original",
+      "reward": 0.3771527817101472,
+      "recall_at_5": 0.1222083372657028,
+      "mrr": 0.509888888888889,
+      "retrieval_calls": 1.0,
+      "rewrite_cost": 0.0,
+      "dominated": true,
+      "reason": "lower_or_equal_reward_and_higher_or_equal_calls"
+    },
+    {
+      "dataset": "nfcorpus",
+      "method": "Train-best retrieval action",
+      "reward": 0.3771527817101472,
+      "recall_at_5": 0.1222083372657028,
+      "mrr": 0.509888888888889,
+      "retrieval_calls": 1.0,
+      "rewrite_cost": 0.0,
+      "dominated": true,
+      "reason": "lower_or_equal_reward_and_higher_or_equal_calls"
+    },
+    {
+      "dataset": "nfcorpus",
+      "method": "Vanilla BM25",
+      "reward": 0.3730694816148493,
+      "recall_at_5": 0.118347259392627,
+      "mrr": 0.5094444444444444,
+      "retrieval_calls": 1.0,
+      "rewrite_cost": 0.0,
+      "dominated": true,
+      "reason": "lower_or_equal_reward_and_higher_or_equal_calls"
+    },
+    {
+      "dataset": "nfcorpus",
+      "method": "Hybrid keyword",
+      "reward": 0.3711454487567848,
+      "recall_at_5": 0.1330621154234514,
+      "mrr": 0.5361666666666667,
+      "retrieval_calls": 2.0,
+      "rewrite_cost": 0.03,
+      "dominated": true,
+      "reason": "lower_or_equal_reward_and_higher_or_equal_calls"
+    },
+    {
+      "dataset": "nfcorpus",
+      "method": "Dense keyword",
+      "reward": 0.367465897258113,
+      "recall_at_5": 0.1188825639247796,
+      "mrr": 0.4971666666666667,
+      "retrieval_calls": 1.0,
+      "rewrite_cost": 0.0,
+      "dominated": true,
+      "reason": "lower_or_equal_reward_and_higher_or_equal_calls"
+    },
+    {
+      "dataset": "nfcorpus",
+      "method": "Hybrid original",
+      "reward": 0.3657712531966178,
+      "recall_at_5": 0.1305490309743956,
+      "mrr": 0.5304444444444444,
+      "retrieval_calls": 2.0,
+      "rewrite_cost": 0.03,
+      "dominated": true,
+      "reason": "lower_or_equal_reward_and_higher_or_equal_calls"
+    }
+  ],
+  "outputs": {
+    "budget_csv": "outputs\\results\\nfcorpus_cost_frontier_summary.csv",
+    "frontier_csv": "outputs\\results\\nfcorpus_cost_frontier_summary_frontier.csv",
+    "summary_json": "outputs\\results\\nfcorpus_cost_frontier_summary.json"
+  }
+}

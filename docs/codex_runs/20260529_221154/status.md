@@ -16,7 +16,7 @@
 - [x] P0 API preflight utility
 - [x] P3 data preflight utility
 - [x] P1 validation guardrail utility
-- [ ] P2 cost frontier utility
+- [x] P2 cost frontier utility
 - [ ] Final second-run report
 
 ## Timeline
@@ -49,6 +49,11 @@
 | 2026-05-29 22:55 | `uv run python scripts/run_validation_guardrail.py --dataset scifact --detailed-csv outputs/results/scifact_retrieval_policy_detailed.csv --output-csv outputs/results/scifact_validation_guardrail.csv` | pass | `analysis_only_no_validation`; reward gap `0.033711`, call gap `-0.586667` |
 | 2026-05-29 22:55 | `uv run python scripts/run_validation_guardrail.py --dataset nfcorpus --detailed-csv outputs/results/nfcorpus_retrieval_policy_detailed.csv --output-csv outputs/results/nfcorpus_validation_guardrail.csv` | pass | `analysis_only_no_validation`; reward gap `0.029942`, call gap `0.0` |
 | 2026-05-29 22:59 | `uv run pytest -q` | pass | `162 passed, 1 warning` before P1 commit |
+| 2026-05-29 23:05 | `uv run pytest tests/test_cost_frontier.py -q` | fail | RED: `selective_rag_rl.cost_frontier` did not exist |
+| 2026-05-29 23:07 | `uv run pytest tests/test_cost_frontier.py -q` | pass | `5 passed` after cost frontier implementation |
+| 2026-05-29 23:08 | `uv run python scripts/run_cost_frontier_summary.py --dataset scifact ...` | pass | Budget 1.0 selected Dense original; budget 1.5 selected Selective retrieval policy |
+| 2026-05-29 23:08 | `uv run python scripts/run_cost_frontier_summary.py --dataset nfcorpus ...` | pass | Selective retrieval policy selected for budgets 1.0, 1.25, 1.5, and 2.0 |
+| 2026-05-29 23:12 | `uv run pytest -q` | pass | `167 passed, 1 warning` before P2 commit |
 
 ## Tests run
 
@@ -64,6 +69,8 @@
 | 2026-05-29 22:46 | `uv run pytest -q` | pass | `156 passed, 1 warning` after P3 |
 | 2026-05-29 22:54 | `uv run pytest tests/test_validation_guardrail.py -q` | pass | `6 passed` |
 | 2026-05-29 22:59 | `uv run pytest -q` | pass | `162 passed, 1 warning` after P1 |
+| 2026-05-29 23:07 | `uv run pytest tests/test_cost_frontier.py -q` | pass | `5 passed` |
+| 2026-05-29 23:12 | `uv run pytest -q` | pass | `167 passed, 1 warning` after P2 |
 
 ## Commits pushed
 
@@ -83,9 +90,9 @@
 
 ## Next planned work
 
-1. Run full pytest for P1.
-2. Commit and push validation guardrail utility and generated guardrail summaries.
-3. Add cost frontier utility next.
+1. Run full pytest for P2.
+2. Commit and push cost frontier utility and generated frontier summaries.
+3. Decide whether to do a bounded Gemini safety/budget milestone without raw data.
 
 ## Milestone self-review
 
@@ -140,3 +147,16 @@
 8. Any secrets/data/cache accidentally staged? To be checked before commit; only sanitized outputs under `outputs/results/` should be staged.
 9. Any API usage? None.
 10. What should a human inspect? The recommendation vocabulary and whether confidence-gated policy should be the heldout-best comparator in final discussion.
+
+### P2 cost frontier utility
+
+1. What changed? Added cost frontier logic, CLI, tests, docs, and SciFact/NFCorpus budget/frontier CSV/JSON outputs.
+2. Why does it improve the project? It makes cost-aware reward/call tradeoffs directly reproducible from summary CSVs.
+3. What evidence verifies it? Targeted tests passed and existing summary CSVs produced budget/frontier artifacts.
+4. What tests ran? `uv run pytest tests/test_cost_frontier.py -q` and full `uv run pytest -q`.
+5. What did not run and why? No experiments reran; this consumes existing summary artifacts only.
+6. Did any claim change? No benchmark claim changed.
+7. Is every changed claim supported? The new docs only claim that the frontier utility exists and records best feasible non-oracle methods.
+8. Any secrets/data/cache accidentally staged? To be checked before commit.
+9. Any API usage? None.
+10. What should a human inspect? Whether budget values 1.0, 1.25, 1.5, and 2.0 match the intended defense table.

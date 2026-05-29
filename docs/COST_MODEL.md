@@ -58,6 +58,17 @@ are useful for deployment-style tradeoff analysis:
 When presenting the frontier, include expected calls and reward or utility on
 the same table or figure.
 
+Executable frontier summaries are available through:
+
+```bash
+uv run python scripts/run_cost_frontier_summary.py --dataset scifact --summary-csv outputs/results/scifact_retrieval_policy_summary.csv --output-csv outputs/results/scifact_cost_frontier_summary.csv --budgets 1.0,1.25,1.5,2.0
+uv run python scripts/run_cost_frontier_summary.py --dataset nfcorpus --summary-csv outputs/results/nfcorpus_retrieval_policy_summary.csv --output-csv outputs/results/nfcorpus_cost_frontier_summary.csv --budgets 1.0,1.25,1.5,2.0
+```
+
+The budget CSV records the best non-oracle feasible method at each expected-call
+budget. The paired frontier CSV marks methods that are dominated by another
+method with no lower reward and no higher call cost.
+
 ## Smoke Versus Full Evidence
 
 Raw-data-free smoke runs use synthetic fixtures and fake embeddings. They check

@@ -1,0 +1,5 @@
+dataset,budget,selected_method,reward,recall_at_5,mrr,retrieval_calls,rewrite_cost,feasible_methods,dominated_methods_count
+nfcorpus,1.0,Selective retrieval policy,0.4070945958761671,0.1356779292095004,0.5428333333333333,1.0,0.0,8,8
+nfcorpus,1.25,Selective retrieval policy,0.4070945958761671,0.1356779292095004,0.5428333333333333,1.0,0.0,8,8
+nfcorpus,1.5,Selective retrieval policy,0.4070945958761671,0.1356779292095004,0.5428333333333333,1.0,0.0,8,8
+nfcorpus,2.0,Selective retrieval policy,0.4070945958761671,0.1356779292095004,0.5428333333333333,1.0,0.0,10,8
