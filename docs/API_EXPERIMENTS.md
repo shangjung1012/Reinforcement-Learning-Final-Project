@@ -71,3 +71,54 @@ CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_gemini_baseline.py --data-path
 
 When the cache misses exceed `--max-new-calls`, or when live calls are not
 explicitly allowed, the script stops before constructing the live Vertex client.
+
+## Vertex Semantic Embedding Budget Gate
+
+Semantic-feature runs use `VertexTextEmbeddingProvider` only when
+`--semantic-features vertex` is selected. The provider now enforces the same
+cache-first rule as Gemini: cache misses do not trigger live API calls unless
+the run passes explicit semantic API flags.
+
+Estimate the embedding workload first:
+
+```bash
+uv run python scripts/run_embedding_preflight.py \
+  --dataset nfcorpus \
+  --num-train-examples 10 \
+  --num-test-examples 10 \
+  --cache-path outputs/cache/codex_nfcorpus_vertex_embeddings.jsonl
+```
+
+Then run cache-only or budget-blocking retrieval commands with the default
+zero budget:
+
+```bash
+uv run python scripts/run_retrieval_policy_nfcorpus.py \
+  --num-train-examples 10 \
+  --num-test-examples 10 \
+  --embedder fake \
+  --policy-model ridge \
+  --semantic-features vertex \
+  --semantic-cache-path outputs/cache/codex_nfcorpus_vertex_embeddings.jsonl \
+  --semantic-max-new-texts 0
+```
+
+Only after the preflight misses are acceptable should a live semantic-feature
+pilot include both an allow flag and a strict text budget:
+
+```bash
+CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_retrieval_policy_nfcorpus.py \
+  --num-train-examples 10 \
+  --num-test-examples 10 \
+  --embedder fake \
+  --policy-model ridge \
+  --semantic-features vertex \
+  --semantic-cache-path outputs/cache/codex_nfcorpus_vertex_embeddings.jsonl \
+  --semantic-allow-api \
+  --semantic-max-new-texts 50
+```
+
+The semantic budget controls are available on the main retrieval scripts,
+policy sweeps, feature ablations, learning curves, repeated selection, semantic
+depth sweeps, and selected-action bandit baseline scripts. They are not used by
+default tests or smoke reproduction.

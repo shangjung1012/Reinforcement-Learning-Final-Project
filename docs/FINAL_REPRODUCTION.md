@@ -114,6 +114,18 @@ CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_api_preflight.py --provider al
 
 See `docs/API_EXPERIMENTS.md` for the full API safety workflow.
 
+For Vertex semantic-feature experiments, first estimate cache misses without
+calling the API:
+
+```bash
+uv run python scripts/run_embedding_preflight.py --dataset nfcorpus --num-train-examples 10 --num-test-examples 10 --cache-path outputs/cache/codex_nfcorpus_vertex_embeddings.jsonl
+```
+
+Then use `--semantic-features vertex` only with cache coverage or explicit
+semantic API controls. The default `--semantic-max-new-texts 0` blocks cache
+misses before the live client is created. A deliberate pilot must include both
+`--semantic-allow-api` and a bounded `--semantic-max-new-texts` value.
+
 ## Claim Boundary
 
 The main supported claim remains retrieval-stage and cost-aware:

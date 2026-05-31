@@ -7,6 +7,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
+import selective_rag_rl.retrieval_policy_experiment as rpe
 from selective_rag_rl.data import Passage, QAExample, load_hotpotqa
 from selective_rag_rl.dense_experiment import FakeDenseEmbedder
 from selective_rag_rl.feature_ablation import run_feature_ablation
@@ -347,6 +348,85 @@ def test_run_retrieval_policy_can_use_semantic_features(tmp_path: Path) -> None:
     assert checkpoint["metadata"]["semantic_features"] == "fake"
     assert checkpoint["metadata"]["feature_width"] == 60
     assert checkpoint["model"].mean.shape[0] == 60
+
+
+def test_load_semantic_embedder_passes_vertex_budget_controls(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    captured: dict[str, object] = {}
+
+    class FakeVertexProvider:
+        def __init__(self, **kwargs: object) -> None:
+            captured.update(kwargs)
+
+    monkeypatch.setattr(rpe, "VertexTextEmbeddingProvider", FakeVertexProvider)
+
+    embedder = rpe._load_semantic_embedder(
+        "vertex",
+        tmp_path / "outputs",
+        tmp_path / "cache" / "vertex.jsonl",
+        semantic_allow_api=True,
+        semantic_max_new_texts=12,
+        semantic_dry_run=True,
+    )
+
+    assert isinstance(embedder, FakeVertexProvider)
+    assert captured["allow_api"] is True
+    assert captured["max_new_texts"] == 12
+    assert captured["dry_run"] is True
+    assert captured["cache_path"] == tmp_path / "cache" / "vertex.jsonl"
+
+
+def test_run_retrieval_policy_forwards_semantic_budget_controls(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    data_path = tmp_path / "hotpot.json"
+    output_dir = tmp_path / "outputs"
+    data_path.write_text(json.dumps([_example(i) for i in range(10)]), encoding="utf-8")
+    examples = load_hotpotqa(data_path, num_examples=10, seed=7)
+    captured: dict[str, object] = {}
+
+    def fake_load_semantic_embedder(
+        semantic_features: str,
+        output_dir: Path,
+        semantic_cache_path: Path | None,
+        *,
+        semantic_allow_api: bool,
+        semantic_max_new_texts: int,
+        semantic_dry_run: bool,
+    ) -> _FakeSemanticEmbedder:
+        captured.update(
+            {
+                "semantic_features": semantic_features,
+                "output_dir": output_dir,
+                "semantic_cache_path": semantic_cache_path,
+                "semantic_allow_api": semantic_allow_api,
+                "semantic_max_new_texts": semantic_max_new_texts,
+                "semantic_dry_run": semantic_dry_run,
+            }
+        )
+        return _FakeSemanticEmbedder()
+
+    monkeypatch.setattr(rpe, "_load_semantic_embedder", fake_load_semantic_embedder)
+
+    metadata = rpe.run_retrieval_policy_on_examples(
+        examples=examples,
+        output_dir=output_dir,
+        dataset_name="semantic budget retrieval policy",
+        output_prefix="semantic_budget_policy",
+        checkpoint_name="semantic_budget_policy.pkl",
+        embedder_name="fake",
+        semantic_features="vertex",
+        semantic_cache_path=tmp_path / "cache" / "vertex.jsonl",
+        semantic_allow_api=True,
+        semantic_max_new_texts=7,
+        semantic_dry_run=False,
+        knn_k_candidates=[1],
+        tuning_folds=2,
+    )
+
+    assert captured["semantic_allow_api"] is True
+    assert captured["semantic_max_new_texts"] == 7
+    assert captured["semantic_dry_run"] is False
+    assert metadata["semantic_allow_api"] is True
+    assert metadata["semantic_max_new_texts"] == 7
+    assert metadata["semantic_dry_run"] is False
 
 
 def test_run_retrieval_policy_accepts_subset_action_map(tmp_path: Path) -> None:
