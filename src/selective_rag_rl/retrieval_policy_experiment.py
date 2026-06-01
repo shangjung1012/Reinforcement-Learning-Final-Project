@@ -1745,11 +1745,8 @@ def _semantic_rank_agreement(similarities: np.ndarray, k: int) -> list[float]:
 
     best_semantic_bm25_rank = int(semantic_order[0]) + 1
     top_bm25_semantic_rank = int(semantic_ranks[0])
-    bm25_scores = pd.Series(np.arange(len(values), 0, -1, dtype=float))
-    semantic_scores = pd.Series(values)
-    spearman = bm25_scores.corr(semantic_scores, method="spearman")
-    if pd.isna(spearman):
-        spearman = 0.0
+    bm25_scores = np.arange(len(values), 0, -1, dtype=float)
+    spearman = _safe_spearman_corr(bm25_scores, values)
 
     top_n = min(2, len(values))
     bm25_top = set(range(top_n))
@@ -1764,6 +1761,17 @@ def _semantic_rank_agreement(similarities: np.ndarray, k: int) -> list[float]:
         float(overlap_at_2),
         semantic_top_mean_bm25_rr,
     ]
+
+
+def _safe_spearman_corr(left: np.ndarray, right: np.ndarray) -> float:
+    left_values = np.asarray(left, dtype=float).reshape(-1)
+    right_values = np.asarray(right, dtype=float).reshape(-1)
+    if left_values.size < 2 or right_values.size < 2:
+        return 0.0
+    if np.allclose(left_values, left_values[0]) or np.allclose(right_values, right_values[0]):
+        return 0.0
+    corr = pd.Series(left_values).corr(pd.Series(right_values), method="spearman")
+    return 0.0 if pd.isna(corr) else float(corr)
 
 
 def _embedding_projection_features(query_embedding: np.ndarray, passage_centroid: np.ndarray) -> list[float]:

@@ -12,8 +12,13 @@ I continued from the cleaned `main` merge on branch `codex/overnight-improvement
 ## Changes Made
 
 - Added `docs/CODEX_REVIEW_SUMMARY.md` with current evidence, claim boundaries, and remaining work.
+- Added `src/selective_rag_rl/experiment_dashboard.py` and `scripts/run_experiment_dashboard.py` to produce a machine-readable evidence dashboard.
+- Added `tests/test_experiment_dashboard.py`.
+- Fixed semantic rank-agreement correlation so constant semantic scores no longer emit pandas/scipy `ConstantInputWarning`.
+- Added `docs/EXPERIMENT_DASHBOARD.md`, generated from existing outputs and local smoke artifacts.
 - Added `docs/codex_runs/20260602_063712/` run log files.
 - Added `docs/superpowers/plans/2026-06-02-overnight-rag-rl-hardening.md`.
+- Added `docs/superpowers/plans/2026-06-02-code-hardening-and-evidence-dashboard.md`.
 - Updated `.gitignore` to ignore wildcard generated evidence directories:
   - `outputs/codex_api_preflight_*/`
   - `outputs/codex_data_preflight_*/`
@@ -28,11 +33,15 @@ I continued from the cleaned `main` merge on branch `codex/overnight-improvement
 
 | Command | Result |
 | --- | --- |
-| `uv run pytest -q` | 176 passed, 1 warning |
+| `uv run pytest -q` | 182 passed |
 | `uv run python scripts/run_final_smoke.py --output-dir outputs/codex_smoke_overnight --pytest-mode targeted` | Nested pytest 18 passed; smoke status pass |
+| `uv run python scripts/run_final_smoke.py --output-dir outputs/codex_smoke_code_hardening --pytest-mode targeted` | Nested pytest 18 passed; smoke status pass |
 | `uv run python scripts/run_reader_eval.py --dataset toy --num-examples 4 --output-dir outputs/codex_reader_smoke_overnight` | Pass; EM 0.0, F1 0.490079 |
+| `uv run pytest tests/test_experiment_dashboard.py -q` | 5 passed |
+| `uv run pytest tests/test_retrieval_policy_experiment.py::test_semantic_rank_agreement_handles_constant_scores_without_warning tests/test_retrieval_policy_experiment.py::test_semantic_state_features_can_use_deeper_rank_profile -q` | 2 passed |
+| `uv run python scripts/run_experiment_dashboard.py ...` | 200 artifacts classified; 6 claim-allowed artifacts |
 
-The one warning is the existing pandas `ConstantInputWarning` in the semantic feature correlation test.
+The previous semantic-feature constant-input warning has a regression test and is fixed in code. Full pytest now runs without that warning.
 
 ## API Preflight
 
@@ -66,6 +75,7 @@ These runs verify local data and script integration only. They do not change fin
 - Validation guardrail ran on existing SciFact/NFCorpus final detailed CSVs.
 - Both guardrail outputs are `analysis_only_no_validation` because the detailed final artifacts do not include a validation split.
 - Cost frontier ran on existing SciFact/NFCorpus final summary CSVs and produced ignored local diagnostic outputs.
+- Experiment dashboard ran across `outputs/results`, overnight smoke/preflight directories, and reader smoke outputs. It classified 200 artifacts and allowed final/full benchmark claims only for final-claim index artifacts and SciFact/NFCorpus retrieval policy summaries.
 
 ## Claims Changed
 
@@ -77,6 +87,7 @@ No final claims were changed. The conservative retrieval-stage claim remains the
 - HotpotQA and NQ raw files are not present locally.
 - Tiny real-data smoke is too small for final result claims.
 - The validation guardrail can audit existing final artifacts but cannot perform true selection without validation-split inputs.
+- The dashboard uses conservative filename/path and metadata heuristics; a human should review labels before using it in slides or final text.
 
 ## Manual Review Checklist
 

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import warnings
 from pathlib import Path
 
 import numpy as np
@@ -864,6 +865,14 @@ def test_semantic_state_features_can_use_deeper_rank_profile() -> None:
     assert len(shallow) == 36
     assert len(deep) == 46
     assert len(deep[9:24]) == 15
+
+
+def test_semantic_rank_agreement_handles_constant_scores_without_warning() -> None:
+    with warnings.catch_warnings():
+        warnings.simplefilter("error")
+        features = rpe._semantic_rank_agreement(np.ones(4), k=4)
+
+    assert features[3] == 0.0
 
 
 def test_evaluate_retrieval_actions_uses_semantic_depth_for_initial_embedding_pool() -> None:

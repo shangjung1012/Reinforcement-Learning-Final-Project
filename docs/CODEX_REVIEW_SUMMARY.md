@@ -10,6 +10,7 @@ This document summarizes the cleanup and continuation work after the selective m
 - SciFact and NFCorpus local data availability can be checked through `scripts/run_data_preflight.py`.
 - Validation guardrail and cost frontier utilities are executable and tested.
 - Tiny real-data smoke now verifies the local SciFact/NFCorpus pipeline without external APIs.
+- Experiment evidence can now be summarized with `scripts/run_experiment_dashboard.py`, which labels artifacts as smoke, tiny real-data, API preflight, full benchmark, or final-claim evidence.
 
 ## Latest Overnight Evidence
 
@@ -23,6 +24,7 @@ This document summarizes the cleanup and continuation work after the selective m
 | Toy reader smoke | Completed with lexical reader | Downstream metric plumbing only. |
 | Guardrail diagnostics | Completed on final detailed CSVs | Analysis-only where no validation split exists. |
 | Cost frontier diagnostics | Completed on final summary CSVs | Defense aid, not new benchmark evidence. |
+| Experiment dashboard | 200 artifacts classified; 6 claim-allowed artifacts | Evidence boundary audit. |
 
 ## What To Claim
 
@@ -43,4 +45,5 @@ The conservative final claim remains:
 2. Add HotpotQA and NQ raw files if downstream reader smoke on real QA datasets is needed.
 3. Run repeated-seed full-data experiments only if final report evidence must be regenerated.
 4. Review whether `FINAL_REPORT.md` should remain unchanged or receive a short appendix pointing to the new reproducibility/API docs.
-5. Review and merge only the useful overnight branch changes; generated `outputs/codex_*` artifacts should stay local.
+5. Review `docs/EXPERIMENT_DASHBOARD.md` to confirm the evidence-level labels match the intended final presentation.
+6. Review and merge only the useful branch changes; generated `outputs/codex_*` artifacts should stay local.

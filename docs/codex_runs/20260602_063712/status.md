@@ -34,6 +34,10 @@
 | 2026-06-02 06:48 | `uv run python scripts/run_reader_eval.py --dataset toy --num-examples 4 --output-dir outputs/codex_reader_smoke_overnight` | Pass | EM 0.0, F1 0.490079, retrieval metrics 1.0; smoke only. |
 | 2026-06-02 06:50 | `uv run pytest -q` | Pass | 176 passed, 1 warning. |
 | 2026-06-02 06:50 | `uv run python scripts/run_final_smoke.py --output-dir outputs/codex_smoke_overnight --pytest-mode targeted` | Pass | Nested pytest 18 passed; no raw data/API/model download. |
+| 2026-06-02 later | `uv run pytest tests/test_experiment_dashboard.py ... -q` | Pass | 7 passed. |
+| 2026-06-02 later | `uv run python scripts/run_experiment_dashboard.py ...` | Pass | 200 artifacts classified; 6 claim-allowed artifacts. |
+| 2026-06-02 later | `uv run pytest -q` | Pass | 182 passed, no warnings. |
+| 2026-06-02 later | `uv run python scripts/run_final_smoke.py --output-dir outputs/codex_smoke_code_hardening --pytest-mode targeted` | Pass | Nested pytest 18 passed; no raw data/API/model download. |
 
 ## Current Blockers
 
