@@ -46,6 +46,9 @@ def run_policy_model_sweep(
     retrieval_call_cost: float = 0.03,
     semantic_features: str = "none",
     semantic_cache_path: Path | None = None,
+    semantic_allow_api: bool = False,
+    semantic_max_new_texts: int = 0,
+    semantic_dry_run: bool = False,
     knn_k_candidates: list[int] | None = None,
     tuning_folds: int = 5,
     auto_candidate_models: list[str] | None = None,
@@ -88,7 +91,14 @@ def run_policy_model_sweep(
         qtype=f"beir-{dataset}",
     )
     embedder = FakeDenseEmbedder() if embedder_name == "fake" else load_sentence_transformer(embedder_name)
-    semantic_embedder = _load_semantic_embedder(semantic_features, output_dir, semantic_cache_path)
+    semantic_embedder = _load_semantic_embedder(
+        semantic_features,
+        output_dir,
+        semantic_cache_path,
+        semantic_allow_api=semantic_allow_api,
+        semantic_max_new_texts=semantic_max_new_texts,
+        semantic_dry_run=semantic_dry_run,
+    )
     if semantic_embedder is not None:
         _prewarm_semantic_embeddings([*train_examples, *test_examples], semantic_embedder, semantic_depth)
 

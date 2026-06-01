@@ -18,6 +18,11 @@ from selective_rag_rl.retriever import BM25Retriever
 from selective_rag_rl.text import content_tokens
 
 RewriteProvider = Callable[[str, str], list[str]]
+GEMINI_MODES = [("rewrite", "Gemini rewrite-all"), ("decompose", "Gemini decompose")]
+
+
+class GeminiBudgetError(RuntimeError):
+    pass
 
 
 class GeminiCache:
@@ -77,17 +82,38 @@ def evaluate_gemini_rewrites(
     k: int = 5,
     cache_path: Path | None = None,
     rewrite_provider: RewriteProvider | None = None,
+    allow_api: bool = False,
+    max_new_calls: int = 0,
+    dry_run: bool = False,
 ) -> dict[str, object]:
     examples = load_hotpotqa(data_path, num_examples=num_examples, seed=seed)
     _train, test = split_examples(examples)
     results_dir = output_dir / "results"
     results_dir.mkdir(parents=True, exist_ok=True)
     cache = GeminiCache(cache_path or output_dir / "cache" / "gemini_rewrites.jsonl")
+    cache_stats = _cache_stats(test, cache)
+    metadata = _metadata(
+        examples=examples,
+        test=test,
+        seed=seed,
+        k=k,
+        cache=cache,
+        results_dir=results_dir,
+        cache_stats=cache_stats,
+        allow_api=allow_api,
+        max_new_calls=max_new_calls,
+        dry_run=dry_run,
+    )
+    if dry_run:
+        Path(metadata["outputs"]["metadata_json"]).write_text(json.dumps(metadata, indent=2), encoding="utf-8")
+        return metadata
+    if rewrite_provider is None:
+        _check_live_budget(cache_stats["misses"], allow_api=allow_api, max_new_calls=max_new_calls)
     provider = rewrite_provider or VertexGeminiRewriter(Path.cwd()).rewrite
 
     rows: list[dict[str, object]] = []
     for ex in tqdm(test, desc="gemini baselines"):
-        for mode, method in [("rewrite", "Gemini rewrite-all"), ("decompose", "Gemini decompose")]:
+        for mode, method in GEMINI_MODES:
             queries = cache.get(ex.qid, mode)
             if queries is None:
                 queries = provider(ex.question, mode)
@@ -104,22 +130,67 @@ def evaluate_gemini_rewrites(
     summary.to_csv(summary_csv, index=False)
     summary_json.write_text(json.dumps(summary.to_dict(orient="records"), indent=2), encoding="utf-8")
     table_tex.write_text(_latex_table(summary), encoding="utf-8")
-    metadata = {
+    metadata["outputs"].update(
+        {
+            "detailed_csv": str(detailed_csv),
+            "summary_csv": str(summary_csv),
+            "summary_json": str(summary_json),
+            "table_tex": str(table_tex),
+        }
+    )
+    (results_dir / "gemini_rewrite_metadata.json").write_text(json.dumps(metadata, indent=2), encoding="utf-8")
+    return metadata
+
+
+def _cache_stats(test_examples: list[QAExample], cache: GeminiCache) -> dict[str, int]:
+    hits = 0
+    misses = 0
+    for ex in test_examples:
+        for mode, _method in GEMINI_MODES:
+            if cache.get(ex.qid, mode) is None:
+                misses += 1
+            else:
+                hits += 1
+    return {"hits": hits, "misses": misses}
+
+
+def _check_live_budget(misses: int, allow_api: bool, max_new_calls: int) -> None:
+    if misses == 0:
+        return
+    if not allow_api:
+        raise GeminiBudgetError("Gemini cache misses require allow_api=True before live API calls")
+    if misses > max_new_calls:
+        raise GeminiBudgetError(f"Gemini cache misses ({misses}) exceed max_new_calls ({max_new_calls})")
+
+
+def _metadata(
+    examples: list[QAExample],
+    test: list[QAExample],
+    seed: int,
+    k: int,
+    cache: GeminiCache,
+    results_dir: Path,
+    cache_stats: dict[str, int],
+    allow_api: bool,
+    max_new_calls: int,
+    dry_run: bool,
+) -> dict[str, object]:
+    return {
         "dataset": "HotpotQA Gemini rewrite baselines",
         "num_examples": len(examples),
         "test_examples": len(test),
         "seed": seed,
         "k": k,
         "cache": str(cache.path),
+        "cache_hits": cache_stats["hits"],
+        "cache_misses": cache_stats["misses"],
+        "allow_api": allow_api,
+        "max_new_calls": max_new_calls,
+        "dry_run": dry_run,
         "outputs": {
-            "detailed_csv": str(detailed_csv),
-            "summary_csv": str(summary_csv),
-            "summary_json": str(summary_json),
-            "table_tex": str(table_tex),
+            "metadata_json": str(results_dir / "gemini_rewrite_metadata.json"),
         },
     }
-    (results_dir / "gemini_rewrite_metadata.json").write_text(json.dumps(metadata, indent=2), encoding="utf-8")
-    return metadata
 
 
 def _evaluate_queries(ex: QAExample, method: str, mode: str, queries: list[str], k: int) -> dict[str, object]:

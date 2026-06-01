@@ -36,6 +36,28 @@ def test_estimate_off_policy_value_computes_ips_snips_and_dr() -> None:
     assert estimates["effective_sample_size"] == 1.0
 
 
+def test_estimate_off_policy_value_reports_no_coverage_when_actions_never_match() -> None:
+    logged = pd.DataFrame(
+        [
+            {"logged_action": "a", "logged_reward": 1.0, "propensity": 0.5},
+            {"logged_action": "a", "logged_reward": 0.0, "propensity": 0.5},
+        ]
+    )
+
+    estimates = estimate_off_policy_value(
+        logged=logged,
+        target_actions=["b", "b"],
+        q_target=np.asarray([0.4, 0.6]),
+        q_logged=np.asarray([0.9, 0.1]),
+    )
+
+    assert estimates["ips"] == 0.0
+    assert np.isnan(estimates["snips"])
+    assert estimates["doubly_robust"] == 0.5
+    assert estimates["match_rate"] == 0.0
+    assert estimates["effective_sample_size"] == 0.0
+
+
 def test_behavior_probabilities_support_uniform_and_epsilon_reference_policy() -> None:
     actions = ["a", "b", "c"]
 

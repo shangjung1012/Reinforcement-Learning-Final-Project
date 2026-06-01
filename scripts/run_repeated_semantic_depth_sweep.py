@@ -32,6 +32,9 @@ def main() -> None:
     parser.add_argument("--retrieval-call-cost", type=float, default=0.03)
     parser.add_argument("--semantic-features", choices=["none", "vertex"], default="vertex")
     parser.add_argument("--semantic-cache-path", type=Path, default=None)
+    parser.add_argument("--semantic-allow-api", action="store_true")
+    parser.add_argument("--semantic-max-new-texts", type=int, default=0)
+    parser.add_argument("--semantic-dry-run", action="store_true")
     parser.add_argument("--knn-k-candidates", default="1,3,5,7,9,11,15,21")
     parser.add_argument("--tuning-folds", type=int, default=5)
     parser.add_argument("--auto-candidate-models", default=",".join(AUTO_POLICY_MODEL_CHOICES))
@@ -72,6 +75,9 @@ def main() -> None:
         retrieval_call_cost=args.retrieval_call_cost,
         semantic_features=args.semantic_features,
         semantic_cache_path=args.semantic_cache_path,
+        semantic_allow_api=args.semantic_allow_api,
+        semantic_max_new_texts=args.semantic_max_new_texts,
+        semantic_dry_run=args.semantic_dry_run,
         knn_k_candidates=knn_k_candidates,
         tuning_folds=args.tuning_folds,
         auto_candidate_models=auto_candidate_models,

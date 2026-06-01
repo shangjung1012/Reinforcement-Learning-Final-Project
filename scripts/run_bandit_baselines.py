@@ -30,6 +30,9 @@ def main() -> None:
     parser.add_argument("--feature-set", choices=FEATURE_SET_CHOICES, default="full")
     parser.add_argument("--semantic-features", choices=["none", "vertex"], default="none")
     parser.add_argument("--semantic-cache-path", type=Path, default=None)
+    parser.add_argument("--semantic-allow-api", action="store_true")
+    parser.add_argument("--semantic-max-new-texts", type=int, default=0)
+    parser.add_argument("--semantic-dry-run", action="store_true")
     parser.add_argument("--semantic-depth", type=int, default=SEMANTIC_DEPTH_DEFAULT)
     args = parser.parse_args()
 
@@ -54,6 +57,9 @@ def main() -> None:
         feature_set=args.feature_set,
         semantic_features=args.semantic_features,
         semantic_cache_path=args.semantic_cache_path,
+        semantic_allow_api=args.semantic_allow_api,
+        semantic_max_new_texts=args.semantic_max_new_texts,
+        semantic_dry_run=args.semantic_dry_run,
         semantic_depth=args.semantic_depth,
     )
     print(pd.read_csv(summary_csv).to_string(index=False))

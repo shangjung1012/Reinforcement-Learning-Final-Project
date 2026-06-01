@@ -39,6 +39,24 @@ def test_linucb_policy_learns_from_logged_chosen_rewards() -> None:
     assert policy.predict(np.asarray([1.0, 1.0])) == "right"
 
 
+def test_linucb_history_records_chosen_action_reward_not_oracle_reward() -> None:
+    actions = ["left", "right"]
+    features = np.asarray([[1.0, 0.0], [1.0, 0.0]])
+    rewards = {
+        "left": [0.0, 0.0],
+        "right": [10.0, 10.0],
+    }
+
+    policy = LinUCBPolicy(actions=actions, alpha=0.0, l2=1.0)
+    history = policy.fit(features, rewards)
+    first = history.iloc[0]
+
+    assert first["chosen_action"] == "left"
+    assert first["reward"] == 0.0
+    assert first["oracle_reward"] == 10.0
+    assert first["regret"] == 10.0
+
+
 def test_epsilon_greedy_policy_replays_selected_action_feedback() -> None:
     actions = ["left", "right"]
     features = np.asarray(

@@ -410,6 +410,9 @@ def run_retrieval_policy_experiment(
     retrieval_call_cost: float = 0.03,
     semantic_features: str = "none",
     semantic_cache_path: Path | None = None,
+    semantic_allow_api: bool = False,
+    semantic_max_new_texts: int = 0,
+    semantic_dry_run: bool = False,
     knn_k_candidates: list[int] | None = None,
     tuning_folds: int = 5,
     policy_model: str = "knn",
@@ -431,6 +434,9 @@ def run_retrieval_policy_experiment(
         retrieval_call_cost=retrieval_call_cost,
         semantic_features=semantic_features,
         semantic_cache_path=semantic_cache_path,
+        semantic_allow_api=semantic_allow_api,
+        semantic_max_new_texts=semantic_max_new_texts,
+        semantic_dry_run=semantic_dry_run,
         knn_k_candidates=knn_k_candidates,
         tuning_folds=tuning_folds,
         policy_model=policy_model,
@@ -455,6 +461,9 @@ def run_llm_retrieval_policy_experiment(
     llm_token_cost: float = 0.01,
     semantic_features: str = "none",
     semantic_cache_path: Path | None = None,
+    semantic_allow_api: bool = False,
+    semantic_max_new_texts: int = 0,
+    semantic_dry_run: bool = False,
     knn_k_candidates: list[int] | None = None,
     tuning_folds: int = 5,
     policy_model: str = "auto",
@@ -476,6 +485,9 @@ def run_llm_retrieval_policy_experiment(
         retrieval_call_cost=retrieval_call_cost,
         semantic_features=semantic_features,
         semantic_cache_path=semantic_cache_path,
+        semantic_allow_api=semantic_allow_api,
+        semantic_max_new_texts=semantic_max_new_texts,
+        semantic_dry_run=semantic_dry_run,
         knn_k_candidates=knn_k_candidates,
         tuning_folds=tuning_folds,
         policy_model=policy_model,
@@ -509,6 +521,9 @@ def run_scifact_retrieval_policy_experiment(
     retrieval_call_cost: float = 0.03,
     semantic_features: str = "none",
     semantic_cache_path: Path | None = None,
+    semantic_allow_api: bool = False,
+    semantic_max_new_texts: int = 0,
+    semantic_dry_run: bool = False,
     knn_k_candidates: list[int] | None = None,
     tuning_folds: int = 5,
     policy_model: str = "knn",
@@ -542,6 +557,9 @@ def run_scifact_retrieval_policy_experiment(
         retrieval_call_cost=retrieval_call_cost,
         semantic_features=semantic_features,
         semantic_cache_path=semantic_cache_path,
+        semantic_allow_api=semantic_allow_api,
+        semantic_max_new_texts=semantic_max_new_texts,
+        semantic_dry_run=semantic_dry_run,
         knn_k_candidates=knn_k_candidates,
         tuning_folds=tuning_folds,
         policy_model=policy_model,
@@ -573,6 +591,9 @@ def run_nfcorpus_retrieval_policy_experiment(
     retrieval_call_cost: float = 0.03,
     semantic_features: str = "none",
     semantic_cache_path: Path | None = None,
+    semantic_allow_api: bool = False,
+    semantic_max_new_texts: int = 0,
+    semantic_dry_run: bool = False,
     knn_k_candidates: list[int] | None = None,
     tuning_folds: int = 5,
     policy_model: str = "knn",
@@ -606,6 +627,9 @@ def run_nfcorpus_retrieval_policy_experiment(
         retrieval_call_cost=retrieval_call_cost,
         semantic_features=semantic_features,
         semantic_cache_path=semantic_cache_path,
+        semantic_allow_api=semantic_allow_api,
+        semantic_max_new_texts=semantic_max_new_texts,
+        semantic_dry_run=semantic_dry_run,
         knn_k_candidates=knn_k_candidates,
         tuning_folds=tuning_folds,
         policy_model=policy_model,
@@ -641,6 +665,9 @@ def run_beir_retrieval_policy_experiment(
     retrieval_call_cost: float = 0.03,
     semantic_features: str = "none",
     semantic_cache_path: Path | None = None,
+    semantic_allow_api: bool = False,
+    semantic_max_new_texts: int = 0,
+    semantic_dry_run: bool = False,
     knn_k_candidates: list[int] | None = None,
     tuning_folds: int = 5,
     policy_model: str = "knn",
@@ -694,6 +721,9 @@ def run_beir_retrieval_policy_experiment(
         retrieval_call_cost=retrieval_call_cost,
         semantic_features=semantic_features,
         semantic_cache_path=semantic_cache_path,
+        semantic_allow_api=semantic_allow_api,
+        semantic_max_new_texts=semantic_max_new_texts,
+        semantic_dry_run=semantic_dry_run,
         knn_k_candidates=knn_k_candidates,
         tuning_folds=tuning_folds,
         policy_model=policy_model,
@@ -740,6 +770,9 @@ def run_nq_retrieval_policy_experiment(
     retrieval_call_cost: float = 0.03,
     semantic_features: str = "none",
     semantic_cache_path: Path | None = None,
+    semantic_allow_api: bool = False,
+    semantic_max_new_texts: int = 0,
+    semantic_dry_run: bool = False,
     knn_k_candidates: list[int] | None = None,
     tuning_folds: int = 5,
     policy_model: str = "knn",
@@ -761,6 +794,9 @@ def run_nq_retrieval_policy_experiment(
         retrieval_call_cost=retrieval_call_cost,
         semantic_features=semantic_features,
         semantic_cache_path=semantic_cache_path,
+        semantic_allow_api=semantic_allow_api,
+        semantic_max_new_texts=semantic_max_new_texts,
+        semantic_dry_run=semantic_dry_run,
         knn_k_candidates=knn_k_candidates,
         tuning_folds=tuning_folds,
         policy_model=policy_model,
@@ -788,6 +824,9 @@ def run_retrieval_policy_on_examples(
     semantic_features: str = "none",
     semantic_cache_path: Path | None = None,
     semantic_embedder: SemanticEmbedder | None = None,
+    semantic_allow_api: bool = False,
+    semantic_max_new_texts: int = 0,
+    semantic_dry_run: bool = False,
     knn_k_candidates: list[int] | None = None,
     tuning_folds: int = 5,
     policy_model: str = "knn",
@@ -826,7 +865,14 @@ def run_retrieval_policy_on_examples(
         oracle_index = method_order.index("Oracle retrieval action") if "Oracle retrieval action" in method_order else len(method_order)
         method_order.insert(oracle_index, CONFIDENCE_GATED_METHOD)
     embedder = FakeDenseEmbedder() if embedder_name == "fake" else load_sentence_transformer(embedder_name)
-    semantic_embedder = semantic_embedder or _load_semantic_embedder(semantic_features, output_dir, semantic_cache_path)
+    semantic_embedder = semantic_embedder or _load_semantic_embedder(
+        semantic_features,
+        output_dir,
+        semantic_cache_path,
+        semantic_allow_api=semantic_allow_api,
+        semantic_max_new_texts=semantic_max_new_texts,
+        semantic_dry_run=semantic_dry_run,
+    )
     if semantic_embedder is not None:
         _prewarm_semantic_embeddings([*train, *test], semantic_embedder, semantic_depth)
     knn_k_candidates = knn_k_candidates or [1, 3, 5, 7, 9, 11, 15, 21]
@@ -992,6 +1038,9 @@ def run_retrieval_policy_on_examples(
             "embedder": embedder_name,
             "semantic_features": semantic_features,
             "semantic_depth": semantic_depth,
+            "semantic_allow_api": semantic_allow_api,
+            "semantic_max_new_texts": semantic_max_new_texts,
+            "semantic_dry_run": semantic_dry_run,
             "semantic_cache_path": str(semantic_cache_path or output_dir / "cache" / "vertex_embeddings.jsonl")
             if semantic_embedder is not None
             else None,
@@ -1024,6 +1073,9 @@ def run_retrieval_policy_on_examples(
         "embedder": embedder_name,
         "semantic_features": semantic_features,
         "semantic_depth": semantic_depth,
+        "semantic_allow_api": semantic_allow_api,
+        "semantic_max_new_texts": semantic_max_new_texts,
+        "semantic_dry_run": semantic_dry_run,
         "semantic_cache_path": str(semantic_cache_path or output_dir / "cache" / "vertex_embeddings.jsonl")
         if semantic_embedder is not None
         else None,
@@ -1569,6 +1621,10 @@ def _load_semantic_embedder(
     semantic_features: str,
     output_dir: Path,
     semantic_cache_path: Path | None,
+    *,
+    semantic_allow_api: bool = False,
+    semantic_max_new_texts: int = 0,
+    semantic_dry_run: bool = False,
 ) -> SemanticEmbedder | None:
     if semantic_features == "none":
         return None
@@ -1576,6 +1632,9 @@ def _load_semantic_embedder(
         return VertexTextEmbeddingProvider(
             project_root=Path.cwd(),
             cache_path=semantic_cache_path or output_dir / "cache" / "vertex_embeddings.jsonl",
+            allow_api=semantic_allow_api,
+            max_new_texts=semantic_max_new_texts,
+            dry_run=semantic_dry_run,
         )
     raise ValueError(f"Unknown semantic feature provider: {semantic_features}")
 
