@@ -1,0 +1,75 @@
+\section{Experimental Results}
+\label{section:exp}
+
+\subsection{Midterm Goal and Toy Environment}
+\label{section:exp:toy}
+For the midterm milestone, we focus on the course requirement of running baselines and a small-scale task that exposes the essence of the proposed problem. We build a reproducible toy retrieval environment from the HotpotQA distractor development set \citep{yang-etal-2018-hotpotqa}. Each question is paired with ten candidate Wikipedia paragraphs from the original dataset. We treat each paragraph title plus its sentences as a retrievable passage, and we use the supporting-fact titles as gold relevant documents. This toy setting is intentionally smaller than the final RAG pipeline, but it preserves the key difficulty of our proposal: multi-hop questions often require selecting the right query form before retrieval can recover all required evidence.
+
+We sample 300 examples with random seed 42, use 180 examples for training the lightweight contextual-bandit selector, and evaluate on 120 held-out examples. All methods use the same BM25 retriever and the same candidate passage pool per question. Since this midterm experiment is designed to test retrieval behavior before adding a reader, we report Recall@5, MRR, nDCG@5, retrieval calls, rewrite cost, and the cost-aware reward
+\[
+    r = \mathrm{Recall@5} + 0.5 \cdot \mathrm{MRR} - \mathrm{RewriteCost}.
+\]
+The rewrite cost penalizes extra rewrite tokens and additional retrieval calls. This reward is a toy version of the answer-plus-retrieval-plus-cost objective described in \cref{section:algorithm}.
+For the one-step contextual-bandit experiment, retrieval calls count the final retrieval issued by the selected action. For the multi-step extension, retrieval calls include the initial observation retrieval plus any refinement retrievals, because the policy explicitly observes retrieval feedback before deciding whether to continue.
+
+\subsection{Baselines and One-Step Toy Method}
+\label{section:exp:baseline}
+We compare six systems. \textbf{Vanilla BM25} retrieves with the original question and serves as the no-rewrite baseline. \textbf{Rewrite-all keyword} removes common stop words and retrieves with a compressed keyword-style query. \textbf{Rewrite-all entity expansion} extracts capitalized spans from the question and appends content words. These two rewrite-all baselines test whether simply rewriting every query is enough. \textbf{Train-best fixed rewrite} is a stronger non-oracle baseline: it chooses the single rewrite action with the highest average reward on the training split and then applies that fixed action to every held-out question. \textbf{Oracle best action} chooses the best action per example using ground-truth feedback and is not a deployable method; it estimates how much headroom exists in the toy action space. \textbf{Selective bandit} is our proposed toy method. It observes query length, wh-word type, number of capitalized spans, and shallow initial BM25 score statistics, then selects one action from \{\texttt{keep}, \texttt{keyword\_compress}, \texttt{entity\_expand}, \texttt{decompose}\}.
+
+\begin{table}[t]
+    \centering
+    \caption{HotpotQA toy retrieval results on 120 held-out examples. Train-best fixed rewrite is selected only from the training split, while the oracle row uses per-example ground-truth feedback and serves as an upper bound.}
+    \label{tab:hotpot-toy-results}
+    \input{../selective-rag-rl/outputs/results/hotpot_toy_table.tex}
+\end{table}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.92\linewidth]{../selective-rag-rl/outputs/figures/retrieval_metrics.png}
+    \caption{Retrieval metrics for baselines and the proposed toy selector. The train-best fixed baseline selects keyword compression, but the oracle gap shows that no single rewrite action is uniformly optimal.}
+    \label{fig:retrieval-metrics}
+\end{figure}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.72\linewidth]{../selective-rag-rl/outputs/figures/bandit_actions.png}
+    \caption{Actions selected by the contextual bandit on the held-out set. The policy mostly chooses keyword compression but keeps the original query for a nontrivial subset, supporting the selective-rewriting motivation.}
+    \label{fig:bandit-actions}
+\end{figure}
+
+\subsection{Multi-Step RL Extension}
+\label{section:exp:multistep}
+To make the midterm experiment closer to a sequential RL problem, we also implement a two-step finite-horizon MDP extension. The agent first retrieves with the current query, observes retrieval feedback, and then chooses either \texttt{stop} or one rewrite action. If it does not stop, it retrieves again and can make one additional decision. In addition to the one-step rewrite actions, this extension includes two feedback-aware actions: \texttt{feedback\_expand}, which appends the top retrieved titles to the query, and \texttt{title\_bridge}, which forms bridge queries from the top retrieved titles. We train this policy with fitted Q iteration using a k-nearest-neighbor Q estimator. We also include \textbf{Train-best fixed trace}, which selects the best fixed two-step action trace on the training split and applies that same trace to every test question. This is still a lightweight toy method, but unlike the fixed-trace baseline, the contextual bandit and FQI policies make per-question decisions from state features.
+
+\begin{table}[t]
+    \centering
+    \caption{Two-step HotpotQA toy results. Train-best fixed trace is selected on the training split. Multi-step FQI outperforms the fixed baselines in Recall@5, showing that retrieval feedback across steps can improve evidence recovery.}
+    \label{tab:multistep-results}
+    \input{../selective-rag-rl/outputs/results/multistep_table.tex}
+\end{table}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.92\linewidth]{../selective-rag-rl/outputs/figures/multistep_metrics.png}
+    \caption{Retrieval metrics for the multi-step extension. The learned two-step FQI policy improves Recall@5 over vanilla BM25 and rewrite-all keyword retrieval, while the oracle two-step result indicates substantial remaining room for better policy learning.}
+    \label{fig:multistep-metrics}
+\end{figure}
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.92\linewidth]{../selective-rag-rl/outputs/figures/multistep_action_traces.png}
+    \caption{Most frequent action traces selected by the multi-step policy. The policy learns a mixture of stopping, one-step keyword compression, and second-step refinement actions, which is the sequential behavior intended by the proposed RL formulation.}
+    \label{fig:multistep-actions}
+\end{figure}
+
+\subsection{Discussion}
+\label{section:exp:discussion}
+The results in \cref{tab:hotpot-toy-results} show why the baseline is insufficient. Vanilla BM25 retrieves only 80.4\% of the required supporting documents at top 5 on this controlled toy task. This is already before answer generation, so any missing evidence directly limits the downstream reader. Train-best fixed rewrite selects \texttt{keyword\_compress} on the training split and improves Recall@5 to 82.9\%, confirming that query reformulation helps even when the fixed action is selected without test feedback. However, the oracle best action reaches 87.5\% Recall@5 and a higher reward, which means a fixed rewrite action still leaves substantial evidence-recovery headroom.
+
+The proposed selective bandit reaches 82.1\% Recall@5 and 77.0\% nDCG@5, improving over vanilla BM25 while keeping the average retrieval calls at 1.0 and the rewrite cost near zero. It does not yet surpass the strongest rewrite-all keyword baseline in raw retrieval metrics, which is useful diagnostic feedback for the next stage: our current features can identify many cases where keyword compression is useful, but they are not yet expressive enough to consistently choose entity expansion or decomposition when those actions are better. This midterm result therefore supports the central claim of the project while also identifying the main remaining work: better state features and reward learning are needed to close the gap between the learned selector and the oracle action selector.
+
+The multi-step extension strengthens the result. As shown in \cref{tab:multistep-results}, the train-best fixed trace is \texttt{keyword\_compress -> stop}, which matches the strongest one-step fixed rewrite under the multi-step cost accounting. The two-step FQI policy reaches 83.8\% Recall@5, exceeding vanilla BM25 and the train-best fixed trace in evidence recovery. This improvement comes from using retrieval feedback as part of the next state, rather than committing to a single rewrite before seeing any evidence. The trade-off is cost: the policy uses 2.36 retrieval calls on average, compared with 2.0 calls for the fixed trace and 1.0 call for vanilla BM25. This is consistent with our cost-aware framing: sequential refinement can recover more evidence, but the final system must learn when the extra retrieval call is worth it. The two-step oracle reaches 93.3\% Recall@5, indicating that the action space has significant headroom and that stronger state representations should be valuable in the final project.
+
+A qualitative example illustrates the failure mode. For the question ``Which author lived longer, Nelson Algren or Nathanael West?'', vanilla BM25 retrieves Nathanael West but misses Nelson Algren in the top 5. Keyword compression retrieves both supporting titles, improving Recall@5 from 0.5 to 1.0. This behavior matches our motivation: multi-hop comparison questions often need a query form that emphasizes both entities instead of the original conversational phrasing.
+
+\FloatBarrier

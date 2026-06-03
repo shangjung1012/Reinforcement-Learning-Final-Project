@@ -1,0 +1,22 @@
+\section{Project Overview}
+\label{section:intro}
+
+\subsection{Profile}
+
+\paragraph{Track: 1. Algorithm}
+
+\paragraph{Abstract and project goal:}
+Retrieval-augmented generation (RAG) improves question answering by retrieving external evidence before answer generation, but the overall performance is highly sensitive to the input query. Existing query rewriting methods have shown that reformulating user questions can improve both retrieval and downstream answering, yet many approaches rewrite every query indiscriminately or optimize only a single stage of the pipeline. This is suboptimal because some queries are already retrieval-friendly, while others need targeted operations such as entity expansion, ambiguity resolution, temporal clarification, or decomposition into sub-queries. In this project, we propose a selective and cost-aware reinforcement learning framework for query rewriting in RAG. Instead of always rewriting the input, our method learns a lightweight policy that decides whether to keep the original query or apply one of several rewrite operations. The reward integrates retrieval quality and answer quality while penalizing excessive rewrite length and retrieval cost. We plan to evaluate the method on both single-hop and multi-hop question answering benchmarks and focus on the effectiveness-efficiency trade-off under limited compute.
+
+\paragraph{TL;DR (``Too Long; Didn't Read"):}
+A lightweight RL-based RAG system that learns when and how to rewrite a query, improving answer quality while controlling rewrite and retrieval cost.
+
+\subsection{Motivation}
+We are interested in this topic because modern RAG systems often fail not because the reader is weak, but because the input query is ambiguous, underspecified, conversational, or poorly aligned with the retriever's indexing space. Prior work shows that moving from retrieve-then-read to rewrite-retrieve-read can substantially improve knowledge-intensive QA \citep{ma-etal-2023-query}, and recent work such as RQ-RAG further demonstrates the benefits of refinement, decomposition, and disambiguation for both single-hop and multi-hop QA \citep{chan2024rqrag}. However, rewriting every query is not always beneficial and may increase token and retrieval costs without improving the final answer.
+
+\begin{itemize}
+    \item Why is the problem interesting? The project studies a practical bottleneck in RAG: whether the system should rewrite a query at all, and if so, what kind of rewrite is most useful for retrieval and answer generation. This makes the problem both scientifically meaningful and practically relevant for efficient QA systems.
+    \item Critical challenges. Challenge 1: Not every query benefits from rewriting, and unnecessary rewriting may distort the user's intent or introduce retrieval drift. Challenge 2: Query rewriting should optimize the full RAG pipeline, not retrieval alone, because better retrieval scores do not always translate into better final answers. Challenge 3: Sequence-level RL for free-form text generation can be expensive, so the method must remain lightweight enough to run on limited hardware.
+    \item Why does the problem remain open or unsolved? Seminal RAG and dense retrieval work established the retrieve-then-read paradigm \citep{lewis2020retrieval,karpukhin-etal-2020-dense}. More recent work showed that query rewriting is powerful in retrieval-augmented LLM pipelines \citep{ma-etal-2023-query}, that query refinement and decomposition can further improve RAG \citep{chan2024rqrag}, and that multi-aspect feedback can benefit RL-based rewriting \citep{wang2024maferw}. Even so, there is still a practical gap between strong but heavier rewriting pipelines and lightweight methods that explicitly decide \emph{whether} to rewrite while accounting for system cost.
+    \item State-of-the-art methods in our opinion. For the specific subproblem of query refinement in RAG with public code and reproducible setup, we consider RQ-RAG \citep{chan2024rqrag} the strongest reference baseline. For reward design in RL-based rewriting, MaFeRw \citep{wang2024maferw} is a strong recent reference.
+\end{itemize}

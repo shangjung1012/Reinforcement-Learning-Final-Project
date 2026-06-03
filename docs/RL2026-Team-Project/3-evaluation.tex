@@ -1,0 +1,31 @@
+\section{Empirical Evaluation}
+\label{section:evaluation}
+We will evaluate the proposed method from three perspectives: retrieval quality, downstream QA quality, and efficiency.
+
+\subsection{Performance Metrics}
+We plan to report the following key metrics.
+\begin{itemize}
+    \item Retrieval quality: Recall@$k$, MRR, and nDCG@$k$. These metrics measure whether the rewritten query helps retrieve more relevant evidence and rank it higher.
+    \item Downstream QA quality: Exact Match (EM) and token-level F1. These metrics verify whether better retrieval actually improves the final answer.
+    \item Efficiency: average rewrite length, average retrieved context length, and average retrieval calls or latency proxy. These metrics are important because our goal is not only to improve answer quality, but also to control rewrite and retrieval cost.
+\end{itemize}
+The efficiency metrics are necessary because a method that always rewrites aggressively may achieve slightly higher accuracy at the expense of much higher token and retrieval overhead.
+
+\subsection{Baseline Methods}
+We will compare against the following baselines.
+\begin{itemize}
+    \item Vanilla RAG \citep{lewis2020retrieval}: standard retrieve-then-read without query rewriting.
+    \item BM25 and DPR-based RAG pipelines \citep{karpukhin-etal-2020-dense}: standard sparse and dense retrieval variants used as fixed retrieval backbones for the same downstream reader.
+    \item Rewrite-Retrieve-Read \citep{ma-etal-2023-query}: a trainable query rewriting framework that replaces retrieve-then-read with rewrite-retrieve-read.
+    \item RQ-RAG \citep{chan2024rqrag}: a recent refinement-based RAG method with explicit rewriting, decomposition, and disambiguation.
+    \item Prompt-based rewriting: a non-RL baseline that uses manually designed prompts or heuristics to rewrite every query.
+    \item MaFeRw-inspired reward-guided rewriting \citep{wang2024maferw}: if compute permits, we will include a simplified RL baseline or ablation inspired by multi-aspect reward feedback.
+\end{itemize}
+
+\subsection{Benchmark Tasks or Datasets}
+We plan to evaluate on one single-hop QA dataset and one multi-hop QA dataset.
+\begin{itemize}
+    \item Natural Questions (NQ) \citep{kwiatkowski-etal-2019-natural}: a standard open-domain single-hop QA benchmark widely used in retrieval-augmented QA.
+    \item HotpotQA \citep{yang-etal-2018-hotpotqa}: a multi-hop QA benchmark with supporting-fact supervision, suitable for evaluating decomposition and evidence selection.
+\end{itemize}
+If time permits, we may additionally test on 2WikiMultihopQA as an extra multi-hop benchmark. For feasibility, we will begin with smaller train and validation subsets, then scale up after the retrieval and RL pipelines become stable.

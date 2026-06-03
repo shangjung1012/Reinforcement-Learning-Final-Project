@@ -1,0 +1,13 @@
+\section{Problem Formulation}
+We formulate query rewriting for RAG as a contextual bandit, or equivalently a one-step Markov decision process. For each input question $q$, the agent observes a state $s(q)$ derived from the original query and optional shallow retrieval statistics from an initial retrieval pass, such as top-$k$ score gaps, entropy, query length, and named-entity indicators. The agent then chooses an action $a \in \mathcal{A}$ from a finite rewrite action space, for example: keep the original query, expand entities or keywords, add temporal clarification, disambiguate an ambiguous term, compress the query into keyword style, or decompose the question into two sub-queries. The chosen action is converted into a rewritten query $\tilde{q} = f(q,a)$, which is then sent to a fixed retriever and a fixed reader. This setting uses standard scalar reward feedback and keeps the environment lightweight enough for a single-GPU implementation.
+
+Formally, let $\mathcal{D}$ denote the question distribution, $R(\tilde{q})$ denote the top-$k$ retrieved passages for the rewritten query, and $G(q, R(\tilde{q}))$ denote the final generated answer. We learn a policy $\pi_{\theta}(a \mid s)$ that maximizes
+\begin{equation}
+\mathbb{E}_{q \sim \mathcal{D},\, a \sim \pi_{\theta}(\cdot \mid s(q))}\left[
+\alpha \cdot \mathrm{AnsScore}
++ \beta \cdot \mathrm{RetScore}
+- \lambda_{1} \cdot \mathrm{RewriteCost}
+- \lambda_{2} \cdot \mathrm{ContextCost}
+\right].
+\end{equation}
+Here, $\mathrm{AnsScore}$ can be Exact Match (EM) or token-level F1, $\mathrm{RetScore}$ can be Recall@$k$, MRR, or nDCG, and the cost terms penalize overly long rewrites and excessive retrieved context. We assume the retriever and reader remain fixed during the main RL training stage so that the observed gains can be attributed primarily to the rewrite policy rather than to changes in other modules.
