@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.artifact_index import (
+from selective_rag_rl.reports.artifact_index import (
     ArtifactSpec,
     export_artifact_index,
     final_project_artifact_specs,

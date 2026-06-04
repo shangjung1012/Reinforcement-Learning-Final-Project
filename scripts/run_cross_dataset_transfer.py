@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.cross_dataset_transfer import run_beir_transfer_matrix
+from selective_rag_rl.experiments.cross_dataset_transfer import run_beir_transfer_matrix
 
 
 def main() -> None:

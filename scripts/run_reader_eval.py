@@ -6,11 +6,11 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.answer_metrics import exact_match, token_f1
-from selective_rag_rl.data import Passage, QAExample, load_hotpotqa, load_natural_questions
-from selective_rag_rl.metrics import mrr, ndcg_at_k, recall_at_k
-from selective_rag_rl.reader import LexicalOverlapReader
-from selective_rag_rl.retriever import BM25Retriever
+from selective_rag_rl.core.answer_metrics import exact_match, token_f1
+from selective_rag_rl.core.data import Passage, QAExample, load_hotpotqa, load_natural_questions
+from selective_rag_rl.core.metrics import mrr, ndcg_at_k, recall_at_k
+from selective_rag_rl.core.reader import LexicalOverlapReader
+from selective_rag_rl.core.retriever import BM25Retriever
 
 
 def run_reader_eval(

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from selective_rag_rl.answer_metrics import exact_match, normalize_answer, token_f1
+from selective_rag_rl.core.answer_metrics import exact_match, normalize_answer, token_f1
 
 
 def test_normalize_answer_uses_squad_style_rules() -> None:

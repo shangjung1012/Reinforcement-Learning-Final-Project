@@ -5,7 +5,7 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
-from selective_rag_rl.semantic_depth_sweep import run_repeated_semantic_depth_sweep, run_semantic_depth_sweep
+from selective_rag_rl.experiments.semantic_depth_sweep import run_repeated_semantic_depth_sweep, run_semantic_depth_sweep
 
 
 def test_run_semantic_depth_sweep_writes_combined_grid_and_depth_effects(tmp_path: Path) -> None:

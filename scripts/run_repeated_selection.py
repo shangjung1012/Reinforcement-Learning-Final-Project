@@ -5,9 +5,9 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.policy_model_sweep import POLICY_MODEL_CHOICES
-from selective_rag_rl.retrieval_policy_experiment import AUTO_POLICY_MODEL_CHOICES, FEATURE_SET_CHOICES, SEMANTIC_DEPTH_DEFAULT
-from selective_rag_rl.selection_repeats import run_repeated_policy_model_selection
+from selective_rag_rl.experiments.policy_model_sweep import POLICY_MODEL_CHOICES
+from selective_rag_rl.experiments.retrieval_policy_experiment import AUTO_POLICY_MODEL_CHOICES, FEATURE_SET_CHOICES, SEMANTIC_DEPTH_DEFAULT
+from selective_rag_rl.experiments.selection_repeats import run_repeated_policy_model_selection
 
 
 def main() -> None:

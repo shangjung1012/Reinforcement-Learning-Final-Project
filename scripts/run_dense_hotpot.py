@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.dense_experiment import run_dense_hotpot_experiment
+from selective_rag_rl.experiments.dense_experiment import run_dense_hotpot_experiment
 
 
 def main() -> None:

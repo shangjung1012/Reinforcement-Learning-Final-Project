@@ -5,12 +5,12 @@ from pathlib import Path
 
 import numpy as np
 
-from selective_rag_rl.bandit import KnnDirectMethodBandit, MarginWeightedDirectMethodBandit, state_features
-from selective_rag_rl.data import Passage, load_beir_scifact, load_hotpotqa, load_natural_questions
-from selective_rag_rl.metrics import mrr, ndcg_at_k, recall_at_k
-from selective_rag_rl.policy_io import load_checkpoint, save_checkpoint
-from selective_rag_rl.retriever import BM25Retriever, RetrievalResult
-from selective_rag_rl.rewrites import ACTIONS, rewrite, rewrite_cost
+from selective_rag_rl.policies.bandit import KnnDirectMethodBandit, MarginWeightedDirectMethodBandit, state_features
+from selective_rag_rl.core.data import Passage, load_beir_scifact, load_hotpotqa, load_natural_questions
+from selective_rag_rl.core.metrics import mrr, ndcg_at_k, recall_at_k
+from selective_rag_rl.core.policy_io import load_checkpoint, save_checkpoint
+from selective_rag_rl.core.retriever import BM25Retriever, RetrievalResult
+from selective_rag_rl.core.rewrites import ACTIONS, rewrite, rewrite_cost
 
 
 def test_hotpot_loader_reads_examples(tmp_path: Path) -> None:

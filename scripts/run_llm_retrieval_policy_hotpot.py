@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.retrieval_policy_experiment import FEATURE_SET_CHOICES, SEMANTIC_DEPTH_DEFAULT, run_llm_retrieval_policy_experiment
+from selective_rag_rl.experiments.retrieval_policy_experiment import FEATURE_SET_CHOICES, SEMANTIC_DEPTH_DEFAULT, run_llm_retrieval_policy_experiment
 
 
 def main() -> None:

@@ -5,12 +5,12 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.policy_model_sweep import POLICY_MODEL_CHOICES
-from selective_rag_rl.retrieval_policy_experiment import (
+from selective_rag_rl.experiments.policy_model_sweep import POLICY_MODEL_CHOICES
+from selective_rag_rl.experiments.retrieval_policy_experiment import (
     AUTO_POLICY_MODEL_CHOICES,
     FEATURE_SET_CHOICES,
 )
-from selective_rag_rl.semantic_depth_sweep import run_semantic_depth_sweep
+from selective_rag_rl.experiments.semantic_depth_sweep import run_semantic_depth_sweep
 
 
 def main() -> None:

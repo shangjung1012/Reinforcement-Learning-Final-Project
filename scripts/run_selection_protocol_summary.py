@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.selection_protocol import export_deployment_decision, export_selection_protocol_summary
+from selective_rag_rl.diagnostics.selection_protocol import export_deployment_decision, export_selection_protocol_summary
 
 
 def main() -> None:

@@ -5,9 +5,9 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from selective_rag_rl.bandit import DirectMethodBandit
-from selective_rag_rl.checkpoint_manifest import export_checkpoint_manifest
-from selective_rag_rl.policy_io import save_checkpoint
+from selective_rag_rl.policies.bandit import DirectMethodBandit
+from selective_rag_rl.reports.checkpoint_manifest import export_checkpoint_manifest
+from selective_rag_rl.core.policy_io import save_checkpoint
 
 
 def test_export_checkpoint_manifest_summarizes_saved_policy(tmp_path: Path) -> None:

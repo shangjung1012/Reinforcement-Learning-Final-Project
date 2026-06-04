@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.data_preflight import run_data_preflight
+from selective_rag_rl.preflight.data_preflight import run_data_preflight
 
 
 def main() -> None:

@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.ablation import run_hotpot_ablation
+from selective_rag_rl.experiments.ablation import run_hotpot_ablation
 
 
 def main() -> None:

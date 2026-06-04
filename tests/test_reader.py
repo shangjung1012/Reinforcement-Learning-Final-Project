@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from selective_rag_rl.data import Passage
-from selective_rag_rl.reader import LexicalOverlapReader
+from selective_rag_rl.core.data import Passage
+from selective_rag_rl.core.reader import LexicalOverlapReader
 
 
 def test_lexical_overlap_reader_selects_sentence_with_question_terms() -> None:

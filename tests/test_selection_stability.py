@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.selection_stability import export_selection_stability
+from selective_rag_rl.diagnostics.selection_stability import export_selection_stability
 
 
 def test_export_selection_stability_summarizes_multiple_grids(tmp_path: Path) -> None:

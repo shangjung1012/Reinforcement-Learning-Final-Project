@@ -5,7 +5,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from selective_rag_rl.feature_reward_diagnostics import export_feature_reward_diagnostics, reward_targets_frame
+from selective_rag_rl.diagnostics.feature_reward_diagnostics import export_feature_reward_diagnostics, reward_targets_frame
 
 
 def test_reward_targets_frame_computes_oracle_and_retriever_advantages() -> None:

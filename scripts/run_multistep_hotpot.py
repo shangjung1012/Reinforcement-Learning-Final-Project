@@ -10,14 +10,14 @@ import numpy as np
 import pandas as pd
 from tqdm import tqdm
 
-from selective_rag_rl.bandit import state_features
-from selective_rag_rl.data import QAExample, load_hotpotqa, split_examples
-from selective_rag_rl.fqi import KnnQ, RidgeQ
-from selective_rag_rl.metrics import mrr, ndcg_at_k, recall_at_k
-from selective_rag_rl.policy_io import save_checkpoint
-from selective_rag_rl.retriever import BM25Retriever, RetrievalResult
-from selective_rag_rl.rewrites import RewriteOutput, rewrite
-from selective_rag_rl.text import content_tokens, unique_preserve_order
+from selective_rag_rl.policies.bandit import state_features
+from selective_rag_rl.core.data import QAExample, load_hotpotqa, split_examples
+from selective_rag_rl.policies.fqi import KnnQ, RidgeQ
+from selective_rag_rl.core.metrics import mrr, ndcg_at_k, recall_at_k
+from selective_rag_rl.core.policy_io import save_checkpoint
+from selective_rag_rl.core.retriever import BM25Retriever, RetrievalResult
+from selective_rag_rl.core.rewrites import RewriteOutput, rewrite
+from selective_rag_rl.core.text import content_tokens, unique_preserve_order
 
 REWRITE_ACTIONS = ["keyword_compress", "entity_expand", "decompose", "feedback_expand", "title_bridge"]
 ACTIONS = ["stop", *REWRITE_ACTIONS]

@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.validation_guardrail import (
+from selective_rag_rl.policies.validation_guardrail import (
     aggregate_guardrail_rows,
     evaluate_summary_frame,
     recommend_guardrail,

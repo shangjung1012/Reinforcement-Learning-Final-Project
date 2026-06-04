@@ -4,8 +4,8 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.artifact_index import final_project_artifact_specs
-from selective_rag_rl.final_claims import CLAIM_COLUMNS, export_final_claims_matrix
+from selective_rag_rl.reports.artifact_index import final_project_artifact_specs
+from selective_rag_rl.reports.final_claims import CLAIM_COLUMNS, export_final_claims_matrix
 
 
 def test_export_final_claims_matrix_derives_key_policy_deltas(tmp_path: Path) -> None:

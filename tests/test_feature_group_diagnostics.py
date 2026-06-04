@@ -5,7 +5,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from selective_rag_rl.feature_group_diagnostics import export_feature_group_diagnostics, feature_group_slices
+from selective_rag_rl.diagnostics.feature_group_diagnostics import export_feature_group_diagnostics, feature_group_slices
 
 
 def test_feature_group_slices_detects_base_and_contrast_groups() -> None:

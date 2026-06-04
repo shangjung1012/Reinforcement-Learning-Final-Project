@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.api_preflight import run_api_preflight
+from selective_rag_rl.preflight.api_preflight import run_api_preflight
 
 
 def main() -> None:

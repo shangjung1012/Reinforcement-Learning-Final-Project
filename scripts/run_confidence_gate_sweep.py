@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.confidence_gate_sweep import export_confidence_gate_sweep
+from selective_rag_rl.diagnostics.confidence_gate_sweep import export_confidence_gate_sweep
 
 
 def main() -> None:

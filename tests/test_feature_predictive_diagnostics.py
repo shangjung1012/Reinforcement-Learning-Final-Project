@@ -5,7 +5,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from selective_rag_rl.feature_predictive_diagnostics import (
+from selective_rag_rl.diagnostics.feature_predictive_diagnostics import (
     export_feature_reward_predictive_diagnostics,
     feature_reward_predictive_diagnostics_frame,
 )

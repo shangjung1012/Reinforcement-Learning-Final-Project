@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.repeated_main_robustness import export_repeated_main_robustness
+from selective_rag_rl.experiments.repeated_main_robustness import export_repeated_main_robustness
 
 
 def test_export_repeated_main_robustness_summarizes_seed_deltas(tmp_path: Path) -> None:

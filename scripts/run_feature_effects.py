@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.feature_effects import export_feature_effects
+from selective_rag_rl.diagnostics.feature_effects import export_feature_effects
 
 
 def main() -> None:

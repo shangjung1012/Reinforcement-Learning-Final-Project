@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.markdown_consistency import export_markdown_consistency
+from selective_rag_rl.reports.markdown_consistency import export_markdown_consistency
 
 
 def main() -> None:

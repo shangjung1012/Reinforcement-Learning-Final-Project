@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.budget_curve import export_budget_curve
+from selective_rag_rl.diagnostics.budget_curve import export_budget_curve
 
 
 def main() -> None:

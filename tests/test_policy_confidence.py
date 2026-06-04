@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import numpy as np
 
-from selective_rag_rl.bandit import DirectMethodBandit, KnnDirectMethodBandit, SklearnRegressorBandit
-from selective_rag_rl.policy_confidence import confidence_gated_action, prediction_margin
+from selective_rag_rl.policies.bandit import DirectMethodBandit, KnnDirectMethodBandit, SklearnRegressorBandit
+from selective_rag_rl.policies.policy_confidence import confidence_gated_action, prediction_margin
 
 
 def test_direct_method_bandit_exposes_predicted_action_scores() -> None:

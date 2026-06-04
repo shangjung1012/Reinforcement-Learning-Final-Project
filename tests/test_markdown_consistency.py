@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.markdown_consistency import CONSISTENCY_COLUMNS, export_markdown_consistency
+from selective_rag_rl.reports.markdown_consistency import CONSISTENCY_COLUMNS, export_markdown_consistency
 
 
 def test_export_markdown_consistency_checks_claim_values_and_artifact_paths(tmp_path: Path) -> None:

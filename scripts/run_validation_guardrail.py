@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.validation_guardrail import (
+from selective_rag_rl.policies.validation_guardrail import (
     DEFAULT_CANDIDATE_METHOD,
     DEFAULT_TRAIN_BEST_METHOD,
     run_validation_guardrail,

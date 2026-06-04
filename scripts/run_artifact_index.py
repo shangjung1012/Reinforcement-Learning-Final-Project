@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.artifact_index import export_artifact_index, final_project_artifact_specs
+from selective_rag_rl.reports.artifact_index import export_artifact_index, final_project_artifact_specs
 
 
 def main() -> None:

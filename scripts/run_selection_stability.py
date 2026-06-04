@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.selection_stability import export_selection_stability
+from selective_rag_rl.diagnostics.selection_stability import export_selection_stability
 
 
 def main() -> None:

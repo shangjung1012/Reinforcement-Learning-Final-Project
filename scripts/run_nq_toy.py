@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.nq_experiment import run_nq_experiment
+from selective_rag_rl.experiments.nq_experiment import run_nq_experiment
 
 
 def main() -> None:

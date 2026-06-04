@@ -7,7 +7,7 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from selective_rag_rl.vertex_embeddings import VertexEmbeddingBudgetError, VertexTextEmbeddingProvider
+from selective_rag_rl.integrations.vertex_embeddings import VertexEmbeddingBudgetError, VertexTextEmbeddingProvider
 
 
 def test_vertex_provider_returns_cached_embedding_without_live_client(tmp_path: Path) -> None:

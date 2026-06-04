@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.gemini_baseline import evaluate_gemini_rewrites
+from selective_rag_rl.experiments.gemini_baseline import evaluate_gemini_rewrites
 
 
 def main() -> None:

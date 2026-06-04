@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.api_preflight import run_api_preflight
+from selective_rag_rl.preflight.api_preflight import run_api_preflight
 
 
 def test_api_preflight_dry_run_never_calls_providers_and_hides_values(tmp_path: Path, monkeypatch) -> None:

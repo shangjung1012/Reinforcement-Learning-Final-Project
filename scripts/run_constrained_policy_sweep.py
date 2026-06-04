@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.constrained_policy import export_constrained_policy_sweep
+from selective_rag_rl.policies.constrained_policy import export_constrained_policy_sweep
 
 
 def main() -> None:

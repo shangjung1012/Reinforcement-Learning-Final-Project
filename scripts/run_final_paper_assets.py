@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.final_paper_assets import export_final_paper_assets
+from selective_rag_rl.reports.final_paper_assets import export_final_paper_assets
 
 
 def main() -> None:

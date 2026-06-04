@@ -5,7 +5,7 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
-from selective_rag_rl.confidence_gate_sweep import export_confidence_gate_sweep
+from selective_rag_rl.diagnostics.confidence_gate_sweep import export_confidence_gate_sweep
 
 
 def test_export_confidence_gate_sweep_recomputes_metrics_from_predicted_margins(tmp_path: Path) -> None:

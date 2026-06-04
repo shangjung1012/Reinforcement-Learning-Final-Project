@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.cost_frontier import run_cost_frontier_summary
+from selective_rag_rl.diagnostics.cost_frontier import run_cost_frontier_summary
 
 
 def main() -> None:

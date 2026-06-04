@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.policy_diagnostics import export_policy_diagnostics
+from selective_rag_rl.diagnostics.policy_diagnostics import export_policy_diagnostics
 
 
 def main() -> None:

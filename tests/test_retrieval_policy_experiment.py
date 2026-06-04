@@ -7,16 +7,16 @@ import numpy as np
 import pandas as pd
 import pytest
 
-import selective_rag_rl.retrieval_policy_experiment as rpe
-from selective_rag_rl.data import Passage, QAExample, load_hotpotqa
-from selective_rag_rl.dense_experiment import FakeDenseEmbedder
-from selective_rag_rl.feature_ablation import run_feature_ablation
-from selective_rag_rl.gemini_baseline import GeminiCache
-from selective_rag_rl.learning_curve import run_policy_learning_curve
-from selective_rag_rl.policy_model_sweep import run_policy_model_sweep
-from selective_rag_rl.policy_io import load_checkpoint
-from selective_rag_rl.qualitative import export_qualitative_examples
-from selective_rag_rl.retrieval_policy_experiment import (
+import selective_rag_rl.experiments.retrieval_policy_experiment as rpe
+from selective_rag_rl.core.data import Passage, QAExample, load_hotpotqa
+from selective_rag_rl.experiments.dense_experiment import FakeDenseEmbedder
+from selective_rag_rl.experiments.feature_ablation import run_feature_ablation
+from selective_rag_rl.experiments.gemini_baseline import GeminiCache
+from selective_rag_rl.experiments.learning_curve import run_policy_learning_curve
+from selective_rag_rl.experiments.policy_model_sweep import run_policy_model_sweep
+from selective_rag_rl.core.policy_io import load_checkpoint
+from selective_rag_rl.diagnostics.qualitative import export_qualitative_examples
+from selective_rag_rl.experiments.retrieval_policy_experiment import (
     _retrieval_contrast_features,
     _semantic_state_features,
     evaluate_retrieval_actions,
@@ -30,7 +30,7 @@ from selective_rag_rl.retrieval_policy_experiment import (
     select_policy_model,
     transform_policy_features,
 )
-from selective_rag_rl.retriever import RetrievalResult
+from selective_rag_rl.core.retriever import RetrievalResult
 
 
 def test_run_retrieval_policy_experiment_writes_summary_and_checkpoint(tmp_path: Path) -> None:

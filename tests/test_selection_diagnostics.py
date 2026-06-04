@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.selection_diagnostics import export_selection_diagnostics
+from selective_rag_rl.diagnostics.selection_diagnostics import export_selection_diagnostics
 
 
 def test_export_selection_diagnostics_writes_validation_and_heldout_gap(tmp_path: Path) -> None:

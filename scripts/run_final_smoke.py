@@ -8,8 +8,8 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.off_policy_evaluation import export_ope_diagnostics
-from selective_rag_rl.retrieval_policy_experiment import run_retrieval_policy_experiment
+from selective_rag_rl.policies.off_policy_evaluation import export_ope_diagnostics
+from selective_rag_rl.experiments.retrieval_policy_experiment import run_retrieval_policy_experiment
 
 PYTEST_TARGETS = [
     "tests/test_core.py",

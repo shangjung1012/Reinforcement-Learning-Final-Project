@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.off_policy_evaluation import DEFAULT_TARGET_METHODS, export_ope_diagnostics
+from selective_rag_rl.policies.off_policy_evaluation import DEFAULT_TARGET_METHODS, export_ope_diagnostics
 
 
 def main() -> None:

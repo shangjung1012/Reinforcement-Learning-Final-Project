@@ -6,8 +6,8 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.data import Passage, QAExample
-from selective_rag_rl.embedding_preflight import (
+from selective_rag_rl.core.data import Passage, QAExample
+from selective_rag_rl.preflight.embedding_preflight import (
     estimate_combined_embedding_workload,
     estimate_embedding_workload,
     estimate_repeated_split_embedding_workloads,

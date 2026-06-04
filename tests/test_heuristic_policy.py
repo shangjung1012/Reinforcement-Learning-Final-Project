@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from selective_rag_rl.heuristic_policy import heuristic_retrieval_action
+from selective_rag_rl.policies.heuristic_policy import heuristic_retrieval_action
 
 
 def test_heuristic_retrieval_action_uses_bm25_when_initial_rank_is_confident() -> None:

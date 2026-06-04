@@ -5,12 +5,12 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.data import load_beir_dataset
-from selective_rag_rl.embedding_preflight import (
+from selective_rag_rl.core.data import load_beir_dataset
+from selective_rag_rl.preflight.embedding_preflight import (
     estimate_repeated_split_embedding_workloads,
     write_embedding_workload_report,
 )
-from selective_rag_rl.retrieval_policy_experiment import SEMANTIC_DEPTH_DEFAULT
+from selective_rag_rl.experiments.retrieval_policy_experiment import SEMANTIC_DEPTH_DEFAULT
 
 
 def main() -> None:

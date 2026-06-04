@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.qualitative import export_qualitative_examples
+from selective_rag_rl.diagnostics.qualitative import export_qualitative_examples
 
 
 def main() -> None:

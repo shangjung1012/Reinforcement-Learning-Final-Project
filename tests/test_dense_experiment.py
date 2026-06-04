@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from selective_rag_rl.dense_experiment import run_dense_hotpot_experiment
+from selective_rag_rl.experiments.dense_experiment import run_dense_hotpot_experiment
 
 
 def test_run_dense_hotpot_experiment_writes_summary(tmp_path: Path) -> None:

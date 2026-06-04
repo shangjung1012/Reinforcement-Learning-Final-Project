@@ -5,8 +5,8 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.feature_ablation import run_feature_ablation
-from selective_rag_rl.retrieval_policy_experiment import FEATURE_SET_CHOICES, SEMANTIC_DEPTH_DEFAULT
+from selective_rag_rl.experiments.feature_ablation import run_feature_ablation
+from selective_rag_rl.experiments.retrieval_policy_experiment import FEATURE_SET_CHOICES, SEMANTIC_DEPTH_DEFAULT
 
 
 def main() -> None:

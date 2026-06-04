@@ -4,8 +4,8 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.policy_diagnostics import export_policy_diagnostics
-from selective_rag_rl.statistical_diagnostics import export_paired_bootstrap_diagnostics
+from selective_rag_rl.diagnostics.policy_diagnostics import export_policy_diagnostics
+from selective_rag_rl.diagnostics.statistical_diagnostics import export_paired_bootstrap_diagnostics
 
 
 def test_export_policy_diagnostics_writes_regret_and_action_match(tmp_path: Path) -> None:

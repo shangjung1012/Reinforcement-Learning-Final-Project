@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.feature_effects import export_feature_effects
+from selective_rag_rl.diagnostics.feature_effects import export_feature_effects
 
 
 def test_export_feature_effects_compares_feature_sets_against_baseline(tmp_path: Path) -> None:

@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from selective_rag_rl.gemini_baseline import GeminiBudgetError, GeminiCache, _parse_queries, _prompt, evaluate_gemini_rewrites
+from selective_rag_rl.experiments.gemini_baseline import GeminiBudgetError, GeminiCache, _parse_queries, _prompt, evaluate_gemini_rewrites
 
 
 def test_gemini_cache_round_trip(tmp_path: Path) -> None:

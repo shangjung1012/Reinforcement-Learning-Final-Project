@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.evidence_consistency import export_evidence_consistency
+from selective_rag_rl.reports.evidence_consistency import export_evidence_consistency
 
 
 def test_export_evidence_consistency_checks_report_against_machine_artifacts(tmp_path: Path) -> None:

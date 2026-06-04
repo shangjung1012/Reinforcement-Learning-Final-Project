@@ -5,7 +5,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from selective_rag_rl.bandit_baselines import (
+from selective_rag_rl.policies.bandit_baselines import (
     EpsilonGreedyPolicy,
     LinearThompsonSamplingPolicy,
     LinUCBPolicy,

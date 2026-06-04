@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from selective_rag_rl.ablation import run_hotpot_ablation
+from selective_rag_rl.experiments.ablation import run_hotpot_ablation
 
 
 def test_run_hotpot_ablation_writes_policy_variants(tmp_path: Path) -> None:

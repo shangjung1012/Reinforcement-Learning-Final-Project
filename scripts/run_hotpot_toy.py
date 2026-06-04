@@ -3,7 +3,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from selective_rag_rl.experiment import run_experiment
+from selective_rag_rl.experiments.experiment import run_experiment
 
 
 def main() -> None:

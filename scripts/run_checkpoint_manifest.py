@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.checkpoint_manifest import (
+from selective_rag_rl.reports.checkpoint_manifest import (
     export_checkpoint_manifest,
     final_project_checkpoint_paths,
 )

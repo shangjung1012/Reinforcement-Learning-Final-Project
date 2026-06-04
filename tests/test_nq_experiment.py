@@ -5,9 +5,9 @@ from pathlib import Path
 import pyarrow
 import pyarrow.parquet as parquet
 
-from selective_rag_rl.nq_experiment import run_nq_experiment
-from selective_rag_rl.policy_io import load_checkpoint
-from selective_rag_rl.retrieval_policy_experiment import run_nq_retrieval_policy_experiment
+from selective_rag_rl.experiments.nq_experiment import run_nq_experiment
+from selective_rag_rl.core.policy_io import load_checkpoint
+from selective_rag_rl.experiments.retrieval_policy_experiment import run_nq_retrieval_policy_experiment
 
 
 def test_run_nq_experiment_writes_summary(tmp_path: Path) -> None:

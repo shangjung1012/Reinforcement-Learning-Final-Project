@@ -5,10 +5,10 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.bandit_baselines import run_beir_linucb_baseline
-from selective_rag_rl.constrained_policy import export_constrained_policy_sweep
-from selective_rag_rl.repeated_main_robustness import export_repeated_main_robustness
-from selective_rag_rl.retrieval_policy_experiment import (
+from selective_rag_rl.policies.bandit_baselines import run_beir_linucb_baseline
+from selective_rag_rl.policies.constrained_policy import export_constrained_policy_sweep
+from selective_rag_rl.experiments.repeated_main_robustness import export_repeated_main_robustness
+from selective_rag_rl.experiments.retrieval_policy_experiment import (
     FEATURE_SET_CHOICES,
     SEMANTIC_DEPTH_DEFAULT,
     run_nfcorpus_retrieval_policy_experiment,

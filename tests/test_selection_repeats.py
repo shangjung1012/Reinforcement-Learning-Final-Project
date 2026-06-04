@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.selection_repeats import run_repeated_policy_model_selection
+from selective_rag_rl.experiments.selection_repeats import run_repeated_policy_model_selection
 
 
 def test_run_repeated_policy_model_selection_writes_manifest_and_stability(tmp_path: Path) -> None:

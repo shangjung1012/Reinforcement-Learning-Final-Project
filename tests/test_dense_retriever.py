@@ -2,9 +2,9 @@ from __future__ import annotations
 
 import numpy as np
 
-from selective_rag_rl.data import Passage
-from selective_rag_rl.dense_retriever import DenseRetriever, hybrid_merge
-from selective_rag_rl.retriever import RetrievalResult
+from selective_rag_rl.core.data import Passage
+from selective_rag_rl.core.dense_retriever import DenseRetriever, hybrid_merge
+from selective_rag_rl.core.retriever import RetrievalResult
 
 
 class FakeEmbedder:

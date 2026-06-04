@@ -5,7 +5,7 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
-from selective_rag_rl.cost_frontier import build_cost_frontier, run_cost_frontier_summary
+from selective_rag_rl.diagnostics.cost_frontier import build_cost_frontier, run_cost_frontier_summary
 
 
 def test_cost_frontier_excludes_oracle_by_default() -> None:

@@ -5,7 +5,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from selective_rag_rl.off_policy_evaluation import (
+from selective_rag_rl.policies.off_policy_evaluation import (
     BehaviorPolicySpec,
     behavior_probabilities,
     estimate_off_policy_value,

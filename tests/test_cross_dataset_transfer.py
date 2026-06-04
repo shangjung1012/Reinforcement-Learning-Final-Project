@@ -5,7 +5,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from selective_rag_rl.cross_dataset_transfer import TransferInputs, run_transfer_from_evals
+from selective_rag_rl.experiments.cross_dataset_transfer import TransferInputs, run_transfer_from_evals
 
 
 def test_run_transfer_from_evals_applies_source_policy_to_target(tmp_path: Path) -> None:

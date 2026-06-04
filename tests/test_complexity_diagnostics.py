@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from selective_rag_rl.complexity_diagnostics import export_complexity_diagnostics
+from selective_rag_rl.diagnostics.complexity_diagnostics import export_complexity_diagnostics
 
 
 def test_export_complexity_diagnostics_writes_bucket_and_action_tables(tmp_path: Path) -> None:
