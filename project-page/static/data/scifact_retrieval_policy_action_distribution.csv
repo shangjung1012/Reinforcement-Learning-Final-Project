@@ -1,0 +1,13 @@
+split,action,count,proportion
+test,bm25_keep,53,0.17666666666666667
+test,bm25_keyword,54,0.18
+test,dense_keep,60,0.2
+test,dense_keyword,9,0.03
+test,hybrid_keep,40,0.13333333333333333
+test,hybrid_keyword,84,0.28
+train,bm25_keep,82,0.13666666666666666
+train,bm25_keyword,138,0.23
+train,dense_keep,139,0.23166666666666666
+train,dense_keyword,19,0.03166666666666667
+train,hybrid_keep,62,0.10333333333333333
+train,hybrid_keyword,160,0.26666666666666666

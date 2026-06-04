@@ -1,6 +1,35 @@
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.1\textwidth]{images/portfolio.png}
-    \caption*{Scan this QR code}
-    \label{fig:figure3}
-\end{figure}
+\begin{center}
+\begin{tikzpicture}[x=0.15cm, y=1.0cm, font=\small]
+  \node[anchor=east, font=\bfseries] at (18,4.50) {SciFact};
+  \draw[fill=gray!45, draw=gray!70] (20,4.25) rectangle (55.7,4.75);
+  \draw[fill=blue!45, draw=blue!70!black] (55.7,4.25) rectangle (78.7,4.75);
+  \draw[fill=green!45, draw=green!50!black] (78.7,4.25) rectangle (120,4.75);
+  \node[font=\scriptsize] at (37.8,4.50) {35.7\%};
+  \node[font=\scriptsize] at (67.2,4.50) {23.0\%};
+  \node[font=\scriptsize] at (99.4,4.50) {41.3\%};
+
+  \node[anchor=east, font=\bfseries] at (18,3.35) {NFCorpus};
+  \draw[fill=gray!45, draw=gray!70] (20,3.10) rectangle (64.7,3.60);
+  \draw[fill=blue!45, draw=blue!70!black] (64.7,3.10) rectangle (120,3.60);
+  \node[font=\scriptsize] at (42.4,3.35) {44.7\%};
+  \node[font=\scriptsize] at (92.4,3.35) {55.3\%};
+
+  \node[anchor=east, font=\bfseries] at (18,2.10) {Rewrite};
+  \draw[fill=orange!35, draw=orange!70!black] (20,1.90) rectangle (69,2.25);
+  \node[anchor=west, font=\scriptsize] at (71,2.08) {SciFact 49.0\%};
+  \draw[fill=orange!20, draw=orange!70!black] (20,1.35) rectangle (51.3,1.70);
+  \node[anchor=west, font=\scriptsize] at (53.3,1.53) {NFCorpus 31.3\%};
+
+  \draw[black!35] (20,0.85) -- (120,0.85);
+  \foreach \x/\lab in {20/0,45/25,70/50,95/75,120/100} {
+    \draw[black!35] (\x,0.78) -- (\x,0.92);
+    \node[anchor=north, font=\tiny] at (\x,0.75) {\lab\%};
+  }
+
+\end{tikzpicture}
+
+{\small Evidence: \texttt{outputs/results/*\_retrieval\_policy\_action\_distribution.csv}.}
+
+\vspace{-0.2em}
+{\small SciFact uses hybrid/rewrite often; NFCorpus stays one-call with BM25 or dense retrieval.}
+\end{center}

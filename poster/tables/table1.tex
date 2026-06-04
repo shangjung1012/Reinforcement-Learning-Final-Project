@@ -1,15 +1,23 @@
 \begin{table}
-    \caption{Caption for table 1}
-      \centering
-      \begin{tabular}{c c c c }
-        \toprule
-        \textbf{Col 1} & \textbf{Col 2} & \textbf{Col 3} & \textbf{Col 4}\\
-        \midrule
-        A & 22 & 73 & 1.20\\
-        B & 33.72 & 67 & 33.33\\
-        C & 55.21 & 32 & 5.32\\
-        {\color{blue}D} & 20 & 96.90 & {\color{blue}35.53}\\
-        \bottomrule
-      \end{tabular}
-      \label{tab:table1}
+  \centering
+  \caption{Full-corpus BEIR evidence from \texttt{outputs/results/final\_main\_results\_table.csv}. Reward rows use the train-best reward baseline. Constrained rows report utility value and delta vs the train-best utility baseline at $\lambda=0.03$: SciFact 1.0420, NFCorpus 0.3772.}
+  \begin{adjustbox}{max width=\textwidth}
+  \begin{tabular}{l l l r l r}
+    \toprule
+    \textbf{Dataset} & \textbf{Method} & \textbf{Obj.} & \textbf{Value} & \textbf{$\Delta$ basis / 95\% CI} & \textbf{Calls} \\
+    \midrule
+    SciFact & Train-best fixed & reward & 1.0568 & 0.0000 vs reward base & 2.000 \\
+    SciFact & Selected-action bandit & reward & 1.0621 & +0.0054 vs reward base & 1.033 \\
+    SciFact & \textbf{Selective policy} & reward & \textbf{1.0905} & \textbf{+0.0337 vs reward base [0.0089, 0.0583]} & 1.413 \\
+    SciFact & Constrained $\lambda=0.03$ & utility & 1.0894 & +0.0474 vs utility 1.0420 [0.0143, 0.0822] & 1.273 \\
+    SciFact & Oracle action & reward & 1.2062 & +0.1495 vs reward base & 1.007 \\
+    \midrule
+    NFCorpus & Train-best fixed & reward & 0.3772 & 0.0000 vs reward base & 1.000 \\
+    NFCorpus & Selected-action bandit & reward & 0.4040 & +0.0269 vs reward base & 1.137 \\
+    NFCorpus & \textbf{Selective policy} & reward & \textbf{0.4071} & \textbf{+0.0299 vs reward base [0.0054, 0.0548]} & 1.000 \\
+    NFCorpus & Constrained $\lambda=0.03$ & utility & 0.4098 & +0.0327 vs utility 0.3772 [0.0106, 0.0584] & 1.000 \\
+    NFCorpus & Oracle action & reward & 0.4641 & +0.0870 vs reward base & 1.020 \\
+    \bottomrule
+  \end{tabular}
+  \end{adjustbox}
 \end{table}

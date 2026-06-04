@@ -1,0 +1,10 @@
+analysis,dataset,fallback_rate,gated_delta_vs_selective,gated_delta_vs_train_best,n_queries,policy_reward,retrieval_calls,reward_delta_vs_heuristic,reward_delta_vs_train_best,slice,utility_delta_vs_train_best
+difficulty_bucket,scifact,,,,144,,1.4930555555555556,0.09796296296296303,0.04877314814814815,action_reward_std:high,
+difficulty_bucket,scifact,,,,100,,1.39,0.0908500000000001,0.05396666666666672,state_bm25_gap:low,
+difficulty_bucket,nfcorpus,,,,100,,1.0,0.04856900421911792,0.09632316541671071,action_reward_std:high,
+difficulty_bucket,nfcorpus,,,,100,,1.0,0.013998931790748737,0.05879504179085654,state_bm25_gap:high,
+constrained_sweep,scifact,,,,300,1.0975777777777778,1.2733333333333334,,,lambda=0.03,0.04735
+constrained_sweep,scifact,,,,300,1.0840444444444446,1.0466666666666666,,,lambda=0.06,0.03921666666666668
+constrained_sweep,nfcorpus,,,,300,0.4098092383244063,1.0,,,lambda=0.03,0.03265645661425909
+confidence_gate,scifact,0.07,0.000566666667,0.034277777778,300,,1.45,,,margin=0.001,
+confidence_gate,nfcorpus,0.0,0.0,0.029941814166,300,,1.0,,,margin=0.0,
