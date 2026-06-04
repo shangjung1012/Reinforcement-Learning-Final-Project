@@ -1747,7 +1747,10 @@ def _semantic_rank_agreement(similarities: np.ndarray, k: int) -> list[float]:
     top_bm25_semantic_rank = int(semantic_ranks[0])
     bm25_scores = pd.Series(np.arange(len(values), 0, -1, dtype=float))
     semantic_scores = pd.Series(values)
-    spearman = bm25_scores.corr(semantic_scores, method="spearman")
+    if len(values) < 2 or np.allclose(values, values[0]):
+        spearman = 0.0
+    else:
+        spearman = bm25_scores.corr(semantic_scores, method="spearman")
     if pd.isna(spearman):
         spearman = 0.0
 

@@ -1,0 +1,58 @@
+artifact_id,artifact_path,dataset,experiment_type,evidence_level,exists,uses_raw_data,uses_external_api,uses_model_download,num_train_examples,num_test_examples,seed,policy_model,feature_set,claim_allowed,supports_final_claim,notes
+final_report,FINAL_REPORT.md,unknown,document,final_claim,True,False,False,False,,,,,,True,False,"final report, figure, or claim artifact"
+readme,README.md,unknown,document,final_claim,True,False,False,False,,,,,,True,False,"final report, figure, or claim artifact"
+final_presentation_outline,FINAL_PRESENTATION_OUTLINE.md,unknown,document,final_claim,True,False,False,False,,,,,,True,False,"final report, figure, or claim artifact"
+final_slides_markdown,FINAL_SLIDES.md,unknown,document,final_claim,True,False,False,False,,,,,,True,False,"final report, figure, or claim artifact"
+final_defense_qa,FINAL_DEFENSE_QA.md,unknown,document,final_claim,True,False,False,False,,,,,,True,False,"final report, figure, or claim artifact"
+final_results_summary,FINAL_RESULTS_SUMMARY.md,unknown,document,final_claim,True,False,False,False,,,,,,True,False,"final report, figure, or claim artifact"
+hotpot_retrieval_policy_summary,outputs/results/retrieval_policy_summary.csv,hotpot,main_result,tiny_realdata,True,True,False,False,,,42,,,False,False,small or non-final real-data run
+hotpot_llm_policy_summary,outputs/results/llm_retrieval_policy_summary.csv,hotpot,main_result,api_pilot,True,True,True,False,,,42,auto,,False,False,API-backed pilot or semantic analysis only
+scifact_policy_summary,outputs/results/scifact_retrieval_policy_summary.csv,scifact,main_result,full_benchmark,True,True,False,False,600,300,42,auto,,True,False,final retrieval-stage benchmark evidence
+nfcorpus_policy_summary,outputs/results/nfcorpus_retrieval_policy_summary.csv,nfcorpus,main_result,full_benchmark,True,True,False,False,600,300,42,auto,,True,False,final retrieval-stage benchmark evidence
+scifact_linucb_baseline_summary,outputs/results/scifact_linucb_baseline_summary.csv,scifact,bandit_baseline,full_benchmark,True,True,False,False,600,300,42,,,True,True,final retrieval-stage benchmark evidence
+scifact_linucb_baseline_history,outputs/results/scifact_linucb_baseline_history.csv,scifact,bandit_diagnostic,full_benchmark,True,True,False,False,600,300,42,,,True,False,final retrieval-stage benchmark evidence
+nfcorpus_linucb_baseline_summary,outputs/results/nfcorpus_linucb_baseline_summary.csv,nfcorpus,bandit_baseline,full_benchmark,True,True,False,False,600,300,42,,,True,True,final retrieval-stage benchmark evidence
+nfcorpus_linucb_baseline_history,outputs/results/nfcorpus_linucb_baseline_history.csv,nfcorpus,bandit_diagnostic,full_benchmark,True,True,False,False,600,300,42,,,True,False,final retrieval-stage benchmark evidence
+scifact_budget_curve,outputs/results/scifact_budget_curve.csv,scifact,budget_curve,tiny_realdata,True,True,False,False,,,,,,False,False,small or non-final real-data run
+nfcorpus_budget_curve,outputs/results/nfcorpus_budget_curve.csv,nfcorpus,budget_curve,tiny_realdata,True,True,False,False,,,,,,False,False,small or non-final real-data run
+scifact_ope_diagnostics,outputs/results/scifact_ope_diagnostics.csv,scifact,off_policy_evaluation,tiny_realdata,True,True,False,False,,,42,,,False,False,small or non-final real-data run
+nfcorpus_ope_diagnostics,outputs/results/nfcorpus_ope_diagnostics.csv,nfcorpus,off_policy_evaluation,tiny_realdata,True,True,False,False,,,42,,,False,False,small or non-final real-data run
+scifact_ope_stability,outputs/results/scifact_ope_stability.csv,scifact,off_policy_evaluation,full_benchmark,True,True,False,False,,,,,,True,True,final retrieval-stage benchmark evidence
+nfcorpus_ope_stability,outputs/results/nfcorpus_ope_stability.csv,nfcorpus,off_policy_evaluation,full_benchmark,True,True,False,False,,,,,,True,True,final retrieval-stage benchmark evidence
+scifact_constrained_policy_sweep,outputs/results/scifact_constrained_policy_sweep.csv,scifact,constrained_bandit,tiny_realdata,True,True,False,False,,,,,,False,False,small or non-final real-data run
+nfcorpus_constrained_policy_sweep,outputs/results/nfcorpus_constrained_policy_sweep.csv,nfcorpus,constrained_bandit,tiny_realdata,True,True,False,False,,,,,,False,False,small or non-final real-data run
+scifact_constrained_policy_bootstrap,outputs/results/scifact_constrained_policy_bootstrap.csv,scifact,constrained_bandit,full_benchmark,True,True,False,False,,,42,,,True,True,final retrieval-stage benchmark evidence
+nfcorpus_constrained_policy_bootstrap,outputs/results/nfcorpus_constrained_policy_bootstrap.csv,nfcorpus,constrained_bandit,full_benchmark,True,True,False,False,,,42,,,True,True,final retrieval-stage benchmark evidence
+scifact_policy_diagnostics,outputs/results/scifact_policy_diagnostics.csv,scifact,diagnostic,tiny_realdata,True,True,False,False,,,,,,False,False,small or non-final real-data run
+nfcorpus_policy_diagnostics,outputs/results/nfcorpus_policy_diagnostics.csv,nfcorpus,diagnostic,tiny_realdata,True,True,False,False,,,,,,False,False,small or non-final real-data run
+scifact_bootstrap,outputs/results/scifact_bootstrap_diagnostics.csv,scifact,statistical_check,full_benchmark,True,True,False,False,,,,,,True,True,final retrieval-stage benchmark evidence
+nfcorpus_bootstrap,outputs/results/nfcorpus_bootstrap_diagnostics.csv,nfcorpus,statistical_check,full_benchmark,True,True,False,False,,,,,,True,True,final retrieval-stage benchmark evidence
+nfcorpus_learning_curve,outputs/results/nfcorpus_policy_learning_curve.csv,nfcorpus,diagnostic,full_benchmark,True,True,False,False,,150,42,auto,,True,False,final retrieval-stage benchmark evidence
+scifact_complexity_buckets,outputs/results/scifact_complexity_buckets.csv,scifact,diagnostic,full_benchmark,True,True,False,False,,,,,,True,False,final retrieval-stage benchmark evidence
+nfcorpus_complexity_buckets,outputs/results/nfcorpus_complexity_buckets.csv,nfcorpus,diagnostic,full_benchmark,True,True,False,False,,,,,,True,False,final retrieval-stage benchmark evidence
+cross_dataset_transfer_summary,outputs/results/cross_dataset_transfer_summary.csv,multiple,transfer_check,full_benchmark,True,False,False,False,600,300,42,,,True,False,final retrieval-stage benchmark evidence
+nfcorpus_confidence_gate_smoke,outputs/confidence_gate_smoke/results/nfcorpus_retrieval_policy_summary.csv,nfcorpus,diagnostic,smoke_synthetic,True,False,False,False,12,8,,ridge,,False,False,"code-path smoke only, not benchmark evidence"
+nfcorpus_confidence_gate_sweep,outputs/results/nfcorpus_confidence_gate_smoke_sweep.csv,nfcorpus,diagnostic,smoke_synthetic,True,False,False,False,,,,,,False,False,"code-path smoke only, not benchmark evidence"
+nfcorpus_main_confidence_gate_sweep,outputs/results/nfcorpus_confidence_gate_sweep.csv,nfcorpus,diagnostic,full_benchmark,True,True,False,False,,,,,,True,False,final retrieval-stage benchmark evidence
+scifact_main_confidence_gate_sweep,outputs/results/scifact_confidence_gate_sweep.csv,scifact,diagnostic,full_benchmark,True,True,False,False,,,,,,True,False,final retrieval-stage benchmark evidence
+final_checkpoint_manifest,outputs/results/final_checkpoint_manifest.csv,unknown,checkpoint_manifest,final_claim,True,False,False,False,,,,,,True,False,"final report, figure, or claim artifact"
+final_evidence_consistency,outputs/results/final_evidence_consistency.csv,unknown,consistency_check,final_claim,True,False,False,False,,,,,,True,False,"final report, figure, or claim artifact"
+final_markdown_consistency,outputs/results/final_markdown_consistency.csv,unknown,consistency_check,final_claim,True,False,False,False,,,,,,True,False,"final report, figure, or claim artifact"
+final_claims_matrix,outputs/results/final_claims_matrix.csv,unknown,defense_artifact,final_claim,True,False,False,False,,,,,,True,False,"final report, figure, or claim artifact"
+experiment_dashboard,outputs/results/experiment_dashboard.csv,unknown,evidence_dashboard,smoke_synthetic,True,False,False,False,,,,,,False,False,"code-path smoke only, not benchmark evidence"
+experiment_dashboard_markdown,docs/EXPERIMENT_DASHBOARD.md,unknown,document,final_claim,True,False,False,False,,,,,,True,False,"final report, figure, or claim artifact"
+poster_claim_audit,docs/POSTER_CLAIM_AUDIT.md,unknown,document,final_claim,True,False,False,False,,,,,,True,False,"final report, figure, or claim artifact"
+final_main_results_table,outputs/results/final_main_results_table.csv,multiple,paper_asset,final_claim,True,False,False,False,,,,,,True,False,"final report, figure, or claim artifact"
+final_main_results_latex,outputs/results/final_main_results_table.tex,unknown,paper_asset,final_claim,True,False,False,False,,,,,,True,False,"final report, figure, or claim artifact"
+final_reward_delta_ci_figure,outputs/figures/final_reward_delta_ci.png,unknown,paper_asset,final_claim,True,False,False,False,,,,,,True,False,"final report, figure, or claim artifact"
+final_cost_reward_frontier_figure,outputs/figures/final_cost_reward_frontier.png,unknown,paper_asset,final_claim,True,False,False,False,,,,,,True,False,"final report, figure, or claim artifact"
+final_ope_estimator_error_figure,outputs/figures/final_ope_estimator_error.png,unknown,paper_asset,final_claim,True,False,False,False,,,,,,True,False,"final report, figure, or claim artifact"
+final_linucb_comparison_figure,outputs/figures/final_linucb_comparison.png,unknown,paper_asset,final_claim,True,False,False,False,,,,,,True,False,"final report, figure, or claim artifact"
+nfcorpus_vertex_repeated_selection_diagnostics,outputs/results/nfcorpus_vertex_repeated_selection_30x30x3_diagnostics.csv,nfcorpus,selection_check,api_pilot,True,True,True,False,30,30,,"ridge,auto","full,no_semantic",False,False,API-backed pilot or semantic analysis only
+nfcorpus_vertex_repeated_semantic_depth_diagnostics,outputs/results/nfcorpus_vertex_repeated_semantic_depth_30x30x3_selection_diagnostics.csv,nfcorpus,selection_check,api_pilot,True,True,True,False,30,30,,"ridge,auto","full,no_semantic",False,False,API-backed pilot or semantic analysis only
+nfcorpus_vertex_repeated_semantic_depth_stability,outputs/results/nfcorpus_vertex_repeated_semantic_depth_30x30x3_stability.csv,nfcorpus,selection_check,api_pilot,True,True,True,False,30,30,,"ridge,auto","full,no_semantic",False,False,API-backed pilot or semantic analysis only
+nfcorpus_vertex_repeated_semantic_depth_selection_stability,outputs/results/nfcorpus_vertex_repeated_semantic_depth_30x30x3_selection_stability.csv,nfcorpus,selection_check,api_pilot,True,True,True,False,30,30,,"ridge,auto","full,no_semantic",False,False,API-backed pilot or semantic analysis only
+nfcorpus_vertex_protocol_summary,outputs/results/nfcorpus_vertex_selection_protocol_summary.csv,nfcorpus,decision_record,api_pilot,True,True,True,False,,,,,,False,False,API-backed pilot or semantic analysis only
+nfcorpus_vertex_deployment_decision,outputs/results/nfcorpus_vertex_deployment_decision.csv,nfcorpus,decision_record,api_pilot,True,True,True,False,,,,,,False,False,API-backed pilot or semantic analysis only
+nfcorpus_policy_checkpoint,outputs/checkpoints/nfcorpus_retrieval_policy.pkl,nfcorpus,checkpoint,full_benchmark,True,True,False,False,600,300,42,auto,,True,False,final retrieval-stage benchmark evidence
+scifact_policy_checkpoint,outputs/checkpoints/scifact_retrieval_policy.pkl,scifact,checkpoint,full_benchmark,True,True,False,False,600,300,42,auto,,True,False,final retrieval-stage benchmark evidence

@@ -55,6 +55,19 @@ uv run pytest -q
 The default tests are intended to be raw-data-free. Full-data experiments are
 covered by separate scripts and require the datasets below.
 
+## Evidence Dashboard
+
+After generating or updating result artifacts, run the evidence dashboard to
+separate final benchmark evidence from smoke checks and API pilots:
+
+```bash
+uv run python scripts/run_experiment_dashboard.py --output-csv outputs/results/experiment_dashboard.csv --output-md docs/EXPERIMENT_DASHBOARD.md
+```
+
+Use `claim_allowed=false` rows as analysis-only or engineering checks. In
+particular, smoke runs, toy reader checks, and Vertex/Gemini pilot artifacts
+should not be promoted to final claims without stronger real-data evidence.
+
 ## Full-Data Reproduction
 
 Raw datasets should be placed under this layout:

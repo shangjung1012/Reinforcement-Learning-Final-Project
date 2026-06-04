@@ -213,6 +213,22 @@ def test_final_project_artifact_specs_include_final_claims_matrix() -> None:
     assert "run_final_claims_matrix.py" in claims.producer_command
 
 
+def test_final_project_artifact_specs_include_experiment_dashboard_and_poster_audit() -> None:
+    specs = {spec.artifact_id: spec for spec in final_project_artifact_specs(Path("."))}
+
+    dashboard = specs["experiment_dashboard"]
+    poster_audit = specs["poster_claim_audit"]
+
+    assert dashboard.category == "evidence_dashboard"
+    assert dashboard.path.as_posix() == "outputs/results/experiment_dashboard.csv"
+    assert "evidence level" in dashboard.role
+    assert "run_experiment_dashboard.py" in dashboard.producer_command
+
+    assert poster_audit.category == "document"
+    assert poster_audit.path.as_posix() == "docs/POSTER_CLAIM_AUDIT.md"
+    assert "poster" in poster_audit.role.lower()
+
+
 def test_final_project_artifact_specs_include_presentation_outline() -> None:
     specs = {spec.artifact_id: spec for spec in final_project_artifact_specs(Path("."))}
 

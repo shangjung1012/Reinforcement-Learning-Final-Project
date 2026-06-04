@@ -341,6 +341,27 @@ def final_project_artifact_specs(root: Path | None = None) -> list[ArtifactSpec]
             "uv run python scripts/run_final_claims_matrix.py --output-csv outputs/results/final_claims_matrix.csv",
         ),
         artifact(
+            "experiment_dashboard",
+            "evidence_dashboard",
+            "outputs/results/experiment_dashboard.csv",
+            "Machine-readable evidence level dashboard separating final claims, full benchmarks, smoke checks, and API pilots.",
+            "uv run python scripts/run_experiment_dashboard.py --output-csv outputs/results/experiment_dashboard.csv --output-md docs/EXPERIMENT_DASHBOARD.md",
+        ),
+        artifact(
+            "experiment_dashboard_markdown",
+            "document",
+            "docs/EXPERIMENT_DASHBOARD.md",
+            "Human-readable evidence level dashboard for avoiding smoke/API-pilot overclaiming.",
+            "uv run python scripts/run_experiment_dashboard.py --output-csv outputs/results/experiment_dashboard.csv --output-md docs/EXPERIMENT_DASHBOARD.md",
+        ),
+        artifact(
+            "poster_claim_audit",
+            "document",
+            "docs/POSTER_CLAIM_AUDIT.md",
+            "Poster claim-boundary audit against the final retrieval-stage evidence and known limitations.",
+            "manual claim-boundary audit against poster/poster.tex and outputs/results/final_claims_matrix.csv",
+        ),
+        artifact(
             "final_main_results_table",
             "paper_asset",
             "outputs/results/final_main_results_table.csv",
