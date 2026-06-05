@@ -48,6 +48,17 @@ def test_experiment_dashboard_separates_final_benchmark_from_smoke_and_api_pilot
             ),
         ),
         ArtifactSpec(
+            artifact_id="nfcorpus_vertex_fake_embedder_tiny_pilot",
+            category="selection_check",
+            path=Path("outputs/results/nfcorpus_vertex_repeated_10x10_stability.csv"),
+            role="Tiny Vertex semantic pilot using a fake dense retriever embedder.",
+            producer_command=(
+                "uv run python scripts/run_repeated_selection.py --dataset nfcorpus "
+                "--seeds 41,42,43 --num-train-examples 10 --num-test-examples 10 "
+                "--embedder fake --semantic-features vertex --semantic-allow-api"
+            ),
+        ),
+        ArtifactSpec(
             artifact_id="scifact_bootstrap",
             category="statistical_check",
             path=Path("outputs/results/scifact_bootstrap_diagnostics.csv"),
@@ -112,6 +123,8 @@ def test_experiment_dashboard_separates_final_benchmark_from_smoke_and_api_pilot
     assert bool(rows.loc["nfcorpus_vertex_repeated_selection_diagnostics", "claim_allowed"]) is False
     assert bool(rows.loc["nfcorpus_vertex_repeated_selection_diagnostics", "uses_external_api"]) is True
     assert rows.loc["nfcorpus_vertex_repeated_selection_diagnostics", "feature_set"] == "full,no_semantic"
+    assert rows.loc["nfcorpus_vertex_fake_embedder_tiny_pilot", "evidence_level"] == "api_pilot"
+    assert bool(rows.loc["nfcorpus_vertex_fake_embedder_tiny_pilot", "uses_external_api"]) is True
 
     assert rows.loc["scifact_bootstrap", "evidence_level"] == "full_benchmark"
     assert bool(rows.loc["scifact_bootstrap", "claim_allowed"]) is True

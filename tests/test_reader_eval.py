@@ -65,6 +65,24 @@ def test_run_reader_eval_toy_mode_supports_span_reader(tmp_path: Path) -> None:
     }
 
 
+def test_run_reader_eval_toy_mode_supports_answer_type_reader(tmp_path: Path) -> None:
+    run_reader_eval = _load_run_reader_eval()
+    output_dir = tmp_path / "answer_type_reader_eval"
+
+    metadata = run_reader_eval(
+        dataset="toy",
+        output_dir=output_dir,
+        num_examples=4,
+        seed=3,
+        k=2,
+        reader="answer_type",
+    )
+
+    assert metadata["reader"] == "answer_type"
+    assert metadata["exact_match"] == 1.0
+    assert metadata["f1"] == 1.0
+
+
 def _load_run_reader_eval():
     script_path = Path("scripts/run_reader_eval.py")
     spec = importlib.util.spec_from_file_location("run_reader_eval", script_path)

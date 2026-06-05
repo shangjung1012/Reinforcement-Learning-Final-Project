@@ -112,6 +112,45 @@ def test_download_missing_raw_data_prefer_hf_uses_injected_hf_fetcher(tmp_path: 
     assert row["fallback_used"] == "hotpotqa/hotpot_qa"
 
 
+def test_download_missing_raw_data_prefer_hf_copies_nq_parquet(tmp_path: Path) -> None:
+    source = tmp_path / "nq.parquet"
+    pd.DataFrame(
+        [
+            {
+                "id": "nq1",
+                "document": {"title": "Ada", "tokens": {"token": ["Ada"], "is_html": [False]}},
+                "question": {"text": "Who?"},
+                "annotations": [],
+            }
+        ]
+    ).to_parquet(source)
+
+    def fail_url_fetch(_url: str, _target: Path) -> None:
+        raise AssertionError("prefer_hf should not call the official URL fetcher")
+
+    def fake_hf_fetch(repo_id: str, filename: str, repo_type: str) -> Path:
+        assert repo_id == "google-research-datasets/natural_questions"
+        assert filename == "default/validation-00000-of-00007.parquet"
+        assert repo_type == "dataset"
+        return source
+
+    summary = download_missing_raw_data(
+        project_root=tmp_path,
+        dataset_keys=["nq-validation-shard"],
+        output_dir=tmp_path / "outputs",
+        dry_run=False,
+        fetcher=fail_url_fetch,
+        hf_fetcher=fake_hf_fetch,
+        prefer_hf=True,
+    )
+
+    target = tmp_path / "data/raw/natural-questions/default/validation-00000-of-00007.parquet"
+    row = summary["rows"][0]
+    assert target.exists()
+    assert row["status"] == "downloaded_hf"
+    assert row["fallback_used"] == "google-research-datasets/natural_questions"
+
+
 def test_download_missing_raw_data_unknown_dataset_key(tmp_path: Path) -> None:
     with pytest.raises(ValueError, match="Unknown dataset key"):
         download_missing_raw_data(

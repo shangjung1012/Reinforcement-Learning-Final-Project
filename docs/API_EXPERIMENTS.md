@@ -88,10 +88,59 @@ A sanitized aggregate summary is available at
 `outputs/results/hotpot_gemini_pilot_summary.csv`. This remains `api_pilot`
 evidence because it covers only 4 held-out examples.
 
+A repeated-seed Gemini pilot was also run:
+
+```bash
+CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_repeated_gemini_baseline.py \
+  --data-path data/raw/HotpotQA/hotpot_dev_distractor_v1.json \
+  --seeds 41,42,43 \
+  --num-examples 10 \
+  --cache-path outputs/cache/codex_gemini_repeated_realdata.jsonl \
+  --allow-api \
+  --max-new-calls 24 \
+  --output-dir outputs/codex_gemini_repeated_realdata_pilot
+```
+
+The repeated live run used 24 cache hits and 0 new calls in this pass. Across
+12 held-out examples, rewrite-all reached mean Recall@5 0.75 and reward
+0.085833; decompose reached mean Recall@5 0.833333 and reward 0.177083. The
+sanitized summary is `outputs/results/hotpot_gemini_repeated_pilot_summary.csv`.
+This remains `api_pilot` evidence only.
+
 The Vertex embedding path has been checked with tiny SciFact/NFCorpus
 semantic-feature pilots; those pilots also remain `api_pilot` evidence and
 should not be promoted to final claims without larger repeated-seed validation
 and guardrail checks.
+
+A tiny repeated-seed NFCorpus Vertex semantic pilot was run with 10 train / 10
+test examples, semantic depth 3, ridge policy, and `full` versus `no_semantic`
+feature sets:
+
+```bash
+CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_repeated_selection.py \
+  --dataset nfcorpus \
+  --seeds 41,42,43 \
+  --policy-models ridge \
+  --feature-sets full,no_semantic \
+  --num-train-examples 10 \
+  --num-test-examples 10 \
+  --full-corpus \
+  --embedder fake \
+  --semantic-features vertex \
+  --semantic-cache-path outputs/cache/codex_nfcorpus_vertex_repeated_10x10.jsonl \
+  --semantic-allow-api \
+  --semantic-max-new-texts 90 \
+  --semantic-depth 3 \
+  --knn-k-candidates 1 \
+  --tuning-folds 2 \
+  --auto-candidate-models ridge \
+  --output-dir outputs/codex_vertex_repeated_10x10
+```
+
+This wrote 208 new cached embedding texts. Validation-selected and heldout-best
+configs matched in all three seeds, but the guardrail fallback rate was 1.0,
+so this is a limitation diagnostic rather than semantic-feature superiority
+evidence.
 
 ## Gemini Baseline Budget Gate
 

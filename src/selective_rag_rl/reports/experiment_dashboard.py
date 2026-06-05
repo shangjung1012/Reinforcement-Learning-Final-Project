@@ -157,10 +157,10 @@ def _evidence_level(spec: ArtifactSpec, *, text: str, supports_final_claim: bool
         "consistency_check",
     }:
         return "final_claim"
-    if "smoke" in text or "--embedder fake" in text:
-        return "smoke_toy_reader" if "reader" in text else "smoke_synthetic"
     if _uses_external_api(text):
         return "api_pilot"
+    if "smoke" in text or "--embedder fake" in text:
+        return "smoke_toy_reader" if "reader" in text else "smoke_synthetic"
     if supports_final_claim:
         return "full_benchmark"
     if _is_supported_full_benchmark(text):

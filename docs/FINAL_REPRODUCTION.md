@@ -51,8 +51,8 @@ comparison:
 uv run python scripts/run_reader_comparison.py --dataset toy --num-examples 4 --output-dir outputs/codex_reader_comparison
 ```
 
-The toy comparison exercises both `lexical` and `span` reader modes. It remains
-`smoke_toy_reader` evidence, not final answer-generation evidence.
+The toy comparison exercises `lexical`, `span`, and `answer_type` reader modes.
+It remains `smoke_toy_reader` evidence, not final answer-generation evidence.
 
 ## Tests
 
@@ -117,6 +117,15 @@ uv run python scripts/download_missing_raw_data.py --dataset hotpot-dev-distract
 The downloaded raw JSON remains under ignored `data/raw/HotpotQA/`. The
 generated downloader report remains under ignored `outputs/codex_*`.
 
+The same downloader can restore the first Natural Questions validation shard
+from Hugging Face Hub:
+
+```bash
+uv run python scripts/download_missing_raw_data.py --dataset nq-validation-shard --prefer-hf --output-dir outputs/codex_nq_download
+```
+
+The downloaded parquet remains under ignored `data/raw/natural-questions/`.
+
 Before launching real-data experiments, check local data availability:
 
 ```bash
@@ -160,6 +169,16 @@ Then use `--semantic-features vertex` only with cache coverage or explicit
 semantic API controls. The default `--semantic-max-new-texts 0` blocks cache
 misses before the live client is created. A deliberate pilot must include both
 `--semantic-allow-api` and a bounded `--semantic-max-new-texts` value.
+
+Repeated API pilots are available but remain analysis-only:
+
+```bash
+CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_repeated_gemini_baseline.py --data-path data/raw/HotpotQA/hotpot_dev_distractor_v1.json --seeds 41,42,43 --num-examples 10 --cache-path outputs/cache/codex_gemini_repeated_realdata.jsonl --allow-api --max-new-calls 24 --output-dir outputs/codex_gemini_repeated_realdata_pilot
+CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_repeated_selection.py --dataset nfcorpus --seeds 41,42,43 --policy-models ridge --feature-sets full,no_semantic --num-train-examples 10 --num-test-examples 10 --full-corpus --embedder fake --semantic-features vertex --semantic-cache-path outputs/cache/codex_nfcorpus_vertex_repeated_10x10.jsonl --semantic-allow-api --semantic-max-new-texts 90 --semantic-depth 3 --knn-k-candidates 1 --tuning-folds 2 --auto-candidate-models ridge --output-dir outputs/codex_vertex_repeated_10x10
+```
+
+Use `docs/EXPERIMENT_DASHBOARD.md` to verify these rows stay labeled as
+`api_pilot`, not final benchmark evidence.
 
 ## Claim Boundary
 

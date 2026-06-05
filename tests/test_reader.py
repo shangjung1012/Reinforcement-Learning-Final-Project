@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from selective_rag_rl.core.data import Passage
-from selective_rag_rl.core.reader import LexicalOverlapReader, SpanHeuristicReader
+from selective_rag_rl.core.reader import AnswerTypeHeuristicReader, LexicalOverlapReader, SpanHeuristicReader
 
 
 def test_lexical_overlap_reader_selects_sentence_with_question_terms() -> None:
@@ -70,3 +70,36 @@ def test_span_heuristic_reader_falls_back_to_sentence_when_no_span_matches() -> 
     prediction = reader.predict("Where is the answer hidden?", passages)
 
     assert prediction.answer == "the answer is hidden in lowercase words only."
+
+
+def test_answer_type_reader_extracts_yes_no_answer() -> None:
+    reader = AnswerTypeHeuristicReader()
+    passages = [Passage("comparison", "Comparison", "The answer is yes because both people were American.")]
+
+    prediction = reader.predict("Were both people American?", passages)
+
+    assert prediction.answer == "yes"
+
+
+def test_answer_type_reader_extracts_numeric_answer() -> None:
+    reader = AnswerTypeHeuristicReader()
+    passages = [Passage("count", "Count", "The mission carried 42 scientific instruments.")]
+
+    prediction = reader.predict("How many scientific instruments did the mission carry?", passages)
+
+    assert prediction.answer == "42"
+
+
+def test_answer_type_reader_uses_entity_fallback() -> None:
+    reader = AnswerTypeHeuristicReader()
+    passages = [
+        Passage(
+            "ada",
+            "Ada Lovelace",
+            "Ada Lovelace wrote notes for the Analytical Engine.",
+        )
+    ]
+
+    prediction = reader.predict("Who wrote notes for the Analytical Engine?", passages)
+
+    assert prediction.answer == "Ada Lovelace"

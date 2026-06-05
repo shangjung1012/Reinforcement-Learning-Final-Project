@@ -213,17 +213,47 @@ def test_final_project_artifact_specs_include_reader_and_gemini_pilots() -> None
     specs = {spec.artifact_id: spec for spec in final_project_artifact_specs(Path("."))}
 
     reader = specs["hotpot_reader_realdata_summary"]
+    hotpot_reader_200 = specs["hotpot_reader_realdata_200_summary"]
+    nq_reader = specs["nq_reader_realdata_summary"]
     gemini = specs["hotpot_gemini_pilot_summary"]
+    repeated_gemini = specs["hotpot_gemini_repeated_pilot_summary"]
 
     assert reader.category == "reader_smoke"
     assert reader.path.as_posix() == "outputs/results/hotpot_reader_realdata_summary.csv"
     assert "not final QA benchmark" in reader.role
     assert "run_reader_comparison.py" in reader.producer_command
+    assert hotpot_reader_200.category == "reader_smoke"
+    assert hotpot_reader_200.path.as_posix() == "outputs/results/hotpot_reader_realdata_200_summary.csv"
+    assert "answer-type" in hotpot_reader_200.role
+    assert "--num-examples 200" in hotpot_reader_200.producer_command
+    assert nq_reader.category == "reader_smoke"
+    assert nq_reader.path.as_posix() == "outputs/results/nq_reader_realdata_summary.csv"
+    assert "Natural Questions" in nq_reader.role
+    assert "--dataset nq" in nq_reader.producer_command
 
     assert gemini.category == "api_pilot"
     assert gemini.path.as_posix() == "outputs/results/hotpot_gemini_pilot_summary.csv"
     assert "8 new Gemini calls" in gemini.role
     assert "--max-new-calls 8" in gemini.producer_command
+    assert repeated_gemini.category == "api_pilot"
+    assert repeated_gemini.path.as_posix() == "outputs/results/hotpot_gemini_repeated_pilot_summary.csv"
+    assert "0 new calls" in repeated_gemini.role
+    assert "run_repeated_gemini_baseline.py" in repeated_gemini.producer_command
+
+
+def test_final_project_artifact_specs_include_vertex_tiny_pilot() -> None:
+    specs = {spec.artifact_id: spec for spec in final_project_artifact_specs(Path("."))}
+
+    diagnostics = specs["nfcorpus_vertex_repeated_10x10_diagnostics"]
+    stability = specs["nfcorpus_vertex_repeated_10x10_stability"]
+
+    assert diagnostics.category == "selection_check"
+    assert diagnostics.path.as_posix() == "outputs/results/nfcorpus_vertex_repeated_10x10_diagnostics.csv"
+    assert "208 new embedding texts" in diagnostics.role
+    assert "--semantic-max-new-texts 90" in diagnostics.producer_command
+    assert stability.category == "selection_check"
+    assert stability.path.as_posix() == "outputs/results/nfcorpus_vertex_repeated_10x10_stability.csv"
+    assert "guardrail" in stability.role
 
 
 def test_final_project_artifact_specs_include_ope_diagnostics() -> None:

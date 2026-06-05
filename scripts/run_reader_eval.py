@@ -9,7 +9,7 @@ import pandas as pd
 from selective_rag_rl.core.answer_metrics import exact_match, token_f1
 from selective_rag_rl.core.data import Passage, QAExample, load_hotpotqa, load_natural_questions
 from selective_rag_rl.core.metrics import mrr, ndcg_at_k, recall_at_k
-from selective_rag_rl.core.reader import LexicalOverlapReader, SpanHeuristicReader
+from selective_rag_rl.core.reader import AnswerTypeHeuristicReader, LexicalOverlapReader, SpanHeuristicReader
 from selective_rag_rl.core.retriever import BM25Retriever
 
 
@@ -23,8 +23,8 @@ def run_reader_eval(
     reader: str = "lexical",
     retriever: str = "bm25",
 ) -> dict[str, object]:
-    if reader not in {"lexical", "span"}:
-        raise ValueError("reader must be one of: lexical, span")
+    if reader not in {"lexical", "span", "answer_type"}:
+        raise ValueError("reader must be one of: lexical, span, answer_type")
     if retriever != "bm25":
         raise ValueError("Only BM25 retrieval is available in the lightweight reader eval")
 
@@ -91,12 +91,14 @@ def _load_examples(dataset: str, num_examples: int, seed: int, data_path: Path |
     raise ValueError("dataset must be one of: toy, hotpot, nq")
 
 
-def _reader(reader: str) -> LexicalOverlapReader | SpanHeuristicReader:
+def _reader(reader: str) -> LexicalOverlapReader | SpanHeuristicReader | AnswerTypeHeuristicReader:
     if reader == "lexical":
         return LexicalOverlapReader()
     if reader == "span":
         return SpanHeuristicReader()
-    raise ValueError("reader must be one of: lexical, span")
+    if reader == "answer_type":
+        return AnswerTypeHeuristicReader()
+    raise ValueError("reader must be one of: lexical, span, answer_type")
 
 
 def _toy_examples(num_examples: int) -> list[QAExample]:
@@ -169,7 +171,7 @@ def main() -> None:
     parser.add_argument("--num-examples", type=int, default=10)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--k", type=int, default=5)
-    parser.add_argument("--reader", choices=["lexical", "span"], default="lexical")
+    parser.add_argument("--reader", choices=["lexical", "span", "answer_type"], default="lexical")
     args = parser.parse_args()
 
     metadata = run_reader_eval(

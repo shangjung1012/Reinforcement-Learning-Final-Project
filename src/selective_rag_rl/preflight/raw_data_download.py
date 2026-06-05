@@ -61,6 +61,8 @@ RAW_DATA_DOWNLOAD_SPECS = [
             "https://huggingface.co/datasets/google-research-datasets/natural_questions"
             "/resolve/main/default/validation-00000-of-00007.parquet"
         ),
+        hf_repo_id="google-research-datasets/natural_questions",
+        hf_filename="default/validation-00000-of-00007.parquet",
     ),
 ]
 
@@ -154,7 +156,7 @@ def _download_one(
     if dry_run:
         row["status"] = "would_download"
         return row
-    if prefer_hf and spec.hf_repo_id and spec.hf_converter:
+    if prefer_hf and spec.hf_repo_id and spec.hf_filename:
         _download_hf_fallback(spec, target, hf_fetcher=hf_fetcher)
         row["status"] = "downloaded_hf"
         row["size_bytes"] = target.stat().st_size
@@ -173,7 +175,7 @@ def _download_one(
     except Exception as exc:
         if part.exists():
             part.unlink()
-        if fetcher is _url_fetch and spec.hf_repo_id and spec.hf_converter:
+        if fetcher is _url_fetch and spec.hf_repo_id and spec.hf_filename:
             _download_hf_fallback(spec, target, hf_fetcher=hf_fetcher)
             row["status"] = "downloaded_hf_fallback"
             row["size_bytes"] = target.stat().st_size
@@ -198,6 +200,8 @@ def _download_hf_fallback(
     hf_fetcher: HfFetcher | None = None,
 ) -> None:
     from huggingface_hub import hf_hub_download
+
+    target.parent.mkdir(parents=True, exist_ok=True)
 
     def default_hf_fetch(repo_id: str, filename: str, repo_type: str) -> Path:
         return Path(hf_hub_download(repo_id=repo_id, filename=filename, repo_type=repo_type))

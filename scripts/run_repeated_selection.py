@@ -11,7 +11,7 @@ from selective_rag_rl.experiments.selection_repeats import run_repeated_policy_m
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(allow_abbrev=False)
     parser.add_argument("--dataset", choices=["scifact", "nfcorpus"], default="nfcorpus")
     parser.add_argument("--data-path", type=Path, default=None)
     parser.add_argument("--output-dir", type=Path, default=Path("outputs") / "repeated_selection_runs")

@@ -124,11 +124,32 @@ def final_project_artifact_specs(root: Path | None = None) -> list[ArtifactSpec]
             "uv run python scripts/run_reader_comparison.py --dataset hotpot --num-examples 50 --readers lexical,span --output-dir outputs/codex_reader_hotpot_realdata_50",
         ),
         artifact(
+            "hotpot_reader_realdata_200_summary",
+            "reader_smoke",
+            "outputs/results/hotpot_reader_realdata_200_summary.csv",
+            "Larger HotpotQA downstream reader comparison for lexical, span, and answer-type heuristic readers; still not final QA benchmark evidence.",
+            "uv run python scripts/run_reader_comparison.py --dataset hotpot --num-examples 200 --readers lexical,span,answer_type --output-dir outputs/codex_reader_hotpot_realdata_200",
+        ),
+        artifact(
+            "nq_reader_realdata_summary",
+            "reader_smoke",
+            "outputs/results/nq_reader_realdata_summary.csv",
+            "Natural Questions downstream reader comparison for lexical, span, and answer-type heuristic readers; small real-data diagnostic only.",
+            "uv run python scripts/run_reader_comparison.py --dataset nq --num-examples 50 --readers lexical,span,answer_type --output-dir outputs/codex_reader_nq_realdata_50",
+        ),
+        artifact(
             "hotpot_gemini_pilot_summary",
             "api_pilot",
             "outputs/results/hotpot_gemini_pilot_summary.csv",
             "Bounded HotpotQA Gemini rewrite/decompose baseline pilot with at most 8 new Gemini calls; not final generated-action evidence.",
             "CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_gemini_baseline.py --data-path data/raw/HotpotQA/hotpot_dev_distractor_v1.json --num-examples 10 --seed 42 --cache-path outputs/cache/codex_gemini_rewrites_realdata.jsonl --allow-api --max-new-calls 8 --output-dir outputs/codex_gemini_realdata_pilot",
+        ),
+        artifact(
+            "hotpot_gemini_repeated_pilot_summary",
+            "api_pilot",
+            "outputs/results/hotpot_gemini_repeated_pilot_summary.csv",
+            "Repeated-seed HotpotQA Gemini rewrite/decompose pilot with 24 cache hits and 0 new calls in this run; not final generated-action evidence.",
+            "CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_repeated_gemini_baseline.py --data-path data/raw/HotpotQA/hotpot_dev_distractor_v1.json --seeds 41,42,43 --num-examples 10 --cache-path outputs/cache/codex_gemini_repeated_realdata.jsonl --allow-api --max-new-calls 24 --output-dir outputs/codex_gemini_repeated_realdata_pilot",
         ),
         artifact(
             "hotpot_multistep_fqi_summary",
@@ -514,6 +535,20 @@ def final_project_artifact_specs(root: Path | None = None) -> list[ArtifactSpec]
             "outputs/results/nfcorpus_vertex_repeated_selection_30x30x3_diagnostics.csv",
             "Cross-seed validation-selection guardrail diagnostics for Vertex semantic features.",
             "uv run python scripts/run_repeated_selection.py --dataset nfcorpus --seeds 41,42,43 --policy-models ridge,auto --feature-sets full,no_semantic --num-train-examples 30 --num-test-examples 30 --semantic-features vertex --semantic-cache-path outputs/cache/nfcorpus_pilot_vertex_embeddings.jsonl --semantic-depth 5 --knn-k-candidates 1,3 --tuning-folds 5 --auto-candidate-models knn,ridge,extra_trees,random_forest --output-dir outputs/repeated_selection_runs/nfcorpus_vertex_30x30x3",
+        ),
+        artifact(
+            "nfcorpus_vertex_repeated_10x10_diagnostics",
+            "selection_check",
+            "outputs/results/nfcorpus_vertex_repeated_10x10_diagnostics.csv",
+            "Tiny NFCorpus Vertex semantic-feature repeated-seed diagnostics with 208 new embedding texts; API pilot only.",
+            "CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_repeated_selection.py --dataset nfcorpus --seeds 41,42,43 --policy-models ridge --feature-sets full,no_semantic --num-train-examples 10 --num-test-examples 10 --full-corpus --embedder fake --semantic-features vertex --semantic-cache-path outputs/cache/codex_nfcorpus_vertex_repeated_10x10.jsonl --semantic-allow-api --semantic-max-new-texts 90 --semantic-depth 3 --knn-k-candidates 1 --tuning-folds 2 --auto-candidate-models ridge --output-dir outputs/codex_vertex_repeated_10x10",
+        ),
+        artifact(
+            "nfcorpus_vertex_repeated_10x10_stability",
+            "selection_check",
+            "outputs/results/nfcorpus_vertex_repeated_10x10_stability.csv",
+            "Tiny NFCorpus Vertex semantic-feature selection stability; guardrail still falls back to train-best fixed.",
+            "CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_repeated_selection.py --dataset nfcorpus --seeds 41,42,43 --policy-models ridge --feature-sets full,no_semantic --num-train-examples 10 --num-test-examples 10 --full-corpus --embedder fake --semantic-features vertex --semantic-cache-path outputs/cache/codex_nfcorpus_vertex_repeated_10x10.jsonl --semantic-allow-api --semantic-max-new-texts 90 --semantic-depth 3 --knn-k-candidates 1 --tuning-folds 2 --auto-candidate-models ridge --output-dir outputs/codex_vertex_repeated_10x10",
         ),
         artifact(
             "nfcorpus_vertex_repeated_semantic_depth_diagnostics",

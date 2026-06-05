@@ -5,6 +5,7 @@ This repository now includes a small downstream QA evaluation path:
 ```bash
 uv run python scripts/run_reader_eval.py --dataset toy --reader lexical --output-dir outputs/codex_reader_smoke
 uv run python scripts/run_reader_eval.py --dataset toy --reader span --output-dir outputs/codex_reader_span_smoke
+uv run python scripts/run_reader_eval.py --dataset toy --reader answer_type --output-dir outputs/codex_reader_answer_type_smoke
 ```
 
 The default mode is intentionally lightweight:
@@ -13,7 +14,8 @@ The default mode is intentionally lightweight:
 - no model downloads;
 - no Vertex/Gemini calls;
 - BM25 retrieval;
-- deterministic lexical-overlap or span-heuristic reader;
+- deterministic lexical-overlap, span-heuristic, or answer-type heuristic
+  reader;
 - SQuAD-style exact match and token F1 metrics.
 
 ## What It Measures
@@ -101,3 +103,27 @@ This result is useful because it confirms the deterministic reader plumbing on
 real HotpotQA examples. It is still not final QA benchmark evidence: the run is
 small, the readers are heuristic, and Natural Questions remains unavailable
 locally.
+
+After restoring Natural Questions and adding the answer-type reader, two larger
+real-data diagnostic comparisons were run:
+
+```bash
+uv run python scripts/run_reader_comparison.py --dataset hotpot --num-examples 200 --readers lexical,span,answer_type --output-dir outputs/codex_reader_hotpot_realdata_200
+uv run python scripts/run_reader_comparison.py --dataset nq --num-examples 50 --readers lexical,span,answer_type --output-dir outputs/codex_reader_nq_realdata_50
+```
+
+HotpotQA 200 summary:
+
+- lexical reader: exact match 0.0, token F1 0.050195, Recall@5 0.82;
+- span reader: exact match 0.035, token F1 0.084691, Recall@5 0.82;
+- answer-type reader: exact match 0.035, token F1 0.084691, Recall@5 0.82.
+
+Natural Questions 50 summary:
+
+- lexical reader: exact match 0.0, token F1 0.038915, Recall@5 0.98;
+- span reader: exact match 0.0, token F1 0.013333, Recall@5 0.98;
+- answer-type reader: exact match 0.0, token F1 0.013333, Recall@5 0.98.
+
+The main lesson is negative but useful: deterministic extraction is not strong
+enough to support downstream RAG answer-quality claims, even when retrieval
+coverage is high. These rows remain `tiny_realdata` diagnostics.

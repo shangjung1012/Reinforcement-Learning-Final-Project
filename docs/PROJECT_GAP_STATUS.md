@@ -31,6 +31,12 @@ dashboard fixes.
   schema.
 - HotpotQA real-data reader comparison and a bounded Gemini baseline pilot were
   run after the missing HotpotQA dev distractor file was restored locally.
+- The Natural Questions validation parquet shard was restored from Hugging Face
+  Hub through the same missing-data downloader.
+- An answer-type heuristic reader was added, and larger HotpotQA plus small NQ
+  reader comparisons were run as tiny real-data diagnostics.
+- A repeated-seed Gemini baseline pilot and a tiny repeated-seed Vertex semantic
+  pilot were run under explicit cache/budget gates.
 
 ## Data Availability
 
@@ -52,9 +58,12 @@ Current local status:
   uv run python scripts/download_missing_raw_data.py --dataset hotpot-dev-distractor --prefer-hf --output-dir outputs/codex_data_download_hotpot_hf
   ```
 
-- Natural Questions is blocked:
-  `data/raw/natural-questions/default/validation-00000-of-00007.parquet` is
-  missing.
+- Natural Questions validation shard is available: 1,119 rows. It was restored
+  with:
+
+  ```bash
+  uv run python scripts/download_missing_raw_data.py --dataset nq-validation-shard --prefer-hf --output-dir outputs/codex_nq_download
+  ```
 
 Small full-corpus smoke runs were completed for SciFact and NFCorpus with fake
 embeddings and 30 train / 30 test examples. These runs validate real-data code
@@ -90,6 +99,13 @@ calls. On the 4 held-out examples, Gemini rewrite-all and decompose both reached
 Recall@5 1.0 and MRR 1.0, but cost-aware reward was only 0.4175 and 0.4000 due
 to high rewrite/retrieval cost. This is `api_pilot` evidence only.
 
+A repeated-seed Gemini pilot was then run on seeds 41, 42, and 43 with 10
+examples per seed. The live run used the existing cache: 24 cache hits and 0
+new calls in this pass. Across 12 held-out examples, rewrite-all reached mean
+Recall@5 0.75 and reward 0.085833; decompose reached mean Recall@5 0.833333
+and reward 0.177083. This is still `api_pilot` evidence because the sample is
+tiny and generated-action policy selection has not been validated.
+
 Vertex semantic feature pilots were run on tiny SciFact/NFCorpus splits:
 
 - NFCorpus 10/10: selective reward tied train-best fixed at 0.212549.
@@ -99,6 +115,14 @@ Vertex semantic feature pilots were run on tiny SciFact/NFCorpus splits:
 
 These are API pilots, not final evidence. They show the path runs and that the
 signal is mixed at tiny scale.
+
+A smaller repeated-seed Vertex semantic pilot was also run on NFCorpus with 10
+train / 10 test examples, depth 3, ridge policy, and `full` versus
+`no_semantic` feature sets. The run wrote 208 new cached embedding texts. The
+validation-selected configuration matched heldout-best in all three seeds, but
+the guardrail fallback rate was 1.0 because the selected policies were
+dominated/tied by the train-best fixed action. This is a useful limitation
+diagnostic, not semantic-feature win evidence.
 
 ## Reader Smoke
 
@@ -138,6 +162,30 @@ This is now real-data evidence, but it is still tiny and uses deterministic
 heuristics. It should be treated as `tiny_realdata`, not final downstream RAG
 answer-quality evidence.
 
+A larger HotpotQA 200-example comparison and an NQ 50-example comparison now
+exist:
+
+```bash
+uv run python scripts/run_reader_comparison.py --dataset hotpot --num-examples 200 --readers lexical,span,answer_type --output-dir outputs/codex_reader_hotpot_realdata_200
+uv run python scripts/run_reader_comparison.py --dataset nq --num-examples 50 --readers lexical,span,answer_type --output-dir outputs/codex_reader_nq_realdata_50
+```
+
+HotpotQA 200 summary:
+
+- lexical reader: exact match 0.0, token F1 0.050195, Recall@5 0.82;
+- span reader: exact match 0.035, token F1 0.084691, Recall@5 0.82;
+- answer-type reader: exact match 0.035, token F1 0.084691, Recall@5 0.82.
+
+NQ 50 summary:
+
+- lexical reader: exact match 0.0, token F1 0.038915, Recall@5 0.98;
+- span reader: exact match 0.0, token F1 0.013333, Recall@5 0.98;
+- answer-type reader: exact match 0.0, token F1 0.013333, Recall@5 0.98.
+
+These results make the downstream gap more concrete: retrieval coverage can be
+high while deterministic answer extraction remains weak. They do not support a
+final downstream answer-quality claim.
+
 ## FQI Extension Status
 
 Checked with:
@@ -154,12 +202,12 @@ but it should not be presented as a main win.
 
 ## Remaining Work
 
-- Add Natural Questions raw data if NQ downstream reader EM/F1 evidence is
-  required.
-- Scale HotpotQA reader evaluation and compare against a stronger reader before
-  making any answer-quality claim.
+- Add a stronger reader, such as a locally cached extractive QA model or a
+  carefully bounded API reader, before making any answer-quality claim.
+- Scale HotpotQA/NQ reader evaluation with comparable baselines if downstream
+  QA evidence is required.
 - Keep Gemini/Vertex pilots labeled as API pilots until larger repeated-seed
-  guardrail checks support them.
+  guardrail checks support them against fixed-action and policy baselines.
 - Keep the deterministic reader paths labeled as smoke unless a stronger reader
   experiment is run on real data with baselines.
 - Treat FQI as an extension/limitation unless a stronger state representation or
