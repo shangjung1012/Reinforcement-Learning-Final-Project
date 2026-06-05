@@ -61,6 +61,30 @@ Evidence:
 - `outputs/results/final_main_results_table.csv`
 - `outputs/figures/final_linucb_comparison.png`
 
+## What Does Selected-Action Replay Show?
+
+Answer:
+
+It separates two learning regimes that can otherwise sound identical. The
+direct-method policy observes every action reward for each replayed query, while
+LinUCB, epsilon-greedy, and Thompson replay observe only the action they choose
+at each step. The replay-regret curves therefore measure the extra difficulty of
+bandit feedback under the same action table.
+
+Numbers:
+
+- SciFact: LinUCB selected-action replay cumulative regret is 82.080 versus
+  67.427 for the full-information direct method.
+- NFCorpus: LinUCB selected-action replay cumulative regret is 43.202 versus
+  29.617 for the full-information direct method.
+
+Evidence:
+
+- `outputs/results/scifact_bandit_replay_summary.csv`
+- `outputs/results/nfcorpus_bandit_replay_summary.csv`
+- `outputs/figures/scifact_bandit_replay_regret.png`
+- `outputs/figures/nfcorpus_bandit_replay_regret.png`
+
 ## What Is The Main Result?
 
 Answer:

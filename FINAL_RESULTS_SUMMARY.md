@@ -41,6 +41,42 @@ Evidence:
 - `outputs/results/nfcorpus_linucb_baseline_summary.csv`
 - `outputs/figures/final_linucb_comparison.png`
 
+The replay-regret diagnostic uses the full-corpus seed-42 training action table
+to compare selected-action feedback against the full-information direct method.
+Lower cumulative regret is better.
+
+| Dataset | Replay Policy | Cumulative Regret | Full-Information Direct Regret | Gap | Oracle Match |
+| --- | --- | ---: | ---: | ---: | ---: |
+| SciFact | LinUCB selected-action replay | 82.080 | 67.427 | +14.653 | 0.170 |
+| NFCorpus | LinUCB selected-action replay | 43.202 | 29.617 | +13.584 | 0.162 |
+
+Evidence:
+
+- `outputs/results/scifact_bandit_replay_summary.csv`
+- `outputs/results/nfcorpus_bandit_replay_summary.csv`
+- `outputs/figures/scifact_bandit_replay_regret.png`
+- `outputs/figures/nfcorpus_bandit_replay_regret.png`
+
+## Multi-Step FQI Extension
+
+The HotpotQA two-step FQI path is kept as an RL extension and limitation
+analysis, not as the final benchmark claim. It demonstrates sequential
+stop/refine actions, but the current lightweight value model does not beat the
+train-best fixed trace.
+
+| Method | Recall@5 | Reward | Calls |
+| --- | ---: | ---: | ---: |
+| Rewrite-all keyword / train-best fixed trace | 0.822917 | 1.264444 | 2.000000 |
+| Multi-step FQI | 0.814583 | 1.222521 | 2.437500 |
+| Oracle two-step | 0.912500 | 1.376264 | 1.570833 |
+
+Evidence:
+
+- `outputs/results/multistep_summary.csv`
+- `outputs/results/multistep_metadata.json`
+- `outputs/figures/multistep_metrics.png`
+- `outputs/figures/multistep_action_traces.png`
+
 ## Repeated-Seed Robustness
 
 The main table remains the primary seed-42 result. As a robustness check, I

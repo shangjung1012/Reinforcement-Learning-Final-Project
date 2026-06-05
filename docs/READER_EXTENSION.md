@@ -60,3 +60,15 @@ uv run python scripts/run_reader_eval.py --dataset nq --num-examples 20 --output
 
 If the requested raw file is missing, the script raises a clear error and
 suggests using `--dataset toy` for a raw-data-free smoke run.
+
+## Latest Local Smoke Result
+
+The current raw-data-free smoke command completed successfully:
+
+```bash
+uv run python scripts/run_reader_eval.py --dataset toy --num-examples 4 --output-dir outputs/codex_reader_smoke_phase
+```
+
+It produced exact match 0.0 and token F1 0.490079 with retrieval Recall@5 1.0.
+That is enough to verify EM/F1 plumbing and output schemas, but not enough to
+claim downstream RAG answer-quality improvement.

@@ -146,6 +146,8 @@ def _dashboard_row(
 def _evidence_level(spec: ArtifactSpec, *, text: str, supports_final_claim: bool) -> str:
     if "api_preflight" in text or "run_api_preflight.py" in text:
         return "api_preflight"
+    if spec.category == "rl_extension" or "multistep" in text or "two-step fqi" in text:
+        return "tiny_realdata" if _dataset(text) in {"hotpot", "nq", "scifact", "nfcorpus"} else "smoke_synthetic"
     if spec.artifact_id.startswith("final_") or spec.category in {
         "document",
         "paper_asset",

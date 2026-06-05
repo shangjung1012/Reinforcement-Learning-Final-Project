@@ -69,6 +69,21 @@ harder bandit-feedback setting from the full-information direct-method policy.
 The selected-action baselines are important for RL framing, but they are not the
 main strongest method in the current evidence.
 
+The final artifact set also includes replay-regret diagnostics that compare
+selected-action learning against the full-information direct method on the same
+training action table. On the full-corpus seed-42 replay, LinUCB accumulates
+82.080 regret on SciFact versus 67.427 for the full-information direct method,
+and 43.202 regret on NFCorpus versus 29.617 for the direct method. These rows
+are not new benchmark wins; they document the extra difficulty of learning from
+chosen-action feedback instead of observing every action reward per query.
+
+Evidence:
+
+- `outputs/results/scifact_bandit_replay_summary.csv`
+- `outputs/results/nfcorpus_bandit_replay_summary.csv`
+- `outputs/figures/scifact_bandit_replay_regret.png`
+- `outputs/figures/nfcorpus_bandit_replay_regret.png`
+
 ## Two-Step FQI Extension
 
 The HotpotQA multi-step script is closer to a finite-horizon MDP. It includes:
@@ -81,6 +96,15 @@ The HotpotQA multi-step script is closer to a finite-horizon MDP. It includes:
 This extension demonstrates sequential refinement and cost accumulation, but
 the final BEIR claims rely on the one-step retrieval-action contextual-bandit
 experiments.
+
+The checked-in HotpotQA two-step artifact is best read as an RL extension and
+failure analysis, not as the final strongest result. The `multistep_summary.csv`
+artifact shows Multi-step FQI at 0.815 Recall@5 and 1.223 reward, below the
+train-best fixed trace / rewrite-all keyword row at 0.823 Recall@5 and 1.264
+reward, while the two-step oracle reaches 0.912 Recall@5 and 1.376 reward. That
+gap is useful: it shows the action space has sequential headroom, but the
+current FQI state representation and small KNN value model are not enough to
+select the best refinement reliably.
 
 ## Off-Policy Evaluation
 

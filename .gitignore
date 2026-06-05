@@ -10,6 +10,7 @@ data/raw/*
 outputs/cache/
 outputs/codex_smoke/
 outputs/codex_smoke_*/
+outputs/codex_*/
 outputs/codex_reader_smoke/
 outputs/codex_smoke_second/
 outputs/codex_reader_smoke_second/

@@ -157,6 +157,13 @@ evaluates each query against the full 3,633-document collection.
 | Multi-step FQI | 0.815 | 0.888 | 0.769 | 1.223 | 0.036 | 2.438 |
 | Oracle two-step | 0.912 | 0.959 | 0.854 | 1.376 | 0.016 | 1.571 |
 
+The two-step FQI extension should be interpreted as a sequential-RL diagnostic,
+not as the final strongest result. It exposes stop/refine actions and fitted-Q
+training, but the current lightweight KNN value model underperforms the
+train-best fixed trace in both Recall@5 and reward. The large two-step oracle
+gap is the useful signal: the action space has headroom, but the current state
+features and value estimator are not yet strong enough to exploit it reliably.
+
 ### Vertex AI Gemini Rewrite Baseline
 
 This baseline uses Gemini through Vertex AI as a strong rewrite-all system. The

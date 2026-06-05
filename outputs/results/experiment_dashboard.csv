@@ -7,12 +7,23 @@ final_defense_qa,FINAL_DEFENSE_QA.md,unknown,document,final_claim,True,False,Fal
 final_results_summary,FINAL_RESULTS_SUMMARY.md,unknown,document,final_claim,True,False,False,False,,,,,,True,False,"final report, figure, or claim artifact"
 hotpot_retrieval_policy_summary,outputs/results/retrieval_policy_summary.csv,hotpot,main_result,tiny_realdata,True,True,False,False,,,42,,,False,False,small or non-final real-data run
 hotpot_llm_policy_summary,outputs/results/llm_retrieval_policy_summary.csv,hotpot,main_result,api_pilot,True,True,True,False,,,42,auto,,False,False,API-backed pilot or semantic analysis only
+hotpot_multistep_fqi_summary,outputs/results/multistep_summary.csv,hotpot,rl_extension,tiny_realdata,True,True,False,False,,,42,,,False,False,small or non-final real-data run
+hotpot_multistep_fqi_detailed,outputs/results/multistep_detailed.csv,hotpot,rl_extension,tiny_realdata,True,True,False,False,,,42,,,False,False,small or non-final real-data run
+hotpot_multistep_fqi_metadata,outputs/results/multistep_metadata.json,hotpot,rl_extension,tiny_realdata,True,True,False,False,,,42,,,False,False,small or non-final real-data run
+hotpot_multistep_metrics_figure,outputs/figures/multistep_metrics.png,hotpot,paper_asset,tiny_realdata,True,True,False,False,,,42,,,False,False,small or non-final real-data run
+hotpot_multistep_action_traces,outputs/figures/multistep_action_traces.png,hotpot,paper_asset,tiny_realdata,True,True,False,False,,,42,,,False,False,small or non-final real-data run
 scifact_policy_summary,outputs/results/scifact_retrieval_policy_summary.csv,scifact,main_result,full_benchmark,True,True,False,False,600,300,42,auto,,True,False,final retrieval-stage benchmark evidence
 nfcorpus_policy_summary,outputs/results/nfcorpus_retrieval_policy_summary.csv,nfcorpus,main_result,full_benchmark,True,True,False,False,600,300,42,auto,,True,False,final retrieval-stage benchmark evidence
 scifact_linucb_baseline_summary,outputs/results/scifact_linucb_baseline_summary.csv,scifact,bandit_baseline,full_benchmark,True,True,False,False,600,300,42,,,True,True,final retrieval-stage benchmark evidence
 scifact_linucb_baseline_history,outputs/results/scifact_linucb_baseline_history.csv,scifact,bandit_diagnostic,full_benchmark,True,True,False,False,600,300,42,,,True,False,final retrieval-stage benchmark evidence
 nfcorpus_linucb_baseline_summary,outputs/results/nfcorpus_linucb_baseline_summary.csv,nfcorpus,bandit_baseline,full_benchmark,True,True,False,False,600,300,42,,,True,True,final retrieval-stage benchmark evidence
 nfcorpus_linucb_baseline_history,outputs/results/nfcorpus_linucb_baseline_history.csv,nfcorpus,bandit_diagnostic,full_benchmark,True,True,False,False,600,300,42,,,True,False,final retrieval-stage benchmark evidence
+scifact_bandit_replay_summary,outputs/results/scifact_bandit_replay_summary.csv,scifact,bandit_diagnostic,full_benchmark,True,True,False,False,,,42,,,True,True,final retrieval-stage benchmark evidence
+scifact_bandit_replay_history,outputs/results/scifact_bandit_replay_history.csv,scifact,bandit_diagnostic,full_benchmark,True,True,False,False,,,42,,,True,False,final retrieval-stage benchmark evidence
+nfcorpus_bandit_replay_summary,outputs/results/nfcorpus_bandit_replay_summary.csv,nfcorpus,bandit_diagnostic,full_benchmark,True,True,False,False,,,42,,,True,True,final retrieval-stage benchmark evidence
+nfcorpus_bandit_replay_history,outputs/results/nfcorpus_bandit_replay_history.csv,nfcorpus,bandit_diagnostic,full_benchmark,True,True,False,False,,,42,,,True,False,final retrieval-stage benchmark evidence
+scifact_bandit_replay_regret_figure,outputs/figures/scifact_bandit_replay_regret.png,scifact,paper_asset,final_claim,True,False,False,False,,,42,,,True,False,"final report, figure, or claim artifact"
+nfcorpus_bandit_replay_regret_figure,outputs/figures/nfcorpus_bandit_replay_regret.png,nfcorpus,paper_asset,final_claim,True,False,False,False,,,42,,,True,False,"final report, figure, or claim artifact"
 scifact_budget_curve,outputs/results/scifact_budget_curve.csv,scifact,budget_curve,tiny_realdata,True,True,False,False,,,,,,False,False,small or non-final real-data run
 nfcorpus_budget_curve,outputs/results/nfcorpus_budget_curve.csv,nfcorpus,budget_curve,tiny_realdata,True,True,False,False,,,,,,False,False,small or non-final real-data run
 scifact_ope_diagnostics,outputs/results/scifact_ope_diagnostics.csv,scifact,off_policy_evaluation,tiny_realdata,True,True,False,False,,,42,,,False,False,small or non-final real-data run

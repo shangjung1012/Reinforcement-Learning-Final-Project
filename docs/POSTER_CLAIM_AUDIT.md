@@ -19,6 +19,6 @@ evidence-dashboard fixes.
 
 ## Manual Review Needed
 
-The author line in `poster/poster.tex` appears to contain mojibake for Chinese
-names. That is a presentation-quality issue, not a claim-validity issue. Fix it
-before final submission if the correct author names are available.
+The author line in `poster/poster.tex` uses the Chinese names from the proposal
+source. Some terminals may display it as mojibake; check the rendered PDF
+rather than relying on PowerShell's default text rendering.

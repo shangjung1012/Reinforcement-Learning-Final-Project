@@ -11,6 +11,11 @@ dashboard fixes.
   `outputs/results/experiment_dashboard.csv` and `docs/EXPERIMENT_DASHBOARD.md`.
 - Poster claim audit added: `docs/POSTER_CLAIM_AUDIT.md` confirms the poster
   claim boundary is aligned with the retrieval-stage evidence.
+- Bandit replay-regret diagnostics added:
+  `scripts/run_bandit_replay_diagnostics.py` writes full-corpus
+  selected-action replay summaries and regret figures for SciFact and NFCorpus,
+  making the distinction between full-information direct-method learning and
+  chosen-action feedback explicit.
 
 ## Data Availability
 
@@ -46,14 +51,32 @@ uv run python scripts/run_api_preflight.py --provider all --output-dir outputs/c
 
 The dry-run preflight sees `.env`, the required variable names, optional Vertex
 settings, and the credential file basename. It made zero Gemini calls and zero
-Vertex embedding requests. Live API usability is still unverified until a
-bounded command is run with both `CODEX_ALLOW_API_CALLS=1` and `--allow-api`.
+Vertex embedding requests.
+
+A bounded live API preflight was also attempted with both
+`CODEX_ALLOW_API_CALLS=1` and `--allow-api`, capped at one Gemini call and one
+Vertex embedding text. Both providers returned `403 PERMISSION_DENIED` for
+`aiplatform.endpoints.predict`, and successful live calls/texts remained zero.
+The next required resource is Google Cloud IAM/model access for Vertex AI
+prediction, not a new local `.env` variable.
+
+## Reader Smoke
+
+Checked with:
+
+```bash
+uv run python scripts/run_reader_eval.py --dataset toy --num-examples 4 --output-dir outputs/codex_reader_smoke_phase
+```
+
+The deterministic lexical reader smoke completed with exact match 0.0 and token
+F1 0.490079. This validates the downstream metric plumbing only; it is not
+evidence for answer-generation quality.
 
 ## Remaining Work
 
 - Add HotpotQA and NQ raw data if downstream real-data reader EM/F1 evidence is
   required.
-- Run a deliberately bounded live API preflight before claiming Gemini/Vertex
+- Grant Vertex AI prediction/model access before claiming Gemini/Vertex live API
   availability.
 - Keep the deterministic reader path labeled as smoke unless a stronger reader
   experiment is run on real data with baselines.

@@ -45,6 +45,15 @@ def test_export_final_claims_matrix_derives_key_policy_deltas(tmp_path: Path) ->
     assert ope["baseline_value"] == 0.05
     assert ope["delta"] == -0.02
 
+    replay = claims.loc["scifact_bandit_replay_feedback_gap"]
+    assert replay["claim_type"] == "bandit_replay"
+    assert replay["metric"] == "final_cumulative_regret"
+    assert replay["value"] == 8.0
+    assert replay["baseline"] == "Full-information direct method"
+    assert replay["baseline_value"] == 3.0
+    assert replay["delta"] == 5.0
+    assert replay["evidence_artifact_id"] == "scifact_bandit_replay_summary"
+
 
 def test_final_claims_matrix_references_indexed_artifacts(tmp_path: Path) -> None:
     _write_minimal_claim_inputs(tmp_path)
@@ -72,6 +81,8 @@ def _write_minimal_claim_inputs(root: Path) -> None:
     _bootstrap(results / "nfcorpus_bootstrap_diagnostics.csv", dataset="nfcorpus", mean_delta=0.1, ci_low=0.01, ci_high=0.19)
     _linucb(results / "scifact_linucb_baseline_summary.csv", reward=1.01, train_reward=1.0, calls=1.2, train_calls=2.0)
     _linucb(results / "nfcorpus_linucb_baseline_summary.csv", reward=0.43, train_reward=0.4, calls=1.3, train_calls=1.0)
+    _bandit_replay(results / "scifact_bandit_replay_summary.csv", dataset="scifact", selected_regret=8.0, direct_regret=3.0)
+    _bandit_replay(results / "nfcorpus_bandit_replay_summary.csv", dataset="nfcorpus", selected_regret=7.0, direct_regret=4.0)
     _constrained(results / "scifact_constrained_policy_bootstrap.csv", dataset="scifact", utility_delta=0.07, calls_delta=-0.4)
     _constrained(results / "nfcorpus_constrained_policy_bootstrap.csv", dataset="nfcorpus", utility_delta=0.06, calls_delta=0.0)
     _ope(results / "scifact_ope_stability.csv", dataset="scifact", dr_error=0.09, dm_error=0.02)
@@ -104,6 +115,41 @@ def _linucb(path: Path, *, reward: float, train_reward: float, calls: float, tra
         [
             {"method": "LinUCB retrieval policy", "reward": reward, "retrieval_calls": calls},
             {"method": "Train-best retrieval action", "reward": train_reward, "retrieval_calls": train_calls},
+        ]
+    ).to_csv(path, index=False)
+
+
+def _bandit_replay(path: Path, *, dataset: str, selected_regret: float, direct_regret: float) -> None:
+    pd.DataFrame(
+        [
+            {
+                "dataset": dataset,
+                "policy": "Full-information direct method",
+                "steps": 10,
+                "mean_reward": 1.0,
+                "mean_oracle_reward": 1.3,
+                "mean_regret": direct_regret / 10,
+                "final_cumulative_reward": 10.0,
+                "final_cumulative_oracle_reward": 13.0,
+                "final_cumulative_regret": direct_regret,
+                "oracle_match_rate": 0.7,
+                "action_entropy": 1.0,
+                "unique_actions": 2,
+            },
+            {
+                "dataset": dataset,
+                "policy": "LinUCB selected-action replay",
+                "steps": 10,
+                "mean_reward": 0.5,
+                "mean_oracle_reward": 1.3,
+                "mean_regret": selected_regret / 10,
+                "final_cumulative_reward": 5.0,
+                "final_cumulative_oracle_reward": 13.0,
+                "final_cumulative_regret": selected_regret,
+                "oracle_match_rate": 0.3,
+                "action_entropy": 1.5,
+                "unique_actions": 3,
+            },
         ]
     ).to_csv(path, index=False)
 

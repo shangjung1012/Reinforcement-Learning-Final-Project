@@ -33,6 +33,8 @@ def export_final_claims_matrix(*, root: Path, output_csv: Path) -> Path:
         _policy_gain_claim(root, dataset="nfcorpus"),
         _selected_action_baseline_claim(root, dataset="scifact"),
         _selected_action_baseline_claim(root, dataset="nfcorpus"),
+        _bandit_replay_feedback_claim(root, dataset="scifact"),
+        _bandit_replay_feedback_claim(root, dataset="nfcorpus"),
         _constrained_claim(root, dataset="scifact", call_penalty=0.03),
         _constrained_claim(root, dataset="nfcorpus", call_penalty=0.03),
         _ope_ips_coverage_claim(root, dataset="scifact"),
@@ -113,6 +115,37 @@ def _selected_action_baseline_claim(root: Path, *, dataset: str) -> dict[str, ob
             "--num-test-examples 300 --seed 42 --full-corpus --alpha 1.0 --epsilon 0.1 --posterior-scale 1.0"
         ),
         presentation_use="RL framing slide: compact selected-action contextual bandit baseline.",
+    )
+
+
+def _bandit_replay_feedback_claim(root: Path, *, dataset: str) -> dict[str, object]:
+    summary = pd.read_csv(root / "outputs" / "results" / f"{dataset}_bandit_replay_summary.csv")
+    selected = _replay_policy(summary, "LinUCB selected-action replay")
+    direct = _replay_policy(summary, "Full-information direct method")
+    return _row(
+        claim_id=f"{dataset}_bandit_replay_feedback_gap",
+        claim_type="bandit_replay",
+        claim=(
+            f"The {dataset} replay diagnostic separates selected-action bandit feedback from "
+            "full-information direct-method policy learning by comparing cumulative regret."
+        ),
+        primary_dataset=dataset,
+        metric="final_cumulative_regret",
+        value=selected["final_cumulative_regret"],
+        baseline="Full-information direct method",
+        baseline_value=direct["final_cumulative_regret"],
+        delta=_round(selected["final_cumulative_regret"] - direct["final_cumulative_regret"]),
+        calls=selected["oracle_match_rate"],
+        baseline_calls=direct["oracle_match_rate"],
+        call_delta=_round(selected["oracle_match_rate"] - direct["oracle_match_rate"]),
+        evidence_artifact_id=f"{dataset}_bandit_replay_summary",
+        evidence_path=f"outputs/results/{dataset}_bandit_replay_summary.csv[LinUCB selected-action replay]",
+        producer_command=(
+            f"uv run python scripts/run_bandit_replay_diagnostics.py --dataset {dataset} "
+            f"--detailed-csv outputs/results/{dataset}_retrieval_policy_detailed.csv "
+            "--output-dir outputs --split train --seed 42 --moving-average-window 50"
+        ),
+        presentation_use="RL framing slide: selected-action replay regret versus full-information direct method.",
     )
 
 
@@ -223,6 +256,13 @@ def _best_bandit_method(frame: pd.DataFrame) -> pd.Series:
     if matches.empty:
         raise ValueError("Missing selected-action bandit baseline rows")
     return matches.sort_values("reward", ascending=False).iloc[0]
+
+
+def _replay_policy(frame: pd.DataFrame, policy: str) -> pd.Series:
+    matches = frame[frame["policy"] == policy]
+    if matches.empty:
+        raise ValueError(f"Missing bandit replay policy row: {policy}")
+    return matches.iloc[0]
 
 
 def _penalty_row(frame: pd.DataFrame, call_penalty: float) -> pd.Series:

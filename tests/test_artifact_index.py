@@ -158,6 +158,46 @@ def test_final_project_artifact_specs_include_bandit_baselines_and_budget_curves
     assert "run_budget_curve.py" in nfcorpus_budget.producer_command
 
 
+def test_final_project_artifact_specs_include_bandit_replay_diagnostics() -> None:
+    specs = {spec.artifact_id: spec for spec in final_project_artifact_specs(Path("."))}
+
+    scifact_summary = specs["scifact_bandit_replay_summary"]
+    nfcorpus_history = specs["nfcorpus_bandit_replay_history"]
+    scifact_figure = specs["scifact_bandit_replay_regret_figure"]
+
+    assert scifact_summary.category == "bandit_diagnostic"
+    assert scifact_summary.path.as_posix() == "outputs/results/scifact_bandit_replay_summary.csv"
+    assert "selected-action" in scifact_summary.role
+    assert "--detailed-csv outputs/results/scifact_retrieval_policy_detailed.csv" in scifact_summary.producer_command
+
+    assert nfcorpus_history.category == "bandit_diagnostic"
+    assert nfcorpus_history.path.as_posix() == "outputs/results/nfcorpus_bandit_replay_history.csv"
+    assert "cumulative regret" in nfcorpus_history.role
+
+    assert scifact_figure.category == "paper_asset"
+    assert scifact_figure.path.as_posix() == "outputs/figures/scifact_bandit_replay_regret.png"
+
+
+def test_final_project_artifact_specs_include_multistep_fqi_extension() -> None:
+    specs = {spec.artifact_id: spec for spec in final_project_artifact_specs(Path("."))}
+
+    summary = specs["hotpot_multistep_fqi_summary"]
+    detailed = specs["hotpot_multistep_fqi_detailed"]
+    action_figure = specs["hotpot_multistep_action_traces"]
+
+    assert summary.category == "rl_extension"
+    assert summary.path.as_posix() == "outputs/results/multistep_summary.csv"
+    assert "two-step FQI" in summary.role
+    assert "run_multistep_hotpot.py" in summary.producer_command
+
+    assert detailed.category == "rl_extension"
+    assert detailed.path.as_posix() == "outputs/results/multistep_detailed.csv"
+    assert "trace" in detailed.role
+
+    assert action_figure.category == "paper_asset"
+    assert action_figure.path.as_posix() == "outputs/figures/multistep_action_traces.png"
+
+
 def test_final_project_artifact_specs_include_ope_diagnostics() -> None:
     specs = {spec.artifact_id: spec for spec in final_project_artifact_specs(Path("."))}
 

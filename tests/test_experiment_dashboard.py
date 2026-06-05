@@ -65,6 +65,13 @@ def test_experiment_dashboard_separates_final_benchmark_from_smoke_and_api_pilot
             role="Reproduction commands, scope, and project inventory.",
             producer_command="manual documentation update",
         ),
+        ArtifactSpec(
+            artifact_id="hotpot_multistep_metrics_figure",
+            category="paper_asset",
+            path=Path("outputs/figures/multistep_metrics.png"),
+            role="HotpotQA two-step FQI metric comparison figure.",
+            producer_command="uv run python scripts/run_multistep_hotpot.py --num-examples 600 --seed 42",
+        ),
     ]
     claims_csv = tmp_path / "outputs" / "results" / "final_claims_matrix.csv"
     claims_csv.parent.mkdir(parents=True)
@@ -102,6 +109,9 @@ def test_experiment_dashboard_separates_final_benchmark_from_smoke_and_api_pilot
 
     assert rows.loc["readme", "evidence_level"] == "final_claim"
     assert bool(rows.loc["readme", "claim_allowed"]) is True
+
+    assert rows.loc["hotpot_multistep_metrics_figure", "evidence_level"] == "tiny_realdata"
+    assert bool(rows.loc["hotpot_multistep_metrics_figure", "claim_allowed"]) is False
 
 
 def test_write_experiment_dashboard_markdown_summarizes_levels(tmp_path: Path) -> None:
