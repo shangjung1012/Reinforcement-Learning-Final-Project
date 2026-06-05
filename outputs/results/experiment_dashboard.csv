@@ -10,6 +10,8 @@ hotpot_llm_policy_summary,outputs/results/llm_retrieval_policy_summary.csv,hotpo
 hotpot_multistep_fqi_summary,outputs/results/multistep_summary.csv,hotpot,rl_extension,tiny_realdata,True,True,False,False,,,42,,,False,False,small or non-final real-data run
 hotpot_multistep_fqi_detailed,outputs/results/multistep_detailed.csv,hotpot,rl_extension,tiny_realdata,True,True,False,False,,,42,,,False,False,small or non-final real-data run
 hotpot_multistep_fqi_metadata,outputs/results/multistep_metadata.json,hotpot,rl_extension,tiny_realdata,True,True,False,False,,,42,,,False,False,small or non-final real-data run
+hotpot_fqi_diagnostics_summary,outputs/results/hotpot_fqi_diagnostics_summary.csv,hotpot,rl_extension,tiny_realdata,True,True,False,False,,,,,,False,False,small or non-final real-data run
+hotpot_fqi_trace_distribution,outputs/results/hotpot_fqi_trace_distribution.csv,hotpot,rl_extension,tiny_realdata,True,True,False,False,,,,,,False,False,small or non-final real-data run
 hotpot_multistep_metrics_figure,outputs/figures/multistep_metrics.png,hotpot,paper_asset,tiny_realdata,True,True,False,False,,,42,,,False,False,small or non-final real-data run
 hotpot_multistep_action_traces,outputs/figures/multistep_action_traces.png,hotpot,paper_asset,tiny_realdata,True,True,False,False,,,42,,,False,False,small or non-final real-data run
 scifact_policy_summary,outputs/results/scifact_retrieval_policy_summary.csv,scifact,main_result,full_benchmark,True,True,False,False,600,300,42,auto,,True,False,final retrieval-stage benchmark evidence

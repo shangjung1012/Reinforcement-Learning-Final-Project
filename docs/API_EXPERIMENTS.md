@@ -64,23 +64,28 @@ validation, and guardrail checks.
 
 On the current local setup, dry-run preflight succeeds without printing secrets:
 `.env` exists, required variable names are present, and the credential file
-basename is visible to the script. A deliberately bounded live preflight was
-also attempted with one Gemini call and one Vertex embedding text allowed:
+basename is visible to the script. After switching to the current local Google
+Cloud project in `.env`, a deliberately bounded live preflight was also run with
+one Gemini call and one Vertex embedding text allowed:
 
 ```bash
 CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_api_preflight.py \
   --provider all \
-  --output-dir outputs/codex_api_preflight_live_phase \
+  --output-dir outputs/codex_api_preflight_new_project_live \
   --allow-api \
   --max-new-gemini-calls 1 \
   --max-new-embedding-texts 1
 ```
 
-Both providers returned `403 PERMISSION_DENIED` for
-`aiplatform.endpoints.predict`, and successful live calls/texts remained zero.
-So the local `.env` shape is valid, but the current Google Cloud identity still
-needs Vertex AI prediction permission and model access before Gemini or Vertex
-semantic-feature pilots can run.
+Both providers succeeded under that cap: one Gemini generation call and one
+Vertex embedding text request. This validates the local credential and SDK path,
+but it is still only `api_preflight` evidence, not benchmark evidence.
+
+The Gemini HotpotQA baseline pilot is currently blocked by missing local
+HotpotQA raw data, not by API access. The Vertex embedding path has been checked
+with tiny SciFact/NFCorpus semantic-feature pilots; those pilots remain
+`api_pilot` evidence and should not be promoted to final claims without larger
+repeated-seed validation and guardrail checks.
 
 ## Gemini Baseline Budget Gate
 

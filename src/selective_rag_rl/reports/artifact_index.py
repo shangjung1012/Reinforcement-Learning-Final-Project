@@ -138,6 +138,20 @@ def final_project_artifact_specs(root: Path | None = None) -> list[ArtifactSpec]
             "uv run python scripts/run_multistep_hotpot.py --num-examples 600 --seed 42",
         ),
         artifact(
+            "hotpot_fqi_diagnostics_summary",
+            "rl_extension",
+            "outputs/results/hotpot_fqi_diagnostics_summary.csv",
+            "Post-hoc HotpotQA FQI diagnostics comparing Multi-step FQI against train-best fixed trace and the two-step oracle.",
+            "uv run python scripts/run_fqi_diagnostics.py --dataset hotpot --detailed-csv outputs/results/multistep_detailed.csv --summary-csv outputs/results/hotpot_fqi_diagnostics_summary.csv --trace-csv outputs/results/hotpot_fqi_trace_distribution.csv --split test",
+        ),
+        artifact(
+            "hotpot_fqi_trace_distribution",
+            "rl_extension",
+            "outputs/results/hotpot_fqi_trace_distribution.csv",
+            "HotpotQA Multi-step FQI selected action-trace distribution with reward and retrieval-call diagnostics.",
+            "uv run python scripts/run_fqi_diagnostics.py --dataset hotpot --detailed-csv outputs/results/multistep_detailed.csv --summary-csv outputs/results/hotpot_fqi_diagnostics_summary.csv --trace-csv outputs/results/hotpot_fqi_trace_distribution.csv --split test",
+        ),
+        artifact(
             "hotpot_multistep_metrics_figure",
             "paper_asset",
             "outputs/figures/multistep_metrics.png",

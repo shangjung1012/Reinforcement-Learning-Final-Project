@@ -44,6 +44,16 @@ uv run python scripts/run_final_smoke.py --output-dir outputs/codex_smoke --pyte
 
 `outputs/codex_smoke/` is ignored by git because it is generated local evidence.
 
+For downstream EM/F1 plumbing without raw data, run the deterministic reader
+comparison:
+
+```bash
+uv run python scripts/run_reader_comparison.py --dataset toy --num-examples 4 --output-dir outputs/codex_reader_comparison
+```
+
+The toy comparison exercises both `lexical` and `span` reader modes. It remains
+`smoke_toy_reader` evidence, not final answer-generation evidence.
+
 ## Tests
 
 Run the default test suite:

@@ -1,0 +1,21 @@
+dataset,split,action_trace,count,rate,mean_reward,mean_retrieval_calls
+hotpot,test,keyword_compress -> stop,72,0.3,1.3087037037037037,2.0
+hotpot,test,stop,47,0.19583333333333333,1.2163120567375887,1.0
+hotpot,test,keyword_compress -> decompose,33,0.1375,1.15010101010101,4.0
+hotpot,test,entity_expand -> stop,23,0.09583333333333334,1.2819565217391304,2.0
+hotpot,test,keyword_compress -> feedback_expand,13,0.05416666666666667,1.2161538461538461,3.0
+hotpot,test,decompose -> stop,8,0.03333333333333333,1.0933333333333333,3.0
+hotpot,test,entity_expand -> decompose,6,0.025,1.0133333333333334,4.0
+hotpot,test,keyword_compress -> entity_expand,5,0.020833333333333332,1.3599999999999999,3.0
+hotpot,test,decompose -> entity_expand,5,0.020833333333333332,1.076,4.0
+hotpot,test,entity_expand -> feedback_expand,4,0.016666666666666666,1.2475,3.0
+hotpot,test,feedback_expand -> stop,4,0.016666666666666666,0.7716666666666666,2.0
+hotpot,test,decompose -> feedback_expand,3,0.0125,1.4100000000000001,4.0
+hotpot,test,keyword_compress -> title_bridge,3,0.0125,1.3983333333333334,4.0
+hotpot,test,entity_expand -> entity_expand,3,0.0125,1.06,3.0
+hotpot,test,decompose -> decompose,2,0.008333333333333333,1.42,5.0
+hotpot,test,entity_expand -> title_bridge,2,0.008333333333333333,1.3875,4.0
+hotpot,test,decompose -> keyword_compress,2,0.008333333333333333,1.315,4.0
+hotpot,test,title_bridge -> stop,2,0.008333333333333333,0.8825000000000001,3.0
+hotpot,test,entity_expand -> keyword_compress,2,0.008333333333333333,0.6975,3.0
+hotpot,test,feedback_expand -> feedback_expand,1,0.004166666666666667,0.67,3.0

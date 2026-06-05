@@ -3,7 +3,8 @@
 This repository now includes a small downstream QA evaluation path:
 
 ```bash
-uv run python scripts/run_reader_eval.py --dataset toy --output-dir outputs/codex_reader_smoke
+uv run python scripts/run_reader_eval.py --dataset toy --reader lexical --output-dir outputs/codex_reader_smoke
+uv run python scripts/run_reader_eval.py --dataset toy --reader span --output-dir outputs/codex_reader_span_smoke
 ```
 
 The default mode is intentionally lightweight:
@@ -12,13 +13,13 @@ The default mode is intentionally lightweight:
 - no model downloads;
 - no Vertex/Gemini calls;
 - BM25 retrieval;
-- deterministic lexical-overlap reader;
+- deterministic lexical-overlap or span-heuristic reader;
 - SQuAD-style exact match and token F1 metrics.
 
 ## What It Measures
 
-The script retrieves passages, selects a sentence from the retrieved passages
-with `LexicalOverlapReader`, and writes:
+The script retrieves passages, selects text from the retrieved passages, and
+writes:
 
 - `reader_eval_detailed.csv`
 - `reader_eval_summary.csv`
@@ -36,9 +37,9 @@ The detailed CSV includes:
 
 ## Claim Boundary
 
-This is a downstream reader smoke check, not a new final benchmark. The reader
-is deterministic and useful for testing evaluation plumbing, but it is not a
-competitive QA model and does not justify changing the main project claim.
+This is a downstream reader smoke check, not a new final benchmark. Both reader
+modes are deterministic and useful for testing evaluation plumbing, but neither
+is a competitive QA model and neither justifies changing the main project claim.
 
 The main supported claim remains retrieval-stage:
 
@@ -72,3 +73,15 @@ uv run python scripts/run_reader_eval.py --dataset toy --num-examples 4 --output
 It produced exact match 0.0 and token F1 0.490079 with retrieval Recall@5 1.0.
 That is enough to verify EM/F1 plumbing and output schemas, but not enough to
 claim downstream RAG answer-quality improvement.
+
+The span heuristic reader can also be compared against the lexical reader:
+
+```bash
+uv run python scripts/run_reader_comparison.py --dataset toy --num-examples 4 --output-dir outputs/codex_reader_comparison_api_run
+```
+
+On the synthetic toy fixture, lexical reader exact match is 0.0 with token F1
+0.490079, while the span reader reaches exact match 1.0 and token F1 1.0. This
+means the toy fixture now exercises answer-span extraction, not only sentence
+selection. It is still `smoke_toy_reader` evidence because HotpotQA and NQ raw
+data are missing locally.

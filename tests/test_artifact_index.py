@@ -183,6 +183,8 @@ def test_final_project_artifact_specs_include_multistep_fqi_extension() -> None:
 
     summary = specs["hotpot_multistep_fqi_summary"]
     detailed = specs["hotpot_multistep_fqi_detailed"]
+    diagnostics = specs["hotpot_fqi_diagnostics_summary"]
+    traces = specs["hotpot_fqi_trace_distribution"]
     action_figure = specs["hotpot_multistep_action_traces"]
 
     assert summary.category == "rl_extension"
@@ -193,6 +195,15 @@ def test_final_project_artifact_specs_include_multistep_fqi_extension() -> None:
     assert detailed.category == "rl_extension"
     assert detailed.path.as_posix() == "outputs/results/multistep_detailed.csv"
     assert "trace" in detailed.role
+
+    assert diagnostics.category == "rl_extension"
+    assert diagnostics.path.as_posix() == "outputs/results/hotpot_fqi_diagnostics_summary.csv"
+    assert "train-best fixed trace" in diagnostics.role
+    assert "run_fqi_diagnostics.py" in diagnostics.producer_command
+
+    assert traces.category == "rl_extension"
+    assert traces.path.as_posix() == "outputs/results/hotpot_fqi_trace_distribution.csv"
+    assert "action-trace distribution" in traces.role
 
     assert action_figure.category == "paper_asset"
     assert action_figure.path.as_posix() == "outputs/figures/multistep_action_traces.png"

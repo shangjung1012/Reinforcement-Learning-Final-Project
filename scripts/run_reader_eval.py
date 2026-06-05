@@ -9,7 +9,7 @@ import pandas as pd
 from selective_rag_rl.core.answer_metrics import exact_match, token_f1
 from selective_rag_rl.core.data import Passage, QAExample, load_hotpotqa, load_natural_questions
 from selective_rag_rl.core.metrics import mrr, ndcg_at_k, recall_at_k
-from selective_rag_rl.core.reader import LexicalOverlapReader
+from selective_rag_rl.core.reader import LexicalOverlapReader, SpanHeuristicReader
 from selective_rag_rl.core.retriever import BM25Retriever
 
 
@@ -23,20 +23,20 @@ def run_reader_eval(
     reader: str = "lexical",
     retriever: str = "bm25",
 ) -> dict[str, object]:
-    if reader != "lexical":
-        raise ValueError("Only the deterministic lexical reader is available by default")
+    if reader not in {"lexical", "span"}:
+        raise ValueError("reader must be one of: lexical, span")
     if retriever != "bm25":
         raise ValueError("Only BM25 retrieval is available in the lightweight reader eval")
 
     examples = _load_examples(dataset, num_examples, seed, data_path)
-    lexical_reader = LexicalOverlapReader()
+    qa_reader = _reader(reader)
     rows = []
     for ex in examples:
         bm25 = BM25Retriever(ex.passages)
         results = bm25.search(ex.question, k=k)
         passages_by_id = {passage.doc_id: passage for passage in ex.passages}
         retrieved_passages = [passages_by_id[result.doc_id] for result in results if result.doc_id in passages_by_id]
-        prediction = lexical_reader.predict(ex.question, retrieved_passages)
+        prediction = qa_reader.predict(ex.question, retrieved_passages)
         rows.append(
             {
                 "dataset": dataset,
@@ -89,6 +89,14 @@ def _load_examples(dataset: str, num_examples: int, seed: int, data_path: Path |
         _require_path(path, dataset)
         return load_natural_questions(path, num_examples=num_examples, seed=seed)
     raise ValueError("dataset must be one of: toy, hotpot, nq")
+
+
+def _reader(reader: str) -> LexicalOverlapReader | SpanHeuristicReader:
+    if reader == "lexical":
+        return LexicalOverlapReader()
+    if reader == "span":
+        return SpanHeuristicReader()
+    raise ValueError("reader must be one of: lexical, span")
 
 
 def _toy_examples(num_examples: int) -> list[QAExample]:
@@ -161,6 +169,7 @@ def main() -> None:
     parser.add_argument("--num-examples", type=int, default=10)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--k", type=int, default=5)
+    parser.add_argument("--reader", choices=["lexical", "span"], default="lexical")
     args = parser.parse_args()
 
     metadata = run_reader_eval(
@@ -170,6 +179,7 @@ def main() -> None:
         num_examples=args.num_examples,
         seed=args.seed,
         k=args.k,
+        reader=args.reader,
     )
     print(json.dumps(metadata, indent=2))
     print(pd.read_csv(metadata["outputs"]["summary_csv"]).to_string(index=False))

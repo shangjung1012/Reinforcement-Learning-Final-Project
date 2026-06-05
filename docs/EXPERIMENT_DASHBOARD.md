@@ -13,7 +13,7 @@ claim without stronger evidence.
 | final_claim | 20 |
 | full_benchmark | 24 |
 | smoke_synthetic | 3 |
-| tiny_realdata | 14 |
+| tiny_realdata | 16 |
 
 ## Artifact Evidence Levels
 
@@ -73,6 +73,8 @@ claim without stronger evidence.
 | nfcorpus_confidence_gate_smoke | nfcorpus | diagnostic | smoke_synthetic | False | False | code-path smoke only, not benchmark evidence |
 | nfcorpus_confidence_gate_sweep | nfcorpus | diagnostic | smoke_synthetic | False | False | code-path smoke only, not benchmark evidence |
 | experiment_dashboard | unknown | evidence_dashboard | smoke_synthetic | False | False | code-path smoke only, not benchmark evidence |
+| hotpot_fqi_diagnostics_summary | hotpot | rl_extension | tiny_realdata | False | False | small or non-final real-data run |
+| hotpot_fqi_trace_distribution | hotpot | rl_extension | tiny_realdata | False | False | small or non-final real-data run |
 | hotpot_multistep_action_traces | hotpot | paper_asset | tiny_realdata | False | False | small or non-final real-data run |
 | hotpot_multistep_fqi_detailed | hotpot | rl_extension | tiny_realdata | False | False | small or non-final real-data run |
 | hotpot_multistep_fqi_metadata | hotpot | rl_extension | tiny_realdata | False | False | small or non-final real-data run |
