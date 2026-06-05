@@ -83,5 +83,21 @@ uv run python scripts/run_reader_comparison.py --dataset toy --num-examples 4 --
 On the synthetic toy fixture, lexical reader exact match is 0.0 with token F1
 0.490079, while the span reader reaches exact match 1.0 and token F1 1.0. This
 means the toy fixture now exercises answer-span extraction, not only sentence
-selection. It is still `smoke_toy_reader` evidence because HotpotQA and NQ raw
-data are missing locally.
+selection. It is still `smoke_toy_reader` evidence.
+
+After restoring HotpotQA dev distractor locally, a tiny real-data comparison was
+also run:
+
+```bash
+uv run python scripts/run_reader_comparison.py --dataset hotpot --num-examples 50 --readers lexical,span --output-dir outputs/codex_reader_hotpot_realdata_50
+```
+
+Summary:
+
+- lexical reader: exact match 0.0, token F1 0.046297, Recall@5 0.83;
+- span reader: exact match 0.02, token F1 0.076500, Recall@5 0.83.
+
+This result is useful because it confirms the deterministic reader plumbing on
+real HotpotQA examples. It is still not final QA benchmark evidence: the run is
+small, the readers are heuristic, and Natural Questions remains unavailable
+locally.

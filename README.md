@@ -118,6 +118,9 @@ For optional Vertex/Gemini setup and bounded preflight commands, see
 `docs/API_EXPERIMENTS.md`.
 Before running full-data experiments, check local raw-data availability with
 `uv run python scripts/run_data_preflight.py --output-dir outputs/codex_data_preflight`.
+If HotpotQA is missing on Windows, the cross-platform downloader can restore the
+dev distractor split via the Hugging Face mirror:
+`uv run python scripts/download_missing_raw_data.py --dataset hotpot-dev-distractor --prefer-hf --output-dir outputs/codex_data_download_hotpot_hf`.
 
 ## Expected Data Layout
 
@@ -277,6 +280,9 @@ benchmark. Deterministic lexical-overlap and span-heuristic reader smoke paths
 are available for testing downstream QA metrics, but the final scope remains
 retrieval-stage selective query rewriting, using Recall@5, MRR, nDCG@5,
 retrieval calls, and rewrite cost as the main evaluation signals.
+The checked-in `outputs/results/hotpot_reader_realdata_summary.csv` is a tiny
+50-example HotpotQA reader comparison; it is useful for sanity checking EM/F1
+plumbing but not for claiming downstream answer-quality improvement.
 Vertex semantic features are implemented as an optional extension and cached
 under `outputs/cache/`. They include query-to-top-passage similarity summaries
 and top-k rank-aware similarity profiles, score-shape features over the head
@@ -304,8 +310,8 @@ Gemini rewrite/decomposition actions are implemented as expensive optional
 actions in a separate HotpotQA experiment; cache files remain under
 `outputs/cache/` and are ignored by git. The current local API preflight can make
 one bounded Gemini call and one bounded Vertex embedding request, but the
-Gemini HotpotQA baseline remains blocked locally until the HotpotQA raw JSON is
-available. The BEIR retrieval-policy scripts also support `--generated-actions`,
+bounded Gemini HotpotQA baseline pilot remains only a 4-example held-out API
+pilot. The BEIR retrieval-policy scripts also support `--generated-actions`,
 which expands the policy action space with Gemini-generated HyDE
 pseudo-documents, multi-query retrieval, and hybrid decomposition actions
 without overwriting the main non-generated result files. These generated runs

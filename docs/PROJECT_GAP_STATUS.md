@@ -25,6 +25,12 @@ dashboard fixes.
 - FQI post-hoc diagnostics were added:
   `scripts/run_fqi_diagnostics.py` writes the reward/call gap against
   train-best fixed trace and the selected trace distribution.
+- A Windows-friendly missing raw-data downloader was added:
+  `scripts/download_missing_raw_data.py` can fetch HotpotQA dev distractor from
+  a Hugging Face parquet mirror and convert it into the existing JSON loader
+  schema.
+- HotpotQA real-data reader comparison and a bounded Gemini baseline pilot were
+  run after the missing HotpotQA dev distractor file was restored locally.
 
 ## Data Availability
 
@@ -40,8 +46,12 @@ Current local status:
   test qrels.
 - NFCorpus is available: 3,633 corpus rows, 3,237 queries, 110,575 train qrels,
   11,385 dev qrels, 12,334 test qrels.
-- HotpotQA is blocked: `data/raw/HotpotQA/hotpot_dev_distractor_v1.json` is
-  missing.
+- HotpotQA dev distractor is available: 7,405 rows. It was restored with:
+
+  ```bash
+  uv run python scripts/download_missing_raw_data.py --dataset hotpot-dev-distractor --prefer-hf --output-dir outputs/codex_data_download_hotpot_hf
+  ```
+
 - Natural Questions is blocked:
   `data/raw/natural-questions/default/validation-00000-of-00007.parquet` is
   missing.
@@ -68,9 +78,19 @@ Vertex embedding text. Under the updated local Google Cloud project, both
 providers succeeded. This establishes API reachability only; it does not change
 the final benchmark claim.
 
-The Gemini HotpotQA baseline pilot is still blocked because
-`data/raw/HotpotQA/hotpot_dev_distractor_v1.json` is missing. Vertex semantic
-feature pilots were run on tiny SciFact/NFCorpus splits:
+A bounded HotpotQA Gemini baseline pilot was run after HotpotQA became
+available:
+
+```bash
+CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_gemini_baseline.py --data-path data/raw/HotpotQA/hotpot_dev_distractor_v1.json --num-examples 10 --seed 42 --cache-path outputs/cache/codex_gemini_rewrites_realdata.jsonl --allow-api --max-new-calls 8 --output-dir outputs/codex_gemini_realdata_pilot
+```
+
+The dry-run estimated 8 cache misses, and the live pilot made 8 new Gemini
+calls. On the 4 held-out examples, Gemini rewrite-all and decompose both reached
+Recall@5 1.0 and MRR 1.0, but cost-aware reward was only 0.4175 and 0.4000 due
+to high rewrite/retrieval cost. This is `api_pilot` evidence only.
+
+Vertex semantic feature pilots were run on tiny SciFact/NFCorpus splits:
 
 - NFCorpus 10/10: selective reward tied train-best fixed at 0.212549.
 - SciFact 10/10: selective reward tied train-best fixed at 0.900000.
@@ -103,6 +123,21 @@ Toy comparison result:
 This validates stronger downstream metric plumbing on a synthetic fixture only;
 it is not evidence for answer-generation quality on HotpotQA or NQ.
 
+After restoring HotpotQA, a tiny real-data reader comparison was run:
+
+```bash
+uv run python scripts/run_reader_comparison.py --dataset hotpot --num-examples 50 --readers lexical,span --output-dir outputs/codex_reader_hotpot_realdata_50
+```
+
+Result:
+
+- lexical reader: exact match 0.0, token F1 0.046297, Recall@5 0.83;
+- span reader: exact match 0.02, token F1 0.076500, Recall@5 0.83.
+
+This is now real-data evidence, but it is still tiny and uses deterministic
+heuristics. It should be treated as `tiny_realdata`, not final downstream RAG
+answer-quality evidence.
+
 ## FQI Extension Status
 
 Checked with:
@@ -119,8 +154,10 @@ but it should not be presented as a main win.
 
 ## Remaining Work
 
-- Add HotpotQA and NQ raw data if downstream real-data reader EM/F1 evidence is
+- Add Natural Questions raw data if NQ downstream reader EM/F1 evidence is
   required.
+- Scale HotpotQA reader evaluation and compare against a stronger reader before
+  making any answer-quality claim.
 - Keep Gemini/Vertex pilots labeled as API pilots until larger repeated-seed
   guardrail checks support them.
 - Keep the deterministic reader paths labeled as smoke unless a stronger reader

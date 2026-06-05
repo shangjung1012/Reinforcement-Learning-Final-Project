@@ -117,6 +117,20 @@ def final_project_artifact_specs(root: Path | None = None) -> list[ArtifactSpec]
             "uv run python scripts/run_llm_retrieval_policy_hotpot.py --num-examples 20 --seed 42 --policy-model auto",
         ),
         artifact(
+            "hotpot_reader_realdata_summary",
+            "reader_smoke",
+            "outputs/results/hotpot_reader_realdata_summary.csv",
+            "Tiny HotpotQA real-data downstream reader comparison for lexical and span heuristic readers; not final QA benchmark evidence.",
+            "uv run python scripts/run_reader_comparison.py --dataset hotpot --num-examples 50 --readers lexical,span --output-dir outputs/codex_reader_hotpot_realdata_50",
+        ),
+        artifact(
+            "hotpot_gemini_pilot_summary",
+            "api_pilot",
+            "outputs/results/hotpot_gemini_pilot_summary.csv",
+            "Bounded HotpotQA Gemini rewrite/decompose baseline pilot with at most 8 new Gemini calls; not final generated-action evidence.",
+            "CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_gemini_baseline.py --data-path data/raw/HotpotQA/hotpot_dev_distractor_v1.json --num-examples 10 --seed 42 --cache-path outputs/cache/codex_gemini_rewrites_realdata.jsonl --allow-api --max-new-calls 8 --output-dir outputs/codex_gemini_realdata_pilot",
+        ),
+        artifact(
             "hotpot_multistep_fqi_summary",
             "rl_extension",
             "outputs/results/multistep_summary.csv",

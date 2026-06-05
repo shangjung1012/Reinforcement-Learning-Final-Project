@@ -81,11 +81,17 @@ Both providers succeeded under that cap: one Gemini generation call and one
 Vertex embedding text request. This validates the local credential and SDK path,
 but it is still only `api_preflight` evidence, not benchmark evidence.
 
-The Gemini HotpotQA baseline pilot is currently blocked by missing local
-HotpotQA raw data, not by API access. The Vertex embedding path has been checked
-with tiny SciFact/NFCorpus semantic-feature pilots; those pilots remain
-`api_pilot` evidence and should not be promoted to final claims without larger
-repeated-seed validation and guardrail checks.
+After restoring local HotpotQA dev distractor data, a bounded Gemini HotpotQA
+baseline pilot was run with 8 cache misses and `--max-new-calls 8`. The live run
+made 8 new Gemini calls and wrote only ignored local detailed/cache artifacts.
+A sanitized aggregate summary is available at
+`outputs/results/hotpot_gemini_pilot_summary.csv`. This remains `api_pilot`
+evidence because it covers only 4 held-out examples.
+
+The Vertex embedding path has been checked with tiny SciFact/NFCorpus
+semantic-feature pilots; those pilots also remain `api_pilot` evidence and
+should not be promoted to final claims without larger repeated-seed validation
+and guardrail checks.
 
 ## Gemini Baseline Budget Gate
 
@@ -98,6 +104,8 @@ CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_gemini_baseline.py --data-path
 
 When the cache misses exceed `--max-new-calls`, or when live calls are not
 explicitly allowed, the script stops before constructing the live Vertex client.
+On the current HotpotQA 10-example pilot, dry-run reported 8 misses and live
+execution used exactly 8 new calls.
 
 ## Vertex Semantic Embedding Budget Gate
 

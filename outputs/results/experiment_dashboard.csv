@@ -7,6 +7,8 @@ final_defense_qa,FINAL_DEFENSE_QA.md,unknown,document,final_claim,True,False,Fal
 final_results_summary,FINAL_RESULTS_SUMMARY.md,unknown,document,final_claim,True,False,False,False,,,,,,True,False,"final report, figure, or claim artifact"
 hotpot_retrieval_policy_summary,outputs/results/retrieval_policy_summary.csv,hotpot,main_result,tiny_realdata,True,True,False,False,,,42,,,False,False,small or non-final real-data run
 hotpot_llm_policy_summary,outputs/results/llm_retrieval_policy_summary.csv,hotpot,main_result,api_pilot,True,True,True,False,,,42,auto,,False,False,API-backed pilot or semantic analysis only
+hotpot_reader_realdata_summary,outputs/results/hotpot_reader_realdata_summary.csv,hotpot,reader_smoke,tiny_realdata,True,True,False,False,,,,,,False,False,small or non-final real-data run
+hotpot_gemini_pilot_summary,outputs/results/hotpot_gemini_pilot_summary.csv,hotpot,api_pilot,api_pilot,True,True,True,False,,,42,,,False,False,API-backed pilot or semantic analysis only
 hotpot_multistep_fqi_summary,outputs/results/multistep_summary.csv,hotpot,rl_extension,tiny_realdata,True,True,False,False,,,42,,,False,False,small or non-final real-data run
 hotpot_multistep_fqi_detailed,outputs/results/multistep_detailed.csv,hotpot,rl_extension,tiny_realdata,True,True,False,False,,,42,,,False,False,small or non-final real-data run
 hotpot_multistep_fqi_metadata,outputs/results/multistep_metadata.json,hotpot,rl_extension,tiny_realdata,True,True,False,False,,,42,,,False,False,small or non-final real-data run

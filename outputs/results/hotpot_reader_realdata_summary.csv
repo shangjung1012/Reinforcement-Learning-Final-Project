@@ -1,0 +1,3 @@
+dataset,reader,retriever,seed,k,num_examples,exact_match,f1,recall_at_5,mrr,ndcg_at_5,claim_scope
+hotpot,lexical,bm25,42,5,50,0.0,0.0462967852398693,0.83,0.915,0.806311528516268,smoke_downstream_reader_check
+hotpot,span,bm25,42,5,50,0.02,0.0765,0.83,0.915,0.806311528516268,smoke_downstream_reader_check

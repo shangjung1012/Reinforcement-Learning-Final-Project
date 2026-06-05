@@ -105,6 +105,18 @@ cd data/raw
 bash download.sh
 ```
 
+On Windows, or when the original HotpotQA HTTP host is unavailable, use the
+cross-platform downloader from the repository root. It downloads the Hugging
+Face HotpotQA parquet mirror and converts it into the existing JSON loader
+schema:
+
+```bash
+uv run python scripts/download_missing_raw_data.py --dataset hotpot-dev-distractor --prefer-hf --output-dir outputs/codex_data_download_hotpot_hf
+```
+
+The downloaded raw JSON remains under ignored `data/raw/HotpotQA/`. The
+generated downloader report remains under ignored `outputs/codex_*`.
+
 Before launching real-data experiments, check local data availability:
 
 ```bash

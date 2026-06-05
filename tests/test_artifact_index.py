@@ -209,6 +209,23 @@ def test_final_project_artifact_specs_include_multistep_fqi_extension() -> None:
     assert action_figure.path.as_posix() == "outputs/figures/multistep_action_traces.png"
 
 
+def test_final_project_artifact_specs_include_reader_and_gemini_pilots() -> None:
+    specs = {spec.artifact_id: spec for spec in final_project_artifact_specs(Path("."))}
+
+    reader = specs["hotpot_reader_realdata_summary"]
+    gemini = specs["hotpot_gemini_pilot_summary"]
+
+    assert reader.category == "reader_smoke"
+    assert reader.path.as_posix() == "outputs/results/hotpot_reader_realdata_summary.csv"
+    assert "not final QA benchmark" in reader.role
+    assert "run_reader_comparison.py" in reader.producer_command
+
+    assert gemini.category == "api_pilot"
+    assert gemini.path.as_posix() == "outputs/results/hotpot_gemini_pilot_summary.csv"
+    assert "8 new Gemini calls" in gemini.role
+    assert "--max-new-calls 8" in gemini.producer_command
+
+
 def test_final_project_artifact_specs_include_ope_diagnostics() -> None:
     specs = {spec.artifact_id: spec for spec in final_project_artifact_specs(Path("."))}
 
