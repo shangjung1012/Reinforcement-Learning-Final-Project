@@ -12,6 +12,8 @@ hotpot_reader_realdata_200_summary,outputs/results/hotpot_reader_realdata_200_su
 nq_reader_realdata_summary,outputs/results/nq_reader_realdata_summary.csv,nq,reader_smoke,tiny_realdata,True,True,False,False,,,,,,False,False,small or non-final real-data run
 hotpot_gemini_pilot_summary,outputs/results/hotpot_gemini_pilot_summary.csv,hotpot,api_pilot,api_pilot,True,True,True,False,,,42,,,False,False,API-backed pilot or semantic analysis only
 hotpot_gemini_repeated_pilot_summary,outputs/results/hotpot_gemini_repeated_pilot_summary.csv,hotpot,api_pilot,api_pilot,True,True,True,False,,,,,,False,False,API-backed pilot or semantic analysis only
+hotpot_gemini_reader_pilot_summary,outputs/results/hotpot_gemini_reader_pilot_summary.csv,hotpot,api_pilot,api_pilot,True,True,True,False,,,,,,False,False,API-backed pilot or semantic analysis only
+nq_gemini_reader_pilot_summary,outputs/results/nq_gemini_reader_pilot_summary.csv,nq,api_pilot,api_pilot,True,True,True,False,,,,,,False,False,API-backed pilot or semantic analysis only
 hotpot_multistep_fqi_summary,outputs/results/multistep_summary.csv,hotpot,rl_extension,tiny_realdata,True,True,False,False,,,42,,,False,False,small or non-final real-data run
 hotpot_multistep_fqi_detailed,outputs/results/multistep_detailed.csv,hotpot,rl_extension,tiny_realdata,True,True,False,False,,,42,,,False,False,small or non-final real-data run
 hotpot_multistep_fqi_metadata,outputs/results/multistep_metadata.json,hotpot,rl_extension,tiny_realdata,True,True,False,False,,,42,,,False,False,small or non-final real-data run

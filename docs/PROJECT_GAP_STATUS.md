@@ -37,6 +37,9 @@ dashboard fixes.
   reader comparisons were run as tiny real-data diagnostics.
 - A repeated-seed Gemini baseline pilot and a tiny repeated-seed Vertex semantic
   pilot were run under explicit cache/budget gates.
+- A bounded Gemini answer-reader pilot was run on HotpotQA and Natural
+  Questions, providing the first non-deterministic downstream QA signal while
+  keeping the evidence labeled as `api_pilot`.
 
 ## Data Availability
 
@@ -186,6 +189,28 @@ These results make the downstream gap more concrete: retrieval coverage can be
 high while deterministic answer extraction remains weak. They do not support a
 final downstream answer-quality claim.
 
+A stronger bounded Gemini reader pilot was then run on the same downstream
+metric path:
+
+```bash
+CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_gemini_reader_eval.py --dataset hotpot --num-examples 40 --cache-path outputs/cache/codex_gemini_reader_hotpot.jsonl --allow-api --max-new-calls 40 --output-dir outputs/codex_gemini_reader_hotpot_40
+CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_gemini_reader_eval.py --dataset nq --num-examples 40 --cache-path outputs/cache/codex_gemini_reader_nq.jsonl --allow-api --max-new-calls 40 --output-dir outputs/codex_gemini_reader_nq_40
+```
+
+HotpotQA 40 summary:
+
+- best deterministic baseline: exact match 0.0, token F1 0.062292;
+- Gemini reader: exact match 0.575, token F1 0.628081.
+
+NQ 40 summary:
+
+- best deterministic baseline: exact match 0.0, token F1 0.029894;
+- Gemini reader: exact match 0.225, token F1 0.265417.
+
+This is a meaningful pilot improvement over deterministic readers, but it is
+not yet a final answer-quality claim because it is single-seed, small, API
+backed, BM25-only, and not compared against policy-routed retrieval.
+
 ## FQI Extension Status
 
 Checked with:
@@ -202,10 +227,11 @@ but it should not be presented as a main win.
 
 ## Remaining Work
 
-- Add a stronger reader, such as a locally cached extractive QA model or a
-  carefully bounded API reader, before making any answer-quality claim.
-- Scale HotpotQA/NQ reader evaluation with comparable baselines if downstream
-  QA evidence is required.
+- Scale the Gemini reader or a locally cached extractive QA reader to larger
+  HotpotQA/NQ splits with repeated seeds before making any answer-quality claim.
+- Compare the stronger reader under fixed BM25, fixed generated rewrites, and
+  the learned retrieval-action policy before connecting downstream QA to the RL
+  policy.
 - Keep Gemini/Vertex pilots labeled as API pilots until larger repeated-seed
   guardrail checks support them against fixed-action and policy baselines.
 - Keep the deterministic reader paths labeled as smoke unless a stronger reader

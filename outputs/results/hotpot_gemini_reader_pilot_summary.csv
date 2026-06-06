@@ -1,0 +1,5 @@
+dataset,reader,method,num_examples,exact_match,f1,recall_at_5,mrr,ndcg_at_5,claim_scope
+hotpot,lexical,Lexical reader,40,0.0,0.03267750835636343,0.825,0.90625,0.801651288756633,api_pilot_reader_check
+hotpot,span,Span reader,40,0.0,0.06229166666666667,0.825,0.90625,0.801651288756633,api_pilot_reader_check
+hotpot,answer_type,Answer-type reader,40,0.0,0.06229166666666667,0.825,0.90625,0.801651288756633,api_pilot_reader_check
+hotpot,gemini,Gemini reader,40,0.575,0.628080808080808,0.825,0.90625,0.801651288756633,api_pilot_reader_check

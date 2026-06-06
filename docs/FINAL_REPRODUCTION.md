@@ -180,6 +180,21 @@ CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_repeated_selection.py --datase
 Use `docs/EXPERIMENT_DASHBOARD.md` to verify these rows stay labeled as
 `api_pilot`, not final benchmark evidence.
 
+For a stronger downstream-reader pilot, run dry-run first and then live with
+explicit call caps:
+
+```bash
+uv run python scripts/run_gemini_reader_eval.py --dataset hotpot --num-examples 40 --cache-path outputs/cache/codex_gemini_reader_hotpot.jsonl --dry-run --output-dir outputs/codex_gemini_reader_hotpot_dry
+uv run python scripts/run_gemini_reader_eval.py --dataset nq --num-examples 40 --cache-path outputs/cache/codex_gemini_reader_nq.jsonl --dry-run --output-dir outputs/codex_gemini_reader_nq_dry
+
+CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_gemini_reader_eval.py --dataset hotpot --num-examples 40 --cache-path outputs/cache/codex_gemini_reader_hotpot.jsonl --allow-api --max-new-calls 40 --output-dir outputs/codex_gemini_reader_hotpot_40
+CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_gemini_reader_eval.py --dataset nq --num-examples 40 --cache-path outputs/cache/codex_gemini_reader_nq.jsonl --allow-api --max-new-calls 40 --output-dir outputs/codex_gemini_reader_nq_40
+```
+
+The committed summaries are API-pilot evidence only:
+`outputs/results/hotpot_gemini_reader_pilot_summary.csv` and
+`outputs/results/nq_gemini_reader_pilot_summary.csv`.
+
 ## Claim Boundary
 
 The main supported claim remains retrieval-stage and cost-aware:

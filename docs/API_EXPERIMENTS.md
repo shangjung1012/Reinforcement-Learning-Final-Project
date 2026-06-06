@@ -142,6 +142,42 @@ configs matched in all three seeds, but the guardrail fallback rate was 1.0,
 so this is a limitation diagnostic rather than semantic-feature superiority
 evidence.
 
+## Gemini Answer Reader Pilot
+
+The downstream-reader gap is now tested with a bounded Gemini answer reader,
+not only deterministic lexical/span heuristics. The reader prompt includes only
+the question and retrieved BM25 passages; gold answers are used only for EM/F1
+scoring after prediction.
+
+Dry-run first:
+
+```bash
+uv run python scripts/run_gemini_reader_eval.py --dataset hotpot --num-examples 40 --cache-path outputs/cache/codex_gemini_reader_hotpot.jsonl --dry-run --output-dir outputs/codex_gemini_reader_hotpot_dry
+uv run python scripts/run_gemini_reader_eval.py --dataset nq --num-examples 40 --cache-path outputs/cache/codex_gemini_reader_nq.jsonl --dry-run --output-dir outputs/codex_gemini_reader_nq_dry
+```
+
+Then run live with explicit caps:
+
+```bash
+CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_gemini_reader_eval.py --dataset hotpot --num-examples 40 --cache-path outputs/cache/codex_gemini_reader_hotpot.jsonl --allow-api --max-new-calls 40 --output-dir outputs/codex_gemini_reader_hotpot_40
+CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_gemini_reader_eval.py --dataset nq --num-examples 40 --cache-path outputs/cache/codex_gemini_reader_nq.jsonl --allow-api --max-new-calls 40 --output-dir outputs/codex_gemini_reader_nq_40
+```
+
+Both live pilots used 40 new Gemini calls. Sanitized summaries are committed at
+`outputs/results/hotpot_gemini_reader_pilot_summary.csv` and
+`outputs/results/nq_gemini_reader_pilot_summary.csv`.
+
+Results:
+
+- HotpotQA 40: Gemini reader EM 0.575 and F1 0.628081; best deterministic
+  baseline EM 0.0 and F1 0.062292.
+- NQ 40: Gemini reader EM 0.225 and F1 0.265417; best deterministic baseline
+  EM 0.0 and F1 0.029894.
+
+These are useful downstream QA pilot results, but they remain `api_pilot`
+evidence because the sample is small, single-seed, BM25-only, and not yet tied
+to a validated retrieval-action policy comparison.
+
 ## Gemini Baseline Budget Gate
 
 `scripts/run_gemini_baseline.py` now supports a dry-run and explicit call budget:

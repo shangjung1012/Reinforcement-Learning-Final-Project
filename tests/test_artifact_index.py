@@ -217,6 +217,8 @@ def test_final_project_artifact_specs_include_reader_and_gemini_pilots() -> None
     nq_reader = specs["nq_reader_realdata_summary"]
     gemini = specs["hotpot_gemini_pilot_summary"]
     repeated_gemini = specs["hotpot_gemini_repeated_pilot_summary"]
+    hotpot_gemini_reader = specs["hotpot_gemini_reader_pilot_summary"]
+    nq_gemini_reader = specs["nq_gemini_reader_pilot_summary"]
 
     assert reader.category == "reader_smoke"
     assert reader.path.as_posix() == "outputs/results/hotpot_reader_realdata_summary.csv"
@@ -239,6 +241,14 @@ def test_final_project_artifact_specs_include_reader_and_gemini_pilots() -> None
     assert repeated_gemini.path.as_posix() == "outputs/results/hotpot_gemini_repeated_pilot_summary.csv"
     assert "0 new calls" in repeated_gemini.role
     assert "run_repeated_gemini_baseline.py" in repeated_gemini.producer_command
+    assert hotpot_gemini_reader.category == "api_pilot"
+    assert hotpot_gemini_reader.path.as_posix() == "outputs/results/hotpot_gemini_reader_pilot_summary.csv"
+    assert "answer-reader" in hotpot_gemini_reader.role
+    assert "--max-new-calls 40" in hotpot_gemini_reader.producer_command
+    assert nq_gemini_reader.category == "api_pilot"
+    assert nq_gemini_reader.path.as_posix() == "outputs/results/nq_gemini_reader_pilot_summary.csv"
+    assert "Natural Questions" in nq_gemini_reader.role
+    assert "--dataset nq" in nq_gemini_reader.producer_command
 
 
 def test_final_project_artifact_specs_include_vertex_tiny_pilot() -> None:

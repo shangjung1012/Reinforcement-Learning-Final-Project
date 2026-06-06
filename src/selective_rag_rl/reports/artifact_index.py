@@ -152,6 +152,20 @@ def final_project_artifact_specs(root: Path | None = None) -> list[ArtifactSpec]
             "CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_repeated_gemini_baseline.py --data-path data/raw/HotpotQA/hotpot_dev_distractor_v1.json --seeds 41,42,43 --num-examples 10 --cache-path outputs/cache/codex_gemini_repeated_realdata.jsonl --allow-api --max-new-calls 24 --output-dir outputs/codex_gemini_repeated_realdata_pilot",
         ),
         artifact(
+            "hotpot_gemini_reader_pilot_summary",
+            "api_pilot",
+            "outputs/results/hotpot_gemini_reader_pilot_summary.csv",
+            "Bounded HotpotQA Gemini answer-reader pilot against deterministic reader baselines; 40 new calls and not final QA benchmark evidence.",
+            "CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_gemini_reader_eval.py --dataset hotpot --num-examples 40 --cache-path outputs/cache/codex_gemini_reader_hotpot.jsonl --allow-api --max-new-calls 40 --output-dir outputs/codex_gemini_reader_hotpot_40",
+        ),
+        artifact(
+            "nq_gemini_reader_pilot_summary",
+            "api_pilot",
+            "outputs/results/nq_gemini_reader_pilot_summary.csv",
+            "Bounded Natural Questions Gemini answer-reader pilot against deterministic reader baselines; 40 new calls and not final QA benchmark evidence.",
+            "CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_gemini_reader_eval.py --dataset nq --num-examples 40 --cache-path outputs/cache/codex_gemini_reader_nq.jsonl --allow-api --max-new-calls 40 --output-dir outputs/codex_gemini_reader_nq_40",
+        ),
+        artifact(
             "hotpot_multistep_fqi_summary",
             "rl_extension",
             "outputs/results/multistep_summary.csv",

@@ -127,3 +127,29 @@ Natural Questions 50 summary:
 The main lesson is negative but useful: deterministic extraction is not strong
 enough to support downstream RAG answer-quality claims, even when retrieval
 coverage is high. These rows remain `tiny_realdata` diagnostics.
+
+## Bounded Gemini Reader Pilot
+
+To test a stronger reader without pretending the deterministic heuristics are
+competitive QA models, the repository also includes a bounded Gemini answer
+reader:
+
+```bash
+uv run python scripts/run_gemini_reader_eval.py --dataset hotpot --num-examples 40 --cache-path outputs/cache/codex_gemini_reader_hotpot.jsonl --dry-run --output-dir outputs/codex_gemini_reader_hotpot_dry
+CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_gemini_reader_eval.py --dataset hotpot --num-examples 40 --cache-path outputs/cache/codex_gemini_reader_hotpot.jsonl --allow-api --max-new-calls 40 --output-dir outputs/codex_gemini_reader_hotpot_40
+
+uv run python scripts/run_gemini_reader_eval.py --dataset nq --num-examples 40 --cache-path outputs/cache/codex_gemini_reader_nq.jsonl --dry-run --output-dir outputs/codex_gemini_reader_nq_dry
+CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_gemini_reader_eval.py --dataset nq --num-examples 40 --cache-path outputs/cache/codex_gemini_reader_nq.jsonl --allow-api --max-new-calls 40 --output-dir outputs/codex_gemini_reader_nq_40
+```
+
+The prompt gives Gemini only the question and retrieved BM25 passages, not the
+gold answer. On the current 40-example pilots:
+
+- HotpotQA: Gemini reader exact match 0.575 and token F1 0.628081, versus span
+  reader exact match 0.0 and token F1 0.062292.
+- Natural Questions: Gemini reader exact match 0.225 and token F1 0.265417,
+  versus lexical reader exact match 0.0 and token F1 0.029894.
+
+This is the first meaningful downstream-reader signal in the repo, but it is
+still `api_pilot` evidence: single seed, 40 examples per dataset, BM25-only
+retrieval, and no policy-routed reader comparison.
