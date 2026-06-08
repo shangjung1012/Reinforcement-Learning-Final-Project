@@ -10,6 +10,12 @@ hotpot_llm_policy_summary,outputs/results/llm_retrieval_policy_summary.csv,hotpo
 hotpot_reader_realdata_summary,outputs/results/hotpot_reader_realdata_summary.csv,hotpot,reader_smoke,tiny_realdata,True,True,False,False,,,,,,False,False,small or non-final real-data run
 hotpot_reader_realdata_200_summary,outputs/results/hotpot_reader_realdata_200_summary.csv,hotpot,reader_smoke,tiny_realdata,True,True,False,False,,,,,,False,False,small or non-final real-data run
 nq_reader_realdata_summary,outputs/results/nq_reader_realdata_summary.csv,nq,reader_smoke,tiny_realdata,True,True,False,False,,,,,,False,False,small or non-final real-data run
+downstream_qa_gap_table,outputs/results/downstream_qa_gap_table.csv,unknown,evidence_boundary,analysis_only,True,False,False,False,,,,,,False,False,claim-boundary or gap-analysis artifact
+downstream_qa_gap_table_markdown,docs/DOWNSTREAM_QA_GAP_TABLE.md,unknown,evidence_boundary,analysis_only,True,False,False,False,,,,,,False,False,claim-boundary or gap-analysis artifact
+hotpot_policy_reader_comparison_summary,outputs/results/hotpot_policy_reader_comparison_summary.csv,hotpot,reader_smoke,tiny_realdata,True,True,False,False,,,,,,False,False,small or non-final real-data run
+hotpot_policy_reader_comparison_detailed,outputs/results/hotpot_policy_reader_comparison_detailed.csv,hotpot,reader_smoke,tiny_realdata,True,True,False,False,,,,,,False,False,small or non-final real-data run
+nq_policy_reader_comparison_summary,outputs/results/nq_policy_reader_comparison_summary.csv,nq,reader_smoke,tiny_realdata,True,True,False,False,,,,,,False,False,small or non-final real-data run
+nq_policy_reader_comparison_detailed,outputs/results/nq_policy_reader_comparison_detailed.csv,nq,reader_smoke,tiny_realdata,True,True,False,False,,,,,,False,False,small or non-final real-data run
 hotpot_gemini_pilot_summary,outputs/results/hotpot_gemini_pilot_summary.csv,hotpot,api_pilot,api_pilot,True,True,True,False,,,42,,,False,False,API-backed pilot or semantic analysis only
 hotpot_gemini_repeated_pilot_summary,outputs/results/hotpot_gemini_repeated_pilot_summary.csv,hotpot,api_pilot,api_pilot,True,True,True,False,,,,,,False,False,API-backed pilot or semantic analysis only
 hotpot_gemini_reader_pilot_summary,outputs/results/hotpot_gemini_reader_pilot_summary.csv,hotpot,api_pilot,api_pilot,True,True,True,False,,,,,,False,False,API-backed pilot or semantic analysis only

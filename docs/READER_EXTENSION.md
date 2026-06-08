@@ -128,6 +128,40 @@ The main lesson is negative but useful: deterministic extraction is not strong
 enough to support downstream RAG answer-quality claims, even when retrieval
 coverage is high. These rows remain `tiny_realdata` diagnostics.
 
+## Policy-Routed Deterministic Reader Diagnostic
+
+The repository now also connects retrieval-policy outputs to deterministic
+reader EM/F1 without calling external APIs:
+
+```bash
+uv run python scripts/run_policy_reader_comparison.py --dataset hotpot --detailed-csv outputs/results/retrieval_policy_detailed.csv --num-examples 50 --readers lexical,span,answer_type --output-dir outputs/codex_policy_reader_hotpot_50 --publish-results
+uv run python scripts/run_policy_reader_comparison.py --dataset nq --detailed-csv outputs/results/nq_retrieval_policy_detailed.csv --num-examples 50 --source-num-examples 500 --readers lexical,span,answer_type --output-dir outputs/codex_policy_reader_nq_50 --publish-results
+```
+
+HotpotQA 50 summary:
+
+- Vanilla BM25 + best deterministic reader: exact match 0.06, token F1
+  0.120706, retrieval reward 1.249167.
+- Train-best fixed retrieval + best deterministic reader: exact match 0.08,
+  token F1 0.130706, retrieval reward 1.316167.
+- Learned retrieval policy + best deterministic reader: exact match 0.06,
+  token F1 0.120706, retrieval reward 1.346367.
+
+Natural Questions 50 summary:
+
+- Vanilla BM25 + answer-type reader: exact match 0.04, token F1 0.072857,
+  retrieval reward 1.456667.
+- Train-best fixed retrieval + answer-type reader: exact match 0.04, token F1
+  0.072857, retrieval reward 1.495000.
+- Learned retrieval policy + answer-type reader: exact match 0.04, token F1
+  0.072857, retrieval reward 1.495000.
+
+These diagnostics are useful because they test the missing policy-routed reader
+plumbing. They also make the limitation clearer: better retrieval reward does
+not automatically become better answer EM/F1 when the reader is a deterministic
+heuristic. The rows are labeled
+`tiny_realdata_policy_reader_diagnostic`, not final QA benchmark evidence.
+
 ## Bounded Gemini Reader Pilot
 
 To test a stronger reader without pretending the deterministic heuristics are
@@ -152,4 +186,4 @@ gold answer. On the current 40-example pilots:
 
 This is the first meaningful downstream-reader signal in the repo, but it is
 still `api_pilot` evidence: single seed, 40 examples per dataset, BM25-only
-retrieval, and no policy-routed reader comparison.
+retrieval, and no policy-routed Gemini-reader comparison.

@@ -40,6 +40,10 @@ dashboard fixes.
 - A bounded Gemini answer-reader pilot was run on HotpotQA and Natural
   Questions, providing the first non-deterministic downstream QA signal while
   keeping the evidence labeled as `api_pilot`.
+- Policy-routed deterministic reader diagnostics were added for HotpotQA and
+  Natural Questions. They compare BM25, train-best fixed retrieval, and learned
+  retrieval-policy outputs under lexical/span/answer-type heuristic readers
+  without API calls.
 
 ## Data Availability
 
@@ -211,6 +215,36 @@ This is a meaningful pilot improvement over deterministic readers, but it is
 not yet a final answer-quality claim because it is single-seed, small, API
 backed, BM25-only, and not compared against policy-routed retrieval.
 
+The missing policy-routed deterministic reader comparison has now been run:
+
+```bash
+uv run python scripts/run_policy_reader_comparison.py --dataset hotpot --detailed-csv outputs/results/retrieval_policy_detailed.csv --num-examples 50 --readers lexical,span,answer_type --output-dir outputs/codex_policy_reader_hotpot_50 --publish-results
+uv run python scripts/run_policy_reader_comparison.py --dataset nq --detailed-csv outputs/results/nq_retrieval_policy_detailed.csv --num-examples 50 --source-num-examples 500 --readers lexical,span,answer_type --output-dir outputs/codex_policy_reader_nq_50 --publish-results
+```
+
+HotpotQA 50 result:
+
+- Vanilla BM25 + best deterministic reader: exact match 0.06, token F1
+  0.120706, retrieval reward 1.249167.
+- Train-best fixed retrieval + best deterministic reader: exact match 0.08,
+  token F1 0.130706, retrieval reward 1.316167.
+- Learned retrieval policy + best deterministic reader: exact match 0.06,
+  token F1 0.120706, retrieval reward 1.346367.
+
+NQ 50 result:
+
+- Vanilla BM25 + answer-type reader: exact match 0.04, token F1 0.072857,
+  retrieval reward 1.456667.
+- Train-best fixed retrieval + answer-type reader: exact match 0.04, token F1
+  0.072857, retrieval reward 1.495000.
+- Learned retrieval policy + answer-type reader: exact match 0.04, token F1
+  0.072857, retrieval reward 1.495000.
+
+This is a useful diagnostic because it connects retrieval-policy outputs to
+EM/F1 plumbing. It is still not an answer-quality claim: deterministic readers
+remain too weak, and the policy-routed Gemini-reader comparison has not been
+run.
+
 ## FQI Extension Status
 
 Checked with:
@@ -229,9 +263,9 @@ but it should not be presented as a main win.
 
 - Scale the Gemini reader or a locally cached extractive QA reader to larger
   HotpotQA/NQ splits with repeated seeds before making any answer-quality claim.
-- Compare the stronger reader under fixed BM25, fixed generated rewrites, and
-  the learned retrieval-action policy before connecting downstream QA to the RL
-  policy.
+- Compare the stronger Gemini reader under fixed BM25, train-best fixed
+  retrieval, and the learned retrieval-action policy before connecting
+  downstream QA to the RL policy.
 - Keep Gemini/Vertex pilots labeled as API pilots until larger repeated-seed
   guardrail checks support them against fixed-action and policy baselines.
 - Keep the deterministic reader paths labeled as smoke unless a stronger reader

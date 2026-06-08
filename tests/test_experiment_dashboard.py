@@ -93,6 +93,17 @@ def test_experiment_dashboard_separates_final_benchmark_from_smoke_and_api_pilot
                 "--num-examples 50 --readers lexical,span"
             ),
         ),
+        ArtifactSpec(
+            artifact_id="downstream_qa_gap_table",
+            category="evidence_boundary",
+            path=Path("outputs/results/downstream_qa_gap_table.csv"),
+            role=(
+                "Machine-readable downstream QA evidence boundary table separating "
+                "retrieval-stage final claims from reader diagnostics and missing "
+                "policy-routed Gemini comparisons."
+            ),
+            producer_command="manual gap table update from reader and Gemini-reader artifacts",
+        ),
     ]
     claims_csv = tmp_path / "outputs" / "results" / "final_claims_matrix.csv"
     claims_csv.parent.mkdir(parents=True)
@@ -138,6 +149,10 @@ def test_experiment_dashboard_separates_final_benchmark_from_smoke_and_api_pilot
 
     assert rows.loc["hotpot_reader_realdata_summary", "evidence_level"] == "tiny_realdata"
     assert bool(rows.loc["hotpot_reader_realdata_summary", "claim_allowed"]) is False
+
+    assert rows.loc["downstream_qa_gap_table", "evidence_level"] == "analysis_only"
+    assert bool(rows.loc["downstream_qa_gap_table", "claim_allowed"]) is False
+    assert bool(rows.loc["downstream_qa_gap_table", "uses_external_api"]) is False
 
 
 def test_write_experiment_dashboard_markdown_summarizes_levels(tmp_path: Path) -> None:

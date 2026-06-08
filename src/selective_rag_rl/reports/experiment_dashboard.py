@@ -144,6 +144,8 @@ def _dashboard_row(
 
 
 def _evidence_level(spec: ArtifactSpec, *, text: str, supports_final_claim: bool) -> str:
+    if spec.category == "evidence_boundary":
+        return "analysis_only"
     if "api_preflight" in text or "run_api_preflight.py" in text:
         return "api_preflight"
     if spec.category == "reader_smoke" and _dataset(text) in {"hotpot", "nq", "scifact", "nfcorpus"}:
@@ -180,12 +182,20 @@ def _is_supported_full_benchmark(text: str) -> bool:
 
 
 def _uses_external_api(text: str) -> bool:
+    if "evidence_boundary" in text:
+        return False
     api_terms = ["vertex", "gemini", "google_genai", "llm", "generated action"]
     return any(term in text for term in api_terms)
 
 
 def _uses_raw_data(text: str, evidence_level: str) -> bool:
-    if evidence_level in {"smoke_synthetic", "smoke_toy_reader", "api_preflight", "final_claim"}:
+    if evidence_level in {
+        "smoke_synthetic",
+        "smoke_toy_reader",
+        "api_preflight",
+        "final_claim",
+        "analysis_only",
+    }:
         return False
     return _dataset(text) in {"scifact", "nfcorpus", "hotpot", "nq"}
 
@@ -225,6 +235,8 @@ def _notes(evidence_level: str, *, uses_external_api: bool) -> str:
         return "code-path smoke only, not benchmark evidence"
     if evidence_level == "tiny_realdata":
         return "small or non-final real-data run"
+    if evidence_level == "analysis_only":
+        return "claim-boundary or gap-analysis artifact"
     if uses_external_api:
         return "external API artifact requires bounded cache-first review"
     return "analysis-only artifact"

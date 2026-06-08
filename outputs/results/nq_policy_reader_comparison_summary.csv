@@ -1,0 +1,10 @@
+dataset,retrieval_method,reader,num_examples,exact_match,f1,recall_at_5,mrr,ndcg_at_5,retrieval_calls,retrieval_reward,missing_doc_count,claim_scope
+nq,Vanilla BM25,lexical,50,0.0,0.04076058514029537,0.98,0.9533333333333333,0.96,1.0,1.4566666666666666,0,tiny_realdata_policy_reader_diagnostic
+nq,Vanilla BM25,span,50,0.02,0.05285714285714285,0.98,0.9533333333333333,0.96,1.0,1.4566666666666666,0,tiny_realdata_policy_reader_diagnostic
+nq,Vanilla BM25,answer_type,50,0.04,0.07285714285714286,0.98,0.9533333333333333,0.96,1.0,1.4566666666666666,0,tiny_realdata_policy_reader_diagnostic
+nq,Train-best retrieval action,lexical,50,0.0,0.03891405119178774,1.0,0.99,0.9926185950714291,1.0,1.495,0,tiny_realdata_policy_reader_diagnostic
+nq,Train-best retrieval action,span,50,0.02,0.05285714285714285,1.0,0.99,0.9926185950714291,1.0,1.495,0,tiny_realdata_policy_reader_diagnostic
+nq,Train-best retrieval action,answer_type,50,0.04,0.07285714285714286,1.0,0.99,0.9926185950714291,1.0,1.495,0,tiny_realdata_policy_reader_diagnostic
+nq,Selective retrieval policy,lexical,50,0.0,0.038601551191787736,1.0,0.99,0.9926185950714291,1.0,1.495,0,tiny_realdata_policy_reader_diagnostic
+nq,Selective retrieval policy,span,50,0.02,0.05285714285714285,1.0,0.99,0.9926185950714291,1.0,1.495,0,tiny_realdata_policy_reader_diagnostic
+nq,Selective retrieval policy,answer_type,50,0.04,0.07285714285714286,1.0,0.99,0.9926185950714291,1.0,1.495,0,tiny_realdata_policy_reader_diagnostic
