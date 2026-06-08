@@ -11,8 +11,8 @@ answer-quality benchmarks.
 | BM25 + Gemini reader | yes | api_pilot | no | 40 examples per dataset and BM25-only retrieval. |
 | train-best fixed + deterministic reader | yes | tiny_realdata | no | Policy-routed reader diagnostic only with heuristic readers. |
 | learned policy + deterministic reader | yes | tiny_realdata | no | Policy retrieval is connected to EM/F1 plumbing, but deterministic readers remain weak. |
-| train-best fixed + Gemini reader | no | missing | no | Not run. |
-| learned policy + Gemini reader | no | missing | no | Not run. |
+| train-best fixed + Gemini reader | yes | api_pilot | no | 30 examples per dataset; policy-routed Gemini pilot only. |
+| learned policy + Gemini reader | yes | api_pilot | no | 30 examples per dataset; policy-routed Gemini pilot only. |
 | retrieval-stage policy benchmark | yes | full_benchmark | yes | Main final claim is retrieval-stage cost-aware reward improvement. |
 
 Machine-readable table: `outputs/results/downstream_qa_gap_table.csv`.
@@ -32,7 +32,22 @@ and train-best fixed on this slice, but deterministic reader EM/F1 does not
 improve over train-best fixed. Natural Questions 50 shows the same pattern:
 retrieval improves, but heuristic answer extraction remains nearly unchanged.
 
-This is useful diagnostic evidence, not an answer-quality claim. A final
-downstream QA claim would require a stronger reader, larger repeated splits, and
-the still-missing `train-best fixed + Gemini reader` versus
-`learned policy + Gemini reader` comparison.
+This is useful diagnostic evidence, not an answer-quality claim. The stronger
+policy-routed Gemini reader comparison has also been run as a bounded API pilot:
+
+```bash
+CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_policy_gemini_reader_comparison.py --dataset hotpot --detailed-csv outputs/results/retrieval_policy_detailed.csv --num-examples 30 --cache-path outputs/cache/codex_policy_gemini_reader_hotpot.jsonl --output-dir outputs/codex_policy_gemini_reader_hotpot_30 --allow-api --max-new-calls 75 --publish-results
+CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_policy_gemini_reader_comparison.py --dataset nq --detailed-csv outputs/results/nq_retrieval_policy_detailed.csv --num-examples 30 --source-num-examples 500 --cache-path outputs/cache/codex_policy_gemini_reader_nq.jsonl --output-dir outputs/codex_policy_gemini_reader_nq_30 --allow-api --max-new-calls 68 --publish-results
+```
+
+HotpotQA 30 shows a promising policy-routed Gemini-reader signal: BM25 exact
+match/F1 is 0.733333/0.823420, train-best fixed is 0.766667/0.851905, and the
+learned policy is 0.800000/0.890087. Natural Questions 30 does not show the
+same answer-quality separation: all three methods have exact match 0.133333,
+with F1 0.171005 for BM25, 0.166106 for train-best fixed, and 0.169916 for the
+learned policy.
+
+This remains `api_pilot` evidence. A final downstream QA claim would still
+require larger repeated splits, cache-first reruns, and guardrail checks showing
+the learned policy consistently improves answer EM/F1 rather than only retrieval
+reward.

@@ -185,5 +185,40 @@ gold answer. On the current 40-example pilots:
   versus lexical reader exact match 0.0 and token F1 0.029894.
 
 This is the first meaningful downstream-reader signal in the repo, but it is
-still `api_pilot` evidence: single seed, 40 examples per dataset, BM25-only
-retrieval, and no policy-routed Gemini-reader comparison.
+still `api_pilot` evidence: single seed, 40 examples per dataset, and BM25-only
+retrieval.
+
+## Policy-Routed Gemini Reader Pilot
+
+The stronger reader has now also been connected to the retrieval-policy outputs
+for BM25, train-best fixed retrieval, and the learned retrieval-action policy:
+
+```bash
+uv run python scripts/run_policy_gemini_reader_comparison.py --dataset hotpot --detailed-csv outputs/results/retrieval_policy_detailed.csv --num-examples 30 --cache-path outputs/cache/codex_policy_gemini_reader_hotpot.jsonl --output-dir outputs/codex_policy_gemini_reader_hotpot_30_dry --dry-run
+CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_policy_gemini_reader_comparison.py --dataset hotpot --detailed-csv outputs/results/retrieval_policy_detailed.csv --num-examples 30 --cache-path outputs/cache/codex_policy_gemini_reader_hotpot.jsonl --output-dir outputs/codex_policy_gemini_reader_hotpot_30 --allow-api --max-new-calls 75 --publish-results
+
+uv run python scripts/run_policy_gemini_reader_comparison.py --dataset nq --detailed-csv outputs/results/nq_retrieval_policy_detailed.csv --num-examples 30 --source-num-examples 500 --cache-path outputs/cache/codex_policy_gemini_reader_nq.jsonl --output-dir outputs/codex_policy_gemini_reader_nq_30_dry --dry-run
+CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_policy_gemini_reader_comparison.py --dataset nq --detailed-csv outputs/results/nq_retrieval_policy_detailed.csv --num-examples 30 --source-num-examples 500 --cache-path outputs/cache/codex_policy_gemini_reader_nq.jsonl --output-dir outputs/codex_policy_gemini_reader_nq_30 --allow-api --max-new-calls 68 --publish-results
+```
+
+HotpotQA 30 summary:
+
+- Vanilla BM25 + Gemini reader: exact match 0.733333, token F1 0.823420,
+  retrieval reward 1.316667.
+- Train-best fixed retrieval + Gemini reader: exact match 0.766667, token F1
+  0.851905, retrieval reward 1.365000.
+- Learned retrieval policy + Gemini reader: exact match 0.800000, token F1
+  0.890087, retrieval reward 1.402333.
+
+Natural Questions 30 summary:
+
+- Vanilla BM25 + Gemini reader: exact match 0.133333, token F1 0.171005,
+  retrieval reward 1.427778.
+- Train-best fixed retrieval + Gemini reader: exact match 0.133333, token F1
+  0.166106, retrieval reward 1.491667.
+- Learned retrieval policy + Gemini reader: exact match 0.133333, token F1
+  0.169916, retrieval reward 1.491667.
+
+This is the first policy-routed stronger-reader pilot. It is encouraging on
+HotpotQA but mixed on Natural Questions, so it should remain an `api_pilot`, not
+a final downstream answer-quality claim.

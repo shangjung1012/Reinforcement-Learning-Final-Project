@@ -178,6 +178,34 @@ These are useful downstream QA pilot results, but they remain `api_pilot`
 evidence because the sample is small, single-seed, BM25-only, and not yet tied
 to a validated retrieval-action policy comparison.
 
+### Policy-routed Gemini reader pilot
+
+The stronger Gemini answer reader has also been run on retrieval outputs from
+BM25, train-best fixed retrieval, and the learned retrieval-action policy:
+
+```bash
+uv run python scripts/run_policy_gemini_reader_comparison.py --dataset hotpot --detailed-csv outputs/results/retrieval_policy_detailed.csv --num-examples 30 --cache-path outputs/cache/codex_policy_gemini_reader_hotpot.jsonl --output-dir outputs/codex_policy_gemini_reader_hotpot_30_dry --dry-run
+CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_policy_gemini_reader_comparison.py --dataset hotpot --detailed-csv outputs/results/retrieval_policy_detailed.csv --num-examples 30 --cache-path outputs/cache/codex_policy_gemini_reader_hotpot.jsonl --output-dir outputs/codex_policy_gemini_reader_hotpot_30 --allow-api --max-new-calls 75 --publish-results
+
+uv run python scripts/run_policy_gemini_reader_comparison.py --dataset nq --detailed-csv outputs/results/nq_retrieval_policy_detailed.csv --num-examples 30 --source-num-examples 500 --cache-path outputs/cache/codex_policy_gemini_reader_nq.jsonl --output-dir outputs/codex_policy_gemini_reader_nq_30_dry --dry-run
+CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_policy_gemini_reader_comparison.py --dataset nq --detailed-csv outputs/results/nq_retrieval_policy_detailed.csv --num-examples 30 --source-num-examples 500 --cache-path outputs/cache/codex_policy_gemini_reader_nq.jsonl --output-dir outputs/codex_policy_gemini_reader_nq_30 --allow-api --max-new-calls 68 --publish-results
+```
+
+The dry-runs estimated 75 HotpotQA misses and 68 NQ misses. The live runs made
+exactly those calls and wrote sanitized summaries to
+`outputs/results/hotpot_policy_gemini_reader_comparison_summary.csv` and
+`outputs/results/nq_policy_gemini_reader_comparison_summary.csv`.
+
+- HotpotQA 30: learned policy + Gemini reader EM/F1 is 0.800000/0.890087,
+  compared with train-best fixed 0.766667/0.851905 and BM25
+  0.733333/0.823420.
+- NQ 30: all three methods have exact match 0.133333; learned policy F1 is
+  0.169916, train-best fixed is 0.166106, and BM25 is 0.171005.
+
+This closes the missing policy-routed stronger-reader comparison at pilot scale.
+It is encouraging on HotpotQA but mixed on NQ, so it is still `api_pilot`
+evidence rather than a final downstream QA claim.
+
 ## Gemini Baseline Budget Gate
 
 `scripts/run_gemini_baseline.py` now supports a dry-run and explicit call budget:

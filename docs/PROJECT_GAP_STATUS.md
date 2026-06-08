@@ -242,8 +242,37 @@ NQ 50 result:
 
 This is a useful diagnostic because it connects retrieval-policy outputs to
 EM/F1 plumbing. It is still not an answer-quality claim: deterministic readers
-remain too weak, and the policy-routed Gemini-reader comparison has not been
-run.
+remain too weak.
+
+The stronger policy-routed Gemini-reader comparison has now been run as a
+bounded API pilot:
+
+```bash
+CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_policy_gemini_reader_comparison.py --dataset hotpot --detailed-csv outputs/results/retrieval_policy_detailed.csv --num-examples 30 --cache-path outputs/cache/codex_policy_gemini_reader_hotpot.jsonl --output-dir outputs/codex_policy_gemini_reader_hotpot_30 --allow-api --max-new-calls 75 --publish-results
+CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_policy_gemini_reader_comparison.py --dataset nq --detailed-csv outputs/results/nq_retrieval_policy_detailed.csv --num-examples 30 --source-num-examples 500 --cache-path outputs/cache/codex_policy_gemini_reader_nq.jsonl --output-dir outputs/codex_policy_gemini_reader_nq_30 --allow-api --max-new-calls 68 --publish-results
+```
+
+HotpotQA 30 result:
+
+- Vanilla BM25 + Gemini reader: exact match 0.733333, token F1 0.823420,
+  retrieval reward 1.316667.
+- Train-best fixed retrieval + Gemini reader: exact match 0.766667, token F1
+  0.851905, retrieval reward 1.365000.
+- Learned retrieval policy + Gemini reader: exact match 0.800000, token F1
+  0.890087, retrieval reward 1.402333.
+
+NQ 30 result:
+
+- Vanilla BM25 + Gemini reader: exact match 0.133333, token F1 0.171005,
+  retrieval reward 1.427778.
+- Train-best fixed retrieval + Gemini reader: exact match 0.133333, token F1
+  0.166106, retrieval reward 1.491667.
+- Learned retrieval policy + Gemini reader: exact match 0.133333, token F1
+  0.169916, retrieval reward 1.491667.
+
+This closes the missing comparison at pilot scale. It is promising on HotpotQA
+but mixed on NQ, so it remains `api_pilot` evidence rather than a final
+downstream answer-quality claim.
 
 ## FQI Extension Status
 
@@ -261,11 +290,11 @@ but it should not be presented as a main win.
 
 ## Remaining Work
 
-- Scale the Gemini reader or a locally cached extractive QA reader to larger
-  HotpotQA/NQ splits with repeated seeds before making any answer-quality claim.
-- Compare the stronger Gemini reader under fixed BM25, train-best fixed
-  retrieval, and the learned retrieval-action policy before connecting
-  downstream QA to the RL policy.
+- Scale the policy-routed Gemini reader or a locally cached extractive QA reader
+  to larger HotpotQA/NQ splits with repeated seeds before making any
+  answer-quality claim.
+- Add guardrail checks for the stronger-reader comparison, especially because
+  the current HotpotQA pilot is positive but the NQ pilot is mixed.
 - Keep Gemini/Vertex pilots labeled as API pilots until larger repeated-seed
   guardrail checks support them against fixed-action and policy baselines.
 - Keep the deterministic reader paths labeled as smoke unless a stronger reader

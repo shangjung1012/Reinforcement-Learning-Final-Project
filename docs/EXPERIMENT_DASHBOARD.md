@@ -10,7 +10,7 @@ claim without stronger evidence.
 | evidence_level | count |
 | --- | --- |
 | analysis_only | 2 |
-| api_pilot | 13 |
+| api_pilot | 17 |
 | final_claim | 20 |
 | full_benchmark | 24 |
 | smoke_synthetic | 3 |
@@ -26,6 +26,8 @@ claim without stronger evidence.
 | hotpot_gemini_reader_pilot_summary | hotpot | api_pilot | api_pilot | False | False | API-backed pilot or semantic analysis only |
 | hotpot_gemini_repeated_pilot_summary | hotpot | api_pilot | api_pilot | False | False | API-backed pilot or semantic analysis only |
 | hotpot_llm_policy_summary | hotpot | main_result | api_pilot | False | False | API-backed pilot or semantic analysis only |
+| hotpot_policy_gemini_reader_comparison_detailed | hotpot | api_pilot | api_pilot | False | False | API-backed pilot or semantic analysis only |
+| hotpot_policy_gemini_reader_comparison_summary | hotpot | api_pilot | api_pilot | False | False | API-backed pilot or semantic analysis only |
 | nfcorpus_vertex_deployment_decision | nfcorpus | decision_record | api_pilot | False | False | API-backed pilot or semantic analysis only |
 | nfcorpus_vertex_protocol_summary | nfcorpus | decision_record | api_pilot | False | False | API-backed pilot or semantic analysis only |
 | nfcorpus_vertex_repeated_10x10_diagnostics | nfcorpus | selection_check | api_pilot | False | False | API-backed pilot or semantic analysis only |
@@ -35,6 +37,8 @@ claim without stronger evidence.
 | nfcorpus_vertex_repeated_semantic_depth_selection_stability | nfcorpus | selection_check | api_pilot | False | False | API-backed pilot or semantic analysis only |
 | nfcorpus_vertex_repeated_semantic_depth_stability | nfcorpus | selection_check | api_pilot | False | False | API-backed pilot or semantic analysis only |
 | nq_gemini_reader_pilot_summary | nq | api_pilot | api_pilot | False | False | API-backed pilot or semantic analysis only |
+| nq_policy_gemini_reader_comparison_detailed | nq | api_pilot | api_pilot | False | False | API-backed pilot or semantic analysis only |
+| nq_policy_gemini_reader_comparison_summary | nq | api_pilot | api_pilot | False | False | API-backed pilot or semantic analysis only |
 | final_main_results_table | multiple | paper_asset | final_claim | True | False | final report, figure, or claim artifact |
 | nfcorpus_bandit_replay_regret_figure | nfcorpus | paper_asset | final_claim | True | False | final report, figure, or claim artifact |
 | scifact_bandit_replay_regret_figure | scifact | paper_asset | final_claim | True | False | final report, figure, or claim artifact |
