@@ -144,8 +144,12 @@ def _dashboard_row(
 
 
 def _evidence_level(spec: ArtifactSpec, *, text: str, supports_final_claim: bool) -> str:
+    if spec.category == "evidence_boundary":
+        return "analysis_only"
     if "api_preflight" in text or "run_api_preflight.py" in text:
         return "api_preflight"
+    if spec.category == "reader_smoke" and _dataset(text) in {"hotpot", "nq", "scifact", "nfcorpus"}:
+        return "tiny_realdata"
     if spec.category == "rl_extension" or "multistep" in text or "two-step fqi" in text:
         return "tiny_realdata" if _dataset(text) in {"hotpot", "nq", "scifact", "nfcorpus"} else "smoke_synthetic"
     if spec.artifact_id.startswith("final_") or spec.category in {
@@ -155,10 +159,10 @@ def _evidence_level(spec: ArtifactSpec, *, text: str, supports_final_claim: bool
         "consistency_check",
     }:
         return "final_claim"
-    if "smoke" in text or "--embedder fake" in text:
-        return "smoke_toy_reader" if "reader" in text else "smoke_synthetic"
     if _uses_external_api(text):
         return "api_pilot"
+    if "smoke" in text or "--embedder fake" in text:
+        return "smoke_toy_reader" if "reader" in text else "smoke_synthetic"
     if supports_final_claim:
         return "full_benchmark"
     if _is_supported_full_benchmark(text):
@@ -178,12 +182,20 @@ def _is_supported_full_benchmark(text: str) -> bool:
 
 
 def _uses_external_api(text: str) -> bool:
+    if "evidence_boundary" in text:
+        return False
     api_terms = ["vertex", "gemini", "google_genai", "llm", "generated action"]
     return any(term in text for term in api_terms)
 
 
 def _uses_raw_data(text: str, evidence_level: str) -> bool:
-    if evidence_level in {"smoke_synthetic", "smoke_toy_reader", "api_preflight", "final_claim"}:
+    if evidence_level in {
+        "smoke_synthetic",
+        "smoke_toy_reader",
+        "api_preflight",
+        "final_claim",
+        "analysis_only",
+    }:
         return False
     return _dataset(text) in {"scifact", "nfcorpus", "hotpot", "nq"}
 
@@ -223,6 +235,8 @@ def _notes(evidence_level: str, *, uses_external_api: bool) -> str:
         return "code-path smoke only, not benchmark evidence"
     if evidence_level == "tiny_realdata":
         return "small or non-final real-data run"
+    if evidence_level == "analysis_only":
+        return "claim-boundary or gap-analysis artifact"
     if uses_external_api:
         return "external API artifact requires bounded cache-first review"
     return "analysis-only artifact"

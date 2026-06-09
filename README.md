@@ -102,12 +102,14 @@ reproduction details.
 For a lightweight downstream QA metric smoke, run:
 
 ```bash
-uv run python scripts/run_reader_eval.py --dataset toy --output-dir outputs/codex_reader_smoke
+uv run python scripts/run_reader_eval.py --dataset toy --reader lexical --output-dir outputs/codex_reader_smoke
+uv run python scripts/run_reader_eval.py --dataset toy --reader span --output-dir outputs/codex_reader_span_smoke
+uv run python scripts/run_reader_comparison.py --dataset toy --num-examples 4 --output-dir outputs/codex_reader_comparison
 ```
 
-This uses a deterministic lexical-overlap reader and reports SQuAD-style EM/F1.
-It is an evaluation-plumbing check, not final answer-generation evidence. See
-`docs/READER_EXTENSION.md`.
+This uses deterministic lexical-overlap and span-heuristic readers and reports
+SQuAD-style EM/F1. It is an evaluation-plumbing check, not final
+answer-generation evidence. See `docs/READER_EXTENSION.md`.
 
 For the precise RL interpretation and claim boundary, see `docs/RL_FRAMING.md`.
 For model-selection guardrails and reward/cost interpretation, see
@@ -116,6 +118,9 @@ For optional Vertex/Gemini setup and bounded preflight commands, see
 `docs/API_EXPERIMENTS.md`.
 Before running full-data experiments, check local raw-data availability with
 `uv run python scripts/run_data_preflight.py --output-dir outputs/codex_data_preflight`.
+If HotpotQA is missing on Windows, the cross-platform downloader can restore the
+dev distractor split via the Hugging Face mirror:
+`uv run python scripts/download_missing_raw_data.py --dataset hotpot-dev-distractor --prefer-hf --output-dir outputs/codex_data_download_hotpot_hf`.
 
 ## Expected Data Layout
 
@@ -271,10 +276,13 @@ outputs/cache/
 ## Current Scope
 
 This version does not include a neural reader or final generated-answer EM/F1
-benchmark. A deterministic lexical-overlap reader smoke path is available for
-testing downstream QA metrics, but the final scope remains retrieval-stage
-selective query rewriting, using Recall@5, MRR, nDCG@5, retrieval calls, and
-rewrite cost as the main evaluation signals.
+benchmark. Deterministic lexical-overlap and span-heuristic reader smoke paths
+are available for testing downstream QA metrics, but the final scope remains
+retrieval-stage selective query rewriting, using Recall@5, MRR, nDCG@5,
+retrieval calls, and rewrite cost as the main evaluation signals.
+The checked-in `outputs/results/hotpot_reader_realdata_summary.csv` is a tiny
+50-example HotpotQA reader comparison; it is useful for sanity checking EM/F1
+plumbing but not for claiming downstream answer-quality improvement.
 Vertex semantic features are implemented as an optional extension and cached
 under `outputs/cache/`. They include query-to-top-passage similarity summaries
 and top-k rank-aware similarity profiles, score-shape features over the head
@@ -298,14 +306,17 @@ artifacts include both a
 fake-embedder orchestration smoke and a cached Vertex 2-seed NFCorpus 20/20
 ridge-only repeated-depth smoke, followed by a larger cached Vertex 3-seed
 NFCorpus 30/30 ridge+auto repeated-depth grid.
-Gemini rewrite/decomposition actions are implemented as
-expensive optional actions in a separate HotpotQA experiment; cache files remain
-under `outputs/cache/` and are ignored by git. The BEIR retrieval-policy scripts
-also support `--generated-actions`, which expands the policy action space with
-Gemini-generated HyDE pseudo-documents, multi-query retrieval, and hybrid
-decomposition actions without overwriting the main non-generated result files.
-These generated runs write `*_retrieval_policy_generated.*` outputs and should
-be staged on smaller splits before a full-corpus API run. Feature ablation, policy-model
+Gemini rewrite/decomposition actions are implemented as expensive optional
+actions in a separate HotpotQA experiment; cache files remain under
+`outputs/cache/` and are ignored by git. The current local API preflight can make
+one bounded Gemini call and one bounded Vertex embedding request, but the
+bounded Gemini HotpotQA baseline pilot remains only a 4-example held-out API
+pilot. The BEIR retrieval-policy scripts also support `--generated-actions`,
+which expands the policy action space with Gemini-generated HyDE
+pseudo-documents, multi-query retrieval, and hybrid decomposition actions
+without overwriting the main non-generated result files. These generated runs
+write `*_retrieval_policy_generated.*` outputs and should be staged on smaller
+splits before a full-corpus API run. Feature ablation, policy-model
 sweeps, feature-model grid sweeps, validation-selection ranking diagnostics,
 qualitative exports, per-query regret diagnostics, paired bootstrap confidence
 intervals, and embedding-cache preflight reports are included to show which

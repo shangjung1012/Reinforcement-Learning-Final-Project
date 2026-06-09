@@ -1,0 +1,8 @@
+experiment,done,evidence_level,can_claim,reason,evidence_artifact
+BM25 + deterministic reader,yes,tiny_realdata,no,heuristic reader only; validates EM/F1 plumbing but not final QA quality,outputs/results/hotpot_reader_realdata_200_summary.csv; outputs/results/nq_reader_realdata_summary.csv
+BM25 + Gemini reader,yes,api_pilot,no,40 examples per dataset and BM25-only retrieval,outputs/results/hotpot_gemini_reader_pilot_summary.csv; outputs/results/nq_gemini_reader_pilot_summary.csv
+train-best fixed + deterministic reader,yes,tiny_realdata,no,policy-routed reader diagnostic only with heuristic readers,outputs/results/hotpot_policy_reader_comparison_summary.csv; outputs/results/nq_policy_reader_comparison_summary.csv
+learned policy + deterministic reader,yes,tiny_realdata,no,policy retrieval is connected to EM/F1 plumbing but deterministic readers remain weak,outputs/results/hotpot_policy_reader_comparison_summary.csv; outputs/results/nq_policy_reader_comparison_summary.csv
+train-best fixed + Gemini reader,yes,api_pilot,no,30 examples per dataset; policy-routed Gemini pilot only,outputs/results/hotpot_policy_gemini_reader_comparison_summary.csv; outputs/results/nq_policy_gemini_reader_comparison_summary.csv
+learned policy + Gemini reader,yes,api_pilot,no,30 examples per dataset; policy-routed Gemini pilot only,outputs/results/hotpot_policy_gemini_reader_comparison_summary.csv; outputs/results/nq_policy_gemini_reader_comparison_summary.csv
+retrieval-stage policy benchmark,yes,full_benchmark,yes,main final claim is retrieval-stage cost-aware reward improvement,outputs/results/final_main_results_table.csv; outputs/results/final_claims_matrix.csv

@@ -1,0 +1,10 @@
+dataset,retrieval_method,reader,num_examples,exact_match,f1,recall_at_5,mrr,ndcg_at_5,retrieval_calls,retrieval_reward,missing_doc_count,claim_scope
+hotpot,Vanilla BM25,lexical,50,0.0,0.06401681869899843,0.81,0.8783333333333333,0.7665802284747109,1.0,1.2491666666666668,0,tiny_realdata_policy_reader_diagnostic
+hotpot,Vanilla BM25,span,50,0.06,0.12070588235294118,0.81,0.8783333333333333,0.7665802284747109,1.0,1.2491666666666668,0,tiny_realdata_policy_reader_diagnostic
+hotpot,Vanilla BM25,answer_type,50,0.06,0.12070588235294118,0.81,0.8783333333333333,0.7665802284747109,1.0,1.2491666666666668,0,tiny_realdata_policy_reader_diagnostic
+hotpot,Train-best retrieval action,lexical,50,0.0,0.05493274644940895,0.9,0.8923333333333333,0.8190457142639018,2.0,1.3161666666666667,0,tiny_realdata_policy_reader_diagnostic
+hotpot,Train-best retrieval action,span,50,0.08,0.13070588235294117,0.9,0.8923333333333333,0.8190457142639018,2.0,1.3161666666666667,0,tiny_realdata_policy_reader_diagnostic
+hotpot,Train-best retrieval action,answer_type,50,0.08,0.13070588235294117,0.9,0.8923333333333333,0.8190457142639018,2.0,1.3161666666666667,0,tiny_realdata_policy_reader_diagnostic
+hotpot,Selective retrieval policy,lexical,50,0.0,0.05054988212679871,0.9,0.9083333333333333,0.8265514231215022,1.26,1.3463666666666665,0,tiny_realdata_policy_reader_diagnostic
+hotpot,Selective retrieval policy,span,50,0.06,0.12070588235294118,0.9,0.9083333333333333,0.8265514231215022,1.26,1.3463666666666665,0,tiny_realdata_policy_reader_diagnostic
+hotpot,Selective retrieval policy,answer_type,50,0.06,0.12070588235294118,0.9,0.9083333333333333,0.8265514231215022,1.26,1.3463666666666665,0,tiny_realdata_policy_reader_diagnostic

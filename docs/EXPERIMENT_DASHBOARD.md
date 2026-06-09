@@ -9,23 +9,36 @@ claim without stronger evidence.
 
 | evidence_level | count |
 | --- | --- |
-| api_pilot | 7 |
+| analysis_only | 2 |
+| api_pilot | 17 |
 | final_claim | 20 |
 | full_benchmark | 24 |
 | smoke_synthetic | 3 |
-| tiny_realdata | 14 |
+| tiny_realdata | 23 |
 
 ## Artifact Evidence Levels
 
 | artifact_id | dataset | experiment_type | evidence_level | claim_allowed | supports_final_claim | notes |
 | --- | --- | --- | --- | --- | --- | --- |
+| downstream_qa_gap_table | unknown | evidence_boundary | analysis_only | False | False | claim-boundary or gap-analysis artifact |
+| downstream_qa_gap_table_markdown | unknown | evidence_boundary | analysis_only | False | False | claim-boundary or gap-analysis artifact |
+| hotpot_gemini_pilot_summary | hotpot | api_pilot | api_pilot | False | False | API-backed pilot or semantic analysis only |
+| hotpot_gemini_reader_pilot_summary | hotpot | api_pilot | api_pilot | False | False | API-backed pilot or semantic analysis only |
+| hotpot_gemini_repeated_pilot_summary | hotpot | api_pilot | api_pilot | False | False | API-backed pilot or semantic analysis only |
 | hotpot_llm_policy_summary | hotpot | main_result | api_pilot | False | False | API-backed pilot or semantic analysis only |
+| hotpot_policy_gemini_reader_comparison_detailed | hotpot | api_pilot | api_pilot | False | False | API-backed pilot or semantic analysis only |
+| hotpot_policy_gemini_reader_comparison_summary | hotpot | api_pilot | api_pilot | False | False | API-backed pilot or semantic analysis only |
 | nfcorpus_vertex_deployment_decision | nfcorpus | decision_record | api_pilot | False | False | API-backed pilot or semantic analysis only |
 | nfcorpus_vertex_protocol_summary | nfcorpus | decision_record | api_pilot | False | False | API-backed pilot or semantic analysis only |
+| nfcorpus_vertex_repeated_10x10_diagnostics | nfcorpus | selection_check | api_pilot | False | False | API-backed pilot or semantic analysis only |
+| nfcorpus_vertex_repeated_10x10_stability | nfcorpus | selection_check | api_pilot | False | False | API-backed pilot or semantic analysis only |
 | nfcorpus_vertex_repeated_selection_diagnostics | nfcorpus | selection_check | api_pilot | False | False | API-backed pilot or semantic analysis only |
 | nfcorpus_vertex_repeated_semantic_depth_diagnostics | nfcorpus | selection_check | api_pilot | False | False | API-backed pilot or semantic analysis only |
 | nfcorpus_vertex_repeated_semantic_depth_selection_stability | nfcorpus | selection_check | api_pilot | False | False | API-backed pilot or semantic analysis only |
 | nfcorpus_vertex_repeated_semantic_depth_stability | nfcorpus | selection_check | api_pilot | False | False | API-backed pilot or semantic analysis only |
+| nq_gemini_reader_pilot_summary | nq | api_pilot | api_pilot | False | False | API-backed pilot or semantic analysis only |
+| nq_policy_gemini_reader_comparison_detailed | nq | api_pilot | api_pilot | False | False | API-backed pilot or semantic analysis only |
+| nq_policy_gemini_reader_comparison_summary | nq | api_pilot | api_pilot | False | False | API-backed pilot or semantic analysis only |
 | final_main_results_table | multiple | paper_asset | final_claim | True | False | final report, figure, or claim artifact |
 | nfcorpus_bandit_replay_regret_figure | nfcorpus | paper_asset | final_claim | True | False | final report, figure, or claim artifact |
 | scifact_bandit_replay_regret_figure | scifact | paper_asset | final_claim | True | False | final report, figure, or claim artifact |
@@ -73,16 +86,25 @@ claim without stronger evidence.
 | nfcorpus_confidence_gate_smoke | nfcorpus | diagnostic | smoke_synthetic | False | False | code-path smoke only, not benchmark evidence |
 | nfcorpus_confidence_gate_sweep | nfcorpus | diagnostic | smoke_synthetic | False | False | code-path smoke only, not benchmark evidence |
 | experiment_dashboard | unknown | evidence_dashboard | smoke_synthetic | False | False | code-path smoke only, not benchmark evidence |
+| hotpot_fqi_diagnostics_summary | hotpot | rl_extension | tiny_realdata | False | False | small or non-final real-data run |
+| hotpot_fqi_trace_distribution | hotpot | rl_extension | tiny_realdata | False | False | small or non-final real-data run |
 | hotpot_multistep_action_traces | hotpot | paper_asset | tiny_realdata | False | False | small or non-final real-data run |
 | hotpot_multistep_fqi_detailed | hotpot | rl_extension | tiny_realdata | False | False | small or non-final real-data run |
 | hotpot_multistep_fqi_metadata | hotpot | rl_extension | tiny_realdata | False | False | small or non-final real-data run |
 | hotpot_multistep_fqi_summary | hotpot | rl_extension | tiny_realdata | False | False | small or non-final real-data run |
 | hotpot_multistep_metrics_figure | hotpot | paper_asset | tiny_realdata | False | False | small or non-final real-data run |
+| hotpot_policy_reader_comparison_detailed | hotpot | reader_smoke | tiny_realdata | False | False | small or non-final real-data run |
+| hotpot_policy_reader_comparison_summary | hotpot | reader_smoke | tiny_realdata | False | False | small or non-final real-data run |
+| hotpot_reader_realdata_200_summary | hotpot | reader_smoke | tiny_realdata | False | False | small or non-final real-data run |
+| hotpot_reader_realdata_summary | hotpot | reader_smoke | tiny_realdata | False | False | small or non-final real-data run |
 | hotpot_retrieval_policy_summary | hotpot | main_result | tiny_realdata | False | False | small or non-final real-data run |
 | nfcorpus_budget_curve | nfcorpus | budget_curve | tiny_realdata | False | False | small or non-final real-data run |
 | nfcorpus_constrained_policy_sweep | nfcorpus | constrained_bandit | tiny_realdata | False | False | small or non-final real-data run |
 | nfcorpus_ope_diagnostics | nfcorpus | off_policy_evaluation | tiny_realdata | False | False | small or non-final real-data run |
 | nfcorpus_policy_diagnostics | nfcorpus | diagnostic | tiny_realdata | False | False | small or non-final real-data run |
+| nq_policy_reader_comparison_detailed | nq | reader_smoke | tiny_realdata | False | False | small or non-final real-data run |
+| nq_policy_reader_comparison_summary | nq | reader_smoke | tiny_realdata | False | False | small or non-final real-data run |
+| nq_reader_realdata_summary | nq | reader_smoke | tiny_realdata | False | False | small or non-final real-data run |
 | scifact_budget_curve | scifact | budget_curve | tiny_realdata | False | False | small or non-final real-data run |
 | scifact_constrained_policy_sweep | scifact | constrained_bandit | tiny_realdata | False | False | small or non-final real-data run |
 | scifact_ope_diagnostics | scifact | off_policy_evaluation | tiny_realdata | False | False | small or non-final real-data run |

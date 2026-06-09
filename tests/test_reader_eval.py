@@ -39,6 +39,50 @@ def test_run_reader_eval_toy_mode_writes_em_f1_outputs(tmp_path: Path) -> None:
     assert 0.0 <= summary["f1"] <= 1.0
 
 
+def test_run_reader_eval_toy_mode_supports_span_reader(tmp_path: Path) -> None:
+    run_reader_eval = _load_run_reader_eval()
+    output_dir = tmp_path / "span_reader_eval"
+
+    metadata = run_reader_eval(
+        dataset="toy",
+        output_dir=output_dir,
+        num_examples=4,
+        seed=3,
+        k=2,
+        reader="span",
+    )
+
+    detailed = pd.read_csv(output_dir / "results" / "reader_eval_detailed.csv")
+
+    assert metadata["reader"] == "span"
+    assert metadata["exact_match"] == 1.0
+    assert metadata["f1"] == 1.0
+    assert set(detailed["predicted_answer"]) == {
+        "Ada Lovelace",
+        "Grace Hopper",
+        "Alan Turing",
+        "Katherine Johnson",
+    }
+
+
+def test_run_reader_eval_toy_mode_supports_answer_type_reader(tmp_path: Path) -> None:
+    run_reader_eval = _load_run_reader_eval()
+    output_dir = tmp_path / "answer_type_reader_eval"
+
+    metadata = run_reader_eval(
+        dataset="toy",
+        output_dir=output_dir,
+        num_examples=4,
+        seed=3,
+        k=2,
+        reader="answer_type",
+    )
+
+    assert metadata["reader"] == "answer_type"
+    assert metadata["exact_match"] == 1.0
+    assert metadata["f1"] == 1.0
+
+
 def _load_run_reader_eval():
     script_path = Path("scripts/run_reader_eval.py")
     spec = importlib.util.spec_from_file_location("run_reader_eval", script_path)

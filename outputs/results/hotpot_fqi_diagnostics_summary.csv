@@ -1,0 +1,2 @@
+dataset,split,examples,fqi_reward,train_best_reward,oracle_reward,reward_gap_vs_train_best,oracle_gap,fqi_calls,train_best_calls,call_gap_vs_train_best,oracle_trace_match_rate,stop_rate,refine_rate
+hotpot,test,240,1.2225208333333335,1.2644444444444447,1.376263888888889,-0.0419236111111112,0.15374305555555545,2.4375,2.0,0.4375,0.2,0.19583333333333333,0.8041666666666667

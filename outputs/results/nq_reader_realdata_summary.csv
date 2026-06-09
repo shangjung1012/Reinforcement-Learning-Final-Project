@@ -1,0 +1,4 @@
+dataset,reader,retriever,seed,k,num_examples,exact_match,f1,recall_at_5,mrr,ndcg_at_5,claim_scope
+nq,lexical,bm25,42,5,50,0.0,0.0389151913486586,0.98,0.955,0.961232126232897,smoke_downstream_reader_check
+nq,span,bm25,42,5,50,0.0,0.0133333333333333,0.98,0.955,0.961232126232897,smoke_downstream_reader_check
+nq,answer_type,bm25,42,5,50,0.0,0.0133333333333333,0.98,0.955,0.961232126232897,smoke_downstream_reader_check

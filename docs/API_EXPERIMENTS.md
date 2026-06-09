@@ -64,23 +64,147 @@ validation, and guardrail checks.
 
 On the current local setup, dry-run preflight succeeds without printing secrets:
 `.env` exists, required variable names are present, and the credential file
-basename is visible to the script. A deliberately bounded live preflight was
-also attempted with one Gemini call and one Vertex embedding text allowed:
+basename is visible to the script. After switching to the current local Google
+Cloud project in `.env`, a deliberately bounded live preflight was also run with
+one Gemini call and one Vertex embedding text allowed:
 
 ```bash
 CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_api_preflight.py \
   --provider all \
-  --output-dir outputs/codex_api_preflight_live_phase \
+  --output-dir outputs/codex_api_preflight_new_project_live \
   --allow-api \
   --max-new-gemini-calls 1 \
   --max-new-embedding-texts 1
 ```
 
-Both providers returned `403 PERMISSION_DENIED` for
-`aiplatform.endpoints.predict`, and successful live calls/texts remained zero.
-So the local `.env` shape is valid, but the current Google Cloud identity still
-needs Vertex AI prediction permission and model access before Gemini or Vertex
-semantic-feature pilots can run.
+Both providers succeeded under that cap: one Gemini generation call and one
+Vertex embedding text request. This validates the local credential and SDK path,
+but it is still only `api_preflight` evidence, not benchmark evidence.
+
+After restoring local HotpotQA dev distractor data, a bounded Gemini HotpotQA
+baseline pilot was run with 8 cache misses and `--max-new-calls 8`. The live run
+made 8 new Gemini calls and wrote only ignored local detailed/cache artifacts.
+A sanitized aggregate summary is available at
+`outputs/results/hotpot_gemini_pilot_summary.csv`. This remains `api_pilot`
+evidence because it covers only 4 held-out examples.
+
+A repeated-seed Gemini pilot was also run:
+
+```bash
+CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_repeated_gemini_baseline.py \
+  --data-path data/raw/HotpotQA/hotpot_dev_distractor_v1.json \
+  --seeds 41,42,43 \
+  --num-examples 10 \
+  --cache-path outputs/cache/codex_gemini_repeated_realdata.jsonl \
+  --allow-api \
+  --max-new-calls 24 \
+  --output-dir outputs/codex_gemini_repeated_realdata_pilot
+```
+
+The repeated live run used 24 cache hits and 0 new calls in this pass. Across
+12 held-out examples, rewrite-all reached mean Recall@5 0.75 and reward
+0.085833; decompose reached mean Recall@5 0.833333 and reward 0.177083. The
+sanitized summary is `outputs/results/hotpot_gemini_repeated_pilot_summary.csv`.
+This remains `api_pilot` evidence only.
+
+The Vertex embedding path has been checked with tiny SciFact/NFCorpus
+semantic-feature pilots; those pilots also remain `api_pilot` evidence and
+should not be promoted to final claims without larger repeated-seed validation
+and guardrail checks.
+
+A tiny repeated-seed NFCorpus Vertex semantic pilot was run with 10 train / 10
+test examples, semantic depth 3, ridge policy, and `full` versus `no_semantic`
+feature sets:
+
+```bash
+CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_repeated_selection.py \
+  --dataset nfcorpus \
+  --seeds 41,42,43 \
+  --policy-models ridge \
+  --feature-sets full,no_semantic \
+  --num-train-examples 10 \
+  --num-test-examples 10 \
+  --full-corpus \
+  --embedder fake \
+  --semantic-features vertex \
+  --semantic-cache-path outputs/cache/codex_nfcorpus_vertex_repeated_10x10.jsonl \
+  --semantic-allow-api \
+  --semantic-max-new-texts 90 \
+  --semantic-depth 3 \
+  --knn-k-candidates 1 \
+  --tuning-folds 2 \
+  --auto-candidate-models ridge \
+  --output-dir outputs/codex_vertex_repeated_10x10
+```
+
+This wrote 208 new cached embedding texts. Validation-selected and heldout-best
+configs matched in all three seeds, but the guardrail fallback rate was 1.0,
+so this is a limitation diagnostic rather than semantic-feature superiority
+evidence.
+
+## Gemini Answer Reader Pilot
+
+The downstream-reader gap is now tested with a bounded Gemini answer reader,
+not only deterministic lexical/span heuristics. The reader prompt includes only
+the question and retrieved BM25 passages; gold answers are used only for EM/F1
+scoring after prediction.
+
+Dry-run first:
+
+```bash
+uv run python scripts/run_gemini_reader_eval.py --dataset hotpot --num-examples 40 --cache-path outputs/cache/codex_gemini_reader_hotpot.jsonl --dry-run --output-dir outputs/codex_gemini_reader_hotpot_dry
+uv run python scripts/run_gemini_reader_eval.py --dataset nq --num-examples 40 --cache-path outputs/cache/codex_gemini_reader_nq.jsonl --dry-run --output-dir outputs/codex_gemini_reader_nq_dry
+```
+
+Then run live with explicit caps:
+
+```bash
+CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_gemini_reader_eval.py --dataset hotpot --num-examples 40 --cache-path outputs/cache/codex_gemini_reader_hotpot.jsonl --allow-api --max-new-calls 40 --output-dir outputs/codex_gemini_reader_hotpot_40
+CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_gemini_reader_eval.py --dataset nq --num-examples 40 --cache-path outputs/cache/codex_gemini_reader_nq.jsonl --allow-api --max-new-calls 40 --output-dir outputs/codex_gemini_reader_nq_40
+```
+
+Both live pilots used 40 new Gemini calls. Sanitized summaries are committed at
+`outputs/results/hotpot_gemini_reader_pilot_summary.csv` and
+`outputs/results/nq_gemini_reader_pilot_summary.csv`.
+
+Results:
+
+- HotpotQA 40: Gemini reader EM 0.575 and F1 0.628081; best deterministic
+  baseline EM 0.0 and F1 0.062292.
+- NQ 40: Gemini reader EM 0.225 and F1 0.265417; best deterministic baseline
+  EM 0.0 and F1 0.029894.
+
+These are useful downstream QA pilot results, but they remain `api_pilot`
+evidence because the sample is small, single-seed, BM25-only, and not yet tied
+to a validated retrieval-action policy comparison.
+
+### Policy-routed Gemini reader pilot
+
+The stronger Gemini answer reader has also been run on retrieval outputs from
+BM25, train-best fixed retrieval, and the learned retrieval-action policy:
+
+```bash
+uv run python scripts/run_policy_gemini_reader_comparison.py --dataset hotpot --detailed-csv outputs/results/retrieval_policy_detailed.csv --num-examples 30 --cache-path outputs/cache/codex_policy_gemini_reader_hotpot.jsonl --output-dir outputs/codex_policy_gemini_reader_hotpot_30_dry --dry-run
+CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_policy_gemini_reader_comparison.py --dataset hotpot --detailed-csv outputs/results/retrieval_policy_detailed.csv --num-examples 30 --cache-path outputs/cache/codex_policy_gemini_reader_hotpot.jsonl --output-dir outputs/codex_policy_gemini_reader_hotpot_30 --allow-api --max-new-calls 75 --publish-results
+
+uv run python scripts/run_policy_gemini_reader_comparison.py --dataset nq --detailed-csv outputs/results/nq_retrieval_policy_detailed.csv --num-examples 30 --source-num-examples 500 --cache-path outputs/cache/codex_policy_gemini_reader_nq.jsonl --output-dir outputs/codex_policy_gemini_reader_nq_30_dry --dry-run
+CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_policy_gemini_reader_comparison.py --dataset nq --detailed-csv outputs/results/nq_retrieval_policy_detailed.csv --num-examples 30 --source-num-examples 500 --cache-path outputs/cache/codex_policy_gemini_reader_nq.jsonl --output-dir outputs/codex_policy_gemini_reader_nq_30 --allow-api --max-new-calls 68 --publish-results
+```
+
+The dry-runs estimated 75 HotpotQA misses and 68 NQ misses. The live runs made
+exactly those calls and wrote sanitized summaries to
+`outputs/results/hotpot_policy_gemini_reader_comparison_summary.csv` and
+`outputs/results/nq_policy_gemini_reader_comparison_summary.csv`.
+
+- HotpotQA 30: learned policy + Gemini reader EM/F1 is 0.800000/0.890087,
+  compared with train-best fixed 0.766667/0.851905 and BM25
+  0.733333/0.823420.
+- NQ 30: all three methods have exact match 0.133333; learned policy F1 is
+  0.169916, train-best fixed is 0.166106, and BM25 is 0.171005.
+
+This closes the missing policy-routed stronger-reader comparison at pilot scale.
+It is encouraging on HotpotQA but mixed on NQ, so it is still `api_pilot`
+evidence rather than a final downstream QA claim.
 
 ## Gemini Baseline Budget Gate
 
@@ -93,6 +217,8 @@ CODEX_ALLOW_API_CALLS=1 uv run python scripts/run_gemini_baseline.py --data-path
 
 When the cache misses exceed `--max-new-calls`, or when live calls are not
 explicitly allowed, the script stops before constructing the live Vertex client.
+On the current HotpotQA 10-example pilot, dry-run reported 8 misses and live
+execution used exactly 8 new calls.
 
 ## Vertex Semantic Embedding Budget Gate
 

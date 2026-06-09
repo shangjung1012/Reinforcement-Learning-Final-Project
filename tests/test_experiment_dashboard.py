@@ -48,6 +48,17 @@ def test_experiment_dashboard_separates_final_benchmark_from_smoke_and_api_pilot
             ),
         ),
         ArtifactSpec(
+            artifact_id="nfcorpus_vertex_fake_embedder_tiny_pilot",
+            category="selection_check",
+            path=Path("outputs/results/nfcorpus_vertex_repeated_10x10_stability.csv"),
+            role="Tiny Vertex semantic pilot using a fake dense retriever embedder.",
+            producer_command=(
+                "uv run python scripts/run_repeated_selection.py --dataset nfcorpus "
+                "--seeds 41,42,43 --num-train-examples 10 --num-test-examples 10 "
+                "--embedder fake --semantic-features vertex --semantic-allow-api"
+            ),
+        ),
+        ArtifactSpec(
             artifact_id="scifact_bootstrap",
             category="statistical_check",
             path=Path("outputs/results/scifact_bootstrap_diagnostics.csv"),
@@ -71,6 +82,27 @@ def test_experiment_dashboard_separates_final_benchmark_from_smoke_and_api_pilot
             path=Path("outputs/figures/multistep_metrics.png"),
             role="HotpotQA two-step FQI metric comparison figure.",
             producer_command="uv run python scripts/run_multistep_hotpot.py --num-examples 600 --seed 42",
+        ),
+        ArtifactSpec(
+            artifact_id="hotpot_reader_realdata_summary",
+            category="reader_smoke",
+            path=Path("outputs/results/hotpot_reader_realdata_summary.csv"),
+            role="Tiny HotpotQA real-data downstream reader comparison for lexical and span heuristic readers.",
+            producer_command=(
+                "uv run python scripts/run_reader_comparison.py --dataset hotpot "
+                "--num-examples 50 --readers lexical,span"
+            ),
+        ),
+        ArtifactSpec(
+            artifact_id="downstream_qa_gap_table",
+            category="evidence_boundary",
+            path=Path("outputs/results/downstream_qa_gap_table.csv"),
+            role=(
+                "Machine-readable downstream QA evidence boundary table separating "
+                "retrieval-stage final claims from reader diagnostics and missing "
+                "policy-routed Gemini comparisons."
+            ),
+            producer_command="manual gap table update from reader and Gemini-reader artifacts",
         ),
     ]
     claims_csv = tmp_path / "outputs" / "results" / "final_claims_matrix.csv"
@@ -102,6 +134,8 @@ def test_experiment_dashboard_separates_final_benchmark_from_smoke_and_api_pilot
     assert bool(rows.loc["nfcorpus_vertex_repeated_selection_diagnostics", "claim_allowed"]) is False
     assert bool(rows.loc["nfcorpus_vertex_repeated_selection_diagnostics", "uses_external_api"]) is True
     assert rows.loc["nfcorpus_vertex_repeated_selection_diagnostics", "feature_set"] == "full,no_semantic"
+    assert rows.loc["nfcorpus_vertex_fake_embedder_tiny_pilot", "evidence_level"] == "api_pilot"
+    assert bool(rows.loc["nfcorpus_vertex_fake_embedder_tiny_pilot", "uses_external_api"]) is True
 
     assert rows.loc["scifact_bootstrap", "evidence_level"] == "full_benchmark"
     assert bool(rows.loc["scifact_bootstrap", "claim_allowed"]) is True
@@ -112,6 +146,13 @@ def test_experiment_dashboard_separates_final_benchmark_from_smoke_and_api_pilot
 
     assert rows.loc["hotpot_multistep_metrics_figure", "evidence_level"] == "tiny_realdata"
     assert bool(rows.loc["hotpot_multistep_metrics_figure", "claim_allowed"]) is False
+
+    assert rows.loc["hotpot_reader_realdata_summary", "evidence_level"] == "tiny_realdata"
+    assert bool(rows.loc["hotpot_reader_realdata_summary", "claim_allowed"]) is False
+
+    assert rows.loc["downstream_qa_gap_table", "evidence_level"] == "analysis_only"
+    assert bool(rows.loc["downstream_qa_gap_table", "claim_allowed"]) is False
+    assert bool(rows.loc["downstream_qa_gap_table", "uses_external_api"]) is False
 
 
 def test_write_experiment_dashboard_markdown_summarizes_levels(tmp_path: Path) -> None:

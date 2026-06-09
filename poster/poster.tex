@@ -49,7 +49,7 @@
 
 \title{Selective and Cost-Aware Retrieval Routing for RAG}
 
-\author{\texorpdfstring{{\cjkfont 蔡尚融}}{蔡尚融} \and \texorpdfstring{{\cjkfont 李羿昕}}{李羿昕} \and \texorpdfstring{{\cjkfont 李政緯}}{李政緯}}
+\author{\texorpdfstring{{\cjkfont 蔡尚融} \and {\cjkfont 李羿昕} \and {\cjkfont 李政緯}}{Tsai Shang-Jung; Li Yi-Hsin; Li Cheng-Wei}}
 
 \institute[shortinst]{National Yang Ming Chiao Tung University}
 
@@ -81,7 +81,7 @@
 \begin{column}{\colwidth}
 
   \begin{block}{Abstract}
-    This project studies \textbf{retrieval-stage control for RAG} as an offline contextual bandit. For each query, a lightweight policy observes lexical and retrieval-confidence features, then chooses a retrieval or rewrite action. The final claim is intentionally narrow: improved \textbf{cost-aware evidence retrieval}, not generated-answer EM/F1 and not LLM fine-tuning.
+    This project treats RAG retrieval as a \textbf{cost-aware offline contextual bandit}: for each query, a lightweight policy chooses BM25, dense, hybrid, or rewrite actions from query and retrieval-confidence features. The main result is improved full-corpus evidence retrieval on \textbf{SciFact} and \textbf{NFCorpus}; generated-answer EM/F1 is reported only as a small Gemini-reader pilot.
   \end{block}
 
   \begin{alertblock}{Problem and Objective}
@@ -109,7 +109,7 @@
 
     \begin{itemize}
       \item \textbf{State:} query features + BM25 confidence statistics.
-      \item \textbf{Actions:} BM25, dense, hybrid, keyword rewrite; Gemini actions are expensive extensions.
+      \item \textbf{Actions:} BM25, dense, hybrid, keyword rewrite; generated-query actions are optional expensive extensions.
       \item \textbf{Policy:} direct-method action-value models with CV model selection.
       \item \textbf{Training evidence:} replayable full-information retrieval rewards; this is not online bandit learning, and selected-action replay is a diagnostic baseline.
     \end{itemize}
@@ -173,16 +173,35 @@
     \end{itemize}
   \end{block}
 
-  \begin{exampleblock}{Where the Result Gets Stronger}
-    \input{tables/table2}
+  \begin{exampleblock}{Downstream QA Pilot: Promising but Not Final Claim}
+    \small
+    Gemini reader was run on policy-routed retrieval outputs.
 
-    \vspace{-0.4em}
-    These checks turn the next-step analysis into evidence: the router is strongest on high-disagreement query slices, constrained routing can preserve utility near one call/query, and simple margin gating does not materially improve the main policy.
+    \begin{table}
+      \centering
+      \begin{tabular}{l l r r}
+        \toprule
+        \textbf{Dataset} & \textbf{Retrieval} & \textbf{EM} & \textbf{F1} \\
+        \midrule
+        HotpotQA 30 & BM25 & 0.733 & 0.823 \\
+        HotpotQA 30 & Train-best & 0.767 & 0.852 \\
+        HotpotQA 30 & \textbf{Learned policy} & \textbf{0.800} & \textbf{0.890} \\
+        \midrule
+        NQ 30 & BM25 & 0.133 & 0.171 \\
+        NQ 30 & Train-best & 0.133 & 0.166 \\
+        NQ 30 & Learned policy & 0.133 & 0.170 \\
+        \bottomrule
+      \end{tabular}
+    \end{table}
+
+    \vspace{-0.5em}
+    \small HotpotQA is positive, but NQ is mixed; this remains \texttt{api\_pilot} evidence, not the final answer-quality claim.
   \end{exampleblock}
 
   \begin{block}{Limitations and Claim Boundary}
     \begin{itemize}
-      \item Evidence retrieval only; no generated-answer EM/F1 or LLM fine-tuning.
+      \item Final claim is evidence retrieval only; Gemini reader EM/F1 is pilot-only.
+      \item No LLM fine-tuning or production RAG deployment.
       \item Direct method uses replayable full-information action tables.
       \item Not online bandit learning; OPE is simulated, not real online logs; semantic features remain analysis-only.
     \end{itemize}

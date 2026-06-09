@@ -101,10 +101,22 @@ The checked-in HotpotQA two-step artifact is best read as an RL extension and
 failure analysis, not as the final strongest result. The `multistep_summary.csv`
 artifact shows Multi-step FQI at 0.815 Recall@5 and 1.223 reward, below the
 train-best fixed trace / rewrite-all keyword row at 0.823 Recall@5 and 1.264
-reward, while the two-step oracle reaches 0.912 Recall@5 and 1.376 reward. That
-gap is useful: it shows the action space has sequential headroom, but the
-current FQI state representation and small KNN value model are not enough to
-select the best refinement reliably.
+reward, while the two-step oracle reaches 0.912 Recall@5 and 1.376 reward. The
+post-hoc diagnostics make the same limitation explicit on 240 test examples:
+Multi-step FQI reward is 1.222521, train-best fixed trace reward is 1.264444,
+and the two-step oracle reward is 1.376264. FQI also averages 2.4375 retrieval
+calls versus 2.0 for train-best fixed trace.
+
+That gap is useful: it shows the action space has sequential headroom, but the
+current FQI state representation and small value model are not enough to select
+the best refinement reliably. Use this as a limitation and future-work result,
+not as evidence that the current FQI policy improves the main benchmark.
+
+Evidence:
+
+- `outputs/results/hotpot_fqi_diagnostics_summary.csv`
+- `outputs/results/hotpot_fqi_trace_distribution.csv`
+- `scripts/run_fqi_diagnostics.py`
 
 ## Off-Policy Evaluation
 
