@@ -1,4 +1,0 @@
-dataset,retrieval_method,reader,num_examples,exact_match,f1,recall_at_5,mrr,ndcg_at_5,retrieval_calls,retrieval_reward,missing_doc_count,claim_scope
-hotpot,Vanilla BM25,gemini,30,0.7333333333333333,0.8234199134199134,0.85,0.9333333333333332,0.826042820278645,1.0,1.3166666666666669,0,api_pilot_policy_routed_gemini_reader
-hotpot,Train-best retrieval action,gemini,30,0.7666666666666667,0.8519047619047619,0.9333333333333332,0.9233333333333332,0.859992778720268,2.0,1.365,0,api_pilot_policy_routed_gemini_reader
-hotpot,Selective retrieval policy,gemini,30,0.8,0.89008658008658,0.9333333333333332,0.95,0.8787609884851016,1.2,1.4023333333333334,0,api_pilot_policy_routed_gemini_reader
