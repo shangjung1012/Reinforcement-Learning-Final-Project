@@ -387,6 +387,31 @@ tr.highlight td {
   border-radius: 8px;
 }
 
+.pilot-layout table {
+  min-width: 680px;
+}
+
+.evidence-card p {
+  margin: 12px 0 0;
+}
+
+.evidence-card p:first-of-type {
+  margin-top: 0;
+}
+
+.evidence-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  margin-right: 6px;
+  padding: 0 8px;
+  color: #fff;
+  background: var(--orange);
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 850;
+}
+
 .bar-row {
   display: grid;
   grid-template-columns: 136px minmax(120px, 1fr) 64px;

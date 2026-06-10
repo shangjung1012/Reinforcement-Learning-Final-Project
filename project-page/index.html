@@ -40,6 +40,7 @@
       <div class="nav-links">
         <a href="#method">Method</a>
         <a href="#results">Results</a>
+        <a href="#pilot">QA Pilot</a>
         <a href="#diagnostics">Diagnostics</a>
         <a href="#poster">Poster</a>
         <a href="https://github.com/shangjung1012/Reinforcement-Learning-Final-Project">Code</a>
@@ -56,14 +57,15 @@
         <p class="venue">NYCU · Reinforcement Learning Final Project · 2026</p>
         <p class="summary">
           <span class="desktop-summary">We learn a query-level router over BM25, dense, hybrid, and rewrite actions. The goal is
-          better retrieval evidence without blindly paying for extra calls.</span>
+          better retrieval evidence without blindly paying for extra calls; downstream Gemini-reader EM/F1 is reported only as pilot evidence.</span>
           <span class="mobile-summary">We learn a router over BM25, dense,<br>hybrid, and rewrite actions.<br>It improves evidence while controlling calls.</span>
         </p>
         <div class="actions">
           <a class="button primary" href="static/pdfs/poster.pdf">View Poster</a>
           <a class="button secondary" href="https://github.com/shangjung1012/Reinforcement-Learning-Final-Project">GitHub Repo</a>
           <a class="button secondary" href="static/data/final_main_results_table.csv">Main Results CSV</a>
-          <a class="button secondary" href="../outputs/results/final_artifact_index.csv">Artifact Index</a>
+          <a class="button secondary" href="static/data/hotpot_policy_gemini_reader_comparison_summary.csv">Gemini Pilot CSV</a>
+          <a class="button secondary" href="static/data/final_artifact_index.csv">Artifact Index</a>
         </div>
       </div>
 
@@ -128,7 +130,7 @@
         </article>
         <article>
           <h3>Actions</h3>
-          <p>BM25, dense, hybrid, and keyword-rewrite variants evaluated as retrieval actions.</p>
+          <p>BM25, dense, hybrid, and keyword-rewrite variants evaluated as retrieval actions; generated-query actions are optional expensive extensions.</p>
         </article>
         <article>
           <h3>Learning</h3>
@@ -280,6 +282,79 @@
       </div>
     </section>
 
+    <section class="section-block" id="pilot">
+      <div class="section-heading">
+        <p class="eyebrow">Downstream QA pilot</p>
+        <h2>Promising on HotpotQA, mixed on Natural Questions.</h2>
+      </div>
+      <div class="result-layout pilot-layout">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Dataset</th>
+                <th>Retrieval feeding Gemini reader</th>
+                <th>EM</th>
+                <th>F1</th>
+                <th>Retrieval reward</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>HotpotQA 30</td>
+                <td>BM25</td>
+                <td>0.733</td>
+                <td>0.823</td>
+                <td>1.317</td>
+              </tr>
+              <tr>
+                <td>HotpotQA 30</td>
+                <td>Train-best fixed</td>
+                <td>0.767</td>
+                <td>0.852</td>
+                <td>1.365</td>
+              </tr>
+              <tr class="highlight">
+                <td>HotpotQA 30</td>
+                <td>Learned policy</td>
+                <td>0.800</td>
+                <td>0.890</td>
+                <td>1.402</td>
+              </tr>
+              <tr>
+                <td>NQ 30</td>
+                <td>BM25</td>
+                <td>0.133</td>
+                <td>0.171</td>
+                <td>1.428</td>
+              </tr>
+              <tr>
+                <td>NQ 30</td>
+                <td>Train-best fixed</td>
+                <td>0.133</td>
+                <td>0.166</td>
+                <td>1.492</td>
+              </tr>
+              <tr>
+                <td>NQ 30</td>
+                <td>Learned policy</td>
+                <td>0.133</td>
+                <td>0.170</td>
+                <td>1.492</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="chart-card evidence-card">
+          <h3>Evidence boundary</h3>
+          <p><span class="evidence-pill">api_pilot</span> Gemini is used here as a stronger answer reader over retrieved passages. It is not part of the final BEIR retrieval benchmark.</p>
+          <p>HotpotQA shows a positive answer-quality pilot for the learned policy. NQ has the same EM across methods and mixed F1, so downstream answer improvement remains a pilot finding.</p>
+          <p class="caption">Evidence: <a href="static/data/hotpot_policy_gemini_reader_comparison_summary.csv">HotpotQA pilot CSV</a> and <a href="static/data/nq_policy_gemini_reader_comparison_summary.csv">NQ pilot CSV</a>.</p>
+        </div>
+      </div>
+    </section>
+
     <section class="section-block" id="diagnostics">
       <div class="section-heading">
         <p class="eyebrow">Diagnostics</p>
@@ -300,7 +375,7 @@
         </article>
         <article>
           <h3>Scope</h3>
-          <p>This page reports retrieval evidence quality. It does not claim end-to-end answer generation improvement.</p>
+          <p>This page's final claim is retrieval evidence quality. Gemini reader EM/F1 is shown separately as an API pilot, not an end-to-end answer-generation benchmark.</p>
         </article>
       </div>
     </section>
@@ -322,7 +397,7 @@
       <div class="citation-box">
         <pre id="bibtex-code">@misc{tsai2026selective,
   title = {Selective and Cost-Aware Retrieval Routing for RAG},
-  author = {Tsai, Shang-Rong and Lee, Yi-Hsin and Lee, Cheng-Wei},
+  author = {Tsai, Shang-Jung and Li, Yi-Hsin and Li, Cheng-Wei},
   year = {2026},
   note = {Reinforcement Learning Final Project, National Yang Ming Chiao Tung University}
 }</pre>
